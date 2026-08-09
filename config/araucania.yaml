@@ -1,0 +1,179 @@
+# Configuración territorial — Región de La Araucanía (código DPA 09)
+# Prototipo riesgomapas. Las comunas prioritarias se recalculan por el script 01
+# a partir de los puntos críticos SENAPRED; esta lista fija el universo.
+
+region:
+  nombre: "LA ARAUCANÍA"
+  codigo_dpa: "09"
+  # bbox aproximado en EPSG:4326 (lon_min, lat_min, lon_max, lat_max)
+  bbox: [-73.70, -39.65, -70.90, -37.35]
+  # husos UTM: el meridiano 72°W parte la región.
+  # 18S cubre el grueso (Temuco, Angol, costa); 19S la cordillera (Pucón, Curarrehue, Lonquimay)
+  utm:
+    principal: "EPSG:32718"
+    cordillera: "EPSG:32719"
+    limite_lon: -72.0
+
+provincias:
+  Cautin:
+    - TEMUCO
+    - CARAHUE
+    - CHOLCHOL
+    - CUNCO
+    - CURARREHUE
+    - FREIRE
+    - GALVARINO
+    - GORBEA
+    - LAUTARO
+    - LONCOCHE
+    - MELIPEUCO
+    - NUEVA IMPERIAL
+    - PADRE LAS CASAS
+    - PERQUENCO
+    - PITRUFQUEN
+    - PUCON
+    - SAAVEDRA
+    - TEODORO SCHMIDT
+    - TOLTEN
+    - VILCUN
+    - VILLARRICA
+  Malleco:
+    - ANGOL
+    - COLLIPULLI
+    - CURACAUTIN
+    - ERCILLA
+    - LONQUIMAY
+    - LOS SAUCES
+    - LUMACO
+    - PUREN
+    - RENAICO
+    - TRAIGUEN
+    - VICTORIA
+
+# Causas de los puntos críticos SENAPRED que consideramos INUNDACIÓN.
+# El resto (nieve, congelamiento, deslizamiento) se ingiere pero se marca
+# como otra amenaza — no se mezcla en la respuesta de inundación.
+causas_inundacion:
+  - "Inundación por desborde de cauce"
+  - "Colapso colectores de aguas lluvia/alcantarillados"
+  - "Anegamiento de caminos/pasos a desnivel"
+  - "Activación de quebradas"
+  - "Flujos de barro/detritos (Aluvión)"
+  - "Subsidencia/Licuefacción/Socavamiento/Erosión"
+
+# Orden de severidad declarado por SENAPRED
+niveles_riesgo:
+  - "Muy Alto"
+  - "Alto"
+  - "Medio"
+  - "Bajo"
+  - "Solucionado Periodo Actual"
+
+# Evento de calibración: sistema frontal que afectó la región.
+# Se usa para derivar la huella observada por SAR (capa B).
+eventos_validacion:
+  - id: "2026-07-30_sistema_frontal"
+    nombre: "Sistema frontal 30-jul a 4-ago 2026"
+    fecha_inicio: "2026-07-30"   # inicio del evento; todo lo anterior sirve de referencia
+    fecha_peak: "2026-08-02"
+    fecha_fin: "2026-08-06"
+    rios: ["Imperial", "Cholchol", "Cautín", "Toltén"]
+    fuente: "Reportes SENAPRED / prensa regional, ago-2026"
+    # Ventanas para el pareo pre/post de Sentinel-1 (script 14).
+    # `pre_desde` acota cuánto atrás se va a buscar referencia: dos meses da 4-5
+    # pasadas por track, suficientes para una mediana y una desviación, sin
+    # meterse en un cambio estacional grande.
+    sar:
+      pre_desde: "2026-06-01"
+      post_desde: "2026-08-03"
+      post_hasta: "2026-08-05"
+
+# Capa B — huella de inundación observada por Sentinel-1.
+#
+# Acceso SIN CREDENCIALES: el catálogo STAC de Microsoft Planetary Computer y su
+# firma SAS anónima entregan los GRD como COG, así que se lee por ventana. Ver
+# docs/PROXIMA_SESION.md §«La capa B no estaba bloqueada».
+sar:
+  stac: "https://planetarycomputer.microsoft.com/api/stac/v1/search"
+  firma_sas: "https://planetarycomputer.microsoft.com/api/sas/v1/token/sentinel1euwest/s1-grd"
+  coleccion: "sentinel-1-grd"
+  # VV separa agua de tierra mejor que VH: el agua tranquila refleja casi todo
+  # lejos del sensor en co-polarización y cae ~15 dB bajo el suelo vegetado.
+  polarizacion: "vv"
+
+  # Rejilla de salida en EPSG:4326. 0,00045° ≈ 50 m en latitud y ≈ 39 m en
+  # longitud a −39°. Se declara como «≈40 × 50 m»: es 20 veces mejor que el
+  # modelo global del JRC y no pretende precisión predial.
+  resolucion_grados: 0.00045
+  # Decimación al leer la escena. El GRD viene a 10 m; leer 1 de cada 4 da 40 m,
+  # que es la resolución de salida, y de paso promedia speckle (multilook).
+  decimacion_lectura: 4
+
+  # --- Criterio de agua. Los tres tienen que cumplirse a la vez. ---
+  # 1. Caída respecto de la mediana pre-evento. Es el criterio principal y el
+  #    único inmune a errores de calibración: pre y post pasan por el mismo
+  #    proceso, así que cualquier sesgo constante se cancela en la resta.
+  #    −3 dB es un factor 2 de caída en potencia retrodispersada.
+  caida_db: -3.0
+  # 2. Oscuridad absoluta. El umbral NO va fijo: se deriva del agua permanente
+  #    de la propia escena, que es agua indiscutible vista por el mismo sensor,
+  #    la misma geometría y el mismo día.
+  #    ⚠️ El percentil va en 50 (la MEDIANA) y no en 90. Medido sobre el track
+  #    83D del 4-ago-2026, la distribución del agua permanente en la imagen
+  #    posterior es: p50 −20,1 dB · p75 −17,9 · p90 −15,8. Esa cola brillante no
+  #    son píxeles de borde —erosionar la máscara tres veces no la mueve— sino
+  #    agua rugosizada por viento y píxeles mal clasificados. Tomar el p90 hacía
+  #    el umbral tan permisivo como el agua peor comportada de la escena y
+  #    multiplicaba por tres el área detectada. La mediana dice «tan oscuro como
+  #    el agua típica que sé que es agua», que es la lectura honesta.
+  percentil_agua: 50
+  agua_db_min: -22.0
+  agua_db_max: -13.0
+  agua_db_respaldo: -16.0
+  # 3. Estabilidad de la referencia. Un píxel cuya retrodispersión ya variaba
+  #    varios dB entre pasadas (cultivo que se cosecha, lago con oleaje) no
+  #    permite afirmar nada por una caída puntual.
+  estabilidad_pre_db: 3.5
+  min_pre: 3
+  # Más pasadas de referencia estabilizan la mediana, pero alejarse en el tiempo
+  # mete cambio estacional. Cuatro cubren ~48 días, que es lo que da un ciclo de
+  # repetición de 12 días.
+  max_pre: 4
+
+  # Agua permanente: oscura y estable ya ANTES del evento. Se excluye de la
+  # huella —el río siempre estuvo ahí— y se usa para calibrar el umbral.
+  permanente_db: -18.0
+
+  # Grupos de píxeles menores a esto son speckle, no inundación.
+  # 5 píxeles de ~40×50 m ≈ 1 ha.
+  min_pixeles_agrupados: 5
+
+  # --- Máscara de terreno: el filtro que separa inundación de NIEVE HÚMEDA ---
+  #
+  # La nieve húmeda es el falso positivo clásico de este método y aquí llegó a
+  # dominar el resultado: en la primera corrida, el 75 % de las detecciones cayó
+  # en la franja cordillerana (−71,4 a −71,0), con una tasa de 8,9 % contra
+  # 0,1–1 % en el resto de la región. No es agua: es el frente cálido derritiendo
+  # la nieve andina. En banda C la nieve mojada absorbe casi toda la señal y se
+  # ve tan oscura como una lámina de agua, así que ningún umbral de brillo la
+  # distingue.
+  #
+  # Lo que sí la distingue es la geomorfología: el agua se embalsa en terreno
+  # plano y junto a los cauces; la nieve se acumula en altura y en pendiente.
+  # Por eso el filtro va sobre el TERRENO y no sobre la señal.
+  #
+  # El DEM es Copernicus GLO-30, también anónimo y también COG (se lee por
+  # `Range`, igual que Sentinel-1). Los tiles se nombran por su esquina suroeste.
+  dem_base: "https://copernicus-dem-30m.s3.amazonaws.com"
+  pendiente_max_grados: 5.0
+  altitud_max_m: 1200.0
+  # Y el mar. Sin este filtro el resultado lo domina el océano: su rugosidad
+  # cambia con el viento entre pasadas, y una que lo encuentra liso lo ve caer
+  # >5 dB respecto de referencias que lo encontraron picado. Cumple todos los
+  # criterios radiométricos de «apareció agua», y es verdad que hay agua lisa,
+  # sólo que ahí el agua siempre estuvo. Medido sobre este evento: el mar
+  # aportaba 871 de los 903 km² que declaraba la órbita 164A, y al excluirlo las
+  # tres órbitas pasaron a coincidir en orden de magnitud (25 / 19 / 32 km²),
+  # que es la señal de que se está midiendo algo real y no un artefacto.
+  # En el DEM Copernicus el océano vale exactamente 0 m.
+  altitud_min_m: 0.5

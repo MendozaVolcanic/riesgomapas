@@ -1,0 +1,20 @@
+# riesgomapas — pipeline de datos
+# Python 3.12
+
+PyYAML>=6.0
+numpy>=2.0
+rasterio>=1.4
+pyproj>=3.6
+Pillow>=10.0
+pypdfium2>=4.30
+
+# tests
+pytest>=8.0
+
+# Auditoría funcional en navegador real (tests/auditoria_e2e.py).
+# Tras instalar: python -m playwright install chromium
+playwright>=1.40
+
+# Nota: geopandas, shapely y fiona no son necesarios para el pipeline actual —
+# todo el trabajo vectorial se hace con GeoJSON plano. Se agregan cuando entre
+# la capa B (SAR) o el análisis de exposición censal.

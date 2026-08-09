@@ -1,0 +1,41 @@
+# Publica el visor en GitHub Pages.
+#
+# Se sirve la carpeta `web/` y no la raíz del repositorio: Pages sólo sabe servir
+# la raíz o `docs/`, y `docs/` aquí ya es la documentación del proyecto. Subir
+# `web/` como artefacto evita tener que reordenar el repositorio para acomodar al
+# hosting.
+#
+# Pages sirve gzip sobre el contenido de texto, que es lo que necesitaba este
+# visor: la carga inicial son ~3 MB en crudo y del orden de 500 KB comprimidos.
+name: Publicar el visor
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Una publicación a la vez, y sin cancelar la que ya está corriendo: cancelar a
+# medias puede dejar el sitio servido a medio actualizar.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.desplegar.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+      - id: desplegar
+        uses: actions/deploy-pages@v4

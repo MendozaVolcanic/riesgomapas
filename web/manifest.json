@@ -1,0 +1,15 @@
+{
+  "name": "¿Se inunda donde vivo? — La Araucanía",
+  "short_name": "¿Se inunda?",
+  "description": "Consulta si tu sector tiene registro de inundaciones en La Araucanía. Funciona sin señal.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1c21",
+  "theme_color": "#0f2830",
+  "lang": "es-CL",
+  "icons": [
+    { "src": "icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

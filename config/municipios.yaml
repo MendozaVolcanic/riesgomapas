@@ -1,0 +1,35 @@
+_nota: 'Dominios de las municipalidades. Los que quedaron en null hay que completarlos
+  a mano: el patrón de dominio no acertó, pero el sitio puede existir.'
+sitios:
+  ANGOL: https://angol.cl/
+  CARAHUE: https://carahue.cl/
+  CHOLCHOL: https://municholchol.cl/
+  COLLIPULLI: https://municipalidadcollipulli.cl/
+  CUNCO: https://municunco.cl/
+  CURACAUTIN: https://curacautin.cl/
+  CURARREHUE: https://curarrehue.cl/
+  ERCILLA: https://muniercilla.cl/
+  FREIRE: https://munifreire.cl/
+  GALVARINO: https://galvarino.cl/
+  GORBEA: https://municipalidadgorbea.cl/
+  LAUTARO: https://munilautaro.cl/
+  LONCOCHE: https://municipalidadloncoche.cl/
+  LONQUIMAY: https://www.mlonquimay.cl/web/
+  LOS SAUCES: https://munilossauces.cl/
+  LUMACO: https://munilumaco.cl/
+  MELIPEUCO: https://municipalidadmelipeuco.cl/
+  NUEVA IMPERIAL: https://nuevaimperial.cl/
+  PADRE LAS CASAS: https://padrelascasas.cl/
+  PERQUENCO: https://perquenco.cl/
+  PITRUFQUEN: https://pitrufquen.cl/
+  PUCON: https://pucon.cl/
+  PUREN: https://munipuren.cl/
+  RENAICO: https://municipalidadrenaico.cl/
+  SAAVEDRA: https://munisaavedra.cl/
+  TEMUCO: https://temuco.cl/
+  TEODORO SCHMIDT: https://teodoroschmidt.cl/
+  TOLTEN: https://tolten.cl/
+  TRAIGUEN: https://traiguen.cl/
+  VICTORIA: https://victoria.cl/
+  VILCUN: https://vilcun.cl/
+  VILLARRICA: https://munivillarrica.cl/

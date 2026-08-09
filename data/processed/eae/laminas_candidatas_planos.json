@@ -1,0 +1,976 @@
+[
+ {
+  "comuna": "Angol",
+  "procedimiento": "PRC Angol",
+  "codigo": "B07",
+  "archivo": "04_Anteproyecto-Planos_PRC_Angol_2.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol_2.pdf.pdf",
+  "archivo_local": "eae\\angol\\04_Anteproyecto-Planos_PRC_Angol_2.pdf.pdf",
+  "mb": 2.4,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Angol",
+  "procedimiento": "PRC Angol",
+  "codigo": "B07",
+  "archivo": "04_Anteproyecto-Planos_PRC_Angol_3.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol_3.pdf.pdf",
+  "archivo_local": "eae\\angol\\04_Anteproyecto-Planos_PRC_Angol_3.pdf.pdf",
+  "mb": 8.6,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Angol",
+  "procedimiento": "PRC Angol",
+  "codigo": "B07",
+  "archivo": "04_Anteproyecto-Planos_PRC_Angol_5.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol_5.pdf.pdf",
+  "archivo_local": "eae\\angol\\04_Anteproyecto-Planos_PRC_Angol_5.pdf.pdf",
+  "mb": 47.3,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Angol",
+  "procedimiento": "PRC Angol - Zona ZR-2",
+  "codigo": "C87",
+  "archivo": "04_Anteproyecto-Planos_PRC_Angol-ZR-2_1.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol-ZR-2_1.pdf.pdf",
+  "archivo_local": "eae\\angol\\04_Anteproyecto-Planos_PRC_Angol-ZR-2_1.pdf.pdf",
+  "mb": 1.3,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
+  "procedimiento": "PRC Collipulli",
+  "codigo": "D04",
+  "archivo": "04_Anteproyecto-Completo-Planos_PRC_Collipulli.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Completo-Planos_PRC_Collipulli.pdf.pdf",
+  "archivo_local": "eae\\collipulli\\04_Anteproyecto-Completo-Planos_PRC_Collipulli.pdf.pdf",
+  "mb": 9.5,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "quebrada"
+    ],
+    "caracteres": 9384,
+    "imagenes": 194,
+    "fraccion_imagen": 0.004,
+    "trazos": 10019,
+    "objetos_texto": 7453,
+    "cm": [
+     110,
+     90
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundacion",
+     "quebrada"
+    ],
+    "caracteres": 4400,
+    "imagenes": 194,
+    "fraccion_imagen": 0.004,
+    "trazos": 1280,
+    "objetos_texto": 3968,
+    "cm": [
+     110,
+     90
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion",
+     "quebrada"
+    ],
+    "caracteres": 7361,
+    "imagenes": 1,
+    "fraccion_imagen": 0.001,
+    "trazos": 42404,
+    "objetos_texto": 6642,
+    "cm": [
+     110,
+     90
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 3
+ },
+ {
+  "comuna": "Cunco",
+  "procedimiento": "PRC Cunco",
+  "codigo": "B29",
+  "archivo": "04_Anteproyecto-Planos_PRC_Cunco_3.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Cunco_3.pdf.pdf",
+  "archivo_local": "eae\\cunco\\04_Anteproyecto-Planos_PRC_Cunco_3.pdf.pdf",
+  "mb": 20.5,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Cunco",
+  "procedimiento": "PRC Cunco",
+  "codigo": "B29",
+  "archivo": "04_Anteproyecto-Planos_PRC_Cunco_4.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Cunco_4.pdf.pdf",
+  "archivo_local": "eae\\cunco\\04_Anteproyecto-Planos_PRC_Cunco_4.pdf.pdf",
+  "mb": 30.5,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Cunco",
+  "procedimiento": "PRC Cunco",
+  "codigo": "B29",
+  "archivo": "04_Anteproyecto-Planos_PRC_Cunco_5.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Cunco_5.pdf.pdf",
+  "archivo_local": "eae\\cunco\\04_Anteproyecto-Planos_PRC_Cunco_5.pdf.pdf",
+  "mb": 28.6,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Freire",
+  "procedimiento": "PRC Freire",
+  "codigo": "A50",
+  "archivo": "04_Anteproyecto-Planos_PRC_Freire.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Freire.pdf.pdf",
+  "archivo_local": "eae\\freire\\04_Anteproyecto-Planos_PRC_Freire.pdf.pdf",
+  "mb": 0.9,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Freire",
+  "procedimiento": "PRC Freire",
+  "codigo": "A50",
+  "archivo": "04_Anteproyecto-Planos_PRC_Freire_3.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Freire_3.pdf.pdf",
+  "archivo_local": "eae\\freire\\04_Anteproyecto-Planos_PRC_Freire_3.pdf.pdf",
+  "mb": 0.9,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Galvarino",
+  "procedimiento": "PRC Galvarino",
+  "codigo": "B59",
+  "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_2.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Galvarino_2.pdf.pdf",
+  "archivo_local": "eae\\galvarino\\04_Anteproyecto-Planos_PRC_Galvarino_2.pdf.pdf",
+  "mb": 1.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "area de riesgo"
+    ],
+    "caracteres": 4645,
+    "imagenes": 75,
+    "fraccion_imagen": 0.009,
+    "trazos": 13395,
+    "objetos_texto": 4037,
+    "cm": [
+     72,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Galvarino",
+  "procedimiento": "PRC Galvarino",
+  "codigo": "B59",
+  "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_3.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Galvarino_3.pdf.pdf",
+  "archivo_local": "eae\\galvarino\\04_Anteproyecto-Planos_PRC_Galvarino_3.pdf.pdf",
+  "mb": 1.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "area de riesgo"
+    ],
+    "caracteres": 4645,
+    "imagenes": 75,
+    "fraccion_imagen": 0.009,
+    "trazos": 13395,
+    "objetos_texto": 4037,
+    "cm": [
+     72,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Galvarino",
+  "procedimiento": "PRC Galvarino",
+  "codigo": "B59",
+  "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_4.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Galvarino_4.pdf.pdf",
+  "archivo_local": "eae\\galvarino\\04_Anteproyecto-Planos_PRC_Galvarino_4.pdf.pdf",
+  "mb": 1.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "area de riesgo"
+    ],
+    "caracteres": 4645,
+    "imagenes": 75,
+    "fraccion_imagen": 0.009,
+    "trazos": 13395,
+    "objetos_texto": 4037,
+    "cm": [
+     72,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Gorbea",
+  "procedimiento": "PRC Gorbea",
+  "codigo": "B06",
+  "archivo": "04_Anteproyecto-Planos_PRC_Gorbea_1.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Gorbea_1.pdf.pdf",
+  "archivo_local": "eae\\gorbea\\04_Anteproyecto-Planos_PRC_Gorbea_1.pdf.pdf",
+  "mb": 5.3,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Gorbea",
+  "procedimiento": "PRC Gorbea",
+  "codigo": "B06",
+  "archivo": "04_Anteproyecto-Planos_PRC_Gorbea_2.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Gorbea_2.pdf.pdf",
+  "archivo_local": "eae\\gorbea\\04_Anteproyecto-Planos_PRC_Gorbea_2.pdf.pdf",
+  "mb": 5.7,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Lonquimay",
+  "procedimiento": "PRC Lonquimay",
+  "codigo": "C86",
+  "archivo": "04_Anteproyecto-Planos-Completo_PRC_Lonquimay.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos-Completo_PRC_Lonquimay.pdf.pdf",
+  "archivo_local": "eae\\lonquimay\\04_Anteproyecto-Planos-Completo_PRC_Lonquimay.pdf.pdf",
+  "mb": 4.7,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Lonquimay",
+  "procedimiento": "PRC Lonquimay",
+  "codigo": "C86",
+  "archivo": "04_Anteproyecto-Planos_PRC_Lonquimay_2.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Lonquimay_2.pdf.pdf",
+  "archivo_local": "eae\\lonquimay\\04_Anteproyecto-Planos_PRC_Lonquimay_2.pdf.pdf",
+  "mb": 4.7,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Pitrufquén",
+  "procedimiento": "PRC Pitrufquén",
+  "codigo": "D58",
+  "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquén.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pitrufquén.pdf",
+  "archivo_local": "eae\\pitrufquen\\04_Anteproyecto-Planos_PRC_Pitrufquén.pdf",
+  "mb": 7.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 3540,
+    "imagenes": 1,
+    "fraccion_imagen": 0.004,
+    "trazos": 2770,
+    "objetos_texto": 2918,
+    "cm": [
+     50,
+     28
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundable",
+     "quebrada"
+    ],
+    "caracteres": 13247,
+    "imagenes": 255,
+    "fraccion_imagen": 0.004,
+    "trazos": 12507,
+    "objetos_texto": 9727,
+    "cm": [
+     110,
+     90
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 2
+ },
+ {
+  "comuna": "Pitrufquén",
+  "procedimiento": "PRC Pitrufquén",
+  "codigo": "D58",
+  "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquén_2.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pitrufquén_2.pdf",
+  "archivo_local": "eae\\pitrufquen\\04_Anteproyecto-Planos_PRC_Pitrufquén_2.pdf",
+  "mb": 7.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 3540,
+    "imagenes": 1,
+    "fraccion_imagen": 0.004,
+    "trazos": 2770,
+    "objetos_texto": 2918,
+    "cm": [
+     50,
+     28
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundable",
+     "quebrada"
+    ],
+    "caracteres": 13301,
+    "imagenes": 255,
+    "fraccion_imagen": 0.004,
+    "trazos": 12507,
+    "objetos_texto": 9771,
+    "cm": [
+     110,
+     90
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 2
+ },
+ {
+  "comuna": "Pucón",
+  "procedimiento": "PRC Pucón",
+  "codigo": "A24",
+  "archivo": "04_Anteproyecto-Planos_PRC_Pucon.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucon.pdf.pdf",
+  "archivo_local": "eae\\pucon\\04_Anteproyecto-Planos_PRC_Pucon.pdf.pdf",
+  "mb": 10.2,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Pucón",
+  "procedimiento": "PRC Pucón",
+  "codigo": "A24",
+  "archivo": "04_Anteproyecto-Planos_PRC_Pucon-2.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucon-2.pdf.pdf",
+  "archivo_local": "eae\\pucon\\04_Anteproyecto-Planos_PRC_Pucon-2.pdf.pdf",
+  "mb": 10.2,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Pucón",
+  "procedimiento": "PRC Pucón",
+  "codigo": "A24",
+  "archivo": "04_Anteproyecto-Planos_PRC_Pucón_v3.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucón_v3.pdf.pdf",
+  "archivo_local": "eae\\pucon\\04_Anteproyecto-Planos_PRC_Pucón_v3.pdf.pdf",
+  "mb": 7.6,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundable",
+     "quebrada"
+    ],
+    "caracteres": 10742,
+    "imagenes": 3,
+    "fraccion_imagen": 0.003,
+    "trazos": 84803,
+    "objetos_texto": 942,
+    "cm": [
+     179,
+     80
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundable",
+     "quebrada"
+    ],
+    "caracteres": 3454,
+    "imagenes": 3,
+    "fraccion_imagen": 0.003,
+    "trazos": 22797,
+    "objetos_texto": 212,
+    "cm": [
+     179,
+     80
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 2
+ },
+ {
+  "comuna": "Pucón",
+  "procedimiento": "PRC Pucón",
+  "codigo": "A24",
+  "archivo": "04_Anteproyecto-Planos_PRC_Pucón_v4.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucón_v4.pdf.pdf",
+  "archivo_local": "eae\\pucon\\04_Anteproyecto-Planos_PRC_Pucón_v4.pdf.pdf",
+  "mb": 7.7,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundable",
+     "area de riesgo",
+     "quebrada"
+    ],
+    "caracteres": 10816,
+    "imagenes": 3,
+    "fraccion_imagen": 0.003,
+    "trazos": 83801,
+    "objetos_texto": 938,
+    "cm": [
+     179,
+     80
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundable",
+     "area de riesgo",
+     "quebrada"
+    ],
+    "caracteres": 3492,
+    "imagenes": 3,
+    "fraccion_imagen": 0.003,
+    "trazos": 22083,
+    "objetos_texto": 209,
+    "cm": [
+     179,
+     80
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 2
+ },
+ {
+  "comuna": "Pucón, Villarrica",
+  "procedimiento": "PRI Villarrica y Pucón",
+  "codigo": "B55",
+  "archivo": "04_Anteproyecto-Planos_PRI_Villarrica-Pucon_2.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRI_Villarrica-Pucon_2.pdf.pdf",
+  "archivo_local": "eae\\pucon,-villarrica\\04_Anteproyecto-Planos_PRI_Villarrica-Pucon_2.pdf.pdf",
+  "mb": 3.7,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "area de riesgo"
+    ],
+    "caracteres": 14942,
+    "imagenes": 78,
+    "fraccion_imagen": 0.003,
+    "trazos": 17540,
+    "objetos_texto": 11459,
+    "cm": [
+     230,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Pucón, Villarrica",
+  "procedimiento": "PRI Villarrica y Pucón",
+  "codigo": "B55",
+  "archivo": "04_Anteproyecto-Planos_PRI_Villarrica-Pucon_3.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRI_Villarrica-Pucon_3.pdf.pdf",
+  "archivo_local": "eae\\pucon,-villarrica\\04_Anteproyecto-Planos_PRI_Villarrica-Pucon_3.pdf.pdf",
+  "mb": 3.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "area de riesgo"
+    ],
+    "caracteres": 10539,
+    "imagenes": 78,
+    "fraccion_imagen": 0.004,
+    "trazos": 17366,
+    "objetos_texto": 10485,
+    "cm": [
+     165,
+     59
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Purén",
+  "procedimiento": "PRC Purén",
+  "codigo": "A94",
+  "archivo": "04_Anteproyecto-Planos_PRC_Purén_VF.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Purén_VF.pdf.pdf",
+  "archivo_local": "eae\\puren\\04_Anteproyecto-Planos_PRC_Purén_VF.pdf.pdf",
+  "mb": 2.3,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundable"
+    ],
+    "caracteres": 6145,
+    "imagenes": 1,
+    "fraccion_imagen": 0.001,
+    "trazos": 50177,
+    "objetos_texto": 490,
+    "cm": [
+     119,
+     84
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundable"
+    ],
+    "caracteres": 3496,
+    "imagenes": 1,
+    "fraccion_imagen": 0.001,
+    "trazos": 7071,
+    "objetos_texto": 201,
+    "cm": [
+     90,
+     70
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 2
+ },
+ {
+  "comuna": "Renaico",
+  "procedimiento": "PRC Renaico",
+  "codigo": "B27",
+  "archivo": "04_Anteproyecto-Planos_PRC_Renaico_3.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Renaico_3.pdf.pdf",
+  "archivo_local": "eae\\renaico\\04_Anteproyecto-Planos_PRC_Renaico_3.pdf.pdf",
+  "mb": 1.7,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Renaico",
+  "procedimiento": "PRC Renaico",
+  "codigo": "B27",
+  "archivo": "04_Anteproyecto-Planos_PRC_Renaico_5.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Renaico_5.pdf.pdf",
+  "archivo_local": "eae\\renaico\\04_Anteproyecto-Planos_PRC_Renaico_5.pdf.pdf",
+  "mb": 1.7,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Saavedra",
+  "procedimiento": "PRC Saavedra",
+  "codigo": "B02",
+  "archivo": "04_Anteproyecto-Planos_PRC_Saavedra_1.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Saavedra_1.pdf.pdf",
+  "archivo_local": "eae\\saavedra\\04_Anteproyecto-Planos_PRC_Saavedra_1.pdf.pdf",
+  "mb": 3.8,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Teodoro Schmidt",
+  "procedimiento": "PRC Teodoro Schmidt",
+  "codigo": "D45",
+  "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1.pdf",
+  "archivo_local": "eae\\teodoro-schmidt\\04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1.pdf",
+  "mb": 5.3,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "area de riesgo"
+    ],
+    "caracteres": 5156,
+    "imagenes": 60,
+    "fraccion_imagen": 0.013,
+    "trazos": 3037,
+    "objetos_texto": 4162,
+    "cm": [
+     63,
+     46
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundacion",
+     "area de riesgo"
+    ],
+    "caracteres": 5863,
+    "imagenes": 73,
+    "fraccion_imagen": 0.011,
+    "trazos": 4071,
+    "objetos_texto": 4670,
+    "cm": [
+     63,
+     55
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 6287,
+    "imagenes": 69,
+    "fraccion_imagen": 0.012,
+    "trazos": 9333,
+    "objetos_texto": 4998,
+    "cm": [
+     63,
+     52
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 3
+ },
+ {
+  "comuna": "Teodoro Schmidt",
+  "procedimiento": "PRC Teodoro Schmidt",
+  "codigo": "D45",
+  "archivo": "04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+  "archivo_local": "eae\\teodoro-schmidt\\04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+  "mb": 7.1,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 6287,
+    "imagenes": 69,
+    "fraccion_imagen": 0.012,
+    "trazos": 9333,
+    "objetos_texto": 4998,
+    "cm": [
+     63,
+     52
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundacion",
+     "area de riesgo"
+    ],
+    "caracteres": 5863,
+    "imagenes": 73,
+    "fraccion_imagen": 0.011,
+    "trazos": 4071,
+    "objetos_texto": 4670,
+    "cm": [
+     63,
+     55
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion",
+     "area de riesgo"
+    ],
+    "caracteres": 5003,
+    "imagenes": 60,
+    "fraccion_imagen": 0.014,
+    "trazos": 2781,
+    "objetos_texto": 3975,
+    "cm": [
+     62,
+     45
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 3
+ },
+ {
+  "comuna": "Toltén",
+  "procedimiento": "PRC Toltén",
+  "codigo": "B05",
+  "archivo": "04_Anteproyecto-Planos_PRC_Tolten_1.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Tolten_1.pdf.pdf",
+  "archivo_local": "eae\\tolten\\04_Anteproyecto-Planos_PRC_Tolten_1.pdf.pdf",
+  "mb": 4.3,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Traiguén",
+  "procedimiento": "Actualización PRC Traiguén",
+  "codigo": "E32",
+  "archivo": "04_Anteproyecto_Planos_PRC_Traiguén.pdf.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Planos_PRC_Traiguén.pdf.pdf",
+  "archivo_local": "eae\\traiguen\\04_Anteproyecto_Planos_PRC_Traiguén.pdf.pdf",
+  "mb": 11.0,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundable",
+     "quebrada"
+    ],
+    "caracteres": 167234,
+    "imagenes": 129,
+    "fraccion_imagen": 0.006,
+    "trazos": 22915,
+    "objetos_texto": 86758,
+    "cm": [
+     90,
+     70
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Vilcún",
+  "procedimiento": "PRC Vilcún",
+  "codigo": "D49",
+  "archivo": "04_Anteproyecto-Planos_PRC_Vilcún.pdf",
+  "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Vilcún.pdf",
+  "archivo_local": "eae\\vilcun\\04_Anteproyecto-Planos_PRC_Vilcún.pdf",
+  "mb": 16.1,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundable"
+    ],
+    "caracteres": 5989,
+    "imagenes": 199,
+    "fraccion_imagen": 0.004,
+    "trazos": 14157,
+    "objetos_texto": 5018,
+    "cm": [
+     150,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundable"
+    ],
+    "caracteres": 6631,
+    "imagenes": 199,
+    "fraccion_imagen": 0.004,
+    "trazos": 17967,
+    "objetos_texto": 5625,
+    "cm": [
+     150,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 3,
+    "terminos": [
+     "area de riesgo"
+    ],
+    "caracteres": 6170,
+    "imagenes": 1,
+    "fraccion_imagen": 0.002,
+    "trazos": 10384,
+    "objetos_texto": 4712,
+    "cm": [
+     95,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 6,
+    "terminos": [
+     "inundable",
+     "area de riesgo"
+    ],
+    "caracteres": 4432,
+    "imagenes": 61,
+    "fraccion_imagen": 0.008,
+    "trazos": 8091,
+    "objetos_texto": 3638,
+    "cm": [
+     80,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 7,
+    "terminos": [
+     "inundable",
+     "anegamiento"
+    ],
+    "caracteres": 7022,
+    "imagenes": 188,
+    "fraccion_imagen": 0.004,
+    "trazos": 18470,
+    "objetos_texto": 5270,
+    "cm": [
+     160,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 8,
+    "terminos": [
+     "inundable",
+     "anegamiento"
+    ],
+    "caracteres": 6128,
+    "imagenes": 188,
+    "fraccion_imagen": 0.004,
+    "trazos": 16578,
+    "objetos_texto": 4830,
+    "cm": [
+     160,
+     60
+    ],
+    "apaisada": true,
+    "tipo_lamina": "plano",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 6
+ }
+]

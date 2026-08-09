@@ -1,0 +1,92 @@
+{
+ "evento": {
+  "id": "2026-07-30_sistema_frontal",
+  "nombre": "Sistema frontal 30-jul a 4-ago 2026",
+  "fecha_inicio": "2026-07-30",
+  "fecha_fin": "2026-08-06",
+  "rios": [
+   "Imperial",
+   "Cholchol",
+   "Cautín",
+   "Toltén"
+  ]
+ },
+ "generado": "2026-08-09T12:34:01+00:00",
+ "resolucion_m": 50,
+ "tracks": [
+  {
+   "track": "83D",
+   "plataforma": "sentinel-1d",
+   "fecha_observacion": "2026-08-04",
+   "fechas_referencia": [
+    "2026-07-11",
+    "2026-07-17",
+    "2026-07-23",
+    "2026-07-29"
+   ],
+   "umbral_agua_db": -20.11,
+   "umbral_crudo_db": -20.11,
+   "px_agua_permanente": 190219,
+   "px_cobertura": 7307265,
+   "px_agua_nueva": 12651,
+   "px_descartados_por_terreno": 167529,
+   "poligonos": 350,
+   "km2": 16.21
+  },
+  {
+   "track": "156D",
+   "plataforma": "sentinel-1c",
+   "fecha_observacion": "2026-08-03",
+   "fechas_referencia": [
+    "2026-07-10",
+    "2026-07-16",
+    "2026-07-22",
+    "2026-07-28"
+   ],
+   "umbral_agua_db": -21.99,
+   "umbral_crudo_db": -21.99,
+   "px_agua_permanente": 40958,
+   "px_cobertura": 7292935,
+   "px_agua_nueva": 9734,
+   "px_descartados_por_terreno": 8216,
+   "poligonos": 298,
+   "km2": 15.37
+  },
+  {
+   "track": "164A",
+   "plataforma": "sentinel-1c",
+   "fecha_observacion": "2026-08-03",
+   "fechas_referencia": [
+    "2026-07-10",
+    "2026-07-16",
+    "2026-07-22",
+    "2026-07-28"
+   ],
+   "umbral_agua_db": -22.0,
+   "umbral_crudo_db": -24.34,
+   "px_agua_permanente": 259249,
+   "px_cobertura": 7590244,
+   "px_agua_nueva": 16513,
+   "px_descartados_por_terreno": 447443,
+   "poligonos": 427,
+   "km2": 26.18
+  }
+ ],
+ "resumen": {
+  "tracks": 3,
+  "poligonos": 1075,
+  "km2": 57.76,
+  "hectareas": 5776.0,
+  "km2_observados": 17381.5
+ },
+ "procedencia": {
+  "fuente": "Sentinel-1 GRD (Copernicus / ESA), distribuido por Microsoft Planetary Computer",
+  "url": "https://planetarycomputer.microsoft.com/api/stac/v1/search",
+  "metodo": "Detección de cambio en σ⁰ VV entre la pasada posterior al evento y la mediana de hasta 4 pasadas previas de la MISMA órbita relativa. Calibración a σ⁰ con la tabla sigmaNought del propio producto; reproyección por los puntos de control del GRD. Se marca agua donde la caída es ≥ 3.0 dB, el valor posterior es tan oscuro como el agua permanente de la propia escena (percentil 50, acotado a [-22.0, -13.0] dB) y la referencia era estable (desviación ≤ 3.5 dB). Se excluye el agua permanente y los grupos menores a 5 píxeles. Se excluye además todo terreno con pendiente > 5.0° o sobre 1200 m (Copernicus GLO-30): es la máscara que separa la inundación de la NIEVE HÚMEDA, que en banda C se ve igual de oscura que el agua y ningún umbral radiométrico distingue.",
+  "capa_evidencia": "B_observado",
+  "incertidumbre": "Es una FOTO del instante de la pasada, no el máximo del evento: agua que subió y bajó entre pasadas no aparece. El radar NO ve agua bajo dosel cerrado (la copa devuelve la señal antes de llegar al suelo) ni en zona urbana densa (el doble rebote pared-suelo mantiene alta la retrodispersión), así que SUBESTIMA justo donde vive más gente. El agua con viento se rugosiza y tampoco se detecta. Por el otro lado, la NIEVE HÚMEDA es radiométricamente indistinguible del agua, y sólo se descarta por geomorfología: se excluye pendiente > 5.0° y altura > 1200 m. Eso implica que esta capa NO puede afirmar nada sobre inundación en cordillera ni en ladera. Comparar dentro de la misma órbita relativa cancela la sombra de radar por ser estática, pero no se aplica corrección radiométrica por terreno. Resolución de salida ~50 m: no apto para decisión predial.",
+  "escala_original": "Sentinel-1 IW GRDH, 10 m de espaciado, leído 1 de cada 4",
+  "fecha_dato": "Sistema frontal 30-jul a 4-ago 2026 — pasadas 2026-08-04, 2026-08-03, 2026-08-03",
+  "generado": "2026-08-09T12:34:01+00:00"
+ }
+}

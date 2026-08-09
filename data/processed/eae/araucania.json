@@ -1,0 +1,2888 @@
+[
+ {
+  "file_id": 79,
+  "codigo": "B07",
+  "nombre": "PRC Angol",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRCAngol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRCAngol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Angol_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Angol_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Angol_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Angol_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Angol_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Angol_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_4to_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_4to_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_4to_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_4to_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_4to_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_4to_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Angol_4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Angol_4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_5to_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_5to_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_5to_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_5to_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_5to_IA_PRC_Angol.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_5to_IA_PRC_Angol.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Angol_5.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Angol_5.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Angol_5.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol_5.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Decreto_Término_EAE_PRC_Angol.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Decreto_Término_EAE_PRC_Angol.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Angol",
+  "instrumento": "PRC",
+  "fecha_ingreso": "05/11/2012",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 245,
+  "codigo": "C87",
+  "nombre": "PRC Angol - Zona ZR-2",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Angol-ZR-2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Angol-ZR-2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Angol-ZR-2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Angol-ZR-2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Angol-ZR-2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Angol-ZR-2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Angol-ZR-2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Angol-ZR-2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Angol-ZR-2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Angol-ZR-2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Angol-ZR-2_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Angol-ZR-2_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Angol-ZR-2_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Angol-ZR-2_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_Decreto_Aprueba_PRC_Angol-ZR-2.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Decreto_Aprueba_PRC_Angol-ZR-2.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Angol",
+  "instrumento": "PRC",
+  "fecha_ingreso": "14/05/2015",
+  "estado": "Resolución de Aprobación del Instrumento"
+ },
+ {
+  "file_id": 495,
+  "codigo": "F29",
+  "nombre": "Actualización PRC Carahue",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_EAE_PRC_Carahue.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_EAE_PRC_Carahue.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusión_Inicio_EAE_PRC_Carahue.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusión_Inicio_EAE_PRC_Carahue.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Carahue",
+  "instrumento": "PRC",
+  "fecha_ingreso": "09/01/2024",
+  "estado": "Inicio EAE"
+ },
+ {
+  "file_id": 289,
+  "codigo": "D04",
+  "nombre": "PRC Collipulli",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso-Desistido_PRC_SCollipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Desistido_PRC_SCollipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing-Desistido_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing-Desistido_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Desistimiento_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Desistimiento_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Reingreso_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Reingreso_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Reing_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Reing_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IA-Incompleto_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Incompleto_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto_PRC_Collipulli_2018.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto_PRC_Collipulli_2018.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Incompleto_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Incompleto_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto-Incompleto_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Incompleto_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso-Completo_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Completo_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Completo_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Completo_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Completo_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Completo_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto-Completo_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Completo_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Completo-Planos_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Completo-Planos_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso-Desistido_PRC_Collipulli.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Desistido_PRC_Collipulli.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Collipulli",
+  "instrumento": "PRC",
+  "fecha_ingreso": "30/08/2016",
+  "estado": "Resolución de Desistimiento o Abandono"
+ },
+ {
+  "file_id": 107,
+  "codigo": "B29",
+  "nombre": "PRC Cunco",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Cunco_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Cunco_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Cunco_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Cunco_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Cunco_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Cunco_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Cunco_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Cunco_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_4to_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_4to_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_4to_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_4to_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_4to_IA-Anexos_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_4to_IA-Anexos_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_4to_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_4to_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Cunco_4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Cunco_4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Cunco_4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Cunco_4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_5to_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_5to_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_5to_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_5to_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_5to_IA_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_5to_IA_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Cunco_5.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Cunco_5.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Cunco_5.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Cunco_5.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Decreto_Termino_EAE_PRC_Cunco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Decreto_Termino_EAE_PRC_Cunco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Cunco",
+  "instrumento": "PRC",
+  "fecha_ingreso": "28/01/2013",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 324,
+  "codigo": "D63",
+  "nombre": "PRC Curacautín",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso-Incompleto_PRC_Curacautin.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Incompleto_PRC_Curacautin.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso-Completo_PRC_Curacautin.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Completo_PRC_Curacautin.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_PRC_Curacautin 2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Curacautin 2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing-Incompleto_PRC_Curacautin.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing-Incompleto_PRC_Curacautin.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing-Completo_PRC_Curacautin.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing-Completo_PRC_Curacautin.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Curacautin 2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Curacautin 2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusión_Inicio_PRC_Curacautin.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusión_Inicio_PRC_Curacautin.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "05_Desistimiento_PRC_Curacautin.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/05_Desistimiento_PRC_Curacautin.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_PRC_Curacautin 2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_PRC_Curacautin 2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Curacautín",
+  "instrumento": "PRC",
+  "fecha_ingreso": "23/02/2018",
+  "estado": "Inicio EAE"
+ },
+ {
+  "file_id": 422,
+  "codigo": "E57",
+  "nombre": "PRC Curarrehue",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_EAE_PRC_Curarrehue.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_EAE_PRC_Curarrehue.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_EAE_PRC_Curarrehue.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_EAE_PRC_Curarrehue.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_EAE_PRC_Curarrehue.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_EAE_PRC_Curarrehue.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Curarrehue",
+  "instrumento": "PRC",
+  "fecha_ingreso": "04/03/2021",
+  "estado": "Inicio EAE"
+ },
+ {
+  "file_id": 73,
+  "codigo": "A50",
+  "nombre": "PRC Freire",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_EAE_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_EAE_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ingreso_EAE_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ingreso_EAE_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Freire.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Freire.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Freire_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Freire_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Freire_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Freire_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Decreto_Término_EAE_PRC_Freire.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Decreto_Término_EAE_PRC_Freire.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Freire",
+  "instrumento": "PRC",
+  "fecha_ingreso": "13/12/2011",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 92,
+  "codigo": "B59",
+  "nombre": "PRC Galvarino",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA-Anexos_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA-Anexos_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Galvarino_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Galvarino_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Galvarino_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Galvarino_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Galvarino_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Galvarino_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Galvarino_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Galvarino_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_4to_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_4to_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_4to_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_4to_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_4to_IA_PRC_Galvarino.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_4to_IA_PRC_Galvarino.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Galvarino_4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Galvarino_4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Galvarino_4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Galvarino",
+  "instrumento": "PRC",
+  "fecha_ingreso": "24/07/2013",
+  "estado": "Cuarto Informe Ambiental"
+ },
+ {
+  "file_id": 78,
+  "codigo": "B06",
+  "nombre": "PRC Gorbea",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA-Anexos_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA-Anexos_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_PRC Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_PRC Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Gorbea_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Gorbea_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Gorbea_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Gorbea_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Gorbea_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Gorbea_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Gorbea_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Gorbea_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_PRC Gorbea.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_PRC Gorbea.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Gorbea",
+  "instrumento": "PRC",
+  "fecha_ingreso": "05/11/2012",
+  "estado": "Tercer Informe Ambiental"
+ },
+ {
+  "file_id": 243,
+  "codigo": "C86",
+  "nombre": "PRC Lonquimay",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IA-Incompleto_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Incompleto_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Incompleto_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Incompleto_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Lonquimay_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Lonquimay_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_IA-Incompleto_PRC_Lonquimay_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Incompleto_PRC_Lonquimay_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto_PRC_Lonquimay_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto_PRC_Lonquimay_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Incompleto_PRC_Lonquimay_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Incompleto_PRC_Lonquimay_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso-Completo_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Completo_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Completo_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Completo_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Completo_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Completo_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Solicitud_Plazo_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Solicitud_Plazo_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt-Solicitud_Plazo_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt-Solicitud_Plazo_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos-Completo_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos-Completo_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Completo_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Completo_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_IAC_PRC_Lonquimay.PDF.PDF",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IAC_PRC_Lonquimay.PDF.PDF",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IAC_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IAC_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IAC_PRC_Lonquimay.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IAC_PRC_Lonquimay.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Lonquimay_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Lonquimay_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Lonquimay_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Lonquimay_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Lonquimay",
+  "instrumento": "PRC",
+  "fecha_ingreso": "11/05/2015",
+  "estado": "Informe Ambiental Complementario"
+ },
+ {
+  "file_id": 291,
+  "codigo": "D06",
+  "nombre": "PRC Lonquimay - zona vivienda alta densidad",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Lonquimay-vivienda_alta_densidad.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Lonquimay-vivienda_alta_densidad.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Lonquimay-vivienda_alta_densidad.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Lonquimay-vivienda_alta_densidad.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso-Desistido_PRC_Lonquimay-vda_alta_densidad.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Desistido_PRC_Lonquimay-vda_alta_densidad.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Lonquimay",
+  "instrumento": "PRC",
+  "fecha_ingreso": "23/10/2015",
+  "estado": "Resolución de Desistimiento o Abandono"
+ },
+ {
+  "file_id": 81,
+  "codigo": "B09",
+  "nombre": "PRC Lumaco",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Lumaco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Lumaco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Lumaco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Lumaco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Lumaco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Lumaco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Lumaco_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Lumaco_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Lumaco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Lumaco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Lumaco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Lumaco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Lumaco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Lumaco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Lumaco",
+  "instrumento": "PRC",
+  "fecha_ingreso": "05/12/2012",
+  "estado": "Segundo Informe Ambiental"
+ },
+ {
+  "file_id": 61,
+  "codigo": "A39",
+  "nombre": "PRC Nueva Imperial",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Nueva_Imperial_1.rar.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Nueva_Imperial_1.rar.rar",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Resolucion_Termino_EAE_PRC_Nueva_Imperial.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Resolucion_Termino_EAE_PRC_Nueva_Imperial.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Nueva Imperial",
+  "instrumento": "PRC",
+  "fecha_ingreso": "01/12/2011",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 318,
+  "codigo": "D58",
+  "nombre": "PRC Pitrufquén",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Pitrufquen.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Pitrufquen.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Pitrufquen.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Pitrufquen.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_PRC_Pitrufquen.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_PRC_Pitrufquen.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso-Incompleto_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Incompleto_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto_PRC Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto_PRC Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Incompleto_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Incompleto_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto-Memoria_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Memoria_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Ordenanza_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Ordenanza_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso-Completo_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Completo_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Completo_PRC Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Completo_PRC Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Completo_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Completo_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Pitrufquén_2.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Pitrufquén_2.rar",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquén_2.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pitrufquén_2.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_IAC_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IAC_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IAC_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IAC_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IAC_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IAC_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Pitrufquén2.zip",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Pitrufquén2.zip",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquén2.zip",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pitrufquén2.zip",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Desestima_Rpt_IAC_PRC_PItrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Desestima_Rpt_IAC_PRC_PItrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Decreto_Término_EAE_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Decreto_Término_EAE_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Decreto_Término_EAE_PRC_Pitrufquén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Decreto_Término_EAE_PRC_Pitrufquén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Pitrufquén",
+  "instrumento": "PRC",
+  "fecha_ingreso": "04/01/2018",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 35,
+  "codigo": "A24",
+  "nombre": "PRC Pucón",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PR_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PR_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Pucon-2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Pucon-2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Pucon-2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucon-2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Pucón.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Pucón.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Pucón.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Pucón.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA-Anexos_PRC_Pucón.rar.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA-Anexos_PRC_Pucón.rar.rar",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Pucón.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Pucón.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Memoria_PRC_Pucón_v3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Memoria_PRC_Pucón_v3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Ordenanza_PRC_Pucón_v3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Ordenanza_PRC_Pucón_v3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Pucón_v3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucón_v3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Estudios_Especiales_PRC_Pucón_v3.rar.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Estudios_Especiales_PRC_Pucón_v3.rar.rar",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_4to_IA_PRC_Pucón.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_4to_IA_PRC_Pucón.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_4to_IA_PRC_Pucón.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_4to_IA_PRC_Pucón.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_4to_IA-Anexo_PRC_Pucón.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_4to_IA-Anexo_PRC_Pucón.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_4to_IA_PRC_Pucón.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_4to_IA_PRC_Pucón.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Memoria_PRC_Pucón_v4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Memoria_PRC_Pucón_v4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Ordenanza_PRC_Pucón_v4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Ordenanza_PRC_Pucón_v4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Pucón_v4.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Pucón_v4.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Estudios_Especiales_PRC_Pucón_v4.rar.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Estudios_Especiales_PRC_Pucón_v4.rar.rar",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Pucón",
+  "instrumento": "PRC",
+  "fecha_ingreso": "01/08/2011",
+  "estado": "Cuarto Informe Ambiental"
+ },
+ {
+  "file_id": 68,
+  "codigo": "B55",
+  "nombre": "PRI Villarrica y Pucón",
+  "tipo": "Plan Regulador Intercomunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PR_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PR_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRI_Villarrica-Pucon_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRI_Villarrica-Pucon_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRI_Villarrica-Pucon.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRI_Villarrica-Pucon_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRI_Villarrica-Pucon_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Resolucion_Termino_EAE_PRI_Villarrica Pucon.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Resolucion_Termino_EAE_PRI_Villarrica Pucon.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Pucón, Villarrica",
+  "instrumento": "PRI",
+  "fecha_ingreso": "17/07/2013",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 41,
+  "codigo": "A94",
+  "nombre": "PRC Purén",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Puren.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Puren.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Decreto_Termino_EAE_PRC_Purén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Decreto_Termino_EAE_PRC_Purén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Rpta_Decreto_Termino_EAE_PRC_Purén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Rpta_Decreto_Termino_EAE_PRC_Purén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IACr_PRC_Purén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IACr_PRC_Purén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IACr_PRC_Purén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IACr_PRC_Purén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto-Memoria_PRC_Purén_VF.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Memoria_PRC_Purén_VF.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Ordenanza_PRC_Purén_VF.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Ordenanza_PRC_Purén_VF.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Purén_VF.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Purén_VF.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Estrudio-Capacidad-Vial_PRC_Purén_VF.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Estrudio-Capacidad-Vial_PRC_Purén_VF.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Factibilidad-Sanitaria_PRC_Purén_VF.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Factibilidad-Sanitaria_PRC_Purén_VF.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Estrudio-Riesgos_PRC_Purén_VF.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Estrudio-Riesgos_PRC_Purén_VF.pdf.pdf",
+    "probable_riesgo": true,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Estrudio-Equipamiento_PRC_Purén_VF.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Estrudio-Equipamiento_PRC_Purén_VF.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Consulta_Indígena_Informe_PRC_Purén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Consulta_Indígena_Informe_PRC_Purén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Consulta_Indígena_Etapas_PRC_Purén.7z",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Consulta_Indígena_Etapas_PRC_Purén.7z",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IACr_PRC_Purén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IACr_PRC_Purén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Purén",
+  "instrumento": "PRC",
+  "fecha_ingreso": "28/08/2012",
+  "estado": "Informe Ambiental Corregido"
+ },
+ {
+  "file_id": 101,
+  "codigo": "B27",
+  "nombre": "PRC Renaico",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Renaico_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Renaico_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Renaico_3.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Renaico_3.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_4to_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_4to_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_4to_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_4to_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_4to_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_4to_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_5to_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_5to_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_5to_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_5to_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_5to_IA_PRC_Renaico.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_5to_IA_PRC_Renaico.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Renaico_5.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Renaico_5.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Renaico_5.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Renaico_5.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Decreto_Término_EAE_PRC_Renaico.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Decreto_Término_EAE_PRC_Renaico.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Renaico",
+  "instrumento": "PRC",
+  "fecha_ingreso": "22/01/2013",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 57,
+  "codigo": "B02",
+  "nombre": "PRC Saavedra",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Saavedra_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Saavedra_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Saavedra_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Saavedra_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA-Anexos_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA-Anexos_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Saavedra.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Saavedra.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Saavedra",
+  "instrumento": "PRC",
+  "fecha_ingreso": "27/08/2012",
+  "estado": "Tercer Informe Ambiental"
+ },
+ {
+  "file_id": 286,
+  "codigo": "D54",
+  "nombre": "PRC Temuco",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Temuco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Temuco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_PRC_Temuco_CI.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Temuco_CI.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Temuco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Temuco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Temuco_CI.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Temuco_CI.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_PRC_Temuco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_PRC_Temuco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_PRC_Temuco_CI.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_PRC_Temuco_CI.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Oficio_Desistimiento_EAE_PRC_Temuco.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Oficio_Desistimiento_EAE_PRC_Temuco.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Temuco",
+  "instrumento": "PRC",
+  "fecha_ingreso": "08/09/2017",
+  "estado": "Resolución de Desistimiento o Abandono"
+ },
+ {
+  "file_id": 522,
+  "codigo": "F55",
+  "nombre": "PRC Temuco",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_Inicio_PRC Temuco.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_Inicio_PRC Temuco.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ingreso_EAE_PRC_Temuco.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ingreso_EAE_PRC_Temuco.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Temuco",
+  "instrumento": "PRC",
+  "fecha_ingreso": "22/07/2025",
+  "estado": "Inicio EAE"
+ },
+ {
+  "file_id": 272,
+  "codigo": "C95",
+  "nombre": "PRC Temuco - Terreno Amanecer",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Temuco_Terreno_Amanecer.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Temuco_Terreno_Amanecer.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Temuco_Terreno_Amanecer.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Temuco_Terreno_Amanecer.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso-Desistido_PRC_Temuco_Terreno_Amanecer.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso-Desistido_PRC_Temuco_Terreno_Amanecer.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Temuco",
+  "instrumento": "PRC",
+  "fecha_ingreso": "13/08/2015",
+  "estado": "Resolución de Desistimiento o Abandono"
+ },
+ {
+  "file_id": 267,
+  "codigo": "D45",
+  "nombre": "PRC Teodoro Schmidt",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Teodoro_Schmidt.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Teodoro_Schmidt.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Teodoro_Schmidt.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Teodoro_Schmidt.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_PRC_Teodoro_Schmidt.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_PRC_Teodoro_Schmidt.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IA-Incompleto_PRC_Teodoro_Schimdt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Incompleto_PRC_Teodoro_Schimdt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto_PRC_Teodoro_Schimdt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto_PRC_Teodoro_Schimdt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Incompleto_PRC_Teodoro_Schimdt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Incompleto_PRC_Teodoro_Schimdt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Teodoro_Schimdt_1.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Teodoro_Schimdt_1.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_IA-Completo_PRC_Teodoro_Schimdt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Completo_PRC_Teodoro_Schimdt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Completo_PRC_Teodoro_Schmidt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Completo_PRC_Teodoro_Schmidt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Completo_PRC_Teodoro_Schmidt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Completo_PRC_Teodoro_Schmidt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Teodoro_Schmidt_2.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Teodoro_Schmidt_2.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schmidt_2.zip",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Teodoro_Schmidt_2.zip",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Reitera_Solicitud_IAC_PRC_Teodoro_Schmidt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Reitera_Solicitud_IAC_PRC_Teodoro_Schmidt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IAC_PRC_Teodoro_Schmidt.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IAC_PRC_Teodoro_Schmidt.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IAC_PRC_Teodoro_Schmidt.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IAC_PRC_Teodoro_Schmidt.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IAC_PRC_Teodoro_Schmidt.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IAC_PRC_Teodoro_Schmidt.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_Memoria_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Memoria_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_Ordenanza_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Ordenanza_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_Anexos_PRC_Teodoro_Schmidt_v2.zip",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Anexos_PRC_Teodoro_Schmidt_v2.zip",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Teodoro Schmidt",
+  "instrumento": "PRC",
+  "fecha_ingreso": "03/07/2017",
+  "estado": "Informe Ambiental Complementario"
+ },
+ {
+  "file_id": 520,
+  "codigo": "F53",
+  "nombre": "EDF Digüeñes - Nueva Pichirropulli",
+  "tipo": "Estudio de Franjas de Transmisión Eléctrica",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_EAE_EDF_Entre_Ríos-Pichirropulli_.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_EAE_EDF_Entre_Ríos-Pichirropulli_.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_EAE_EDF_Entre_Ríos-Pichirropulli_.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_EAE_EDF_Entre_Ríos-Pichirropulli_.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusión_EAE_EDF_Entre_Ríos-Pichirropulli_.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusión_EAE_EDF_Entre_Ríos-Pichirropulli_.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Resolución_Desacumula_Procedimiento_EDF_.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Resolución_Desacumula_Procedimiento_EDF_.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "Biobío La Araucanía Los Ríos Ñuble",
+  "provincia": "Todas",
+  "comunas": "Todas",
+  "instrumento": "EDF",
+  "fecha_ingreso": "06/07/2021",
+  "estado": "Inicio EAE"
+ },
+ {
+  "file_id": 109,
+  "codigo": "B68",
+  "nombre": "PROT La Araucanía",
+  "tipo": "Plan Regional de Ordenamiento Territorial",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PROT_La_Araucania.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PROT_La_Araucania.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PROT_La_Araucania.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PROT_La_Araucania.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PROT_La_Araucania.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PROT_La_Araucania.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PROT_La_Araucania.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PROT_La_Araucania.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PROT_La_Araucania.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PROT_La_Araucania.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PROT_La_Araucania.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PROT_La_Araucania.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Todas",
+  "comunas": "Todas",
+  "instrumento": "PROT",
+  "fecha_ingreso": "30/08/2013",
+  "estado": "Primer Informe Ambiental"
+ },
+ {
+  "file_id": 77,
+  "codigo": "B05",
+  "nombre": "PRC Toltén",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_1er_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_1er_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_1er_IA-Anexos_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_1er_IA-Anexos_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_1er_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_1er_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Tolten_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Tolten_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Tolten_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Tolten_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_2do_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_2do_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_2do_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_2do_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_2do_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_2do_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Tolten_2.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Tolten_2.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_3er_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_3er_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_3er_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_3er_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_3er_IA_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_3er_IA_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Decreto_Termino_EAE_PRC_Tolten.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Decreto_Termino_EAE_PRC_Tolten.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Toltén",
+  "instrumento": "PRC",
+  "fecha_ingreso": "05/11/2012",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 396,
+  "codigo": "E32",
+  "nombre": "Actualización PRC Traiguén",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ing_EAE_PRC_Traiguén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ing_EAE_PRC_Traiguén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt-Ing_EAE_PRC_Traiguén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt-Ing_EAE_PRC_Traiguén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusión_Inicio_PRC_Traiguén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusión_Inicio_PRC_Traiguén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IA-Incompleto_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Incompleto_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Incompleto_Actualizacion_PRC_Traiguén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Incompleto_Actualizacion_PRC_Traiguén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto-Memoria_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Memoria_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Ordenanza_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Ordenanza_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Plano_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Plano_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Anexos_Actualizacion_PRC_Traiguén.zip.zip",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Anexos_Actualizacion_PRC_Traiguén.zip.zip",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Ingreso_IA-Completo_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Completo_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Completo_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Completo_Actualizacion_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Completo_Actualizacion_PRC_Traiguén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Completo_Actualizacion_PRC_Traiguén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IAC_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IAC_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IAC_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IAC_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IAC_PRC_Traiguén.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IAC_PRC_Traiguén.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_Memoria_Explicativa_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Memoria_Explicativa_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_Ordenanza_Local_PRC Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Ordenanza_Local_PRC Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_Planos_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Planos_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto_Estudios_Técnicos_PRC_Traiguén.rar.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_Estudios_Técnicos_PRC_Traiguén.rar.rar",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "01_Res_Término_EAE_PRC_Traiguén.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Res_Término_EAE_PRC_Traiguén.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Traiguén",
+  "instrumento": "PRC",
+  "fecha_ingreso": "19/03/2020",
+  "estado": "Resolución de Término de la EAE"
+ },
+ {
+  "file_id": 246,
+  "codigo": "C88",
+  "nombre": "PRC Victoria",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Victoria.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Victoria.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Victoria.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Victoria.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IA-Incompleto_PRC_Victoria.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA-Incompleto_PRC_Victoria.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto_PRC_Victoria.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto_PRC_Victoria.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Incompleto-Anexos_PRC_Victoria.rar.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Incompleto-Anexos_PRC_Victoria.rar.rar",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA-Incompleto_PRC_Victoria.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-Incompleto_PRC_Victoria.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Victoria_1.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Victoria_1.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "05_Desistimiento_PRC_Victoria.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/05_Desistimiento_PRC_Victoria.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Malleco",
+  "comunas": "Victoria",
+  "instrumento": "PRC",
+  "fecha_ingreso": "16/06/2015",
+  "estado": "Resolución de Desistimiento o Abandono"
+ },
+ {
+  "file_id": 276,
+  "codigo": "D49",
+  "nombre": "PRC Vilcún",
+  "tipo": "Plan Regulador Comunal",
+  "documentos": [
+   {
+    "archivo": "01_Ingreso_PRC_Vilcun.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_PRC_Vilcun.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_Rpt_Ing_PRC_Vilcun.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_Rpt_Ing_PRC_Vilcun.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Difusion_Inicio_PRC_Vilcun.pdf.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Difusion_Inicio_PRC_Vilcun.pdf.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IA_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IA_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_IA_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "02_IA-Solicitud_Ampliación_Plazo_PRC_Vilcún.PDF",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Solicitud_Ampliación_Plazo_PRC_Vilcún.PDF",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IA-Rpt_Solicitud_Ampliación_Plazo_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IA-Rpt_Solicitud_Ampliación_Plazo_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IA_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Memoria_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Memoria_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Ordenanza_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Ordenanza_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Planos_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Planos_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "04_Anteproyecto-Anexos_PRC_Vilcún.rar",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto-Anexos_PRC_Vilcún.rar",
+    "probable_riesgo": false,
+    "probable_informe": true
+   },
+   {
+    "archivo": "03_Rpt_IA-2daSolicitud_Plazo_PRC_Vilcun.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IA-2daSolicitud_Plazo_PRC_Vilcun.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt-2daSolicitud_Plazo_PRC_Vilcun.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt-2daSolicitud_Plazo_PRC_Vilcun.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "01_Ingreso_IAC_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/01_Ingreso_IAC_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "02_IAC_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/02_IAC_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "03_Rpt_IAC_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/03_Rpt_IAC_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": false
+   },
+   {
+    "archivo": "04_Anteproyecto_PRC_Vilcún.pdf",
+    "url": "https://eae.mma.gob.cl/storage/documents/04_Anteproyecto_PRC_Vilcún.pdf",
+    "probable_riesgo": false,
+    "probable_informe": true
+   }
+  ],
+  "region": "La Araucanía",
+  "provincia": "Cautín",
+  "comunas": "Vilcún",
+  "instrumento": "PRC",
+  "fecha_ingreso": "18/08/2017",
+  "estado": "Informe Ambiental Complementario"
+ }
+]

@@ -1,0 +1,507 @@
+/* riesgomapas — sistema visual
+ *
+ * Anclaje: cartografía de riesgo y agua. Los colores de amenaza no son los de
+ * una paleta de interfaz genérica, son los de una leyenda cartográfica; el
+ * achurado diagonal es el mismo recurso con que los planes reguladores marcan
+ * las áreas de riesgo.
+ *
+ * Tipografía: pila del sistema, a propósito. Una fuente web rompería el
+ * requisito de funcionar sin señal y agrega descarga en una conexión mala, que
+ * es la condición del público objetivo. El carácter lo dan la escala, los pesos
+ * y los numerales tabulares, no un archivo de 80 KB.
+ */
+
+:root {
+  /* Grises con sesgo hacia el acento: un gris neutro puro se lee como no elegido. */
+  --papel:       #e9eef0;
+  --panel:       #ffffff;
+  --panel-alto:  #dfe8ec;
+  --linea:       #c4d4da;
+  --tinta:       #10242b;
+  --tinta-suave: #4a6470;
+  --rio:         #0b6478;
+  --rio-claro:   #d3e9ef;
+
+  /* Semántica de amenaza — leyenda, no acento. Se mantiene aparte del color de
+     marca para que "esto es grave" nunca dependa del mismo tono que "esto es un
+     enlace". */
+  --muy-alto: #a52016;
+  --alto:     #b45309;
+  --medio:    #8a6d00;
+  --bajo:     #3f7d3a;
+  --agua:     #2f6fb0;
+
+  /* Capa B — agua observada por radar. Es magenta y no azul a propósito: el
+     azul ya es el modelo del JRC (--agua) y el petróleo ya es el acento, así
+     que un segundo azul haría que la evidencia más fuerte del visor pareciera
+     una variante de la más débil. El magenta es además la convención con que
+     se pintan los productos derivados de radar sobre una imagen en grises, y
+     no lo confunde con el granate normativo alguien con daltonismo rojo-verde. */
+  --sar:      #b0197f;
+
+  --sombra: 0 1px 2px rgba(16, 36, 43, .06), 0 4px 14px rgba(16, 36, 43, .05);
+  --radio: 10px;
+  --radio-lg: 14px;
+
+  --paso-1: .72rem;
+  --paso-2: .82rem;
+  --paso-3: .92rem;
+  --paso-4: 1rem;
+  --paso-5: 1.18rem;
+  --paso-6: 1.5rem;
+  --paso-7: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papel:       #0e171b;
+    --panel:       #152229;
+    --panel-alto:  #1e2f38;
+    --linea:       #2a4049;
+    --tinta:       #e6eef1;
+    --tinta-suave: #93aab4;
+    --rio:         #4fc3dc;
+    --rio-claro:   #16323c;
+    --muy-alto: #f0655a;
+    --alto:     #e59245;
+    --medio:    #d8b53c;
+    --bajo:     #74c26c;
+    --agua:     #5e9ad6;
+    --sar:      #f25fc0;
+    --sombra: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 14px rgba(0, 0, 0, .25);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font: var(--paso-4)/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+main {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;          /* el layout pone el ritmo, no márgenes sueltos */
+}
+
+a { color: var(--rio); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible,
+label:focus-within { outline: 3px solid var(--rio); outline-offset: 2px; }
+
+.eyebrow {
+  font-size: var(--paso-1);
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+/* ---------------------------------------------------------- cabecera ---- */
+
+.cabecera {
+  background: var(--panel);
+  border-bottom: 1px solid var(--linea);
+  /* El padding lateral va en el interior, no acá: si va en la cabecera, su
+     contenido queda 16 px corrido respecto del de <main> y la columna se ve
+     quebrada. */
+  padding: 1.5rem 0 1.2rem;
+  margin-bottom: .4rem;
+}
+.cabecera-interior {
+  max-width: 62rem; margin: 0 auto; padding: 0 1rem;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1rem;
+}
+.cabecera h1 {
+  margin: .2rem 0 0;
+  font-size: var(--paso-7);
+  font-weight: 800;
+  letter-spacing: -.022em;
+  line-height: 1.1;
+  text-wrap: balance;
+  flex: 1 1 100%;
+}
+.cabecera .sub { margin: .35rem 0 0; color: var(--tinta-suave); font-size: var(--paso-3); flex: 1 1 100%; }
+
+/* Línea de agua: el único adorno de la cabecera, y dice algo — es la escala de
+   amenaza que después usa todo el visor. */
+.linea-agua {
+  /* Sin `flex: 1 1 100%` este elemento no se ve: es un hijo flex sin contenido,
+     así que su ancho base es cero y colapsa. */
+  flex: 1 1 100%;
+  height: 4px; margin-top: 1rem; border-radius: 2px;
+  background: linear-gradient(90deg,
+      var(--bajo) 0 25%, var(--medio) 25% 50%, var(--alto) 50% 75%, var(--muy-alto) 75% 100%);
+  opacity: .85;
+}
+
+/* ------------------------------------------------------------ cifras ---- */
+
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: .6rem;
+}
+.cifra {
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: .8rem .9rem;
+  box-shadow: var(--sombra);
+}
+.cifra-num {
+  display: block;
+  font-size: var(--paso-6);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.cifra-txt { display: block; margin-top: .2rem; font-size: var(--paso-2); color: var(--tinta-suave); }
+
+/* ---------------------------------------------------------- buscador ---- */
+
+.buscador {
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-lg);
+  padding: 1rem;
+  box-shadow: var(--sombra);
+}
+.buscador label { display: block; font-weight: 600; margin-bottom: .5rem; }
+.fila { display: flex; gap: .5rem; align-items: flex-start; }
+
+/* ------------------------------------------------------- sugerencias ---- */
+
+.campo-sugerencias { position: relative; flex: 1; min-width: 0; }
+.campo-sugerencias input[type=search] { width: 100%; }
+
+.sugerencias {
+  position: absolute; z-index: 30;    /* por encima de todo lo del formulario */
+  left: 0; right: 0; top: calc(100% + .3rem);
+  margin: 0; padding: .25rem;
+  list-style: none;
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  box-shadow: 0 8px 24px rgba(16, 36, 43, .18);
+  max-height: 17rem; overflow-y: auto;
+}
+.sugerencias li {
+  display: flex; align-items: flex-start; gap: .55rem;
+  padding: .55rem .6rem; border-radius: 7px; cursor: pointer;
+  min-height: 44px;
+}
+.sugerencias li:hover, .sugerencias li.activa { background: var(--rio-claro); }
+.sug-icono { color: var(--rio); font-size: 1rem; line-height: 1.45; flex: 0 0 auto; }
+.sug-txt { min-width: 0; }
+.sug-txt strong { display: block; font-weight: 600; font-size: var(--paso-3); }
+.sug-txt small {
+  display: block; color: var(--tinta-suave); font-size: var(--paso-1);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+input[type=search] {
+  flex: 1; min-width: 0;
+  padding: .75rem .85rem;
+  font-size: var(--paso-4);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+button {
+  padding: .75rem 1.15rem;
+  font: inherit; font-weight: 650;
+  border: 1px solid transparent; border-radius: var(--radio);
+  background: var(--rio); color: var(--panel);
+  cursor: pointer;
+  min-height: 44px;
+}
+@media (prefers-color-scheme: dark) { button { color: #06171d; } }
+button:hover { filter: brightness(1.08); }
+button.secundario {
+  margin-top: .5rem; width: 100%;
+  background: transparent; color: var(--rio); border-color: var(--linea);
+}
+button.secundario:hover { background: var(--panel-alto); filter: none; }
+button[disabled] { opacity: .55; cursor: progress; }
+
+.estado { min-height: 1.2rem; margin: .6rem 0 0; color: var(--tinta-suave); font-size: var(--paso-3); }
+
+/* --------------------------------------------------------- respuesta ---- */
+
+.respuesta {
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-lg);
+  padding: 1.1rem;
+  box-shadow: var(--sombra);
+}
+.oculto { display: none; }
+
+.veredicto {
+  display: flex; align-items: center; gap: .75rem;
+  font-size: var(--paso-5); font-weight: 700; line-height: 1.25;
+  padding: .85rem 1rem; border-radius: var(--radio);
+  border: 1px solid var(--linea);
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+.veredicto .icono { font-size: 1.5rem; line-height: 1; flex: 0 0 auto; }
+
+/* Achurado diagonal: es el recurso con que los planes reguladores rayan las
+   áreas de riesgo. Sólo en el veredicto grave, para que signifique algo. */
+.v-alto {
+  border-color: var(--muy-alto);
+  background:
+    repeating-linear-gradient(-45deg,
+      color-mix(in srgb, var(--muy-alto) 13%, transparent) 0 6px,
+      transparent 6px 12px),
+    color-mix(in srgb, var(--muy-alto) 8%, var(--panel));
+}
+.v-medio  { border-color: var(--alto);  background: color-mix(in srgb, var(--alto) 12%, var(--panel)); }
+.v-bajo   { border-color: var(--bajo);  background: color-mix(in srgb, var(--bajo) 12%, var(--panel)); }
+.v-sindato{ background: var(--panel-alto); }
+
+.direccion { color: var(--tinta-suave); font-size: var(--paso-3); margin: 0 0 .9rem; word-break: break-word; }
+
+.evidencia { border-top: 1px solid var(--linea); padding: .95rem 0 .2rem; }
+.evidencia h3 {
+  margin: 0 0 .4rem;
+  font-size: var(--paso-1);
+  text-transform: uppercase; letter-spacing: .09em;
+  color: var(--tinta-suave);
+  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+}
+.etiqueta {
+  font-size: .62rem; font-weight: 700; letter-spacing: .07em;
+  padding: .12rem .4rem; border-radius: 3px;
+  border: 1px solid var(--linea); color: var(--tinta-suave);
+}
+.evidencia p { margin: .25rem 0 .55rem; }
+.evidencia ul { margin: .35rem 0 .6rem; padding-left: 1.15rem; }
+.evidencia li { margin-bottom: .35rem; }
+.incert { font-size: var(--paso-2); color: var(--tinta-suave); }
+
+/* Limitaciones del radar. Van con el MISMO tamaño y el mismo color de texto que
+   el hallazgo, no en letra chica: si "el satélite no detectó agua" se lee fuerte
+   y "pero no ve bajo el bosque ni en ciudad densa" se lee tenue, el visor
+   termina afirmando "acá no se inunda", que es justo lo que no sabe. */
+.evidencia ul.limitaciones {
+  margin: .55rem 0 .7rem;
+  padding: .7rem .85rem .7rem 2rem;
+  font-size: var(--paso-4);
+  color: var(--tinta);
+  background: color-mix(in srgb, var(--sar) 7%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--sar) 32%, var(--linea));
+  border-radius: var(--radio);
+}
+.evidencia ul.limitaciones li { margin-bottom: .45rem; }
+.evidencia ul.limitaciones li:last-child { margin-bottom: 0; }
+
+/* Atribución. Sin barrita de acento a la izquierda: es una ficha de catálogo,
+   con su rótulo arriba, no una cita destacada. */
+.fuente {
+  font-size: var(--paso-2);
+  margin: .55rem 0 .4rem;
+  padding: .5rem .65rem;
+  background: var(--panel-alto);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+}
+.fuente strong { color: var(--tinta); }
+
+.pill {
+  display: inline-block; font-size: var(--paso-1); font-weight: 700;
+  padding: .1rem .5rem; border-radius: 999px; margin-left: .35rem;
+  color: #fff; white-space: nowrap;
+}
+.p-muyalto { background: var(--muy-alto); }
+.p-alto    { background: var(--alto); }
+.p-medio   { background: var(--medio); }
+.p-bajo    { background: var(--bajo); }
+@media (prefers-color-scheme: dark) { .pill { color: #06171d; } }
+
+.acciones { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.acciones button { flex: 1 1 12rem; font-size: var(--paso-3); }
+
+/* ------------------------------------------------------------- capas ---- */
+
+.capas {
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-lg);
+  padding: .8rem .9rem;
+  box-shadow: var(--sombra);
+}
+.capas-titulo { margin: 0 0 .55rem; font-size: var(--paso-1); text-transform: uppercase;
+                letter-spacing: .09em; font-weight: 700; color: var(--tinta-suave); }
+.capas-fila { display: flex; flex-wrap: wrap; gap: .45rem; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .45rem .75rem;
+  border: 1px solid var(--linea); border-radius: 999px;
+  background: var(--papel);
+  font-size: var(--paso-3); line-height: 1.2;
+  cursor: pointer;
+  min-height: 44px;   /* por debajo de ~44 px la gente falla al tocar */
+}
+.chip:hover { background: var(--panel-alto); }
+.chip input { width: 18px; height: 18px; margin: 0; accent-color: var(--rio); }
+.chip:has(input:checked) { border-color: var(--rio); background: var(--rio-claro); }
+
+.muestra { width: 14px; height: 14px; border-radius: 3px; flex: 0 0 auto;
+           border: 1px solid rgba(0, 0, 0, .3); }
+.m-areas  { background: var(--muy-alto); }
+.m-planos { background: transparent; border: 2px dashed var(--rio); }
+.m-puntos { background: var(--alto); border-radius: 50%; }
+.m-camp   { background: #6a3fa0; }
+.m-jrc    { background: var(--agua); }
+.m-sar    { background: var(--sar); }
+
+.capas-nota { margin: .55rem 0 0; font-size: var(--paso-2); color: var(--tinta-suave); }
+/* La nota de los planos se oculta con su capa apagada; la de la huella
+   observada NO, porque cuando el dato falta es justamente lo que hay que
+   decir. Por eso el selector apunta a la nota de los planos y no a todas. */
+.capas:has(#cap-planos:not(:checked)) .nota-planos { display: none; }
+.nota-sar:empty { display: none; }
+
+/* -------------------------------------------------------------- mapa ---- */
+
+.mapa-envoltorio { position: relative; }
+#mapa {
+  height: 60vh; min-height: 22rem;
+  border-radius: var(--radio-lg);
+  border: 1px solid var(--linea);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+/* ----------------------------------------------------------- comunas ---- */
+
+.comunas h2, .advertencia h2 { font-size: var(--paso-5); margin: 0 0 .25rem; }
+.nota { color: var(--tinta-suave); font-size: var(--paso-2); margin: 0 0 .7rem; }
+#tabla-comunas { display: grid; gap: .35rem; }
+
+/* La barra codifica la magnitud: en un panel que se opera, el estado tiene que
+   leerse de un vistazo y no sólo en el número. */
+.fila-comuna {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: .4rem .8rem; align-items: center;
+  background: var(--panel); border: 1px solid var(--linea);
+  border-radius: var(--radio); padding: .55rem .8rem;
+  cursor: pointer; text-align: left; color: inherit; font: inherit; width: 100%;
+  min-height: 44px;
+}
+.fila-comuna:hover { background: var(--panel-alto); }
+.fila-comuna .n { font-weight: 700; }
+.fila-comuna .cr { color: var(--tinta-suave); font-size: var(--paso-2); font-variant-numeric: tabular-nums; }
+.fila-comuna .barra {
+  grid-column: 1 / -1; height: 4px; border-radius: 2px;
+  background: var(--panel-alto); overflow: hidden;
+}
+.fila-comuna .barra span { display: block; height: 100%; background: var(--alto); }
+
+/* -------------------------------------------------------- advertencia --- */
+
+.advertencia {
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-top: 3px solid var(--alto);
+  border-radius: var(--radio-lg);
+  padding: 1rem 1.1rem;
+  font-size: var(--paso-3);
+}
+.advertencia p { margin: .5rem 0; }
+
+.enlace-catalogo {
+  display: block; padding: .95rem 1.05rem;
+  background: var(--panel); border: 1px solid var(--linea);
+  border-radius: var(--radio-lg); text-decoration: none; color: inherit;
+  box-shadow: var(--sombra);
+}
+.enlace-catalogo:hover { background: var(--panel-alto); }
+.enlace-catalogo strong { display: block; color: var(--rio); font-size: var(--paso-5); }
+.enlace-catalogo span { display: block; margin-top: .2rem; font-size: var(--paso-3); color: var(--tinta-suave); }
+
+footer {
+  border-top: 1px solid var(--linea);
+  padding: 1.2rem 1rem 2.5rem;
+  color: var(--tinta-suave); font-size: var(--paso-1);
+  max-width: 62rem; margin: 1rem auto 0;
+}
+footer p { margin: .3rem 0; }
+
+/* ---------------------------------------------------------- catálogo ---- */
+
+.intro { margin: 0; max-width: 62ch; }
+
+details.comuna {
+  background: var(--panel); border: 1px solid var(--linea);
+  border-radius: var(--radio); overflow: hidden;
+}
+details.comuna + details.comuna { margin-top: .45rem; }
+details.comuna > summary {
+  cursor: pointer; padding: .8rem 1rem; min-height: 44px;
+  display: flex; flex-wrap: wrap; gap: .3rem 1rem;
+  align-items: baseline; justify-content: space-between;
+}
+details.comuna > summary:hover { background: var(--panel-alto); }
+.c-nombre { font-weight: 700; font-size: var(--paso-4); }
+.c-cifras { color: var(--tinta-suave); font-size: var(--paso-2); font-variant-numeric: tabular-nums; }
+
+.doc { border-top: 1px solid var(--linea); padding: .8rem 1rem; }
+.doc.con-mapa { background: color-mix(in srgb, var(--rio) 4%, var(--panel)); }
+.doc-titulo { font-weight: 600; word-break: break-word; }
+.doc-meta { margin: .25rem 0 .4rem; font-size: var(--paso-1); color: var(--tinta-suave); }
+.doc-hallazgo { margin: .45rem 0 .3rem; font-size: var(--paso-3); }
+
+ul.laminas { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+li.lamina {
+  display: flex; flex-wrap: wrap; gap: .5rem; align-items: baseline;
+  background: var(--panel-alto); border-radius: var(--radio);
+  padding: .45rem .65rem; font-size: var(--paso-3);
+}
+li.lamina .pag {
+  font-weight: 700; color: var(--rio); text-decoration: none;
+  border: 1px solid var(--rio); border-radius: 6px;
+  padding: .15rem .5rem; white-space: nowrap;
+}
+li.lamina a.pag:hover { background: var(--rio); color: var(--panel); }
+li.lamina .terminos { color: var(--tinta-suave); font-size: var(--paso-2); }
+li.lamina .geo {
+  font-size: var(--paso-1); font-weight: 700;
+  color: #fff; background: var(--bajo);
+  padding: .12rem .5rem; border-radius: 999px;
+}
+@media (prefers-color-scheme: dark) { li.lamina .geo { color: #06171d; } }
+
+/* ------------------------------------------------------------- móvil ---- */
+
+@media (max-width: 560px) {
+  :root { --paso-7: 1.55rem; --paso-6: 1.3rem; }
+  main { gap: .85rem; padding: 0 .75rem 2.5rem; }
+  .cabecera { padding: 1.1rem .75rem .9rem; }
+  .capas { padding: .6rem .65rem; }
+  .capas-fila { gap: .35rem; }
+  .chip { min-height: 40px; padding: .35rem .6rem; font-size: var(--paso-2); }
+  #mapa { height: 52vh; }
+  .cifras { grid-template-columns: repeat(2, 1fr); gap: .45rem; }
+  .cifra { padding: .6rem .7rem; }
+  .buscador { padding: .8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

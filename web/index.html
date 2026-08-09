@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Se inunda donde vivo? — La Araucanía</title>
+<meta name="description" content="Consulta si tu sector tiene registro de inundaciones en La Araucanía. Datos oficiales de SENAPRED y modelos abiertos.">
+<meta name="theme-color" content="#0f2830">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="cabecera-interior">
+    <p class="eyebrow">Región de La Araucanía · prototipo abierto</p>
+    <h1>¿Se inunda donde vivo?</h1>
+    <p class="sub">Reúne la información de inundaciones que ya es pública pero está
+       repartida en informes que nadie abre. Cada dato dice de dónde salió y de
+       cuándo es.</p>
+    <div class="linea-agua" aria-hidden="true"></div>
+  </div>
+</header>
+
+<main>
+  <!-- Las cifras se calculan de los datos cargados, no van escritas a mano:
+       si el pipeline cambia, la portada no puede quedar mintiendo. -->
+  <section class="cifras" id="cifras" aria-label="Qué contiene este visor"></section>
+
+  <section class="buscador" id="buscador">
+    <label for="q">Escribe tu dirección, sector o localidad</label>
+    <div class="fila">
+      <div class="campo-sugerencias">
+        <input id="q" type="search" autocomplete="off" enterkeyhint="search"
+               placeholder="Ej: Balmaceda 500, Temuco"
+               role="combobox" aria-expanded="false" aria-autocomplete="list"
+               aria-controls="sugerencias">
+        <ul id="sugerencias" class="sugerencias oculto" role="listbox"
+            aria-label="Sugerencias"></ul>
+      </div>
+      <button id="btn-buscar" type="button">Buscar</button>
+    </div>
+    <button id="btn-ubicacion" class="secundario" type="button">
+      Usar mi ubicación actual
+    </button>
+    <p class="estado" id="estado" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="respuesta oculto" id="respuesta" tabindex="-1"></section>
+
+  <!-- Los controles de capas van ARRIBA del mapa, no flotando encima.
+       Flotando chocaban con los controles propios de MapLibre (la barra de
+       escala, que va abajo a la izquierda con z-index 2) y tapaban las últimas
+       casillas: eran invisibles y no se dejaban tocar. Además, en un celular una
+       leyenda flotante se come media pantalla de mapa. -->
+  <section class="capas" aria-label="Capas del mapa">
+    <p class="capas-titulo">Capas del mapa</p>
+    <div class="capas-fila">
+      <label class="chip"><input type="checkbox" id="cap-areas" checked>
+        <span class="muestra m-areas"></span> Área de riesgo del Plan Regulador</label>
+      <label class="chip"><input type="checkbox" id="cap-sar">
+        <span class="muestra m-sar"></span> Huella de inundación observada por satélite</label>
+      <label class="chip"><input type="checkbox" id="cap-planos">
+        <span class="muestra m-planos"></span> Plano original del Plan Regulador</label>
+      <label class="chip"><input type="checkbox" id="cap-puntos" checked>
+        <span class="muestra m-puntos"></span> Puntos críticos SENAPRED</label>
+      <label class="chip"><input type="checkbox" id="cap-camp">
+        <span class="muestra m-camp"></span> Campamentos en área de riesgo</label>
+      <label class="chip"><input type="checkbox" id="cap-jrc">
+        <span class="muestra m-jrc"></span> Modelo global 100 años (~1 km)</label>
+    </div>
+    <!-- La fecha del evento observado NO va escrita acá: la escribe app.js
+         leyéndola del índice del propio dato (`notaSar`), para que no pueda
+         quedar desincronizada del archivo que se está mostrando. -->
+    <p class="capas-nota nota-sar" id="nota-sar"></p>
+    <p class="capas-nota nota-planos">Al activar los planos aparecen recuadros punteados
+       sobre las comunas que tienen uno. Toca un recuadro para verlo sobre el mapa.</p>
+  </section>
+
+  <section class="mapa-envoltorio">
+    <div id="mapa"></div>
+  </section>
+
+  <a class="enlace-catalogo" href="documentos.html">
+    <strong>¿Dónde está el mapa de riesgo de mi comuna? →</strong>
+    <span>Índice de los documentos oficiales de planificación de La Araucanía, con
+    la página exacta donde está la cartografía de inundación.</span>
+  </a>
+
+  <section class="comunas">
+    <h2>Comunas con más registros de inundación</h2>
+    <p class="nota">Ordenadas por cantidad de puntos críticos de origen hídrico
+       clasificados de riesgo Alto o Muy Alto por SENAPRED.</p>
+    <div id="tabla-comunas"></div>
+  </section>
+
+  <section class="advertencia">
+    <h2>Qué es y qué no es esto</h2>
+    <p><strong>Esto no es información oficial del Estado.</strong> Es un proyecto
+       abierto que reúne y hace consultable información pública que hoy está
+       dispersa. No reemplaza al Plan Regulador de tu comuna, ni a un estudio de
+       riesgo, ni a las instrucciones de SENAPRED durante una emergencia.</p>
+    <p>Cada dato que se muestra dice de dónde viene y cuánto se equivoca. Si un
+       dato no puede declarar su origen, no se publica.</p>
+    <p><strong>Que no aparezcan registros en tu sector no significa que no se
+       inunde.</strong> Significa que nadie lo ha registrado en las fuentes que
+       este sitio consulta.</p>
+    <p>En emergencia, la fuente válida es
+       <a href="https://senapred.cl" rel="noopener">SENAPRED</a> y tu municipio.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Fuentes: SENAPRED (Puntos Críticos Programa Invierno) · JRC European
+     Commission (Global River Flood Hazard, CC BY 4.0) · Copernicus / ESA
+     Sentinel-1 GRD, obtenido vía Microsoft Planetary Computer · OpenStreetMap.</p>
+  <p id="sello-datos"></p>
+</footer>
+
+<script src="vendor/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

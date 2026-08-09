@@ -1,0 +1,28 @@
+# Descargas crudas: se regeneran con los scripts (~770 MB).
+# Regla del proyecto: data/raw/ nunca se edita a mano, así que tampoco se versiona.
+data/raw/
+
+# Derivados pesados
+data/processed/jrc/*.tif
+data/processed/georreferenciado/*.tif
+
+# Caché de la capa B: ~830 MB de σ⁰ por fecha y del DEM. Se regenera con
+# `scripts/14_sar_huella_observada.py`; lo que el visor consume son los GeoJSON
+# de `web/data/sar/`, que sí se versionan.
+data/processed/sar/
+
+# Capturas de la auditoría en navegador: son evidencia de una corrida, no fuente.
+data/processed/auditoria/
+
+# Los GeoJSON que el frontend consume en runtime SÍ se versionan: si no están
+# en el repo, el sitio publicado se ve vacío sin dar ningún error.
+# (lección heredada del deploy de valles-volcanicos-chile)
+!web/data/**
+
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.env
+.DS_Store

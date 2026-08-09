@@ -1,0 +1,518 @@
+{
+ "procedencia": {
+  "fuente": "Planos de planes reguladores comunales georreferenciados desde su grilla UTM impresa",
+  "url": "https://eae.mma.gob.cl/reporte-general",
+  "metodo": "Reproyección a EPSG:3857 y reducción a un máximo de 2600 px de lado; el blanco de la hoja se vuelve semitransparente para no tapar el mapa base",
+  "capa_evidencia": "A_normativo",
+  "incertidumbre": "Cada plano declara su propio RMSE. La imagen web está remuestreada: para trabajo de precisión hay que usar el GeoTIFF original, no esta versión.",
+  "escala_original": null,
+  "fecha_dato": null,
+  "generado": "2026-08-07T10:08:33+00:00"
+ },
+ "planos": [
+  {
+   "archivo": "04_Anteproyecto-Plano_Actualizacion_PRC_Traiguen.pdf_p001.png",
+   "ancho": 1888,
+   "alto": 1493,
+   "kb": 1222,
+   "bounds_wgs84": [
+    -72.6923344,
+    -38.2675567,
+    -72.6399335,
+    -38.2350137
+   ],
+   "titulo": "04 Anteproyecto-Plano Actualizacion PRC Traiguén p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.512,
+   "rmse_loo_m": 0.19,
+   "aptitud": "predial",
+   "puntos_control": 42,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Plano_Actualizacion_PRC_Traiguén.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 42 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_2.pdf_p001.png",
+   "ancho": 2306,
+   "alto": 1947,
+   "kb": 1164,
+   "bounds_wgs84": [
+    -72.7998821,
+    -38.4301347,
+    -72.7578512,
+    -38.4023279
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Galvarino 2 p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.11,
+   "aptitud": "predial",
+   "puntos_control": 28,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Galvarino_2.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 28 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_3.pdf_p001.png",
+   "ancho": 2306,
+   "alto": 1947,
+   "kb": 1164,
+   "bounds_wgs84": [
+    -72.7998821,
+    -38.4301347,
+    -72.7578512,
+    -38.4023279
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Galvarino 3 p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.11,
+   "aptitud": "predial",
+   "puntos_control": 28,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Galvarino_3.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 28 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_4.pdf_p001.png",
+   "ancho": 2306,
+   "alto": 1947,
+   "kb": 1164,
+   "bounds_wgs84": [
+    -72.7998821,
+    -38.4301347,
+    -72.7578512,
+    -38.4023279
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Galvarino 4 p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.11,
+   "aptitud": "predial",
+   "puntos_control": 28,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Galvarino_4.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 28 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_2_p001.png",
+   "ancho": 2600,
+   "alto": 1501,
+   "kb": 482,
+   "bounds_wgs84": [
+    -72.9748907,
+    -39.0321741,
+    -72.9456581,
+    -39.0190617
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pitrufquén 2 p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.03,
+   "aptitud": "predial",
+   "puntos_control": 9,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén_2",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 9 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_2_p002.png",
+   "ancho": 2075,
+   "alto": 1722,
+   "kb": 1168,
+   "bounds_wgs84": [
+    -72.6786954,
+    -39.0123891,
+    -72.6138944,
+    -38.9705783
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pitrufquén 2 p002",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.04,
+   "aptitud": "predial",
+   "puntos_control": 90,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén_2",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_p001.png",
+   "ancho": 2600,
+   "alto": 1501,
+   "kb": 481,
+   "bounds_wgs84": [
+    -72.9748907,
+    -39.0321741,
+    -72.9456581,
+    -39.0190617
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pitrufquén p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.03,
+   "aptitud": "predial",
+   "puntos_control": 9,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 9 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_p002.png",
+   "ancho": 2077,
+   "alto": 1723,
+   "kb": 1167,
+   "bounds_wgs84": [
+    -72.6786954,
+    -39.0123879,
+    -72.6138963,
+    -38.9705783
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pitrufquén p002",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.04,
+   "aptitud": "predial",
+   "puntos_control": 90,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v3.pdf_p001.png",
+   "ancho": 2600,
+   "alto": 1236,
+   "kb": 830,
+   "bounds_wgs84": [
+    -72.0234856,
+    -39.2938734,
+    -71.9184025,
+    -39.2551896
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pucón v3 p001",
+   "crs_original": "EPSG:32719",
+   "resolucion_m_px": 0.424,
+   "rmse_loo_m": 1.61,
+   "aptitud": "predial",
+   "puntos_control": 112,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v3.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 112 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v3.pdf_p002.png",
+   "ancho": 2600,
+   "alto": 1237,
+   "kb": 265,
+   "bounds_wgs84": [
+    -72.0713322,
+    -39.3245993,
+    -71.9661641,
+    -39.2858781
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pucón v3 p002",
+   "crs_original": "EPSG:32719",
+   "resolucion_m_px": 0.424,
+   "rmse_loo_m": 1.81,
+   "aptitud": "predial",
+   "puntos_control": 96,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v3.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 96 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v4.pdf_p001.png",
+   "ancho": 2600,
+   "alto": 1236,
+   "kb": 881,
+   "bounds_wgs84": [
+    -72.0234861,
+    -39.2934625,
+    -71.9183785,
+    -39.2547728
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pucón v4 p001",
+   "crs_original": "EPSG:32719",
+   "resolucion_m_px": 0.773,
+   "rmse_loo_m": 1.31,
+   "aptitud": "predial",
+   "puntos_control": 96,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v4.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 96 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v4.pdf_p002.png",
+   "ancho": 2600,
+   "alto": 1235,
+   "kb": 374,
+   "bounds_wgs84": [
+    -72.0711965,
+    -39.3245778,
+    -71.9660361,
+    -39.2859189
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Pucón v4 p002",
+   "crs_original": "EPSG:32719",
+   "resolucion_m_px": 0.772,
+   "rmse_loo_m": 1.52,
+   "aptitud": "predial",
+   "puntos_control": 112,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v4.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 112 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1_p001.png",
+   "ancho": 2180,
+   "alto": 1604,
+   "kb": 1156,
+   "bounds_wgs84": [
+    -72.9406932,
+    -38.9974988,
+    -72.9037452,
+    -38.9763593
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Teodoro Schimdt 1 p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.17,
+   "aptitud": "predial",
+   "puntos_control": 80,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 80 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1_p002.png",
+   "ancho": 2440,
+   "alto": 2150,
+   "kb": 1177,
+   "bounds_wgs84": [
+    -73.2013916,
+    -39.0979083,
+    -73.1643499,
+    -39.0725671
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Teodoro Schimdt 1 p002",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.18,
+   "aptitud": "predial",
+   "puntos_control": 100,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 100 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1_p003.png",
+   "ancho": 2600,
+   "alto": 2171,
+   "kb": 899,
+   "bounds_wgs84": [
+    -73.1082002,
+    -39.0096421,
+    -73.0641447,
+    -38.9810426
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Teodoro Schimdt 1 p003",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.504,
+   "rmse_loo_m": 0.2,
+   "aptitud": "predial",
+   "puntos_control": 132,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 132 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p001.png",
+   "ancho": 2600,
+   "alto": 1103,
+   "kb": 403,
+   "bounds_wgs84": [
+    -72.5211636,
+    -38.6781715,
+    -72.4776268,
+    -38.6637498
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Vilcún p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.212,
+   "rmse_loo_m": 0.09,
+   "aptitud": "predial",
+   "puntos_control": 65,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p002.png",
+   "ancho": 2600,
+   "alto": 1103,
+   "kb": 669,
+   "bounds_wgs84": [
+    -72.5215648,
+    -38.6893917,
+    -72.4780205,
+    -38.6749678
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Vilcún p002",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.212,
+   "rmse_loo_m": 0.07,
+   "aptitud": "predial",
+   "puntos_control": 65,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p006.png",
+   "ancho": 2600,
+   "alto": 1993,
+   "kb": 515,
+   "bounds_wgs84": [
+    -72.1260088,
+    -38.6662454,
+    -72.1025095,
+    -38.6521788
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Vilcún p006",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.212,
+   "rmse_loo_m": 0.02,
+   "aptitud": "predial",
+   "puntos_control": 20,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 20 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p007.png",
+   "ancho": 2600,
+   "alto": 1046,
+   "kb": 623,
+   "bounds_wgs84": [
+    -72.2395461,
+    -38.6746793,
+    -72.1930999,
+    -38.6600887
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Vilcún p007",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.212,
+   "rmse_loo_m": 0.09,
+   "aptitud": "predial",
+   "puntos_control": 65,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p008.png",
+   "ancho": 2600,
+   "alto": 1046,
+   "kb": 629,
+   "bounds_wgs84": [
+    -72.239548,
+    -38.6822879,
+    -72.1930958,
+    -38.6676949
+   ],
+   "titulo": "04 Anteproyecto-Planos PRC Vilcún p008",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.212,
+   "rmse_loo_m": 0.07,
+   "aptitud": "predial",
+   "puntos_control": 65,
+   "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf_p001.png",
+   "ancho": 2600,
+   "alto": 2171,
+   "kb": 899,
+   "bounds_wgs84": [
+    -73.1082002,
+    -39.0096421,
+    -73.0641447,
+    -38.9810426
+   ],
+   "titulo": "04 Anteproyecto Planos PRC Teodoro Schmidt v2 p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.504,
+   "rmse_loo_m": 0.2,
+   "aptitud": "predial",
+   "puntos_control": 132,
+   "fuente": "Plan Regulador — 04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 132 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf_p002.png",
+   "ancho": 2440,
+   "alto": 2150,
+   "kb": 1177,
+   "bounds_wgs84": [
+    -73.2013916,
+    -39.0979083,
+    -73.1643499,
+    -39.0725671
+   ],
+   "titulo": "04 Anteproyecto Planos PRC Teodoro Schmidt v2 p002",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.18,
+   "aptitud": "predial",
+   "puntos_control": 100,
+   "fuente": "Plan Regulador — 04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 100 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf_p003.png",
+   "ancho": 2193,
+   "alto": 1621,
+   "kb": 1157,
+   "bounds_wgs84": [
+    -72.9422789,
+    -38.998032,
+    -72.9059187,
+    -38.9771282
+   ],
+   "titulo": "04 Anteproyecto Planos PRC Teodoro Schmidt v2 p003",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.15,
+   "aptitud": "predial",
+   "puntos_control": 90,
+   "fuente": "Plan Regulador — 04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi"
+  },
+  {
+   "archivo": "04_Anteproyecto_Planos_PRC_Traiguen.pdf_p001.png",
+   "ancho": 1913,
+   "alto": 1513,
+   "kb": 1231,
+   "bounds_wgs84": [
+    -72.6923344,
+    -38.2675529,
+    -72.6399378,
+    -38.2350138
+   ],
+   "titulo": "04 Anteproyecto Planos PRC Traiguén p001",
+   "crs_original": "EPSG:32718",
+   "resolucion_m_px": 0.423,
+   "rmse_loo_m": 0.19,
+   "aptitud": "predial",
+   "puntos_control": 42,
+   "fuente": "Plan Regulador — 04_Anteproyecto_Planos_PRC_Traiguén.pdf",
+   "anio": "no declarado por la fuente",
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 42 puntos de control, transformación afín, render a 300 dpi"
+  }
+ ]
+}

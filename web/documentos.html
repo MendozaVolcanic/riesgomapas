@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dónde está el mapa de riesgo de tu comuna — La Araucanía</title>
+<meta name="description" content="Índice de los documentos oficiales de planificación territorial de La Araucanía, con la página exacta donde está la cartografía de inundación.">
+<meta name="theme-color" content="#0f2830">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="cabecera-interior">
+    <p class="eyebrow">Región de La Araucanía · índice de documentos oficiales</p>
+    <h1>¿Dónde está el mapa de riesgo de mi comuna?</h1>
+    <p class="sub">La página exacta de cada informe donde está la cartografía de
+       inundación, con enlace directo al PDF oficial.</p>
+    <div class="linea-agua" aria-hidden="true"></div>
+  </div>
+</header>
+
+<main>
+  <p class="intro">
+    La cartografía de inundación de cada comuna <strong>ya es pública</strong>: está
+    dentro de los expedientes de los planes reguladores, en el registro de
+    Evaluación Ambiental Estratégica del Ministerio del Medio Ambiente. El problema
+    es que está en la página 84 de un informe de 300 páginas que nadie abre.
+  </p>
+  <p class="intro">
+    Acá está el índice que faltaba: por comuna, qué documentos hay y
+    <strong>en qué página está el mapa</strong>. Los enlaces van al PDF oficial,
+    sin modificar.
+  </p>
+
+  <section class="buscador">
+    <label for="q">Busca tu comuna</label>
+    <div class="fila">
+      <input id="q" type="search" autocomplete="off" placeholder="Ej: Pucón">
+    </div>
+    <p class="estado" id="resumen" role="status" aria-live="polite"></p>
+  </section>
+
+  <div id="lista"></div>
+
+  <section class="advertencia">
+    <h2>Cómo leer esto</h2>
+    <p><strong>Las páginas marcadas son candidatas detectadas automáticamente.</strong>
+       El programa abre cada PDF y busca páginas que hablen de inundación o
+       anegamiento y que además sean una lámina cartográfica. Puede equivocarse:
+       si abres la página y no es un mapa, es un falso positivo.</p>
+    <p><strong>La fuente de verdad es el PDF oficial</strong>, no este índice. Por eso
+       todos los enlaces apuntan al documento original en el servidor del Estado.</p>
+    <p>Que una comuna no aparezca no significa que no tenga riesgo de inundación:
+       significa que su plan regulador no ha pasado por este registro o que sus
+       documentos no traen cartografía detectable.</p>
+    <p><a href="./">← Volver al visor</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>Fuente: Registro de Evaluación Ambiental Estratégica, Ministerio del Medio
+     Ambiente de Chile. Documentos de los municipios y sus consultores.</p>
+  <p id="sello-datos"></p>
+</footer>
+
+<script src="catalogo.js"></script>
+</body>
+</html>
