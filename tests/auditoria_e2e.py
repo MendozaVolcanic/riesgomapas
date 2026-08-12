@@ -241,6 +241,37 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     else:
         aud.falla(f"ficha de respuesta [{etq}]", "no se mostró tras consultar un punto")
 
+    # -------------------------------- capa A: qué dice sobre el efecto legal
+    #
+    # «No prohíbe construir, condiciona» no es un matiz de redacción: es lo que dice
+    # la OGUC 2.1.17, que permite autorizar proyectos en área de riesgo con estudio
+    # fundado de un profesional especialista y obras de mitigación. Un visor que
+    # deje entender que el área de riesgo prohíbe estaría informando mal sobre el
+    # efecto de una norma, que es el peor error que puede cometer.
+    #
+    # Va aparte porque sólo se puede comprobar sobre un punto que CAIGA dentro de un
+    # área de riesgo, y el punto de prueba general no cae. Comprobarlo en el bloque
+    # general daba un hallazgo falso que acusaba al visor de un error de la prueba.
+    if page.evaluate("() => !!(estado.areasRiesgo && estado.areasRiesgo.features.length)"):
+        centro_ar = page.evaluate("""() => {
+            const g = estado.areasRiesgo.features[0].geometry;
+            const anillo = g.type === 'MultiPolygon' ? g.coordinates[0][0]
+                                                     : g.coordinates[0];
+            let x = 0, y = 0;
+            for (const [a, b] of anillo) { x += a; y += b; }
+            return [x / anillo.length, y / anillo.length];
+        }""")
+        page.evaluate("([lon,lat]) => consultar(lon, lat, 'Auditoría área de riesgo')",
+                      centro_ar)
+        page.wait_for_timeout(900)
+        t = page.locator("#respuesta").inner_text().lower()
+        if "no prohíbe construir" in t:
+            aud.ok(f"la ficha explica que el área de riesgo condiciona, no prohíbe [{etq}]")
+        else:
+            aud.falla(f"efecto legal mal explicado [{etq}]",
+                      "la ficha de un punto dentro de área de riesgo no dice que la "
+                      "OGUC 2.1.17 permite construir con estudio fundado y mitigación")
+
     # ------------------------------------------- capa B en sus TRES estados
     #
     # La capa B es la única que puede decir «el agua llegó hasta acá», y por eso

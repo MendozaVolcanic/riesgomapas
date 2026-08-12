@@ -377,10 +377,22 @@ function render(res, etiqueta, lon, lat) {
       html += `</li>`;
     }
     html += `</ul><p>Esto <strong>sí tiene efecto legal</strong>: condiciona permisos
-             de edificación y usos de suelo en ese terreno.</p>`;
+             de edificación y usos de suelo en ese terreno.</p>
+             <p class="incert">Ojo con lo que esto significa: un área de riesgo
+             <strong>no prohíbe construir, condiciona</strong>. La Ordenanza General
+             (art. 2.1.17) permite autorizar proyectos si se acompaña un
+             <strong>estudio fundado de un profesional especialista</strong>, aprobado
+             por el organismo competente, que defina las obras de mitigación, y esas
+             obras se ejecutan. Distinto es una <em>zona no edificable</em>, que sí
+             prohíbe.</p>`;
   } else if (estado.areasRiesgo) {
     html += `<p>Este punto no cae dentro de un área de riesgo por inundación
-             declarada en el plan regulador.</p>`;
+             declarada en el plan regulador.</p>
+             <p class="incert">Que no aparezca no significa que no exista: esta capa
+             sólo trae instrumentos ya vigentes y publicados, y va por detrás de las
+             aprobaciones. Además, la mayoría de las comunas de la región no ha
+             declarado ningún área de riesgo. Consulta en la Dirección de Obras de tu
+             municipalidad.</p>`;
   }
   html += atribucion(estado.areasRiesgo, res.areas[0] || estado.areasRiesgo?.features[0]);
   if (res.areas.length) {
