@@ -136,7 +136,7 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
 
     capas = page.evaluate("() => estado.mapa.getStyle().layers.map(l => l.id)")
     for esperada in ["osm", "pc-circ", "ar-fill", "huellas-fill", "camp-fill",
-                     "sar-fill", "sar-line"]:
+                     "sar-fill", "sar-line", "gore-fill"]:
         if esperada in capas:
             aud.ok(f"capa {esperada} [{etq}]")
         else:
@@ -162,7 +162,7 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
 
     # -------------------------------------------- controles de capa clicables
     for cid in ["cap-areas", "cap-planos", "cap-puntos", "cap-camp", "cap-jrc",
-                "cap-sar"]:
+                "cap-sar", "cap-gore"]:
         el = page.locator(f"#{cid}")
         if el.count() == 0:
             aud.falla(f"control #{cid} [{etq}]", "no existe en el DOM")

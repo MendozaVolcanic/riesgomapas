@@ -261,11 +261,16 @@ def main() -> None:
         url=SERIES[SERIE_REFERENCIA],
         metodo="Descarga directa vía ArcGIS REST, filtro por región, clasificación "
                "de causa según config/araucania.yaml, reincidencia contra series "
-               f"{sorted(todas)}",
+               f"{sorted(todas)}. Se cuentan como inundación sólo las causas de "
+               "origen FLUVIAL —desborde de cauce y activación de quebradas—; el "
+               "anegamiento urbano por drenaje insuficiente queda fuera de alcance "
+               "por ser otro fenómeno.",
         capa_evidencia="D_operacional",
         incertidumbre="Puntos, no polígonos. Reflejan lo que el municipio reportó: "
                       "hay sesgo hacia comunas con más capacidad técnica. La "
-                      "ausencia de puntos NO significa ausencia de riesgo.",
+                      "ausencia de puntos NO significa ausencia de riesgo. Los "
+                      "puntos de drenaje urbano se conservan en el dato con su "
+                      "etiqueta, pero no cuentan como inundación.",
         fecha_dato=f"temporada {SERIE_REFERENCIA}",
     )
 
@@ -273,6 +278,24 @@ def main() -> None:
 
     solo_inund = [f for f in actual if f["properties"]["es_inundacion"]]
     escribir_geojson(solo_inund, WEB_DATA / "puntos-criticos-inundacion.geojson", meta)
+
+    # Qué quedó dentro y qué fuera, con nombre y apellido. El alcance del
+    # proyecto es una decisión, no un residuo de una lista incompleta, así que
+    # tiene que verse en cada corrida.
+    fuera = cfg.get("causas_fuera_de_alcance", {})
+    conteo = collections.Counter(f["properties"]["causa"] for f in actual)
+    log(f"  alcance FLUVIAL: {len(solo_inund):,} de {len(actual):,} puntos")
+    for causa in cfg["causas_inundacion"]:
+        if conteo.get(causa):
+            log(f"    ✓ {conteo[causa]:4d}  {causa}")
+    for causa, motivo in fuera.items():
+        if conteo.get(causa):
+            log(f"    ✗ {conteo[causa]:4d}  {causa} — {motivo}")
+    sin_clasificar = set(conteo) - set(cfg["causas_inundacion"]) - set(fuera) - {None, ""}
+    if sin_clasificar:
+        # Una causa nueva en la fuente que nadie clasificó se iría en silencio al
+        # grupo «no es inundación». Mejor que grite.
+        raise SystemExit(f"causas sin clasificar en config/araucania.yaml: {sorted(sin_clasificar)}")
 
     # --- Shards por comuna para el frontend offline -------------------------
     por_comuna: dict[str, list[dict]] = collections.defaultdict(list)

@@ -129,6 +129,7 @@ def main() -> None:
                       "algunos no está informado. Un campamento puede haberse "
                       "erradicado o crecido desde entonces. El número de hogares "
                       "es el del levantamiento, no un dato actual.",
+        fecha_dato="catastro 2019 o 2022 según campamento; el año va por registro",
     )
 
     escribir_geojson(feats, DATA_PROC / "campamentos_araucania.geojson", meta)

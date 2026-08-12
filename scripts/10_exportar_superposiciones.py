@@ -17,6 +17,7 @@ Salida: web/data/planos/<nombre>.png + web/data/planos/indice.json
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -161,10 +162,22 @@ def main() -> None:
     destino_dir = WEB_DATA / "planos"
     log(f"{len(tifs)} planos georreferenciados a publicar")
     items = []
+    # Un mismo plano puede venir repetido en el expediente: el anteproyecto se
+    # vuelve a presentar en cada Informe Ambiental sin que la cartografía cambie.
+    # Galvarino es el caso extremo — el mismo archivo en el 2°, 3° y 4° informe,
+    # idéntico byte a byte. Publicarlos todos hacía que el visor dibujara tres
+    # imágenes encima de sí mismas y que el sitio cargara 4,5 MB de repetición.
+    vistos: dict[str, str] = {}
     for t in tifs:
         r = exportar(t, destino_dir)
         if not r:
             continue
+        h = hashlib.md5((destino_dir / r["archivo"]).read_bytes()).hexdigest()
+        if h in vistos:
+            log(f"  duplicado exacto de {vistos[h][:46]}, no se publica: {r['archivo'][:46]}")
+            (destino_dir / r["archivo"]).unlink(missing_ok=True)
+            continue
+        vistos[h] = r["archivo"]
         rep = reportes.get(t.stem, {})
         aj = rep.get("ajuste", {})
         # Un plano con error de decenas de metros no se publica como si nada:

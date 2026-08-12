@@ -19,7 +19,7 @@ B observado / C modelado / D operacional), **nunca fusionadas en un índice úni
 | **A · Normativo** | ✅ | 63 polígonos de área de riesgo por inundación (MINVU, vectorial abierto) + **24 planos de PRC georreferenciados** desde su grilla UTM impresa, error < 2 m |
 | **B · Observado** | ✅ | **5.776 ha** de huella observada en 3 órbitas (16,2 / 15,4 / 26,2 km²) sobre 17.382 km² mirados, **sin ninguna cuenta** |
 | **C · Modelado** | ✅ | 6 períodos de retorno del JRC (2016, ~1 km) |
-| **D · Operacional** | ✅ | 1.374 puntos críticos SENAPRED (992 hídricos, 358 crónicos) + 15 campamentos con 537 hogares en área de riesgo |
+| **D · Operacional** | ✅ | 1.374 puntos críticos SENAPRED, **440 de inundación fluvial** (211 crónicos) + 15 campamentos con 537 hogares en área de riesgo |
 
 Además:
 
@@ -99,10 +99,10 @@ leyendo las esquinas. Ojo: **Windows Storage Sense borra `%TEMP%`** cuando el
 disco se llena — se llevó dos logs y el Chromium de Playwright a mitad de sesión.
 
 **Verificación** contra los puntos críticos hídricos de SENAPRED, que no
-participaron en la derivación: **×1,7 de enriquecimiento** a 300 m (76/831 contra
-877/16.620 al azar en la misma cobertura), ~4,8 σ. Modesto y explicable: buena
-parte de esos puntos son colectores urbanos, y el radar no ve agua en zona urbana
-densa.
+participaron en la derivación: **×2,8 de enriquecimiento** a 300 m (55/371 contra
+390/7.420 al azar), ~8 σ. La cifra era ×1,7 mientras la capa D mezclaba desborde
+de cauce con drenaje urbano: los puntos de colector, que el radar no puede ver,
+diluían la verificación de nuestra propia capa.
 
 ## Lo que sigue, por valor
 

@@ -53,13 +53,54 @@ provincias:
 # Causas de los puntos críticos SENAPRED que consideramos INUNDACIÓN.
 # El resto (nieve, congelamiento, deslizamiento) se ingiere pero se marca
 # como otra amenaza — no se mezcla en la respuesta de inundación.
+# ---------------------------------------------------------------------------
+# QUÉ CUENTA COMO INUNDACIÓN EN ESTE PROYECTO
+#
+# El alcance es la **inundación fluvial**: agua que se sale de un cauce —río,
+# estero, quebrada, canal— y ocupa terreno que normalmente está seco.
+#
+# NO es alcance el **anegamiento urbano por drenaje insuficiente**: un colector
+# que colapsa o un paso bajo nivel que se llena. Suena parecido y es otro
+# fenómeno, con otra física, otra mitigación y otro servicio responsable (la
+# Dirección de Obras Hidráulicas y sus Planes Maestros de Aguas Lluvias).
+#
+# Mezclarlos no es un descuido de vocabulario: **diluye la evidencia**. Medido
+# sobre la huella satelital de agosto 2026, contra los puntos críticos de
+# SENAPRED y con el mismo método para los dos grupos:
+#
+#     puntos de desborde de cauce  → enriquecimiento ×2,1
+#     puntos de drenaje urbano     → enriquecimiento ×1,0  (azar puro)
+#
+# El radar ve una lámina de agua libre sobre terreno abierto; no ve un colector
+# colapsado bajo una calle. Contar los segundos como si fueran los primeros sólo
+# agrega ruido a la verificación. La fuente que usamos para la amenaza modelada
+# —el estudio del GORE 2016— ya hacía esta distinción: publica «Amenaza de
+# inundación» separada de «Riesgo de anegamiento». Los que las mezclábamos
+# éramos nosotros.
+#
+# Las causas descartadas NO se borran: se conservan en el dato con su etiqueta,
+# para que quien quiera estudiarlas pueda hacerlo. Sólo dejan de contar como
+# inundación.
 causas_inundacion:
   - "Inundación por desborde de cauce"
-  - "Colapso colectores de aguas lluvia/alcantarillados"
-  - "Anegamiento de caminos/pasos a desnivel"
   - "Activación de quebradas"
-  - "Flujos de barro/detritos (Aluvión)"
-  - "Subsidencia/Licuefacción/Socavamiento/Erosión"
+
+# Fuera de alcance, y por qué. Se listan explícitamente para que la exclusión
+# sea una decisión visible y no el efecto de una lista incompleta.
+causas_fuera_de_alcance:
+  "Colapso colectores de aguas lluvia/alcantarillados": "drenaje urbano, no desborde de cauce"
+  "Anegamiento de caminos/pasos a desnivel": "drenaje urbano, no desborde de cauce"
+  "Flujos de barro/detritos (Aluvión)": "remoción en masa, otro fenómeno"
+  "Subsidencia/Licuefacción/Socavamiento/Erosión": "otro fenómeno geológico"
+  "Deslizamiento/Derrumbe/Rodado/Caída": "remoción en masa, otro fenómeno"
+  "Acumulación de nieve": "nieve, otro fenómeno"
+  "Congelamiento de caminos": "hielo, otro fenómeno"
+  # Estas dos no son causas sino CONSECUENCIAS: describen el daño, no el
+  # proceso que lo produjo. Un camino interrumpido puede serlo por desborde o
+  # por derrumbe, y el dato no lo dice. Clasificarlas como inundación sería
+  # inventar el mecanismo.
+  "Interrupción de caminos": "consecuencia, no causa: el mecanismo no está declarado"
+  "Daño/pérdida en infraestructura (Ej.: Vial, Portuario/Costero, Agrícola, otros)": "consecuencia, no causa"
 
 # Orden de severidad declarado por SENAPRED
 niveles_riesgo:
@@ -177,3 +218,24 @@ sar:
   # que es la señal de que se está midiendo algo real y no un artefacto.
   # En el DEM Copernicus el océano vale exactamente 0 m.
   altitud_min_m: 0.5
+
+# Año del instrumento de planificación vigente, por comuna.
+# MINVU no lo publica en su capa de áreas de riesgo. Lo levantó el Atlas del
+# Riesgo de Desastre (Magdalena Vicuña y Simón Guzmán, CIGIDEN / Instituto de
+# Estudios Urbanos y Territoriales UC, 2025), y se usa con atribución explícita
+# en el campo `anio_fuente` de cada polígono.
+# Las comunas que no están acá siguen diciendo «no declarado por la fuente»: el
+# año no se inventa.
+anio_instrumento_comuna:
+  "Temuco": 2010
+  "Carahue": 1989
+  "Gorbea": 2012
+  "Pitrufquén": 1984
+  "Pitufquén": 1984          # la fuente trae la comuna mal escrita, sin la r
+  "Puerto Saavedra": 1964    # reconstrucción posterior al terremoto de 1960
+  "Toltén": 2012
+  "Villarrica": 1992
+  "Angol": 2022
+  "Collipulli": 2009
+  "Renaico": 2023
+  "Traiguén": 1991

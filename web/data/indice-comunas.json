@@ -2,166 +2,89 @@
  "procedencia": {
   "fuente": "SENAPRED — Puntos Críticos, Programa Invierno",
   "url": "https://services5.arcgis.com/i7S5PSnIJAUcWvSE/arcgis/rest/services/compilado_INV_2026/FeatureServer/0",
-  "metodo": "Descarga directa vía ArcGIS REST, filtro por región, clasificación de causa según config/araucania.yaml, reincidencia contra series [2020, 2021, 2022, 2026]",
+  "metodo": "Descarga directa vía ArcGIS REST, filtro por región, clasificación de causa según config/araucania.yaml, reincidencia contra series [2020, 2021, 2022, 2026]. Se cuentan como inundación sólo las causas de origen FLUVIAL —desborde de cauce y activación de quebradas—; el anegamiento urbano por drenaje insuficiente queda fuera de alcance por ser otro fenómeno.",
   "capa_evidencia": "D_operacional",
-  "incertidumbre": "Puntos, no polígonos. Reflejan lo que el municipio reportó: hay sesgo hacia comunas con más capacidad técnica. La ausencia de puntos NO significa ausencia de riesgo.",
+  "incertidumbre": "Puntos, no polígonos. Reflejan lo que el municipio reportó: hay sesgo hacia comunas con más capacidad técnica. La ausencia de puntos NO significa ausencia de riesgo. Los puntos de drenaje urbano se conservan en el dato con su etiqueta, pero no cuentan como inundación.",
   "escala_original": null,
   "fecha_dato": "temporada 2026",
-  "generado": "2026-08-07T03:38:45+00:00"
+  "generado": "2026-08-12T16:44:49+00:00"
  },
  "comunas": [
-  {
-   "comuna": "PURÉN",
-   "slug": "puren",
-   "puntos_total": 106,
-   "puntos_inundacion": 64,
-   "inundacion_riesgo_alto": 39,
-   "cronicos": 17,
-   "causas": {
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 35,
-    "Inundación por desborde de cauce": 9,
-    "Colapso colectores de aguas lluvia/alcantarillados": 8,
-    "Anegamiento de caminos/pasos a desnivel": 7,
-    "Flujos de barro/detritos (Aluvión)": 4,
-    "Activación de quebradas": 1
-   }
-  },
   {
    "comuna": "PUCÓN",
    "slug": "pucon",
    "puntos_total": 54,
-   "puntos_inundacion": 46,
-   "inundacion_riesgo_alto": 39,
-   "cronicos": 13,
+   "puntos_inundacion": 26,
+   "inundacion_riesgo_alto": 25,
+   "cronicos": 11,
    "causas": {
-    "Inundación por desborde de cauce": 26,
-    "Colapso colectores de aguas lluvia/alcantarillados": 13,
-    "Anegamiento de caminos/pasos a desnivel": 6,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 1
-   }
-  },
-  {
-   "comuna": "TEMUCO",
-   "slug": "temuco",
-   "puntos_total": 72,
-   "puntos_inundacion": 72,
-   "inundacion_riesgo_alto": 37,
-   "cronicos": 2,
-   "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 47,
-    "Anegamiento de caminos/pasos a desnivel": 25
-   }
-  },
-  {
-   "comuna": "SAAVEDRA",
-   "slug": "saavedra",
-   "puntos_total": 69,
-   "puntos_inundacion": 48,
-   "inundacion_riesgo_alto": 34,
-   "cronicos": 22,
-   "causas": {
-    "Inundación por desborde de cauce": 23,
-    "Anegamiento de caminos/pasos a desnivel": 13,
-    "Colapso colectores de aguas lluvia/alcantarillados": 10,
-    "Flujos de barro/detritos (Aluvión)": 2
-   }
-  },
-  {
-   "comuna": "TEODORO SCHMIDT",
-   "slug": "teodoro-schmidt",
-   "puntos_total": 54,
-   "puntos_inundacion": 54,
-   "inundacion_riesgo_alto": 32,
-   "cronicos": 32,
-   "causas": {
-    "Inundación por desborde de cauce": 32,
-    "Anegamiento de caminos/pasos a desnivel": 14,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 6,
-    "Colapso colectores de aguas lluvia/alcantarillados": 2
+    "Inundación por desborde de cauce": 26
    }
   },
   {
    "comuna": "NUEVA IMPERIAL",
    "slug": "nueva-imperial",
    "puntos_total": 65,
-   "puntos_inundacion": 45,
-   "inundacion_riesgo_alto": 32,
-   "cronicos": 16,
+   "puntos_inundacion": 34,
+   "inundacion_riesgo_alto": 24,
+   "cronicos": 12,
    "causas": {
-    "Inundación por desborde de cauce": 34,
-    "Colapso colectores de aguas lluvia/alcantarillados": 6,
-    "Anegamiento de caminos/pasos a desnivel": 4,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 1
+    "Inundación por desborde de cauce": 34
+   }
+  },
+  {
+   "comuna": "SAAVEDRA",
+   "slug": "saavedra",
+   "puntos_total": 69,
+   "puntos_inundacion": 23,
+   "inundacion_riesgo_alto": 21,
+   "cronicos": 15,
+   "causas": {
+    "Inundación por desborde de cauce": 23
+   }
+  },
+  {
+   "comuna": "TEODORO SCHMIDT",
+   "slug": "teodoro-schmidt",
+   "puntos_total": 54,
+   "puntos_inundacion": 32,
+   "inundacion_riesgo_alto": 19,
+   "cronicos": 17,
+   "causas": {
+    "Inundación por desborde de cauce": 32
    }
   },
   {
    "comuna": "RENAICO",
    "slug": "renaico",
    "puntos_total": 51,
-   "puntos_inundacion": 41,
-   "inundacion_riesgo_alto": 30,
-   "cronicos": 5,
+   "puntos_inundacion": 19,
+   "inundacion_riesgo_alto": 19,
+   "cronicos": 0,
    "causas": {
-    "Inundación por desborde de cauce": 19,
-    "Colapso colectores de aguas lluvia/alcantarillados": 12,
-    "Anegamiento de caminos/pasos a desnivel": 10
+    "Inundación por desborde de cauce": 19
    }
   },
   {
    "comuna": "PADRE LAS CASAS",
    "slug": "padre-las-casas",
    "puntos_total": 68,
-   "puntos_inundacion": 54,
-   "inundacion_riesgo_alto": 29,
-   "cronicos": 38,
+   "puntos_inundacion": 30,
+   "inundacion_riesgo_alto": 18,
+   "cronicos": 21,
    "causas": {
-    "Inundación por desborde de cauce": 30,
-    "Colapso colectores de aguas lluvia/alcantarillados": 20,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 3,
-    "Anegamiento de caminos/pasos a desnivel": 1
+    "Inundación por desborde de cauce": 30
    }
   },
   {
    "comuna": "CURARREHUE",
    "slug": "curarrehue",
    "puntos_total": 71,
-   "puntos_inundacion": 29,
-   "inundacion_riesgo_alto": 29,
-   "cronicos": 25,
+   "puntos_inundacion": 18,
+   "inundacion_riesgo_alto": 18,
+   "cronicos": 17,
    "causas": {
     "Inundación por desborde de cauce": 17,
-    "Anegamiento de caminos/pasos a desnivel": 4,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 3,
-    "Colapso colectores de aguas lluvia/alcantarillados": 2,
-    "Flujos de barro/detritos (Aluvión)": 2,
-    "Activación de quebradas": 1
-   }
-  },
-  {
-   "comuna": "VILLARRICA",
-   "slug": "villarrica",
-   "puntos_total": 58,
-   "puntos_inundacion": 50,
-   "inundacion_riesgo_alto": 23,
-   "cronicos": 9,
-   "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 19,
-    "Inundación por desborde de cauce": 18,
-    "Anegamiento de caminos/pasos a desnivel": 12,
-    "Flujos de barro/detritos (Aluvión)": 1
-   }
-  },
-  {
-   "comuna": "TOLTÉN",
-   "slug": "tolten",
-   "puntos_total": 40,
-   "puntos_inundacion": 28,
-   "inundacion_riesgo_alto": 21,
-   "cronicos": 24,
-   "causas": {
-    "Inundación por desborde de cauce": 12,
-    "Anegamiento de caminos/pasos a desnivel": 11,
-    "Flujos de barro/detritos (Aluvión)": 4,
     "Activación de quebradas": 1
    }
   },
@@ -169,105 +92,111 @@
    "comuna": "LAUTARO",
    "slug": "lautaro",
    "puntos_total": 39,
-   "puntos_inundacion": 33,
-   "inundacion_riesgo_alto": 18,
-   "cronicos": 11,
+   "puntos_inundacion": 16,
+   "inundacion_riesgo_alto": 15,
+   "cronicos": 10,
    "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 17,
     "Inundación por desborde de cauce": 16
-   }
-  },
-  {
-   "comuna": "LONCOCHE",
-   "slug": "loncoche",
-   "puntos_total": 24,
-   "puntos_inundacion": 23,
-   "inundacion_riesgo_alto": 16,
-   "cronicos": 11,
-   "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 12,
-    "Inundación por desborde de cauce": 8,
-    "Anegamiento de caminos/pasos a desnivel": 3
    }
   },
   {
    "comuna": "GALVARINO",
    "slug": "galvarino",
    "puntos_total": 32,
-   "puntos_inundacion": 26,
-   "inundacion_riesgo_alto": 15,
-   "cronicos": 11,
+   "puntos_inundacion": 14,
+   "inundacion_riesgo_alto": 12,
+   "cronicos": 9,
    "causas": {
     "Inundación por desborde de cauce": 12,
-    "Anegamiento de caminos/pasos a desnivel": 10,
-    "Activación de quebradas": 2,
-    "Colapso colectores de aguas lluvia/alcantarillados": 2
+    "Activación de quebradas": 2
    }
   },
   {
-   "comuna": "ANGOL",
-   "slug": "angol",
-   "puntos_total": 50,
-   "puntos_inundacion": 34,
-   "inundacion_riesgo_alto": 13,
-   "cronicos": 8,
-   "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 15,
-    "Inundación por desborde de cauce": 14,
-    "Flujos de barro/detritos (Aluvión)": 3,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 2
-   }
-  },
-  {
-   "comuna": "FREIRE",
-   "slug": "freire",
-   "puntos_total": 34,
-   "puntos_inundacion": 34,
-   "inundacion_riesgo_alto": 13,
-   "cronicos": 18,
-   "causas": {
-    "Inundación por desborde de cauce": 26,
-    "Colapso colectores de aguas lluvia/alcantarillados": 4,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 3,
-    "Anegamiento de caminos/pasos a desnivel": 1
-   }
-  },
-  {
-   "comuna": "COLLIPULLI",
-   "slug": "collipulli",
-   "puntos_total": 25,
-   "puntos_inundacion": 23,
-   "inundacion_riesgo_alto": 13,
+   "comuna": "VILLARRICA",
+   "slug": "villarrica",
+   "puntos_total": 58,
+   "puntos_inundacion": 18,
+   "inundacion_riesgo_alto": 11,
    "cronicos": 2,
    "causas": {
-    "Inundación por desborde de cauce": 10,
-    "Colapso colectores de aguas lluvia/alcantarillados": 9,
-    "Flujos de barro/detritos (Aluvión)": 2,
-    "Anegamiento de caminos/pasos a desnivel": 1,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 1
+    "Inundación por desborde de cauce": 18
    }
   },
   {
    "comuna": "LOS SAUCES",
    "slug": "los-sauces",
    "puntos_total": 23,
-   "puntos_inundacion": 18,
-   "inundacion_riesgo_alto": 13,
+   "puntos_inundacion": 16,
+   "inundacion_riesgo_alto": 11,
    "cronicos": 9,
    "causas": {
-    "Inundación por desborde de cauce": 16,
-    "Colapso colectores de aguas lluvia/alcantarillados": 2
+    "Inundación por desborde de cauce": 16
+   }
+  },
+  {
+   "comuna": "FREIRE",
+   "slug": "freire",
+   "puntos_total": 34,
+   "puntos_inundacion": 26,
+   "inundacion_riesgo_alto": 10,
+   "cronicos": 15,
+   "causas": {
+    "Inundación por desborde de cauce": 26
+   }
+  },
+  {
+   "comuna": "TOLTÉN",
+   "slug": "tolten",
+   "puntos_total": 40,
+   "puntos_inundacion": 13,
+   "inundacion_riesgo_alto": 10,
+   "cronicos": 11,
+   "causas": {
+    "Inundación por desborde de cauce": 12,
+    "Activación de quebradas": 1
+   }
+  },
+  {
+   "comuna": "ANGOL",
+   "slug": "angol",
+   "puntos_total": 50,
+   "puntos_inundacion": 14,
+   "inundacion_riesgo_alto": 9,
+   "cronicos": 3,
+   "causas": {
+    "Inundación por desborde de cauce": 14
+   }
+  },
+  {
+   "comuna": "COLLIPULLI",
+   "slug": "collipulli",
+   "puntos_total": 25,
+   "puntos_inundacion": 10,
+   "inundacion_riesgo_alto": 9,
+   "cronicos": 0,
+   "causas": {
+    "Inundación por desborde de cauce": 10
    }
   },
   {
    "comuna": "TRAIGUÉN",
    "slug": "traiguen",
    "puntos_total": 27,
-   "puntos_inundacion": 22,
-   "inundacion_riesgo_alto": 12,
-   "cronicos": 19,
+   "puntos_inundacion": 8,
+   "inundacion_riesgo_alto": 8,
+   "cronicos": 6,
    "causas": {
-    "Anegamiento de caminos/pasos a desnivel": 14,
+    "Inundación por desborde de cauce": 8
+   }
+  },
+  {
+   "comuna": "LONCOCHE",
+   "slug": "loncoche",
+   "puntos_total": 24,
+   "puntos_inundacion": 8,
+   "inundacion_riesgo_alto": 7,
+   "cronicos": 8,
+   "causas": {
     "Inundación por desborde de cauce": 8
    }
   },
@@ -275,171 +204,164 @@
    "comuna": "PITRUFQUÉN",
    "slug": "pitrufquen",
    "puntos_total": 36,
-   "puntos_inundacion": 32,
-   "inundacion_riesgo_alto": 10,
-   "cronicos": 10,
+   "puntos_inundacion": 23,
+   "inundacion_riesgo_alto": 6,
+   "cronicos": 5,
    "causas": {
-    "Inundación por desborde de cauce": 23,
-    "Colapso colectores de aguas lluvia/alcantarillados": 8,
-    "Anegamiento de caminos/pasos a desnivel": 1
+    "Inundación por desborde de cauce": 23
    }
   },
   {
-   "comuna": "PERQUENCO",
-   "slug": "perquenco",
-   "puntos_total": 22,
-   "puntos_inundacion": 17,
-   "inundacion_riesgo_alto": 9,
-   "cronicos": 3,
+   "comuna": "PURÉN",
+   "slug": "puren",
+   "puntos_total": 106,
+   "puntos_inundacion": 10,
+   "inundacion_riesgo_alto": 6,
+   "cronicos": 8,
    "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 11,
-    "Inundación por desborde de cauce": 4,
-    "Anegamiento de caminos/pasos a desnivel": 2
+    "Inundación por desborde de cauce": 9,
+    "Activación de quebradas": 1
    }
   },
   {
    "comuna": "MELIPEUCO",
    "slug": "melipeuco",
    "puntos_total": 32,
-   "puntos_inundacion": 11,
-   "inundacion_riesgo_alto": 7,
-   "cronicos": 4,
-   "causas": {
-    "Inundación por desborde de cauce": 7,
-    "Colapso colectores de aguas lluvia/alcantarillados": 3,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 1
-   }
-  },
-  {
-   "comuna": "CARAHUE",
-   "slug": "carahue",
-   "puntos_total": 58,
-   "puntos_inundacion": 31,
+   "puntos_inundacion": 7,
    "inundacion_riesgo_alto": 5,
-   "cronicos": 13,
+   "cronicos": 3,
    "causas": {
-    "Inundación por desborde de cauce": 9,
-    "Anegamiento de caminos/pasos a desnivel": 9,
-    "Colapso colectores de aguas lluvia/alcantarillados": 8,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 5
+    "Inundación por desborde de cauce": 7
    }
   },
   {
    "comuna": "LONQUIMAY",
    "slug": "lonquimay",
    "puntos_total": 43,
-   "puntos_inundacion": 16,
-   "inundacion_riesgo_alto": 5,
-   "cronicos": 12,
+   "puntos_inundacion": 11,
+   "inundacion_riesgo_alto": 4,
+   "cronicos": 9,
    "causas": {
     "Inundación por desborde de cauce": 10,
-    "Anegamiento de caminos/pasos a desnivel": 2,
-    "Colapso colectores de aguas lluvia/alcantarillados": 2,
-    "Activación de quebradas": 1,
-    "Flujos de barro/detritos (Aluvión)": 1
-   }
-  },
-  {
-   "comuna": "ERCILLA",
-   "slug": "ercilla",
-   "puntos_total": 65,
-   "puntos_inundacion": 47,
-   "inundacion_riesgo_alto": 3,
-   "cronicos": 0,
-   "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 21,
-    "Anegamiento de caminos/pasos a desnivel": 14,
-    "Inundación por desborde de cauce": 10,
-    "Flujos de barro/detritos (Aluvión)": 2
-   }
-  },
-  {
-   "comuna": "LUMACO",
-   "slug": "lumaco",
-   "puntos_total": 15,
-   "puntos_inundacion": 5,
-   "inundacion_riesgo_alto": 3,
-   "cronicos": 1,
-   "causas": {
-    "Inundación por desborde de cauce": 4,
-    "Colapso colectores de aguas lluvia/alcantarillados": 1
-   }
-  },
-  {
-   "comuna": "CURACAUTÍN",
-   "slug": "curacautin",
-   "puntos_total": 59,
-   "puntos_inundacion": 29,
-   "inundacion_riesgo_alto": 2,
-   "cronicos": 12,
-   "causas": {
-    "Anegamiento de caminos/pasos a desnivel": 18,
-    "Inundación por desborde de cauce": 9,
-    "Colapso colectores de aguas lluvia/alcantarillados": 2
-   }
-  },
-  {
-   "comuna": "VICTORIA",
-   "slug": "victoria",
-   "puntos_total": 17,
-   "puntos_inundacion": 16,
-   "inundacion_riesgo_alto": 2,
-   "cronicos": 0,
-   "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 11,
-    "Anegamiento de caminos/pasos a desnivel": 5
+    "Activación de quebradas": 1
    }
   },
   {
    "comuna": "CUNCO",
    "slug": "cunco",
    "puntos_total": 22,
-   "puntos_inundacion": 15,
+   "puntos_inundacion": 14,
    "inundacion_riesgo_alto": 2,
    "cronicos": 9,
    "causas": {
-    "Inundación por desborde de cauce": 14,
-    "Anegamiento de caminos/pasos a desnivel": 1
+    "Inundación por desborde de cauce": 14
+   }
+  },
+  {
+   "comuna": "ERCILLA",
+   "slug": "ercilla",
+   "puntos_total": 65,
+   "puntos_inundacion": 10,
+   "inundacion_riesgo_alto": 2,
+   "cronicos": 0,
+   "causas": {
+    "Inundación por desborde de cauce": 10
+   }
+  },
+  {
+   "comuna": "CARAHUE",
+   "slug": "carahue",
+   "puntos_total": 58,
+   "puntos_inundacion": 9,
+   "inundacion_riesgo_alto": 2,
+   "cronicos": 4,
+   "causas": {
+    "Inundación por desborde de cauce": 9
+   }
+  },
+  {
+   "comuna": "LUMACO",
+   "slug": "lumaco",
+   "puntos_total": 15,
+   "puntos_inundacion": 4,
+   "inundacion_riesgo_alto": 2,
+   "cronicos": 0,
+   "causas": {
+    "Inundación por desborde de cauce": 4
+   }
+  },
+  {
+   "comuna": "PERQUENCO",
+   "slug": "perquenco",
+   "puntos_total": 22,
+   "puntos_inundacion": 4,
+   "inundacion_riesgo_alto": 2,
+   "cronicos": 1,
+   "causas": {
+    "Inundación por desborde de cauce": 4
+   }
+  },
+  {
+   "comuna": "CURACAUTÍN",
+   "slug": "curacautin",
+   "puntos_total": 59,
+   "puntos_inundacion": 9,
+   "inundacion_riesgo_alto": 1,
+   "cronicos": 4,
+   "causas": {
+    "Inundación por desborde de cauce": 9
    }
   },
   {
    "comuna": "GORBEA",
    "slug": "gorbea",
    "puntos_total": 6,
-   "puntos_inundacion": 4,
-   "inundacion_riesgo_alto": 2,
+   "puntos_inundacion": 1,
+   "inundacion_riesgo_alto": 1,
    "cronicos": 1,
    "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 2,
-    "Inundación por desborde de cauce": 1,
-    "Anegamiento de caminos/pasos a desnivel": 1
-   }
-  },
-  {
-   "comuna": "CHOL CHOL",
-   "slug": "chol-chol",
-   "puntos_total": 10,
-   "puntos_inundacion": 7,
-   "inundacion_riesgo_alto": 1,
-   "cronicos": 0,
-   "causas": {
-    "Colapso colectores de aguas lluvia/alcantarillados": 3,
-    "Inundación por desborde de cauce": 3,
-    "Subsidencia/Licuefacción/Socavamiento/Erosión": 1
+    "Inundación por desborde de cauce": 1
    }
   },
   {
    "comuna": "VILCÚN",
    "slug": "vilcun",
    "puntos_total": 27,
-   "puntos_inundacion": 18,
+   "puntos_inundacion": 10,
    "inundacion_riesgo_alto": 0,
    "cronicos": 1,
    "causas": {
-    "Inundación por desborde de cauce": 10,
-    "Colapso colectores de aguas lluvia/alcantarillados": 6,
-    "Anegamiento de caminos/pasos a desnivel": 2
+    "Inundación por desborde de cauce": 10
    }
+  },
+  {
+   "comuna": "CHOL CHOL",
+   "slug": "chol-chol",
+   "puntos_total": 10,
+   "puntos_inundacion": 3,
+   "inundacion_riesgo_alto": 0,
+   "cronicos": 0,
+   "causas": {
+    "Inundación por desborde de cauce": 3
+   }
+  },
+  {
+   "comuna": "TEMUCO",
+   "slug": "temuco",
+   "puntos_total": 72,
+   "puntos_inundacion": 0,
+   "inundacion_riesgo_alto": 0,
+   "cronicos": 0,
+   "causas": {}
+  },
+  {
+   "comuna": "VICTORIA",
+   "slug": "victoria",
+   "puntos_total": 17,
+   "puntos_inundacion": 0,
+   "inundacion_riesgo_alto": 0,
+   "cronicos": 0,
+   "causas": {}
   }
  ]
 }

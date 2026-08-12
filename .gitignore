@@ -6,6 +6,11 @@ data/raw/
 data/processed/jrc/*.tif
 data/processed/georreferenciado/*.tif
 
+# Derivados del modelo regional del GORE: ~18 MB que se regeneran con
+# `scripts/15_gore_amenaza.py`. Lo que el visor consume es la versión recortada
+# de `web/data/gore/`, que sí se versiona.
+data/processed/gore/
+
 # Caché de la capa B: ~830 MB de σ⁰ por fecha y del DEM. Se regenera con
 # `scripts/14_sar_huella_observada.py`; lo que el visor consume son los GeoJSON
 # de `web/data/sar/`, que sí se versionan.
@@ -26,3 +31,7 @@ __pycache__/
 venv/
 .env
 .DS_Store
+
+# Los .docx se generan desde los .md con pandoc: versionar el binario ensucia
+# el historial en cada edición de texto. Se comparten directamente, no por git.
+docs/*.docx

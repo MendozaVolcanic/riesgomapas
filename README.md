@@ -28,8 +28,8 @@ declara su error. Nunca las fusiona en un número único.
 |---|---|---|
 | **A · Normativo** | Área de riesgo del Plan Regulador. Tiene efecto legal. | ✅ 63 polígonos de inundación, 12 comunas |
 | **B · Observado** | Huella real de inundación por satélite, con fecha. | ✅ 5.776 ha, 3 órbitas, ago-2026 |
-| **C · Modelado** | Períodos de retorno de 10 a 500 años. | ✅ 6 períodos, JRC |
-| **D · Operacional** | Puntos críticos municipales, nivel de río, pronóstico. | ✅ 1.374 puntos, 4 temporadas |
+| **C · Modelado** | Qué dice un modelo que podría pasar, y cada cuánto. | ✅ 6 escenarios globales (JRC) + amenaza regional a 35 m |
+| **D · Operacional** | Puntos críticos municipales, nivel de río, pronóstico. | ✅ 440 puntos fluviales, 4 temporadas |
 
 ## Qué funciona hoy
 
@@ -38,8 +38,10 @@ declara su error. Nunca las fusiona en un número único.
   ordenanza. Es la única capa con efecto jurídico, y resultó estar publicada como
   servicio ArcGIS abierto — no encerrada en PDFs, como suponíamos.
 - **1.374 puntos críticos** de La Araucanía descargados de SENAPRED, de los
-  cuales **992 son de origen hídrico** y **358 son crónicos** (aparecen en 3 o
-  más temporadas del Programa Invierno — no son eventos aislados).
+  cuales **440 son de inundación fluvial** —desborde de cauce y activación de
+  quebradas— y **211 de ésos son crónicos** (aparecen en 3 o más temporadas del
+  Programa Invierno: no son eventos aislados). El resto se conserva etiquetado
+  pero no cuenta como inundación; ver «Qué cuenta como inundación» más abajo.
 - **6 capas de amenaza modelada** del JRC recortadas a la región.
 - **Índice de 5.991 documentos** de Evaluación Ambiental Estratégica de todo Chile
   (411 de La Araucanía, 25 comunas), con escáner que abre los PDF y localiza las
@@ -53,7 +55,8 @@ declara su error. Nunca las fusiona en un número único.
   mapa** (`....pdf#page=13`), no al documento de 300 páginas.
   **20 de las 32 comunas** tienen al menos una lámina localizada; los vacíos
   están documentados uno a uno en el inventario de fuentes.
-- **24 planos de plan regulador georreferenciados automáticamente** desde su
+- **24 planos de plan regulador georreferenciados automáticamente** (20 se
+  publican; 4 resultaron ser copias exactas del mismo plano) desde su
   grilla UTM impresa, visibles como capa en el visor. Al activarla se dibujan los
   **recuadros** de las hojas disponibles; la imagen se carga sólo al acercarse
   (zoom ≥ 11) o al tocar un recuadro, con un tope de 6 simultáneas. El fondo de
@@ -67,6 +70,42 @@ declara su error. Nunca las fusiona en un número único.
   el mapa, con ficha compartible por WhatsApp y funcionamiento **sin señal**.
 - **Georreferenciador** de láminas de PDF con RMSE leave-one-out y clasificación
   de aptitud de uso, verificado con transformaciones conocidas.
+
+## Qué cuenta como inundación acá
+
+El alcance es la **inundación fluvial**: agua que se sale de un cauce —río,
+estero, quebrada, canal— y ocupa terreno que normalmente está seco.
+
+**No** es alcance el **anegamiento urbano por drenaje insuficiente**: un colector
+que colapsa, un paso bajo nivel que se llena. Suena parecido y es otro fenómeno,
+con otra física, otra mitigación y otro servicio responsable — la Dirección de
+Obras Hidráulicas y sus Planes Maestros de Aguas Lluvias.
+
+La distinción no es de vocabulario: **mezclarlos diluye la evidencia**, y se puede
+medir. Contrastando los puntos críticos de SENAPRED contra la huella satelital,
+con el mismo método para los dos grupos:
+
+| Grupo de puntos | Enriquecimiento sobre el azar |
+|---|---:|
+| Desborde de cauce y quebradas | **×2,1** |
+| Colectores y anegamiento de caminos | **×1,0** — azar puro |
+
+Los puntos de drenaje **no muestran ninguna señal**, y es lo que predice la
+física: el radar ve una lámina de agua libre sobre terreno abierto y no ve un
+colector colapsado bajo una calle. Contarlos juntos sólo agregaba ruido.
+
+De los 1.374 puntos de SENAPRED en la región, **440 son fluviales**: 434 por
+desborde de cauce y 6 por activación de quebradas. Los otros 934 se conservan en
+`data/processed/` con su etiqueta —quien quiera estudiarlos puede— pero no cuentan
+como inundación. La lista de causas dentro y fuera de alcance vive en
+`config/araucania.yaml`, y **el pipeline se cae si la fuente trae una causa que
+nadie clasificó**: al aplicar esta regla aparecieron cinco causas que se estaban
+yendo en silencio al grupo equivocado.
+
+Vale la pena notar que la fuente que usamos para la amenaza modelada regional —el
+estudio del Gobierno Regional de 2016— **ya hacía esta distinción**: publica
+«Amenaza de inundación» separada de «Riesgo de anegamiento». Los que las
+mezclábamos éramos nosotros.
 
 ## Hasta dónde llegó el agua, de verdad
 
@@ -138,12 +177,17 @@ observado —porque una huella grande acierta por tamaño—:
 
 | | dentro de 300 m de la huella |
 |---|---:|
-| Puntos críticos SENAPRED | 76 de 831 (9,1 %) |
-| Puntos al azar, misma cobertura | 877 de 16.620 (5,3 %) |
+| Puntos fluviales de SENAPRED | 55 de 371 (14,8 %) |
+| Puntos al azar, misma cobertura | 390 de 7.420 (5,3 %) |
 
-**Enriquecimiento ×1,7**, con un exceso de ~4,8 σ. Es una señal real y modesta, y
-la modestia se explica: buena parte de los puntos de SENAPRED son colapsos de
-colectores urbanos, y el radar **no ve agua en zona urbana densa**.
+**Enriquecimiento ×2,8**, con un exceso de ~8 σ. Sube a **×3,0** exigiendo
+coincidencia exacta y baja a ×2,0 al ampliar el radio a 1 km, que es el
+comportamiento esperable de una señal real.
+
+Esta cifra era **×1,7** hasta que se depuró el alcance: los puntos de drenaje
+urbano, que el radar no puede ver, estaban diluyendo la verificación de la propia
+capa. El límite que queda en pie es otro: el radar **no ve agua bajo dosel cerrado
+ni en zona urbana densa**.
 
 ### Lo que esta capa no puede decir
 

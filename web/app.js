@@ -19,6 +19,7 @@ const RADIOS = { cercano: 300, medio: 500, contexto: 1500 };
 const estado = {
   puntos: null,        // FeatureCollection de puntos críticos de inundación
   jrc: null,           // FeatureCollection mancha modelada RP100
+  gore: null,          // amenaza modelada regional del GORE 2016 (~35 m)
   sar: null,           // capa B — huella de agua observada por Sentinel-1
   sarCobertura: null,  // dónde el satélite SÍ pudo mirar (imprescindible: sin
                        // esto, "no hay huella" se confunde con "no se inundó")
@@ -49,6 +50,8 @@ async function cargarDatos() {
   estado.comunas = comunas;
   // Capas opcionales: si aún no se generaron, el sitio funciona igual.
   try { estado.jrc = await cargarJSON('data/jrc/rp100.geojson'); } catch { estado.jrc = null; }
+  try { estado.gore = await cargarJSON('data/gore/amenaza-inundacion.geojson'); }
+  catch { estado.gore = null; }
   try {
     estado.areasRiesgo = await cargarJSON('data/areas-riesgo-inundacion.geojson');
   } catch { estado.areasRiesgo = null; }
@@ -310,7 +313,8 @@ function evaluar(lon, lat) {
            enCoberturaSar: coberturaSar.length > 0,
            planos: planosQueCubren(lon, lat),
            campamentos: poligonosQueContienen(lon, lat, estado.campamentos),
-           enMancha: dentroDeMancha(lon, lat, estado.jrc) };
+           enMancha: dentroDeMancha(lon, lat, estado.jrc),
+           gore: poligonosQueContienen(lon, lat, estado.gore) };
 }
 
 /* ----------------------------------------------------------------- render */
@@ -486,7 +490,14 @@ function render(res, etiqueta, lon, lat) {
                <li><strong>Es la foto de un instante</strong>, no el máximo del
                    evento. El agua que subió y bajó entre dos pasadas no aparece en
                    ninguna de las dos.</li>
-             </ul>`;
+             </ul>
+             <p class="incert">Un caso real de este mismo evento, para que se
+             entienda cuánto pesa el último límite: en <strong>Angol</strong> el
+             estero Rehue se desbordó la madrugada del <strong>2 de agosto</strong>
+             y el agua superó 1,5 m dentro de las casas. Las dos pasadas satelitales
+             sobre Angol fueron el <strong>3</strong>, y no vieron nada: el agua ya
+             había bajado. Esta capa registra 7,7 ha en esa comuna, y la inundación
+             fue de las peores de la región.</p>`;
     html += atribucion(estado.sarCobertura, res.coberturaSar[0]);
   } else if (estado.sarCobertura) {
     const ev = estado.sarIndice?.evento || {};
@@ -571,6 +582,26 @@ function render(res, etiqueta, lon, lat) {
              así que no incorpora obras fluviales ni cambios de uso de suelo
              posteriores. Sirve como contexto regional, <strong>no</strong> para
              decidir sobre una propiedad concreta.</p>`;
+  }
+  // Segundo modelo, treinta veces más fino y de la propia región. Va en el mismo
+  // bloque C porque es la misma clase de evidencia, y se muestra aparte porque
+  // dice algo distinto: el global habla en períodos de retorno y éste en clases
+  // ordinales sin significado físico. Mezclarlos sería inventar una equivalencia.
+  if (estado.gore) {
+    const clase = res.gore.length ? res.gore[0].properties.clase : null;
+    html += clase
+      ? `<p>El modelo regional del Gobierno Regional clasifica este punto como
+         amenaza de inundación <strong>${clase === 'MAXIMA' ? 'máxima' : 'media'}</strong>.</p>`
+      : `<p>El modelo regional del Gobierno Regional <strong>no</strong> clasifica
+         este punto en sus dos categorías más altas.</p>`;
+    html += atribucion(estado.gore, res.gore[0] || estado.gore.features[0]);
+    html += `<p class="incert">Resolución ~35 m, mucho más fina que el modelo
+             global, pero sus clases <strong>no significan un período de retorno</strong>:
+             «máxima» no equivale a ningún «cada tantos años». Más detalle espacial,
+             menos interpretable. Se contrastó contra los puntos críticos de
+             SENAPRED, que no participaron en su elaboración: el 39,5 % de los
+             desbordes reales cae en la clase máxima, que ocupa el 8,2 % del
+             territorio. El estudio que lo encargó nunca llegó a aprobarse.</p>`;
   } else {
     html += `<p class="incert">Capa no disponible en esta instalación.</p>`;
   }
@@ -932,6 +963,22 @@ function iniciarMapa() {
         paint: { 'fill-color': '#2f6fb0', 'fill-opacity': 0.35 },
       });
     }
+    // Amenaza regional del GORE 2016: mismo tipo de evidencia que el JRC pero a
+    // ~35 m en vez de ~1 km. Va justo encima porque es más fina, y en dos tonos
+    // porque sus clases son ordinales — pintarlas de un solo color perdería lo
+    // único que el modelo distingue.
+    if (estado.gore) {
+      m.addSource('gore', { type: 'geojson', data: estado.gore });
+      m.addLayer({
+        id: 'gore-fill', type: 'fill', source: 'gore',
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-color': ['match', ['get', 'clase'],
+                         'MAXIMA', '#1d4f8c', 'MEDIA', '#5b93c9', '#5b93c9'],
+          'fill-opacity': ['match', ['get', 'clase'], 'MAXIMA', 0.55, 0.32],
+        },
+      });
+    }
     // Capa B, agregada justo después del JRC: queda SOBRE la mancha modelada y
     // BAJO las áreas normativas y los puntos críticos, que se añaden más abajo.
     // El orden de apilado es el orden de evidencia, y así se lee sin leyenda.
@@ -1082,6 +1129,7 @@ function iniciarMapa() {
   });
   alternar('#cap-puntos', 'pc-circ');
   alternar('#cap-jrc', 'jrc-fill');
+  alternar('#cap-gore', 'gore-fill');
   // La huella observada son dos capas (relleno y borde), así que no puede usar
   // `alternar`, que maneja una sola. Y si la capa no existe, el control lo dice
   // en vez de quedarse mudo: una casilla que no hace nada se lee como visor roto.

@@ -40,6 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from comun import (  # noqa: E402
     DATA_PROC,
     WEB_DATA,
+    cargar_config,
     consultar_capa_arcgis,
     escribir_geojson,
     get_json,
@@ -266,6 +267,7 @@ def fechas_eae_por_comuna() -> dict[str, dict]:
 
 
 def main() -> None:
+    cfg = cargar_config()
     feats = deduplicar(desde_nacional() + desde_regional())
     if not feats:
         raise SystemExit("no se obtuvo ningún polígono — revisar los servicios MINVU")
@@ -292,7 +294,30 @@ def main() -> None:
                       "polígono no significa ausencia de riesgo, significa que el plan "
                       "regulador no lo zonificó.",
         escala_original="escala del plan regulador respectivo (típicamente 1:5.000 a 1:20.000)",
+        fecha_dato="consulta al servicio de MINVU; el año de cada instrumento va "
+                   "por polígono en el campo `anio`",
     )
+
+    # Año del instrumento vigente por comuna. MINVU no lo publica en la capa —el
+    # campo venía «no declarado por la fuente» en los 124 polígonos—, y sin él no
+    # se puede decir lo más útil de esta capa: que el área de riesgo que rige tu
+    # terreno la dibujó un plan de hace medio siglo.
+    #
+    # La fuente es el catastro nacional del Atlas del Riesgo de Desastre (Vicuña y
+    # Guzmán, CIGIDEN / IEUT-UC, 2025), que sí lo levantó comuna por comuna. Se
+    # atribuye explícitamente porque es dato de terceros, y sólo cubre las comunas
+    # que el Atlas lista: las que faltan siguen diciendo «no declarado».
+    anios = cfg.get("anio_instrumento_comuna") or {}
+    puestos = 0
+    for f in feats:
+        a = anios.get((f["properties"].get("comuna") or "").strip())
+        if a:
+            f["properties"]["anio"] = a
+            f["properties"]["anio_fuente"] = ("Atlas del Riesgo de Desastre, "
+                                              "Vicuña y Guzmán, CIGIDEN/IEUT-UC 2025")
+            puestos += 1
+    log(f"  año del instrumento asignado a {puestos} de {len(feats)} polígonos "
+        f"({len(anios)} comunas con año conocido)")
 
     escribir_geojson(feats, DATA_PROC / "areas_riesgo_prc_araucania.geojson", meta)
     inund = [f for f in feats if f["properties"]["es_inundacion"]]
