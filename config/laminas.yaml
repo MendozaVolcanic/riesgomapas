@@ -1,0 +1,156 @@
+# Láminas de peligro que se vectorizan desde su figura impresa.
+# Las consume scripts/18_vectorizar_laminas.py — leer su docstring antes de tocar
+# esto.
+#
+# POR QUÉ ESTE ARCHIVO EXISTE, en vez de detectarlo todo solo
+# ---------------------------------------------------------------
+# Las POSICIONES de la grilla se detectan automáticamente (son líneas continuas y
+# regulares). Los VALORES de sus rótulos, no: viven dentro del ráster y leerlos
+# exige OCR, que en este equipo no está disponible —`pytesseract` está instalado
+# pero el binario de tesseract no—. Adivinarlos sería inventar una coordenada, y
+# la regla del proyecto es no inventar valores.
+#
+# Así que cada lámina se declara a mano una vez, con los números leídos de la
+# propia imagen, y el script verifica que sean coherentes: exige que la escala en
+# X y en Y coincida y que el resultado aterrice donde vive la comuna. Una
+# coordenada mal tecleada mueve la mancha cientos de metros y esas dos
+# comprobaciones la cachan.
+#
+# Cómo agregar una lámina nueva:
+#   python scripts/18_vectorizar_laminas.py --inspeccionar <pdf> --pagina N
+# eso deja en data/processed/laminas/_inspeccion/ la imagen extraída con las
+# líneas de grilla detectadas marcadas y sus posiciones en píxeles. Se leen los
+# rótulos y los colores de la leyenda con el ojo, se anotan acá, y se corre.
+
+laminas:
+  - id: angol-peligro-inundacion-2013
+    comuna: ANGOL
+    pdf: documentos/angol/Estudio_Riesgo.pdf
+    pagina: 30
+    imagen: 0                     # índice de la imagen dentro de la página
+    titulo: "Modelo raster de peligro de inundación"
+    fuente: >-
+      Estudio de Riesgo, Actualización Plan Regulador Comunal de Angol,
+      I. Municipalidad de Angol, septiembre de 2013
+    url: https://angol.cl/images/planregulador/Estudio_Riesgo.pdf
+    anio_estudio: 2013
+    # Va literal en la procedencia de cada polígono. Es lo que impide que el
+    # resultado se lea como si fuera modelación hidráulica.
+    metodo_original: >-
+      álgebra de mapas con pesos sobre variables morfométricas (morfología,
+      pendiente, cobertura vegetal) más terreno; sin modelación hidráulica, sin
+      caudales y sin períodos de retorno
+    escala_impresa: "1:33.000"
+    epsg: 32718                   # UTM 18S — Angol está al oeste del meridiano 72°O
+
+    # Rótulos leídos de la imagen: [posición en píxeles, coordenada UTM].
+    grilla:
+      x:
+        - [321, 700000]
+        - [967, 705000]
+      y:
+        # La línea de 5.810.000 existe pero queda TAPADA por la caja de leyenda,
+        # así que sólo se declara una. El script deriva la escala vertical de la
+        # horizontal, que es válido porque un mapa tiene una sola escala — y lo
+        # deja dicho en la procedencia en vez de disimularlo.
+        - [230, 5815000]
+
+    # Colores de los cuadros de la leyenda, muestreados de la propia lámina.
+    clases:
+      - { nombre: "Alto",  rgb: [4, 78, 163] }
+      - { nombre: "Medio", rgb: [0, 114, 255] }
+    tolerancia_color: 45
+
+    # La red hídrica se dibuja en el MISMO azul oscuro que la clase «Alto». Sin
+    # esto el cauce entero se convierte en mancha de inundación, y queda
+    # plausible porque el río sí está dentro del área inundable. Se descarta por
+    # grosor: una línea de red hídrica es fina, un polígono de peligro no.
+    ancho_minimo_px: 4
+    # Descarta motas sueltas del antialiasing de una figura a 200 dpi.
+    area_minima_m2: 2000
+
+  - id: curarrehue-catripulli-inundacion-2025
+    comuna: CURARREHUE
+    pdf: documentos/curarrehue/Decreto-Exento-1802-30-12-2025-Aprueba-PLAN-RRD.pdf
+    pagina: 72
+    imagen: 1
+    titulo: "Carta riesgo de inundación en el centro poblado de Catripulli"
+    fuente: >-
+      Levantamiento de riesgos, Actualización Plan Regulador Comunal de
+      Curarrehue, reproducido en el Plan Comunal para la Reducción del Riesgo de
+      Desastres aprobado por Decreto Exento N°1802 del 30-12-2025
+    url: https://curarrehue.cl/
+    anio_estudio: 2025
+    metodo_original: >-
+      levantamiento de riesgos de la actualización del plan regulador comunal;
+      la lámina no declara el método de delimitación de la susceptibilidad
+    escala_impresa: "no declarada; la lámina trae barra gráfica"
+    # ⚠️ La lámina declara «Proyección: UTM, Huso 18 Sur», y es un error suyo.
+    # Con coordenadas Este de 264.000 a 270.000, el huso 18 la pondría a 77°O, en el
+    # Pacífico. Es huso 19 Sur, que es donde efectivamente cae Curarrehue. La
+    # verificación de alcance regional del script lo detecta sola: con 32718 el
+    # resultado se sale de la región y el script se cae.
+    epsg: 32719
+    grilla:
+      x:
+        - [165.5, 264000]
+        - [1289.8, 270000]
+      y:
+        # Único rótulo de norte de la lámina, y viene cortado por ambos
+        # márgenes: a la izquierda se lee «…640000» y a la derecha «5640000».
+        - [569, 5640000]
+    clases:
+      - { nombre: "Susceptibilidad alta",  rgb: [0, 116, 255] }
+      - { nombre: "Susceptibilidad media", rgb: [191, 231, 255] }
+    tolerancia_color: 40
+    ancho_minimo_px: 4
+    area_minima_m2: 2000
+
+  # ---------------------------------------------------------------------------
+  # El instrumento con efecto legal, no una figura de informe. Se georreferencia
+  # por los vértices del límite urbano, que el propio plano rotula con su
+  # coordenada, y las clases se separan por su ACHURADO: el plano no colorea las
+  # áreas de riesgo, las raya encima de la zona urbana que haya debajo.
+  - id: angol-prc-ar2a-lamina1
+    comuna: ANGOL
+    pdf: documentos/angol/Plano_Zonificacion_Vialidad-PRC_09201-1.pdf
+    pagina: 1
+    imagen: 0
+    rotar: -90                    # el pliego viene girado dentro del PDF
+    dpi: 150
+    titulo: "Plano de Zonificación y Vialidad, lámina PRC 09201-1"
+    fuente: >-
+      Plan Regulador Comunal de Angol, Plano de Zonificación y Vialidad lámina
+      PRC 09201-1, aprobado por la SEREMI de Vivienda y Urbanismo de La
+      Araucanía; ordenanza local actualizada a marzo de 2026
+    url: https://angol.cl/index.php/plan-regulador
+    anio_estudio: 2026
+    escala_impresa: "1:5.000"
+    epsg: 32718
+    # Lo que la ordenanza establece, literal en cada polígono: el área de riesgo
+    # CONDICIONA, no prohíbe.
+    efecto_legal: >-
+      Zona restringida al desarrollo urbano. Los predios afectados deben cumplir
+      el artículo 2.1.17 de la OGUC; cumplido eso rigen las normas de su zona
+      urbana. Ninguna edificación puede superar 14 m de altura en el área
+      afectada (Ordenanza Local, marzo 2026).
+    # [nombre, x, y, Este, Norte] — leídos de los rótulos del propio plano.
+    vertices:
+      - ['1',  4747,  404, 702780, 5816013]
+      - ['13', 1762,  523, 700238, 5815912]
+      - ['10', 1310, 2757, 699860, 5814024]
+    rmse_maximo_m: 15
+    # El bloque de leyenda trae muestras de los mismos achurados; si no se
+    # excluye, se vectoriza la leyenda como si fuera territorio.
+    excluir_x: 6900
+    clases:
+      - nombre: "AR-2a"
+        descripcion: "Áreas de Riesgo Inundables o Potencialmente Inundables"
+        # El triángulo de AR-2a mide ~5×5 px; el punteado de AR-1a/b/c, 2×2.
+        marca_area: [8, 45]
+        marca_lado: [4, 11]
+        contraste_minimo: 28
+        celda_px: 8
+        ventana_celdas: 5
+        densidad_minima: 8
+    area_minima_m2: 2000
