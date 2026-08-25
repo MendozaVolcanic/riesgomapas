@@ -456,9 +456,71 @@ function bloqueComuna(c) {
       ? `<p><strong>Qué falta:</strong></p><ul class="falta"><li>${
           c.le_falta.map(esc).join('</li><li>')}</li></ul>`
       : '<p>No detectamos vacíos en las fuentes que revisamos.</p>'}
-    <button type="button" class="secundario" id="btn-compartir-comuna">
-      Compartir el estado de ${esc(c.comuna)}</button>
+    <div class="acciones">
+      <button type="button" class="secundario" id="btn-compartir-comuna">
+        Compartir el estado de ${esc(c.comuna)}</button>
+      <button type="button" class="secundario" id="btn-solicitud">
+        Pedirle el mapa a la autoridad</button>
+    </div>
+    <p class="incert">La solicitud usa la <strong>Ley 20.285</strong>: el
+       organismo está obligado a responderte por escrito en 20 días hábiles. Se
+       envía en
+       <a href="https://www.portaltransparencia.cl" rel="noopener"
+          target="_blank">portaltransparencia.cl</a>, es gratis y no necesitas
+       abogado.</p>
   </div>`;
+}
+
+/** Solicitud de acceso a información, Ley 20.285, lista para enviar.
+ *
+ *  Por qué el visor la genera en vez de sólo mostrar el vacío: porque el vacío
+ *  sin un camino de acción es sólo una queja. Un organismo del Estado está
+ *  obligado a responder por escrito en 20 días hábiles, y **las dos respuestas
+ *  posibles sirven**: si el mapa existe, se pide y el visor mejora; si no
+ *  existe, el vacío queda documentado con timbre y fecha, que es lo que
+ *  convierte «lo dicen dos geólogos» en «lo dice el organismo».
+ *
+ *  Se dirige al organismo que corresponde según lo que falte, no a uno
+ *  genérico: el instrumento es del MINVU, la amenaza hidráulica es de la DGA.
+ */
+function textoSolicitud(c) {
+  const sinArea = !c.poligonos_area_riesgo;
+  const l = [
+    `Solicitud de acceso a información pública (Ley N° 20.285)`,
+    ``,
+    `Materia: cartografía de amenaza y áreas de riesgo por inundación en la `
+    + `comuna de ${c.comuna}, Región de La Araucanía.`,
+    ``,
+    `De acuerdo a la Ley N° 20.285 sobre Acceso a la Información Pública, `
+    + `solicito la siguiente información:`,
+    ``,
+    `1. Si esa institución dispone de cartografía de amenaza o de áreas de `
+    + `riesgo por inundación fluvial para la comuna de ${c.comuna}, indicando `
+    + `su fecha de elaboración y la metodología empleada.`,
+    `2. En caso afirmativo, copia digital de dicha cartografía en formato `
+    + `vectorial (shapefile, GeoJSON o equivalente), junto con el estudio que `
+    + `la fundamenta.`,
+    `3. En caso negativo, indicar si existe algún estudio en curso o `
+    + `programado, y qué organismo tiene la competencia para elaborarlo.`,
+  ];
+  if (sinArea) {
+    l.push(`4. Si el Plan Regulador Comunal vigente de ${c.comuna} define áreas `
+           + `de riesgo por inundación conforme al artículo 2.1.17 de la `
+           + `Ordenanza General de Urbanismo y Construcciones, y por qué razón `
+           + `dicha cartografía no se encuentra disponible en el servicio `
+           + `público de datos territoriales del MINVU.`);
+  }
+  l.push(``,
+    `Fundamento de la consulta: al revisar fuentes públicas no fue posible `
+    + `encontrar esta información en formato consultable para la comuna. `
+    + `Específicamente:`);
+  for (const f of c.le_falta) l.push(`   • ${f}`);
+  l.push(``,
+    `Solicito la respuesta en formato digital al correo electrónico que indico `
+    + `en este formulario.`,
+    ``,
+    `Saluda atentamente,`);
+  return l.join('\n');
 }
 
 /** El texto que se reenvía. Se arma acá y no se deriva del HTML para que diga
@@ -904,6 +966,23 @@ function render(res, etiqueta, lon, lat) {
         await navigator.clipboard.writeText(texto);
         elEstado().textContent = `Estado de ${c.comuna} copiado. Ya lo puedes pegar.`;
       } catch { elEstado().textContent = 'No se pudo copiar automáticamente.'; }
+    });
+  }
+
+  const btnSol = $('#btn-solicitud');
+  if (btnSol) {
+    btnSol.addEventListener('click', async () => {
+      const c = comunaDe(res, lon, lat);
+      if (!c) return;
+      const texto = textoSolicitud(c);
+      try {
+        await navigator.clipboard.writeText(texto);
+        elEstado().textContent =
+          'Solicitud copiada. Pégala en portaltransparencia.cl, dirigida al '
+          + 'MINVU (SEREMI de La Araucanía), a la DGA o a tu municipalidad.';
+      } catch {
+        elEstado().textContent = 'No se pudo copiar automáticamente.';
+      }
     });
   }
 
@@ -1770,6 +1849,8 @@ function enlazarInterfaz() {
     if (el) el.addEventListener('change', () => { if (el.checked) aplicarBase(cual); });
   }
   enlazarPestanas();
+  const imp = $('#btn-imprimir');
+  if (imp) imp.addEventListener('click', () => window.print());
 
   // Encender / apagar todo. Con las capas agrupadas por familia, comparar «lo
   // que dice la norma» contra «lo que se midió» es el gesto más útil del visor,

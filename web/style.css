@@ -611,3 +611,42 @@ body.base-satelite .maplibregl-ctrl-attrib a { color: #eaf4ff; }
 .cifras-comuna li { margin: .2rem 0; }
 .bloque-comuna ul.falta li { color: var(--tinta); }
 .bloque-comuna ul.falta { margin: .3rem 0 .8rem 1.1rem; }
+
+/* ------------------------------------------------------------- impresión */
+/*
+ * Existe porque el uso principal de esto NO es la emergencia: es la decisión
+ * previa. Alguien que está por comprar un sitio o pedir un permiso necesita
+ * llevarse la evidencia a la Dirección de Obras, adjuntarla a un reclamo o
+ * mostrársela al vendedor. Una captura de pantalla no sirve para eso: se
+ * imprime cortada, sin las fuentes y sin las fechas, que es justo lo que le da
+ * peso al papel.
+ *
+ * Al imprimir se muestra la EVIDENCIA COMPLETA aunque estés en la pestaña
+ * corta, porque el papel viaja solo y sin nadie que lo explique.
+ */
+@media print {
+  .pestanas, .buscador, .capas-plegable, .mapa-envoltorio, .enlace-catalogo,
+  .acciones, .comunas, #sugerencias, .capas-acciones { display: none !important; }
+
+  /* Las dos pestañas se imprimen: en pantalla una está oculta, en papel no
+     puede faltar la evidencia. */
+  [role="tabpanel"][hidden] { display: block !important; }
+
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+  .evidencia, .veredicto, .respuesta, .advertencia {
+    background: #fff !important; border-color: #666 !important;
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; }
+  .incert { color: #333 !important; }
+  .descargo-fijo { border-left: 3px solid #000 !important; }
+}
+
+/* Para qué sirve, antes de que alguien lo use. El caso principal no es la
+   emergencia sino la decisión previa, y decirlo cambia quién lo consulta. */
+.para-que {
+  font-size: var(--paso-3); line-height: 1.45; margin: 0 0 .7rem;
+  padding: .6rem .8rem; border-radius: var(--radio);
+  background: color-mix(in srgb, var(--acento) 10%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
+}

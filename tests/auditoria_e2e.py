@@ -160,6 +160,61 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         aud.falla(f"render del mapa [{etq}]",
                   f"la captura del mapa tiene sólo {colores} colores — ¿tiles no cargan?")
 
+    # ------------------------- para qué sirve, y qué se puede hacer con esto
+    #
+    # El uso principal no es la emergencia: es la decisión previa —comprar un
+    # sitio, construir, firmar— y el reclamo posterior. Durante una inundación
+    # la gente ya no puede actuar sobre esta información. Si el sitio deja de
+    # decirlo, vuelve a leerse como una herramienta de emergencia, que es
+    # justamente lo que no debe ser.
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.wait_for_timeout(200)
+    pq = page.locator(".para-que")
+    if pq.count() and "antes de comprar" in pq.inner_text().lower():
+        aud.ok(f"el sitio declara que sirve antes de comprar o construir [{etq}]")
+    else:
+        aud.falla(f"para qué sirve [{etq}]",
+                  "no dice que el uso es la decisión previa; sin eso se lee como "
+                  "herramienta de emergencia, que es cuando ya no se puede actuar")
+
+    page.evaluate("() => consultar(-72.5904, -38.7359, 'Auditoría acciones')")
+    page.wait_for_timeout(700)
+    page.evaluate("() => irAPestana('detalle', false)")
+    page.wait_for_timeout(300)
+    if page.locator("#btn-imprimir").count():
+        aud.ok(f"la evidencia se puede imprimir o guardar como PDF [{etq}]")
+    else:
+        aud.falla(f"ficha imprimible [{etq}]",
+                  "no se puede llevar el respaldo a la Dirección de Obras ni "
+                  "adjuntarlo a un reclamo")
+    if page.locator("#btn-solicitud").count():
+        aud.ok(f"se puede generar la solicitud de transparencia [{etq}]")
+        # El texto tiene que citar la ley y nombrar la comuna: una plantilla
+        # genérica no sirve para presentarla.
+        txt = page.evaluate(
+            "() => { const c = comunaDe(estado.ultimo.res, estado.ultimo.lon, "
+            "estado.ultimo.lat); return c ? textoSolicitud(c) : ''; }")
+        falta = [x for x in ("20.285", "inundación") if x not in txt]
+        if txt and not falta:
+            aud.ok(f"la solicitud cita la ley y es específica [{etq}]",
+                   f"{len(txt)} caracteres")
+        else:
+            aud.falla(f"solicitud de transparencia [{etq}]",
+                      f"texto vacío o le falta: {falta}")
+    else:
+        aud.falla(f"solicitud de transparencia [{etq}]",
+                  "el vacío se muestra pero no hay camino para reclamarlo")
+
+    # En papel NO puede faltar la evidencia: la hoja viaja sola, sin nadie que
+    # la explique, y la pestaña oculta no se imprimiría sin la regla de @media.
+    css = (WEB / "style.css").read_text(encoding="utf-8")
+    if '[role="tabpanel"][hidden] { display: block !important; }' in css:
+        aud.ok(f"al imprimir se incluye la evidencia completa [{etq}]")
+    else:
+        aud.falla(f"impresión [{etq}]",
+                  "la pestaña oculta no se imprime: el papel saldría con el "
+                  "veredicto y sin las fuentes")
+
     # ------------------------------------ quiénes lo hacen y para qué
     #
     # La autoría explícita y el «esperamos dejar de hacer falta» no son adorno:
