@@ -118,11 +118,42 @@ diluían la verificación de nuestra propia capa.
    ve al renderizar pero es dibujo. Habría que renderizar las franjas de margen,
    pasarles OCR y alimentar el mismo `08_georreferenciar_grilla.py`.
 
-3. **Los 12 vacíos comunales.** El barrido automático ya cubrió los 32 sitios.
+3. **Los vacíos comunales — actualizado 24-ago-2026, quedan 11.**
+
+   Dos cosas los redujeron. Ver §6bis y §4.3 del inventario.
+
+   **(a) El cosechador municipal preguntaba por un solo marco legal.** Un
+   municipio publica la misma amenaza bajo tres leyes con vocabularios que no
+   comparten ni una palabra: plan regulador (Ley General de Urbanismo), **Plan
+   Comunal de RRD (Ley 21.364)** y **PACCC (Ley 21.455)**. `12_cosechar_municipios.py`
+   sólo tenía el vocabulario del primero. Al agregar los otros dos aparecieron
+   **40 documentos**, casi todos de 2024-2026 y por tanto posteriores al registro
+   EAE: el índice municipal pasó de 140 a **173 documentos** y de 70 a **80
+   láminas**. **Renaico, Villarrica y Lonquimay** ganaron cartografía.
+
+   **Lo mejor: Curarrehue.** Su Plan RRD de diciembre-2025 trae la «Zonificación
+   de áreas inundables de Catripulli» —susceptibilidad y riesgo de inundación,
+   con grilla UTM impresa, lista para `08_georreferenciar_grilla.py`—. Viene del
+   levantamiento de riesgos del PRC: **el estudio del plan regulador llegó antes
+   por la vía del plan de desastres que por el registro EAE**. Ése es el patrón a
+   explotar, no la excepción.
+
+   **(b) ARClim cubre cinco de las siete comunas sin documento**, incluida
+   **Padre Las Casas**. Ver el punto 5.
+
    - **Sin ningún documento (7)**: Cholchol, Loncoche, Melipeuco,
-     **Padre Las Casas**, Perquenco, Ercilla, Los Sauces.
-   - **Con documentos pero sin cartografía (5)**: Carahue, Lautaro, Curacautín,
-     Renaico, Victoria.
+     **Padre Las Casas**, Perquenco, Ercilla, Los Sauces. De ésas, ARClim cubre
+     cinco; **sólo Ercilla y Perquenco quedan sin ninguna fuente**.
+   - **Con documentos pero sin cartografía (4)**: Carahue, Lautaro, Curacautín,
+     Victoria. El plan de RRD de Lautaro se revisó página a página: es texto y
+     tablas, no tiene mapas.
+
+   ⚠️ **Punto ciego confirmado del escáner de láminas**: exige vocabulario
+   hídrico en la **capa de texto**. La lámina del PACCC de Collipulli es un PDF
+   aparte, A3, con el texto convertido a trazos — cero caracteres extraíbles, así
+   que es invisible para el índice. Es justo el formato más valioso. Falta una
+   segunda vía que detecte lámina por **geometría de página** (A3/A2 apaisado,
+   miles de objetos vectoriales, poco o nada de texto) y no por vocabulario.
 
    **Padre Las Casas es la prioridad**: 76.000 habitantes, 54 puntos críticos de
    inundación y **38 crónicos —el máximo de la región**— y cero documentos. Su
@@ -139,6 +170,70 @@ diluían la verificación de nuestra propia capa.
    sirva gzip (1,9 MB en crudo → 397 KB comprimido) y montar geocodificador y
    tiles propios: hoy usa Nominatim y el servidor de teselas de OSM, cuyas
    políticas de uso no admiten tráfico de producción.
+
+5. **Decidir si ARClim entra al visor. Es una decisión, no una tarea.**
+
+   `scripts/17_arclim_desbordes.py` ya deja **46 sitios de desborde de río** de
+   La Araucanía en `data/processed/arclim/`, con río asociado, estaciones DGA e
+   índices de exposición, vulnerabilidad y riesgo para T=25/50/100 en presente y
+   proyectado a 2035-2065. Cubre **26 de 32 comunas**, entre ellas cinco que no
+   tienen ni un documento.
+
+   Lo que hay que resolver antes de publicarlo: **es un punto por localidad con
+   un índice adimensional, no una mancha de inundación.** El visor existe para
+   responder «¿se inunda donde vivo?», y este dato no puede responder eso. Un
+   punto rojo sobre el nombre de un pueblo se lee como si lo hiciera. O se
+   presenta de una forma que no admita esa lectura, o no entra.
+
+   Y si entra, **hay que agregarle comprobaciones a `auditoria_e2e.py`**: ya pasó
+   con la capa B que la auditoría diera 108/108 sin mirarla ni una vez.
+
+   ⚠️ Dos cosas de la fuente, ya verificadas y codificadas en el script: el
+   índice de amenaza **presente** es una constante nacional (0,4/0,6/0,8 según el
+   período de retorno) y no mide nada local — se excluye; y las rutas de la API
+   van **sin barra final**, al revés de lo que dice su documentación.
+
+6. **Vectorizar láminas: funciona, y ya hay dos.** `scripts/18_vectorizar_laminas.py`
+   convierte una figura de peligro impresa en polígonos, leyendo su retícula UTM
+   rotulada y clasificando los colores de su leyenda. Es la primera vez que el
+   proyecto **produce** una capa en vez de recolectarla.
+
+   | Lámina | Resolución | Resultado | Verificación independiente |
+   |---|---|---|---|
+   | **Angol** — peligro de inundación, Estudio de Riesgo 2013, p30 | 7,74 m/px | 98 polígonos · 208 ha | los 4 puntos SENAPRED «Alto» a **12-37 m** de la mancha; los 3 «Medio», a 636-716 m |
+   | **Curarrehue** — Catripulli, Plan RRD dic-2025, p72 | 5,34 m/px | 39 polígonos · 809 ha | **5 de 6** puntos crónicos dentro o a ≤17 m |
+
+   Los puntos de SENAPRED no participan en la derivación, así que esa separación
+   valida a la vez la georreferenciación y el contenido. En Angol, 12-37 m son
+   1,5 a 5 píxeles de la figura: es el límite de precisión, no error.
+
+   ⚠️ **Van a `data/processed/laminas/`, NO al visor.** Publicarlas es una
+   decisión aparte: son producto **derivado** —la geometría la construimos
+   nosotros— y no pueden mezclarse con el vectorial del MINVU, que sí tiene
+   efecto legal. Si entran, van como capa propia y con comprobaciones propias en
+   `auditoria_e2e.py`.
+
+   **Lo que frena a las demás** (censo con `--censo`, índice en
+   `data/processed/laminas/_censo_reticulas.json`):
+
+   - **No hay OCR.** `pytesseract` está instalado pero **el binario de tesseract
+     no**, así que los rótulos de la grilla se declaran a mano en
+     `config/laminas.yaml`. Detectar dónde está la grilla es automático; saber
+     qué dice, no. Instalar tesseract abriría el resto de golpe.
+   - **Figuras recortadas sin márgenes.** Purén p10 —«Mapa Riesgo de inundación
+     a nivel urbano de Purén y Caupolicán», oct-2025— tiene una retícula regular
+     preciosa de 6×4 y **ningún rótulo**: la figura está cortada al marco. Sin
+     rótulos no hay georreferenciación, y adivinarlos sería inventar coordenadas.
+   - **Una lámina marcada por vocabulario de inundación no siempre es de
+     inundación.** Teodoro Schmidt p56 se descartó al leer su página: muestra
+     «el riesgo actual asociado a las amenazas analizadas» y en inundación va
+     «sin discriminar entre los niveles de peligrosidad». Es multiamenaza.
+     **Hay que leer el texto alrededor antes de declarar una lámina.**
+
+   ⚠️ Y una trampa que conviene conocer: la lámina de Catripulli **declara mal su
+   propio huso** («UTM, Huso 18 Sur» cuando es 19 Sur; con 18 caería en el
+   Pacífico, a 77°O). La verificación de alcance regional del script lo detecta
+   sola. No confiar en el recuadro de información cartográfica.
 
 ## Antes de buscar fuentes nuevas
 

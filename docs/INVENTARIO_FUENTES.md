@@ -374,7 +374,44 @@ Punta Arenas — única capa de inundación puntual).
   (metodología Groundsource).
 - Gratuito, sin registro. Existe API de Flood Forecasting de Google.
 
-### 4.3 Elevación 🔎
+### 4.3 ARClim — inundación por desborde de ríos (MMA) ✅ verificado
+
+> Estaba anotado en §7 como «referencia secundaria». Era un error de
+> clasificación del mismo tipo que los de §1.2 y §5b: se archivó como atlas
+> divulgativo algo que expone una **API pública documentada**. Consumido por
+> `scripts/17_arclim_desbordes.py`.
+
+- Vista: https://arclim.mma.gob.cl/atlas/view/desbordes_rios_cbit/
+- API: `https://arclim.mma.gob.cl/api/datos/sitios_desbordes/geojson?attributes=…`
+  Sin autenticación. ⚠️ La documentación escribe las rutas **con barra final** y
+  así devuelven 404; van **sin** barra. El listado de capas es `/api/capas`.
+- Los atributos de cada cadena de impacto no salen por API: están en un
+  `var config = {…}` embebido en el HTML de la vista.
+- Autoría: Ricchetti, Mendoza y Jerez (FCFM, U. de Chile), actualizada en 2022
+  por MMA / Naciones Unidas / Centro de Cambio Global UC.
+
+**252 sitios de análisis en centros poblados de Chile, 46 en La Araucanía**,
+cubriendo **26 de las 32 comunas**. Cada sitio trae río principal, estaciones
+fluviométricas DGA asociadas, e índices de amenaza, exposición, vulnerabilidad y
+riesgo para T=25, 50 y 100 años, en presente y proyectado a 2035-2065.
+
+**Por qué vale**: cubre **cinco de las siete comunas que no tienen ni un
+documento** —Cholchol, Loncoche, Los Sauces, Melipeuco y **Padre Las Casas**, el
+vacío más grave de la región— y las cinco que tenían documentos sin cartografía.
+Quedan sin cubrir Curarrehue, Ercilla, Perquenco, Pucón, Purén y Saavedra.
+
+⚠️ **No es una mancha de inundación**: es un punto por localidad con un índice
+adimensional. No responde «¿se inunda mi casa?». Capa C, escala de localidad.
+
+⚠️ **El índice de amenaza PRESENTE no mide amenaza.** Verificado sobre los 252
+sitios del país: `t25` vale 0,4 en todos, `t50` 0,6 en todos, `t100` 0,8 en
+todos. Es una recodificación del período de retorno, constante en el territorio:
+no distingue Temuco de Lonquimay. El script **lo excluye de la salida** y se cae
+si alguna vez deja de ser constante —porque entonces sí sería un dato útil y
+excluirlo en silencio nos haría tirarlo. Lo que sí varía es la amenaza **futura**,
+la exposición, la vulnerabilidad y el riesgo.
+
+### 4.4 Elevación 🔎
 
 - IDE Chile publica **DEM ALOS PALSAR 12,5 m** por región, descarga directa:
   https://ide.cl/descarga/capas.html
@@ -527,17 +564,90 @@ por suposición.
 | **`repositoriodigital.minvu.cl`** | Versión digital del anterior | El dominio **no resuelve** (DNS). |
 | **Tienda digital SERNAGEOMIN** | *Geología para el Ordenamiento Territorial: área de Temuco* (2007), que incluye el Mapa 5 de peligros geológicos a 1:100.000 | `tiendadigital.sernageomin.cl` **no resuelve** (DNS). La publicación existe y está citada; hay que conseguirla por otra vía. |
 | **GORE Araucanía** | Estudios regionales | Responde **403** a peticiones automatizadas. |
-| **SEIA — `seia.sea.gob.cl`** | Estudios de impacto ambiental con anexos de inundación | Responde **500**. Además es enorme y sin filtro por tipo de amenaza; requeriría un proyecto aparte. |
+| **SEIA — `seia.sea.gob.cl`** | Estudios de impacto ambiental con anexos de inundación | Daba **500** en agosto; al 24-ago-2026 **responde 200**, así que el descarte caducó. Sigue siendo enorme y sin filtro por tipo de amenaza: es un proyecto aparte, no un barrido. |
+| **Registro global de ArcGIS Online** | Capas de inundación publicadas y olvidadas por municipios o consultoras, como pasó con la capa del MINVU | Barridas 26 consultas (por texto y por `bbox` de la región; ojo: `bbox` es **parámetro propio**, dentro de `q` devuelve 0 sin error) → 443 ítems, **34 pertinentes y ninguno útil**: son trabajos de estudiantes de INACAP e IPLACEX sobre incendios y volcanes. El ítem «RIESGOS DE INUNDACIÓN» es de un colegio. **No volver a barrer**: si aparece algo institucional será por el org de su servicio, no por el buscador global. |
+| **`OSIG_GEOLOGIA_O` (org ArcGIS de SERNAGEOMIN)** | Capa de inundación propia | 47 ítems: hidrogeología, geotermia, geoquímica y peligro volcánico del Villarrica. **Ninguno de inundación** — confirma por segunda vía lo de §2.2. |
+| **`sitemap.xml` de los 32 municipios** | Enumerar el sitio entero en vez de rastrear a profundidad 2 | **Cero documentos.** WordPress no lista los adjuntos en el sitemap, sólo entradas y páginas. La API de medios (`/wp-json/wp/v2/media`) sigue siendo la única vía que rinde. |
+| **`datos.gob.cl` (CKAN)** | Catálogo nacional de datos abiertos | La API responde 200, pero busca «inundación OR araucanía OR riesgo» y devuelve **2 resultados** en todo el país. El catálogo está prácticamente vacío. |
 
-## 6c. Estado de cobertura por comuna (ago-2026)
+## 6bis. La misma amenaza bajo tres marcos legales ✅ verificado 24-ago-2026
+
+El hallazgo de método de esta pasada, y el que más rinde a futuro. Un municipio
+chileno publica cartografía de la misma amenaza bajo **tres leyes distintas**,
+con vocabularios que no comparten ni una palabra:
+
+| Marco | Instrumento | Vigencia |
+|---|---|---|
+| Ley General de Urbanismo | Estudio Fundado de Riesgos del plan regulador | histórico |
+| **Ley 21.364 (2021)** | **Plan Comunal para la Reducción del Riesgo de Desastres**, plan de emergencia comunal | 2024-2026 |
+| **Ley 21.455 (2022)** | **Plan de Acción Comunal de Cambio Climático (PACCC)** | 2025-2026 |
+
+El cosechador `12_cosechar_municipios.py` sólo tenía el vocabulario del primero
+—`riesgo`, `prc`, `zonificacion`, `estudio fundado`— y **pasaba por encima de los
+otros dos sin verlos**. No es que los municipios no publicaran: es que el barrido
+no preguntaba por esos nombres.
+
+Al agregar las tres familias aparecieron **40 documentos nuevos** en 11 comunas,
+casi todos **posteriores al registro EAE**. El índice de láminas municipales pasó
+de 140 a **173 documentos** y de 70 a **80 láminas candidatas**:
+
+- **Curarrehue — el mejor hallazgo.** Su `Decreto-Exento-1802-30-12-2025-Aprueba-PLAN-RRD.pdf`
+  trae en p71-73 la **«Zonificación de áreas inundables en la localidad de
+  Catripulli»**: susceptibilidad alta y media de inundación, y riesgo alto y
+  medio sobre edificaciones, equipamiento y caminos, con los ríos Trancura y
+  Cavisañi y el estero Santa Rosa. Tiene **grilla UTM impresa y rotulada**
+  (264000-270000 E), así que es georreferenciable con
+  `08_georreferenciar_grilla.py`. Procede del levantamiento de riesgos de la
+  actualización del PRC — es decir, el estudio del plan regulador **llegó antes
+  por la vía del plan de desastres que por la del registro EAE**. Su PACCC
+  (Decreto 950, julio-2025) aporta 2 láminas más.
+- **Lautaro** — `PLAN-COMUNAL-PARA-LA-RRD-FINAL.pdf` (2024) y plan de emergencia.
+  Verificado página a página: es texto y tablas, **sin cartografía**. El escáner
+  acertó al no declarar láminas.
+- **Collipulli** — PACCC aprobado por Decreto N°1752 de julio-2025, más
+  `15.-y-16.-Mapa-de-Vulnerabilidad-fusionado.pdf`: dos láminas **A3 con grilla
+  UTM SIRGAS 18S impresa y rotulada**, georreferenciables con
+  `08_georreferenciar_grilla.py`. Contenido: índice de vulnerabilidad social
+  SoVI 2017 y catastro de campamentos 2022-2023 — **no es amenaza de
+  inundación**, sirve como exposición.
+- **Lonquimay** — Plan de Cambio Climático comunal, junio-2025, con lámina.
+- **Renaico** — el PLADECO trae 2 láminas y saca a la comuna de la lista de «sin
+  cartografía». **Villarrica** y **Lonquimay** también ganan cartografía.
+- **Saavedra** — dos planes de emergencia comunal y el PLADECO.
+- PLADECO recientes de Purén, Freire, Temuco, Villarrica y Collipulli.
+
+> **La lección que queda**: el estudio de riesgo de una comuna puede llegar antes
+> por el plan de desastres o por el de cambio climático que por el registro
+> ambiental, porque esos instrumentos **citan y reproducen** el levantamiento del
+> plan regulador mientras el expediente EAE todavía está en trámite. Buscar por
+> un solo marco legal deja fuera la copia más accesible del mismo mapa.
+
+⚠️ **Punto ciego del escáner de láminas, confirmado.** `07_buscar_laminas_riesgo.py`
+exige vocabulario hídrico **en la capa de texto** de la página. La lámina de
+Collipulli es un PDF aparte, de 2 páginas, con el texto convertido a trazos: cero
+caracteres extraíbles. El escáner no la ve, y es justo el formato más valioso —la
+cartografía de verdad, en tamaño de plano. Una lámina publicada como PDF separado
+sin capa de texto es invisible para el índice.
+
+⚠️ **Ruido propio de este vocabulario.** «emergencia», «adaptación» y
+«vulnerabilidad» traen compras de vehículos, bases de concurso para jefaturas de
+protección civil y el Ingreso Familiar de Emergencia. Se descartan por nombre en
+`RUIDO_NOMBRE` antes de gastar la descarga.
+
+## 6c. Estado de cobertura por comuna (24-ago-2026)
 
 De las 32 comunas de La Araucanía:
 
-- **20 tienen al menos una lámina cartográfica** localizada.
-- **5 tienen documentos pero sin cartografía detectada**: Carahue (2 doc),
-  Lautaro (5), Curacautín (3), Renaico (10), Victoria (4).
+- **21 tienen al menos una lámina cartográfica** localizada (Renaico se sumó al
+  agregar el vocabulario de §6bis).
+- **4 tienen documentos pero sin cartografía detectada**: Carahue (2 doc),
+  Lautaro (7, incluido su plan de RRD — verificado sin mapas), Curacautín (3),
+  Victoria (4).
 - **7 no tienen ningún documento**: Cholchol, Loncoche, Melipeuco,
   **Padre Las Casas**, Perquenco, Ercilla, Los Sauces.
+  De ésas, **ARClim (§4.3) cubre cinco** con un sitio de desborde de río:
+  Cholchol, Loncoche, Los Sauces, Melipeuco y **Padre Las Casas**. Siguen sin
+  ninguna fuente **Ercilla y Perquenco**.
 
 > ⚠️ **Padre Las Casas es el vacío más grave**: 76.000 habitantes, 54 puntos
 > críticos de inundación y **38 crónicos** —el máximo de la región—, y cero
@@ -548,8 +658,10 @@ De las 32 comunas de La Araucanía:
 
 ## 7. Referencias secundarias
 
-- ARClim (MMA) — atlas de riesgos climáticos, incluye desbordes de ríos e
-  inundaciones urbanas a escala comunal: https://arclim.mma.gob.cl/
+- ~~ARClim (MMA)~~ → **promovido a §4.3**: no era una referencia secundaria, tiene
+  API pública y ya está consumido. Quedan sin explotar sus otras dos cadenas de
+  impacto de inundación: `asentamientos_inundaciones` e `inundaciones_urbanas`
+  (esta última **fuera del alcance** del proyecto, que es inundación fluvial).
 - IDE MMA, centro de descargas: https://ide.mma.gob.cl/centro-de-descargas
 - Geoportal de Chile (IDE Chile): https://geoportal.cl/geoportal/catalog
 - Kimün-Ko (UFRO, Temuco) — plataforma local de alertas hidrometeorológicas;

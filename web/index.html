@@ -24,9 +24,22 @@
 </header>
 
 <main>
-  <!-- Las cifras se calculan de los datos cargados, no van escritas a mano:
-       si el pipeline cambia, la portada no puede quedar mintiendo. -->
-  <section class="cifras" id="cifras" aria-label="Qué contiene este visor"></section>
+  <!-- Dos pestañas, y la razón es de comunicación, no de espacio.
+       Quien llega quiere una respuesta, no un expediente: la primera pestaña
+       contesta y nada más. Pero la respuesta corta sola sería una autoridad sin
+       respaldo, y este proyecto se sostiene justamente en mostrar de dónde sale
+       cada cosa — por eso la evidencia completa no se elimina, se mueve a la
+       segunda pestaña, entera y a un toque de distancia. -->
+  <div class="pestanas" role="tablist" aria-label="Secciones del visor">
+    <button class="pestana" role="tab" id="tab-respuesta"
+            aria-controls="panel-respuesta" aria-selected="true">¿Se inunda?</button>
+    <button class="pestana" role="tab" id="tab-detalle"
+            aria-controls="panel-detalle" aria-selected="false" tabindex="-1">
+      Detalle y fuentes</button>
+  </div>
+
+<section id="panel-respuesta" role="tabpanel" aria-labelledby="tab-respuesta"
+         tabindex="0">
 
   <section class="buscador" id="buscador">
     <label for="q">Escribe tu dirección, sector o localidad</label>
@@ -47,6 +60,13 @@
     <p class="estado" id="estado" role="status" aria-live="polite"></p>
   </section>
 
+  <!-- El descargo va acá, visible siempre y antes de la primera consulta. Al
+       final de la página llegaba tarde: quien busca su dirección lee el
+       veredicto y se va. -->
+  <p class="descargo-fijo">Esto <strong>no es información oficial del Estado</strong>
+     y <strong>no es un pronóstico</strong>. Es un proyecto abierto y personal.
+     En emergencia, haz caso a SENAPRED y a tu municipalidad.</p>
+
   <section class="respuesta oculto" id="respuesta" tabindex="-1"></section>
 
   <!-- Los controles de capas van ARRIBA del mapa, no flotando encima.
@@ -54,24 +74,77 @@
        escala, que va abajo a la izquierda con z-index 2) y tapaban las últimas
        casillas: eran invisibles y no se dejaban tocar. Además, en un celular una
        leyenda flotante se come media pantalla de mapa. -->
+  <details class="capas-plegable">
+  <summary>Capas del mapa y fondo</summary>
   <section class="capas" aria-label="Capas del mapa">
-    <p class="capas-titulo">Capas del mapa</p>
-    <div class="capas-fila">
-      <label class="chip"><input type="checkbox" id="cap-areas" checked>
-        <span class="muestra m-areas"></span> Área de riesgo del Plan Regulador</label>
-      <label class="chip"><input type="checkbox" id="cap-sar">
-        <span class="muestra m-sar"></span> Huella de inundación observada por satélite</label>
-      <label class="chip"><input type="checkbox" id="cap-planos">
-        <span class="muestra m-planos"></span> Plano original del Plan Regulador</label>
-      <label class="chip"><input type="checkbox" id="cap-puntos" checked>
-        <span class="muestra m-puntos"></span> Puntos críticos SENAPRED</label>
-      <label class="chip"><input type="checkbox" id="cap-camp">
-        <span class="muestra m-camp"></span> Campamentos en área de riesgo</label>
-      <label class="chip"><input type="checkbox" id="cap-gore">
-        <span class="muestra m-gore"></span> Modelo regional de amenaza (~35 m)</label>
-      <label class="chip"><input type="checkbox" id="cap-jrc">
-        <span class="muestra m-jrc"></span> Modelo global 100 años (~1 km)</label>
+    <p class="capas-titulo" id="base-titulo">Mapa base</p>
+    <!-- El satelital no es decoración: sobre la imagen se ve si la mancha cae
+         encima de casas o de un potrero, que es lo que la gente quiere saber. -->
+    <div class="capas-fila" role="radiogroup" aria-labelledby="base-titulo">
+      <label class="chip"><input type="radio" name="base" id="base-calles" checked>
+        Calles</label>
+      <label class="chip"><input type="radio" name="base" id="base-satelite">
+        Satélite, color real</label>
     </div>
+
+    <p class="capas-titulo">Capas del mapa</p>
+    <!-- Las capas van AGRUPADAS por lo que son, no en una lista plana.
+         Una lista de siete casillas obliga a saber de antemano qué es cada cosa;
+         agrupadas, el grupo mismo explica el peso de lo que enciendes. Y cada
+         capa lleva su peso legal escrito, porque es la diferencia que más
+         consecuencias tiene y la que nadie adivina. -->
+    <div class="grupo-capas">
+      <p class="grupo-titulo">⚖️ Lo que dice la norma
+        <span class="grupo-nota">tiene consecuencias legales sobre tu terreno</span></p>
+      <div class="capas-fila">
+        <label class="chip"><input type="checkbox" id="cap-areas" checked>
+          <span class="muestra m-areas"></span> Área de riesgo del Plan Regulador
+          <span class="sello sello-vigente">vigente</span></label>
+        <label class="chip"><input type="checkbox" id="cap-planos">
+          <span class="muestra m-planos"></span> Planos del Plan Regulador
+          <span class="sello sello-anteproyecto">anteproyecto</span></label>
+      </div>
+      <p class="capas-nota">Un <strong>anteproyecto</strong> es la propuesta que está
+         en tramitación: puede cambiar y todavía no obliga a nadie. Sólo el
+         instrumento <strong>vigente</strong> rige hoy sobre el territorio.</p>
+    </div>
+
+    <div class="grupo-capas">
+      <p class="grupo-titulo">🛰️ Lo que se midió
+        <span class="grupo-nota">agua real, con fecha</span></p>
+      <div class="capas-fila">
+        <label class="chip"><input type="checkbox" id="cap-sar">
+          <span class="muestra m-sar"></span> Huella observada por satélite</label>
+      </div>
+    </div>
+
+    <div class="grupo-capas">
+      <p class="grupo-titulo">📐 Lo que modeló un estudio
+        <span class="grupo-nota">escenarios, no pronósticos</span></p>
+      <div class="capas-fila">
+        <label class="chip"><input type="checkbox" id="cap-gore">
+          <span class="muestra m-gore"></span> Modelo regional (~35 m)</label>
+        <label class="chip"><input type="checkbox" id="cap-jrc">
+          <span class="muestra m-jrc"></span> Modelo global 100 años (~1 km)</label>
+      </div>
+    </div>
+
+    <div class="grupo-capas">
+      <p class="grupo-titulo">📍 Lo que reportó el municipio
+        <span class="grupo-nota">dónde ya hubo problemas</span></p>
+      <div class="capas-fila">
+        <label class="chip"><input type="checkbox" id="cap-puntos" checked>
+          <span class="muestra m-puntos"></span> Puntos críticos SENAPRED</label>
+        <label class="chip"><input type="checkbox" id="cap-camp">
+          <span class="muestra m-camp"></span> Campamentos en área de riesgo</label>
+      </div>
+    </div>
+
+    <div class="capas-acciones">
+      <button type="button" class="secundario" id="btn-capas-todas">Encender todo</button>
+      <button type="button" class="secundario" id="btn-capas-ninguna">Apagar todo</button>
+    </div>
+
     <!-- La fecha del evento observado NO va escrita acá: la escribe app.js
          leyéndola del índice del propio dato (`notaSar`), para que no pueda
          quedar desincronizada del archivo que se está mostrando. -->
@@ -80,9 +153,29 @@
        sobre las comunas que tienen uno. Toca un recuadro para verlo sobre el mapa.</p>
   </section>
 
+  </details>
+
   <section class="mapa-envoltorio">
-    <div id="mapa"></div>
+    <div id="mapa" role="region" aria-label="Mapa de exposición a inundaciones"></div>
   </section>
+
+</section><!-- /panel-respuesta -->
+
+<section id="panel-detalle" role="tabpanel" aria-labelledby="tab-detalle"
+         tabindex="0" hidden>
+
+  <!-- La evidencia completa de la última consulta. La escribe app.js; mientras
+       no haya consulta explica para qué sirve la pestaña. -->
+  <section class="respuesta" id="detalle-ficha" tabindex="-1">
+    <p class="nota">Busca tu dirección en la pestaña <strong>«¿Se inunda?»</strong>
+       y acá va a aparecer todo lo que dice cada fuente sobre ese punto: qué
+       declaró el plan regulador, qué midió el satélite, qué modeló cada estudio
+       y qué registró el municipio — cada uno con su año y su método.</p>
+  </section>
+
+  <!-- Las cifras se calculan de los datos cargados, no van escritas a mano:
+       si el pipeline cambia, la portada no puede quedar mintiendo. -->
+  <section class="cifras" id="cifras" aria-label="Qué contiene este visor"></section>
 
   <a class="enlace-catalogo" href="documentos.html">
     <strong>¿Dónde está el mapa de riesgo de mi comuna? →</strong>
@@ -95,6 +188,37 @@
     <p class="nota">Ordenadas por cantidad de puntos críticos de origen hídrico
        clasificados de riesgo Alto o Muy Alto por SENAPRED.</p>
     <div id="tabla-comunas"></div>
+  </section>
+
+  <section class="advertencia" id="como-leer">
+    <h2>Cómo leer un mapa de inundación</h2>
+    <p><strong>Ninguno de estos mapas predice la próxima inundación.</strong> Ni
+       el mejor hecho de todos. Dicen otra cosa, que es igual de útil: hasta
+       dónde llegó el agua en un evento que alguien midió, o hasta dónde llegaría
+       bajo el escenario que un estudio decidió modelar. Un mapa de amenaza no es
+       un pronóstico: es la conclusión de un estudio, con su fecha y su método.</p>
+
+    <p><strong>Están hechos con métodos distintos y no son comparables entre
+       sí.</strong> Varios vienen de un <em>estudio fundado de riesgo</em>: el que
+       la Ordenanza General exige, firmado por un profesional especialista, para
+       poder declarar un área de riesgo en un plan regulador. Otros son
+       aproximaciones de un modelo global que nunca miró tu comuna. Por eso cada
+       capa lleva pegado de dónde viene, de qué año es y cuánto se equivoca — para
+       que sepas cuál estás mirando antes de decidir nada.</p>
+
+    <p><strong>Mira la mancha, no su borde.</strong> El borde es donde un estudio
+       decidió cortar. Un metro para adentro y un metro para afuera el terreno es
+       el mismo, y esa diferencia suele ser más chica que el error del propio
+       mapa. Que tu casa quede justo afuera no es una buena noticia.</p>
+
+    <p><strong>Un mapa envejece.</strong> El río cambia de curso, se construye
+       aguas arriba, la ciudad crece sobre el paño que antes drenaba. Un estudio
+       de 2013 describe la comuna de 2013, aunque el plan que lo contiene se haya
+       aprobado mucho después.</p>
+
+    <p>Nada de esto los vuelve inútiles. Al revés: es lo mejor que existe, y
+       mientras estuvo repartido en PDF que nadie abre no le servía a nadie. Sólo
+       hay que leerlo por lo que es.</p>
   </section>
 
   <section class="advertencia">
@@ -111,6 +235,7 @@
     <p>En emergencia, la fuente válida es
        <a href="https://senapred.cl" rel="noopener">SENAPRED</a> y tu municipio.</p>
   </section>
+</section><!-- /panel-detalle -->
 </main>
 
 <footer>

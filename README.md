@@ -14,7 +14,7 @@ evidencia, y construye lo que falta.
 > personal. No reemplaza al Plan Regulador de tu comuna ni a las instrucciones de
 > SENAPRED durante una emergencia.
 
-📄 [Inventario de fuentes](docs/INVENTARIO_FUENTES.md) · [Propuesta y arquitectura](docs/PROPUESTA.md) · [Cómo continuar](docs/PROXIMA_SESION.md)
+📄 [Inventario de fuentes](docs/INVENTARIO_FUENTES.md) · [Propuesta y arquitectura](docs/PROPUESTA.md) · [Cómo publicarlo y difundirlo](docs/DIFUSION.md) · [Cómo continuar](docs/PROXIMA_SESION.md)
 
 ---
 
@@ -33,7 +33,7 @@ declara su error. Nunca las fusiona en un número único.
 
 ## Qué funciona hoy
 
-- **Áreas de riesgo del Plan Regulador en vectorial**: 212 polígonos de la región,
+- **Áreas de riesgo del Plan Regulador en vectorial**: 124 polígonos de la región,
   **63 por amenaza hídrica**, con el texto legal de usos prohibidos y enlace a la
   ordenanza. Es la única capa con efecto jurídico, y resultó estar publicada como
   servicio ArcGIS abierto — no encerrada en PDFs, como suponíamos.

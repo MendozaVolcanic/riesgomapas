@@ -271,6 +271,10 @@ button[disabled] { opacity: .55; cursor: progress; }
 .v-medio  { border-color: var(--alto);  background: color-mix(in srgb, var(--alto) 12%, var(--panel)); }
 .v-bajo   { border-color: var(--bajo);  background: color-mix(in srgb, var(--bajo) 12%, var(--panel)); }
 .v-sindato{ background: var(--panel-alto); }
+/* Fuera de alcance NO es un nivel de riesgo, así que no toma ningún color de la
+   escala: si usara el gris de «sin dato» se leería como un veredicto flojo, y
+   es otra cosa — es el sitio diciendo que no sabe. */
+.v-fuera { background: var(--panel-alto); border-style: dashed; font-weight: 600; }
 
 .direccion { color: var(--tinta-suave); font-size: var(--paso-3); margin: 0 0 .9rem; word-break: break-word; }
 
@@ -506,3 +510,94 @@ li.lamina .geo {
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* Cierre de la ficha: separa el descargo de la evidencia sin gritar. */
+.cierre-ficha {
+  margin-top: 1rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--linea, rgba(0,0,0,.12));
+}
+
+/* Sobre la imagen satelital el fondo es oscuro y variado: la escala y la
+   atribución de MapLibre quedan ilegibles con su color por defecto. */
+body.base-satelite .maplibregl-ctrl-scale {
+  background: rgba(0, 0, 0, .55); color: #fff; border-color: #fff;
+}
+body.base-satelite .maplibregl-ctrl-attrib {
+  background: rgba(0, 0, 0, .55);
+}
+body.base-satelite .maplibregl-ctrl-attrib a { color: #eaf4ff; }
+
+/* --------------------------------------------------------------- pestañas */
+.pestanas {
+  display: flex; gap: .25rem; margin: 0 0 1rem;
+  border-bottom: 2px solid var(--linea);
+}
+.pestanas .pestana {
+  flex: 1 1 auto; padding: .7rem 1rem; border: 0; background: none;
+  font: inherit; font-weight: 600; font-size: var(--paso-3);
+  color: var(--tinta-suave); cursor: pointer;
+  border-bottom: 3px solid transparent; margin-bottom: -2px;
+  border-radius: var(--radio) var(--radio) 0 0;
+}
+.pestanas .pestana:hover { background: var(--panel-alto); color: var(--tinta); }
+.pestanas .pestana[aria-selected="true"] {
+  color: var(--tinta); border-bottom-color: var(--acento);
+}
+.pestanas .pestana:focus-visible { outline: 3px solid var(--acento); outline-offset: -3px; }
+[role="tabpanel"]:focus { outline: none; }
+
+/* El descargo permanente: se lee ANTES de la primera consulta, no después. */
+.descargo-fijo {
+  font-size: var(--paso-2); color: var(--tinta);
+  background: var(--panel-alto); border-left: 3px solid var(--alto);
+  padding: .6rem .8rem; border-radius: 0 var(--radio) var(--radio) 0;
+  margin: 0 0 1rem;
+}
+
+/* La razón del veredicto: es lo que de verdad se lee, así que va grande. */
+.por-que { font-size: var(--paso-4); line-height: 1.45; margin: .6rem 0 0; }
+
+/* «Sin registros» leído al revés es el peor error posible de este visor. */
+.aviso-fuerte {
+  font-size: var(--paso-3); line-height: 1.45; margin: .9rem 0 0;
+  background: color-mix(in srgb, var(--alto) 10%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--alto) 35%, transparent);
+  border-radius: var(--radio); padding: .7rem .85rem;
+}
+
+.veredicto h2 { font: inherit; margin: 0; }
+
+.capas-plegable { margin: 0 0 1rem; }
+.capas-plegable > summary {
+  cursor: pointer; font-size: var(--paso-2); font-weight: 600;
+  color: var(--tinta-suave); padding: .5rem 0;
+}
+.capas-plegable > summary:hover { color: var(--tinta); }
+
+/* ----------------------------------------------- capas agrupadas y sellos */
+.grupo-capas { margin: 0 0 .9rem; }
+.grupo-titulo {
+  margin: 0 0 .35rem; font-size: var(--paso-2); font-weight: 700;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem;
+}
+.grupo-nota { font-weight: 400; color: var(--tinta-suave); }
+
+/* El sello de peso legal. Va con texto además de color: el color solo no
+   comunica nada a quien no distingue tonos, y esta es justo la distinción que
+   no se puede perder. */
+.sello {
+  font-size: .72em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .03em; padding: .1rem .4rem; border-radius: 999px;
+  margin-left: .35rem; white-space: nowrap;
+}
+.sello-vigente {
+  background: color-mix(in srgb, var(--bajo) 22%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--bajo) 55%, transparent);
+}
+.sello-anteproyecto {
+  background: color-mix(in srgb, var(--alto) 18%, var(--panel));
+  border: 1px dashed color-mix(in srgb, var(--alto) 60%, transparent);
+}
+.capas-acciones { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .3rem; }
+.capas-acciones button { font-size: var(--paso-2); padding: .35rem .8rem; }

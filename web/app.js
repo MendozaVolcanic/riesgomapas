@@ -16,6 +16,36 @@
 
 const RADIOS = { cercano: 300, medio: 500, contexto: 1500 };
 
+/* Alcance del prototipo. Una sola definición: antes el bbox estaba copiado a
+ * mano en las dos URL del geocodificador y no lo conocía nadie más, así que el
+ * mapa se dejaba desplazar hasta Arica y un clic allá devolvía una ficha entera
+ * vacía. Eso es lo peor que puede hacer este visor: «sin registros» leído como
+ * «no se inunda» es exactamente el error que el resto del sitio se esfuerza en
+ * evitar. Fuera del recuadro no se responde nada — se dice que no se sabe.
+ *
+ * El bbox es el mismo de config/araucania.yaml. Si la región cambia, se cambia
+ * acá y en el YAML.
+ */
+const REGION = {
+  nombre: 'La Araucanía',
+  bbox: [-73.70, -39.65, -70.90, -37.35],   // [oeste, sur, este, norte]
+  // Margen para poder ver el borde de la región sin que quede pegado al canto
+  // de la pantalla. No amplía el alcance: `dentroDeRegion` usa el bbox pelado.
+  margenGrados: 0.30,
+};
+
+const dentroDeRegion = (lon, lat) => {
+  const [o, s, e, n] = REGION.bbox;
+  return lon >= o && lon <= e && lat >= s && lat <= n;
+};
+
+/** Límites de desplazamiento del mapa, en el formato que espera MapLibre. */
+const limitesMapa = () => {
+  const [o, s, e, n] = REGION.bbox;
+  const m = REGION.margenGrados;
+  return [[o - m, s - m], [e + m, n + m]];
+};
+
 const estado = {
   puntos: null,        // FeatureCollection de puntos críticos de inundación
   jrc: null,           // FeatureCollection mancha modelada RP100
@@ -28,6 +58,7 @@ const estado = {
   mapa: null,
   marcador: null,
   ultimo: null,        // último resultado, para compartir
+  base: 'calles',      // mapa base activo: 'calles' o 'satelite'
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -317,6 +348,67 @@ function evaluar(lon, lat) {
            gore: poligonosQueContienen(lon, lat, estado.gore) };
 }
 
+/* ---------------------------------------------------------------- resumen */
+
+/** La frase que explica el veredicto, en una línea y sin jerga.
+ *
+ *  Nombra la evidencia que MANDÓ, no todas: quien pregunta si se le inunda la
+ *  casa necesita una razón, no un inventario. El inventario está a un toque.
+ */
+function porQue(res) {
+  if (res.sar.length) {
+    const f = fechaLarga(res.sar[0].properties.fecha_observacion);
+    return `Un satélite midió agua sobre este punto${f ? ` el ${f}` : ''}. No es un
+            modelo: es agua que estuvo ahí.`;
+  }
+  if (res.areas.length) {
+    return `El plan regulador de tu comuna declaró esta zona <strong>área de riesgo
+            por inundación</strong>. Es la única fuente con efecto legal.`;
+  }
+  const cercanos = res.cerca.filter((c) => c.d <= RADIOS.medio);
+  if (cercanos.length) {
+    const cronicos = cercanos.filter((c) => c.f.properties.cronico).length;
+    return `Hay ${cercanos.length} punto${cercanos.length > 1 ? 's' : ''} donde el
+            municipio reportó inundación a menos de 500 metros` +
+           (cronicos ? `, y ${cronicos} se ${cronicos > 1 ? 'repiten' : 'repite'}
+            temporada tras temporada.` : '.');
+  }
+  if (res.cerca.length) {
+    return `El registro más cercano de inundación está a
+            ${Math.round(res.cerca[0].d)} metros.`;
+  }
+  return `Ninguna de las fuentes consultadas registra inundación en este punto.`;
+}
+
+/** Respuesta corta: veredicto, una razón, y el camino a la evidencia. */
+function resumen(res, etiqueta) {
+  const cont = $('#respuesta');
+  let html = `
+    <div class="veredicto v-${res.nivel}">
+      <span class="icono" aria-hidden="true">${ICONO[res.nivel]}</span>
+      <h2>${esc(res.titulo)}</h2>
+    </div>
+    <p class="direccion">📍 ${esc(etiqueta)}</p>
+    <p class="por-que">${porQue(res)}</p>`;
+
+  // «Sin registros» es el veredicto que más fácil se lee al revés. La aclaración
+  // va pegada al titular, no enterrada — y viaja también en el texto que se
+  // comparte por WhatsApp.
+  if (res.nivel === 'sindato') {
+    html += `<p class="aviso-fuerte">Que no haya registro <strong>no significa que
+             acá no se inunde</strong>. Significa que nadie lo ha levantado. En
+             comunas con poca capacidad técnica municipal es lo esperable.</p>`;
+  }
+  html += `<div class="acciones">
+    <button type="button" id="btn-ver-detalle">Ver todo el detalle y las fuentes</button>
+    <button type="button" class="secundario" id="btn-compartir-corto">Compartir</button>
+  </div>`;
+  cont.innerHTML = html;
+  cont.classList.remove('oculto');
+  $('#btn-ver-detalle').addEventListener('click', () => irAPestana('detalle'));
+  $('#btn-compartir-corto').addEventListener('click', compartir);
+}
+
 /* ----------------------------------------------------------------- render */
 
 const ICONO = { alto: '⚠️', medio: '⚡', bajo: 'ℹ️', sindato: '❔' };
@@ -347,7 +439,10 @@ function atribucion(fc, primerFeature) {
 }
 
 function render(res, etiqueta, lon, lat) {
-  const cont = $('#respuesta');
+  // La evidencia completa vive en la pestaña de detalle. Acá no se recorta
+  // nada: lo que cambió es dónde se muestra, no cuánto se cuenta.
+  const cont = $('#detalle-ficha');
+  resumen(res, etiqueta);
   const cercanos = res.cerca.slice(0, 5);
   const cronicos = res.cerca.filter((c) => c.f.properties.cronico);
   const responsables = [...new Set(
@@ -524,17 +619,25 @@ function render(res, etiqueta, lon, lat) {
   /* --- El plano original, si lo tenemos georreferenciado --- */
   if (res.planos.length) {
     const p = res.planos[0];
+    // El estado de tramitación va en el ENCABEZADO, no en la letra chica: es la
+    // diferencia entre «esto rige tu terreno» y «esto es una propuesta», y quien
+    // sólo lee el título tiene que enterarse igual.
+    const anteproyecto = (p.estado_tramite || '').toLowerCase() === 'anteproyecto';
     html += `<div class="evidencia">
-      <h3>El plano original de tu comuna <span class="etiqueta">A · NORMATIVO</span></h3>
+      <h3>El plano de tu comuna
+        <span class="sello ${anteproyecto ? 'sello-anteproyecto' : 'sello-vigente'}"
+              >${esc(p.estado_tramite || 'estado no declarado')}</span></h3>
       <p>Tenemos el plano del plan regulador que cubre este punto, ubicado sobre el
          mapa a partir de su propia grilla de coordenadas impresa.</p>
       <ul><li><strong>${esc(p.titulo)}</strong><br>
         <span class="incert">${p.puntos_control} puntos de control ·
         error de ubicación ${p.rmse_loo_m} m · ${p.resolucion_m_px} m por píxel</span>
       </li></ul>
+      <p class="${anteproyecto ? 'aviso-fuerte' : 'incert'}">
+        ${esc(p.estado_tramite_nota || '')}</p>
       <button type="button" class="secundario" id="btn-plano">Ver el plano sobre el mapa</button>
-      <p class="incert">Es el documento oficial tal cual, sin retocar. Lo único que
-         hicimos fue darle coordenadas.</p></div>`;
+      <p class="incert">Es el documento tal cual, sin retocar. Lo único que hicimos
+         fue darle coordenadas.</p></div>`;
   }
 
   /* --- Capa D: registro municipal --- */
@@ -623,6 +726,17 @@ function render(res, etiqueta, lon, lat) {
              de hoy.</p></div>`;
   }
 
+  /* Cierre de la ficha. Cada capa ya declaró arriba su fuente y su error; lo que
+     falta decir es lo que ninguna dice por separado y la gente necesita oír: que
+     ninguna de ellas es un pronóstico, y que el borde de la mancha es justo
+     donde el mapa se equivoca más. Va acá y no en el encabezado a propósito —
+     antes de leer la evidencia suena a excusa, después suena a instrucción. */
+  html += `<p class="incert cierre-ficha">Ninguno de estos mapas predice la
+           próxima inundación: cada uno es la conclusión de un estudio, con su
+           fecha y su método, y están hechos con métodos distintos. <strong>Mira
+           la mancha, no su borde</strong> — quedar justo afuera no es una buena
+           noticia. <a href="#como-leer">Cómo leer un mapa de inundación</a>.</p>`;
+
   html += `<div class="acciones">
     <button type="button" id="btn-compartir">Compartir esta ficha</button>
     <button type="button" class="secundario" id="btn-centrar">Ver en el mapa</button>
@@ -709,7 +823,15 @@ function textoFicha() {
   } else {
     l.push('Sin puntos críticos registrados en 1,5 km.');
   }
-  l.push('', 'Esto NO es información oficial. En emergencia: SENAPRED y tu municipio.');
+  // La aclaración viaja en el texto compartido, no sólo en la pantalla: la
+  // ficha se reenvía por WhatsApp y ahí «sin registros» queda solo, sin el
+  // contexto que lo matiza.
+  if (estado.ultimo && estado.ultimo.nivel === 'sindato') {
+    l.push('', 'OJO: que no haya registro NO significa que acá no se inunde.',
+           'Significa que nadie lo ha levantado.');
+  }
+  l.push('', 'Esto NO es información oficial ni un pronóstico.',
+         'En emergencia: SENAPRED y tu municipio.');
   return l.join('\n');
 }
 
@@ -734,7 +856,8 @@ async function geocodificar(texto) {
   // Para producción hay que montar geocodificador propio o usar el de IDE Chile.
   const url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1'
             + '&countrycodes=cl&accept-language=es'
-            + `&viewbox=-73.7,-37.35,-70.9,-39.65&bounded=1&q=${encodeURIComponent(texto)}`;
+            + `&viewbox=${REGION.bbox[0]},${REGION.bbox[3]},${REGION.bbox[2]},${REGION.bbox[1]}`
+            + `&bounded=1&q=${encodeURIComponent(texto)}`;
   const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
   if (!r.ok) throw new Error(`geocodificador HTTP ${r.status}`);
   const j = await r.json();
@@ -776,7 +899,8 @@ async function sugerenciasDirecciones(texto) {
   SUG.aborto = new AbortController();
   const url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5'
             + '&countrycodes=cl&accept-language=es'
-            + `&viewbox=-73.7,-37.35,-70.9,-39.65&bounded=1&q=${encodeURIComponent(texto)}`;
+            + `&viewbox=${REGION.bbox[0]},${REGION.bbox[3]},${REGION.bbox[2]},${REGION.bbox[1]}`
+            + `&bounded=1&q=${encodeURIComponent(texto)}`;
   try {
     const r = await fetch(url, { signal: SUG.aborto.signal });
     if (!r.ok) return [];
@@ -864,10 +988,43 @@ function pedirSugerencias() {
 }
 
 async function consultar(lon, lat, etiqueta) {
+  // Fuera del alcance no se evalúa. Si se dejara pasar, `evaluar` devolvería
+  // «SIN DATO» —que es una afirmación sobre La Araucanía— para un punto de
+  // Antofagasta, y la ficha se leería como que ahí no se inunda.
+  if (!dentroDeRegion(lon, lat)) { renderFuera(etiqueta, lon, lat); return; }
   const res = evaluar(lon, lat);
   render(res, etiqueta, lon, lat);
   ponerMarcador(lon, lat);
   estado.mapa && estado.mapa.flyTo({ center: [lon, lat], zoom: 14 });
+}
+
+/** Respuesta para un punto fuera del prototipo. No dice «sin riesgo»: dice que
+ *  este sitio no tiene nada que decir sobre ese lugar, que es distinto. */
+function renderFuera(etiqueta, lon, lat) {
+  const cont = $('#respuesta');
+  $('#detalle-ficha').innerHTML =
+    '<p class="nota">El punto que elegiste queda fuera de La Araucanía, '
+    + 'así que no hay evidencia que mostrar.</p>';
+  cont.innerHTML = `
+    <div class="veredicto v-fuera">
+      <span class="icono" aria-hidden="true">🧭</span>
+      <span>Fuera del alcance de este prototipo</span>
+    </div>
+    <p class="direccion">📍 ${esc(etiqueta)}</p>
+    <div class="evidencia">
+      <p>Este visor cubre <strong>sólo la Región de ${esc(REGION.nombre)}</strong>,
+         y el punto que elegiste queda afuera.</p>
+      <p class="incert"><strong>Eso no dice nada sobre el riesgo de ese lugar.</strong>
+         No es que no se inunde: es que acá no hay dato para responder. El resto
+         de Chile tampoco tiene un mapa nacional de inundaciones — esa es
+         justamente la razón de este proyecto.</p>
+      <p class="incert">Para ese sector, consulta la Dirección de Obras de su
+         municipalidad y el plan regulador de su comuna. En emergencia,
+         <a href="https://senapred.cl" rel="noopener">SENAPRED</a>.</p>
+    </div>`;
+  cont.classList.remove('oculto');
+  cont.focus();
+  estado.ultimo = null;   // no hay ficha que compartir
 }
 
 async function buscar() {
@@ -896,28 +1053,148 @@ function ubicarme() {
   elEstado().textContent = 'Obteniendo tu ubicación…';
   navigator.geolocation.getCurrentPosition(
     (pos) => {
-      elEstado().textContent = '';
-      consultar(pos.coords.longitude, pos.coords.latitude, 'Tu ubicación actual');
+      const { longitude: lon, latitude: lat } = pos.coords;
+      // Se avisa ANTES de consultar: quien abre esto desde otra región merece
+      // saber por qué no obtiene respuesta, en vez de deducirlo de una ficha
+      // vacía.
+      elEstado().textContent = dentroDeRegion(lon, lat) ? ''
+        : `Estás fuera de ${REGION.nombre}: este prototipo sólo cubre esa región.`;
+      consultar(lon, lat, 'Tu ubicación actual');
     },
     (err) => { elEstado().textContent = `No se pudo obtener la ubicación (${err.message}).`; },
     { enableHighAccuracy: true, timeout: 12000 }
   );
 }
 
+/* -------------------------------------------------------------- pestañas */
+
+const PESTANAS = ['respuesta', 'detalle'];
+
+/** Cambia de pestaña. Mueve el foco al panel para que quien navega con teclado
+ *  o lector de pantalla llegue al contenido, no se quede en el botón. */
+function irAPestana(cual, moverFoco = true) {
+  if (!PESTANAS.includes(cual)) cual = 'respuesta';
+  for (const p of PESTANAS) {
+    const tab = $(`#tab-${p}`);
+    const panel = $(`#panel-${p}`);
+    if (!tab || !panel) continue;
+    const activa = p === cual;
+    tab.setAttribute('aria-selected', activa ? 'true' : 'false');
+    tab.tabIndex = activa ? 0 : -1;
+    panel.hidden = !activa;
+  }
+  // El mapa vive en el primer panel: si estuvo oculto, MapLibre midió cero y
+  // hay que decirle que vuelva a medirse o queda un lienzo en blanco.
+  if (cual === 'respuesta' && estado.mapa) estado.mapa.resize();
+  if (moverFoco) {
+    const panel = $(`#panel-${cual}`);
+    if (panel) panel.focus({ preventScroll: true });
+  }
+  if (location.hash.slice(1) !== cual) history.replaceState(null, '', `#${cual}`);
+}
+
+function enlazarPestanas() {
+  PESTANAS.forEach((p, i) => {
+    const tab = $(`#tab-${p}`);
+    if (!tab) return;
+    tab.addEventListener('click', () => irAPestana(p));
+    tab.addEventListener('keydown', (e) => {
+      const salto = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (!salto) return;
+      e.preventDefault();
+      const destino = PESTANAS[(i + salto + PESTANAS.length) % PESTANAS.length];
+      irAPestana(destino);
+      $(`#tab-${destino}`).focus();
+    });
+  });
+  // Los enlaces internos del detalle («Cómo leer un mapa») apuntan a secciones
+  // que ahora viven en la otra pestaña: sin esto no llevan a ninguna parte.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const destino = document.querySelector(a.getAttribute('href'));
+    if (!destino) return;
+    const panel = destino.closest('[role="tabpanel"]');
+    if (panel && panel.hidden) {
+      irAPestana(panel.id.replace('panel-', ''), false);
+      requestAnimationFrame(() => destino.scrollIntoView({ block: 'start' }));
+    }
+  });
+  irAPestana(location.hash.slice(1) || 'respuesta', false);
+}
+
 /* -------------------------------------------------------------------- mapa */
+
+/* Dos mapas base, y no es un adorno.
+ *
+ * El de calles ubica: dice en qué esquina estás. El satelital muestra el
+ * terreno — dónde está el cauce de verdad, qué es potrero y qué está
+ * construido, si la mancha cae sobre casas o sobre un paño vacío. Para juzgar
+ * un área de riesgo, ver el suelo real cambia la lectura más que cualquier
+ * leyenda.
+ *
+ * ⚠️ Las dos fuentes son de terceros y ninguna admite tráfico de producción bajo
+ * su política de uso: OSM lo dice explícitamente y Esri exige atribución y
+ * limita el uso. Para publicar hay que montar teselas propias. Está anotado
+ * también en docs/PROXIMA_SESION.md.
+ */
+const BASES = {
+  calles: {
+    id: 'osm',
+    tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+    atribucion: '© OpenStreetMap',
+    maxzoom: 19,
+  },
+  satelite: {
+    id: 'sat',
+    // El esquema de Esri invierte el orden {y}/{x} respecto del de OSM.
+    tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/'
+            + 'World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+    atribucion: 'Imágenes © Esri, Maxar, Earthstar Geographics',
+    maxzoom: 19,
+  },
+};
 
 const ESTILO = {
   version: 8,
-  sources: {
-    osm: {
-      type: 'raster',
-      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-      tileSize: 256,
-      attribution: '© OpenStreetMap',
-    },
-  },
-  layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
+  sources: Object.fromEntries(Object.values(BASES).map((b) => [b.id, {
+    type: 'raster', tiles: b.tiles, tileSize: 256,
+    attribution: b.atribucion, maxzoom: b.maxzoom,
+  }])),
+  // Los dos van en el estilo desde el principio y se alternan por visibilidad,
+  // no agregando y quitando capas: así las capas de datos —que se agregan
+  // después y por tanto quedan encima— no se pierden al cambiar de base.
+  layers: Object.values(BASES).map((b) => ({
+    id: b.id, type: 'raster', source: b.id,
+    layout: { visibility: b.id === 'osm' ? 'visible' : 'none' },
+  })),
 };
+
+/** Cuál de los dos mapas base está activo. Se recuerda entre visitas. */
+function baseGuardada() {
+  try {
+    const v = localStorage.getItem('riesgomapas.base');
+    return (v && BASES[v]) ? v : 'calles';
+  } catch { return 'calles'; }
+}
+
+function aplicarBase(cual) {
+  const m = estado.mapa;
+  if (!m || !BASES[cual]) return;
+  for (const [nombre, b] of Object.entries(BASES)) {
+    if (!m.getLayer(b.id)) continue;
+    m.setLayoutProperty(b.id, 'visibility', nombre === cual ? 'visible' : 'none');
+  }
+  estado.base = cual;
+  try { localStorage.setItem('riesgomapas.base', cual); } catch { /* modo privado */ }
+  // Sobre la imagen satelital el texto oscuro de las etiquetas se pierde; la
+  // hoja de estilos usa esta marca para aclararlas.
+  document.body.classList.toggle('base-satelite', cual === 'satelite');
+  // El selector tiene que mostrar lo que de verdad está activo, incluida la
+  // preferencia recordada de una visita anterior.
+  const radio = $(`#base-${cual}`);
+  if (radio && !radio.checked) radio.checked = true;
+}
 
 function ponerMarcador(lon, lat) {
   if (!estado.mapa) return;
@@ -930,6 +1207,10 @@ function iniciarMapa() {
   const m = new maplibregl.Map({
     container: 'mapa', style: ESTILO,
     center: [-72.6, -38.75], zoom: 7.2, attributionControl: true,
+    // El prototipo es regional: no se deja salir del recuadro ni alejar hasta
+    // ver el país entero. Además de acotar el alcance, evita que alguien
+    // termine tocando Santiago y reciba una ficha vacía. Ver REGION.
+    maxBounds: limitesMapa(), minZoom: 6.5,
   });
   estado.mapa = m;
   m.addControl(new maplibregl.NavigationControl(), 'top-right');
@@ -1118,9 +1399,12 @@ function iniciarMapa() {
     });
   };
 
-  m.on('styledata', agregarCapas);
-  m.on('load', agregarCapas);
+  // Cada vez que el estilo se recarga hay que volver a fijar cuál base se
+  // muestra: MapLibre la deja en su valor por defecto.
+  m.on('styledata', () => { agregarCapas(); aplicarBase(estado.base); });
+  m.on('load', () => { agregarCapas(); aplicarBase(estado.base); });
   agregarCapas();
+  aplicarBase(baseGuardada());
 
   const alternar = (id, capa) => $(id).addEventListener('change', (e) => {
     if (m.getLayer(capa)) {
@@ -1322,6 +1606,27 @@ async function inicio() {
   renderComunas();
   notaSar();
   $('#btn-buscar').addEventListener('click', () => { cerrarSugerencias(); buscar(); });
+  for (const cual of Object.keys(BASES)) {
+    const el = $(`#base-${cual}`);
+    if (el) el.addEventListener('change', () => { if (el.checked) aplicarBase(cual); });
+  }
+  enlazarPestanas();
+
+  // Encender / apagar todo. Con las capas agrupadas por familia, comparar «lo
+  // que dice la norma» contra «lo que se midió» es el gesto más útil del visor,
+  // y a mano son siete toques.
+  const CASILLAS = ['cap-areas', 'cap-planos', 'cap-sar', 'cap-gore', 'cap-jrc',
+                    'cap-puntos', 'cap-camp'];
+  const todas = (encender) => {
+    for (const id of CASILLAS) {
+      const el = $(`#${id}`);
+      if (!el || el.checked === encender) continue;
+      el.checked = encender;
+      el.dispatchEvent(new Event('change'));   // reusa la lógica de cada capa
+    }
+  };
+  $('#btn-capas-todas').addEventListener('click', () => todas(true));
+  $('#btn-capas-ninguna').addEventListener('click', () => todas(false));
   $('#btn-ubicacion').addEventListener('click', () => { cerrarSugerencias(); ubicarme(); });
 
   const campo = $('#q');

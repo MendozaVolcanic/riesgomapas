@@ -160,7 +160,96 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         aud.falla(f"render del mapa [{etq}]",
                   f"la captura del mapa tiene sólo {colores} colores — ¿tiles no cargan?")
 
+    # ------------------------------------------------------- las pestañas
+    #
+    # La primera contesta; la segunda respalda. Se comprueba que la respuesta
+    # corta traiga veredicto y una razón, que el descargo se lea ANTES de
+    # cualquier consulta, y que la evidencia completa siga estando entera —
+    # simplificar no puede significar esconder de dónde sale el dato.
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.wait_for_timeout(200)
+    if page.locator("#panel-detalle").is_hidden() and page.locator("#panel-respuesta").is_visible():
+        aud.ok(f"parte en la pestaña de respuesta [{etq}]")
+    else:
+        aud.falla(f"pestaña inicial [{etq}]", "no arranca mostrando la respuesta")
+
+    desc = page.locator(".descargo-fijo")
+    if desc.count() and desc.is_visible():
+        t = desc.inner_text().lower()
+        falta = [x for x in ("no es información oficial", "no es un pronóstico")
+                 if x not in t]
+        if not falta:
+            aud.ok(f"el descargo se lee antes de consultar [{etq}]")
+        else:
+            aud.falla(f"descargo permanente [{etq}]", f"le falta: {falta}")
+    else:
+        aud.falla(f"descargo permanente [{etq}]",
+                  "no hay descargo visible antes de la primera consulta")
+
+    page.evaluate("() => consultar(-72.5904, -38.7359, 'Auditoría pestañas')")
+    page.wait_for_timeout(700)
+    corto = page.locator("#respuesta").inner_text().lower()
+    if len(corto) and "📍" in page.locator("#respuesta").inner_text():
+        aud.ok(f"la respuesta corta muestra el punto consultado [{etq}]")
+    else:
+        aud.falla(f"respuesta corta [{etq}]", "no muestra la dirección consultada")
+    if page.locator("#respuesta .por-que").count():
+        aud.ok(f"la respuesta corta explica por qué [{etq}]")
+    else:
+        aud.falla(f"respuesta corta [{etq}]",
+                  "da un veredicto sin decir en qué se basa")
+    # La respuesta corta tiene que ser CORTA: si crece, deja de ser una respuesta
+    # y vuelve a ser el expediente que se quiso mover a la otra pestaña.
+    if len(corto) < 900:
+        aud.ok(f"la respuesta corta se mantiene breve [{etq}]", f"{len(corto)} caracteres")
+    else:
+        aud.falla(f"respuesta corta [{etq}]",
+                  f"creció a {len(corto)} caracteres; la evidencia va en la otra pestaña",
+                  gravedad="media")
+
+    page.locator("#btn-ver-detalle").click(timeout=3000)
+    page.wait_for_timeout(300)
+    if page.locator("#panel-detalle").is_visible():
+        aud.ok(f"el botón lleva al detalle [{etq}]")
+    else:
+        aud.falla(f"botón ver detalle [{etq}]", "no cambia de pestaña")
+    largo = page.locator("#detalle-ficha").inner_text()
+    if len(largo) > len(corto) * 2:
+        aud.ok(f"la evidencia completa sigue entera [{etq}]",
+               f"{len(largo)} caracteres contra {len(corto)} del resumen")
+    else:
+        aud.falla(f"evidencia en el detalle [{etq}]",
+                  f"el detalle tiene {len(largo)} caracteres: se perdió contenido")
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.wait_for_timeout(200)
+
     # -------------------------------------------- controles de capa clicables
+    #
+    # Viven dentro de un <details> plegado: la primera pestaña muestra sólo lo
+    # necesario para obtener una respuesta. Se abre primero, que es exactamente
+    # lo que hace una persona.
+    plegable = page.locator("details.capas-plegable")
+    if plegable.count():
+        page.evaluate("() => document.querySelector('details.capas-plegable').open = true")
+        aud.ok(f"las capas del mapa están plegadas por omisión [{etq}]")
+    else:
+        aud.falla(f"plegable de capas [{etq}]", "no existe details.capas-plegable")
+    # Las capas van agrupadas y con su peso legal a la vista. Los 20 planos
+    # publicados son ANTEPROYECTOS —propuestas en tramitación, sin efecto legal—
+    # y el visor los describía como «Plano original del Plan Regulador» bajo una
+    # capa que el sitio llama «la única con efecto jurídico». Si ese sello se
+    # cae, se le vuelve a atribuir a una propuesta un peso que no tiene.
+    grupos = page.locator(".grupo-capas").count()
+    if grupos >= 4:
+        aud.ok(f"las capas están agrupadas por tipo de evidencia [{etq}]", f"{grupos} grupos")
+    else:
+        aud.falla(f"agrupación de capas [{etq}]", f"sólo {grupos} grupo(s)")
+    sello = page.locator("#cap-planos").locator("xpath=..").locator(".sello")
+    if sello.count() and "anteproyecto" in sello.inner_text().lower():
+        aud.ok(f"los planos se declaran anteproyecto en la leyenda [{etq}]")
+    else:
+        aud.falla(f"sello de tramitación [{etq}]",
+                  "la capa de planos no dice que son anteproyectos")
     for cid in ["cap-areas", "cap-planos", "cap-puntos", "cap-camp", "cap-jrc",
                 "cap-sar", "cap-gore"]:
         el = page.locator(f"#{cid}")
@@ -222,7 +311,11 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     page.evaluate("([lon,lat]) => consultar(lon, lat, 'Auditoría')", p)
     page.wait_for_timeout(900)
 
-    ficha = page.locator("#respuesta")
+    # La evidencia completa está en la segunda pestaña; hay que abrirla para
+    # poder leerla, igual que una persona.
+    page.evaluate("() => irAPestana('detalle', false)")
+    page.wait_for_timeout(200)
+    ficha = page.locator("#detalle-ficha")
     if ficha.is_visible():
         aud.ok(f"ficha de respuesta [{etq}]")
         # Se compara en minúsculas: los encabezados llevan text-transform:
@@ -264,13 +357,172 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         page.evaluate("([lon,lat]) => consultar(lon, lat, 'Auditoría área de riesgo')",
                       centro_ar)
         page.wait_for_timeout(900)
-        t = page.locator("#respuesta").inner_text().lower()
+        t = page.locator("#detalle-ficha").inner_text().lower()
         if "no prohíbe construir" in t:
             aud.ok(f"la ficha explica que el área de riesgo condiciona, no prohíbe [{etq}]")
         else:
             aud.falla(f"efecto legal mal explicado [{etq}]",
                       "la ficha de un punto dentro de área de riesgo no dice que la "
                       "OGUC 2.1.17 permite construir con estudio fundado y mitigación")
+
+    # Encender y apagar todo de una vez: comparar «lo que dice la norma» contra
+    # «lo que se midió» es el gesto más útil del visor y a mano son siete toques.
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.evaluate("() => document.querySelector('details.capas-plegable').open = true")
+    page.wait_for_timeout(200)
+    page.locator("#btn-capas-todas").click(timeout=3000)
+    page.wait_for_timeout(400)
+    prendidas = page.evaluate(
+        "() => ['cap-areas','cap-planos','cap-sar','cap-gore','cap-jrc','cap-puntos',"
+        "'cap-camp'].filter(i => document.getElementById(i).checked).length")
+    if prendidas == 7:
+        aud.ok(f"«encender todo» prende las 7 capas [{etq}]")
+    else:
+        aud.falla(f"encender todo [{etq}]", f"quedaron {prendidas} de 7")
+    page.locator("#btn-capas-ninguna").click(timeout=3000)
+    page.wait_for_timeout(400)
+    apagadas = page.evaluate(
+        "() => ['cap-areas','cap-planos','cap-sar','cap-gore','cap-jrc','cap-puntos',"
+        "'cap-camp'].filter(i => !document.getElementById(i).checked).length")
+    if apagadas == 7:
+        aud.ok(f"«apagar todo» apaga las 7 capas [{etq}]")
+    else:
+        aud.falla(f"apagar todo [{etq}]", f"quedaron {7 - apagadas} encendidas")
+    page.locator("#cap-areas").click(timeout=3000)
+    page.locator("#cap-puntos").click(timeout=3000)   # volver al estado inicial
+
+    # ------------------------------------------- los dos mapas base
+    #
+    # Los bloques anteriores dejan abierta la pestaña de detalle. Cada bloque
+    # deja el estado que necesita en vez de heredarlo: si no, el orden de las
+    # comprobaciones cambia el resultado y la auditoría se vuelve frágil.
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.evaluate("() => document.querySelector('details.capas-plegable').open = true")
+    page.wait_for_timeout(200)
+    #
+    # El satelital existe para ver el suelo real bajo la mancha. Se comprueba
+    # que el cambio ocurra en el MAPA —visibilidad de la capa ráster— y no sólo
+    # que el control se marque, que es lo que un botón roto también hace.
+    vis = page.evaluate(
+        "() => ({osm: estado.mapa.getLayoutProperty('osm','visibility'),"
+        " sat: estado.mapa.getLayoutProperty('sat','visibility')})")
+    if vis["osm"] == "visible" and vis["sat"] == "none":
+        aud.ok(f"parte con el mapa base de calles [{etq}]")
+    else:
+        aud.falla(f"mapa base inicial [{etq}]", f"visibilidad inesperada: {vis}")
+
+    page.locator("#base-satelite").click(timeout=3000)
+    page.wait_for_timeout(300)
+    vis = page.evaluate(
+        "() => ({osm: estado.mapa.getLayoutProperty('osm','visibility'),"
+        " sat: estado.mapa.getLayoutProperty('sat','visibility'),"
+        " clase: document.body.classList.contains('base-satelite')})")
+    if vis["sat"] == "visible" and vis["osm"] == "none":
+        aud.ok(f"cambia a imagen satelital [{etq}]")
+    else:
+        aud.falla(f"cambio a satelital [{etq}]", f"visibilidad inesperada: {vis}")
+    if vis["clase"]:
+        aud.ok(f"marca el cuerpo para aclarar la escala sobre la imagen [{etq}]")
+    else:
+        aud.falla(f"contraste sobre satelital [{etq}]",
+                  "falta la clase base-satelite; escala y atribución quedan ilegibles")
+
+    # Las capas de datos tienen que seguir por ENCIMA del nuevo base: si se
+    # perdieran al cambiar de fondo, el visor dejaría de responder justo cuando
+    # alguien quiere mirar el terreno.
+    capas_ahora = page.evaluate("() => estado.mapa.getStyle().layers.map(l => l.id)")
+    faltan = [c for c in ("pc-circ", "ar-fill") if c not in capas_ahora]
+    if not faltan:
+        aud.ok(f"las capas de datos sobreviven al cambio de base [{etq}]")
+    else:
+        aud.falla(f"capas tras cambiar de base [{etq}]", f"desaparecieron: {faltan}")
+
+    page.locator("#base-calles").click(timeout=3000)
+    page.wait_for_timeout(200)
+
+    # --------------------------------------- el prototipo está acotado
+    #
+    # Dos afirmaciones distintas y las dos importan:
+    #   1. no se puede salir de la región desplazando el mapa;
+    #   2. si igual llega una coordenada de afuera —GPS de otra región, enlace
+    #      compartido, consola—, la respuesta dice «no sé», no «sin registros».
+    # La segunda es la que hace daño si se rompe: una ficha vacía sobre Santiago
+    # se lee como que Santiago no se inunda.
+    lim = page.evaluate("() => estado.mapa.getMaxBounds() && "
+                        "estado.mapa.getMaxBounds().toArray()")
+    if lim:
+        aud.ok(f"el mapa no deja salir de la región [{etq}] — "
+               f"{lim[0][0]:.1f}…{lim[1][0]:.1f} lon")
+    else:
+        aud.falla(f"el mapa se puede desplazar fuera de la región [{etq}]",
+                  "sin maxBounds se puede llegar a cualquier punto del país y "
+                  "tocarlo, y ahí el visor responde por una región que no cubre")
+
+    # Santiago: bien lejos del bbox, y el caso que de verdad va a ocurrir.
+    page.evaluate("() => consultar(-70.65, -33.44, 'Auditoría fuera de alcance')")
+    # Esperar el CONTENIDO, no un tiempo fijo. Con `wait_for_timeout` la
+    # comprobación siguiente alcanzaba a leer la ficha anterior y el resultado
+    # cambiaba entre corridas: una prueba intermitente esconde más de lo que
+    # descubre.
+    page.wait_for_function(
+        "() => document.querySelector('#respuesta').innerText"
+        ".toLowerCase().includes('fuera del alcance')", timeout=5000)
+    t_fuera = page.locator("#respuesta").inner_text().lower()
+    if "fuera del alcance" in t_fuera:
+        aud.ok(f"un punto fuera de la región se declara fuera de alcance [{etq}]")
+    else:
+        aud.falla(f"punto fuera de la región no se declara [{etq}]",
+                  f"la ficha de un punto en Santiago dice: {t_fuera[:120]!r}")
+    if "no dice nada sobre el riesgo de ese lugar" in t_fuera:
+        aud.ok(f"fuera de alcance NO se confunde con ausencia de riesgo [{etq}]")
+    else:
+        aud.falla(f"fuera de alcance se puede leer como «sin riesgo» [{etq}]",
+                  "la respuesta para un punto de otra región no aclara que la "
+                  "falta de dato no dice nada sobre su riesgo")
+
+    # Se vuelve a un punto de la región: las comprobaciones que siguen operan
+    # sobre la ficha, y quedarían mirando la de fuera de alcance.
+    page.evaluate("() => consultar(-72.5904, -38.7359, 'Auditoría Temuco')")
+    page.wait_for_function(
+        "() => !document.querySelector('#respuesta').innerText"
+        ".toLowerCase().includes('fuera del alcance')", timeout=5000)
+
+    # ------------------------------------- el descargo de cómo leer un mapa
+    #
+    # Va comprobado, y no por formalismo. Es el texto que evita las dos lecturas
+    # que hacen daño de verdad: creer que un mapa de amenaza pronostica la
+    # próxima inundación, y creer que quedar del lado de afuera del borde
+    # significa estar a salvo. Si alguien lo acorta «para que no asuste», esto
+    # tiene que caerse.
+    afirmaciones = {
+        "no es un pronóstico": "predice la próxima inundación",
+        "los métodos no son comparables": "no son comparables entre sí",
+        "el estudio fundado tiene otro peso": "estudio fundado de riesgo",
+        "el borde es lo más incierto": "mira la mancha, no su borde",
+        "un mapa envejece": "un mapa envejece",
+    }
+    # Vive en la pestaña de detalle: oculta, `inner_text()` devuelve vacío y la
+    # comprobación se acusaría a sí misma.
+    page.evaluate("() => irAPestana('detalle', false)")
+    page.wait_for_timeout(200)
+    t_leer = page.locator("#como-leer").inner_text().lower()
+    for nombre, aguja in afirmaciones.items():
+        if aguja in t_leer:
+            aud.ok(f"descargo dice que {nombre} [{etq}]")
+        else:
+            aud.falla(f"descargo incompleto: falta que {nombre} [{etq}]",
+                      f"«{aguja}» no aparece en la sección «Cómo leer un mapa de "
+                      "inundación»")
+
+    # Y el cierre de la ficha, que es donde la gente sí lee: no sirve de nada que
+    # el descargo esté al fondo de la página si la respuesta no lo menciona.
+    t_ficha = page.locator("#detalle-ficha").inner_text().lower()
+    if "mira la mancha, no su borde" in t_ficha:
+        aud.ok(f"la ficha cierra recordando que el borde es lo incierto [{etq}]")
+    else:
+        aud.falla(f"la ficha no lleva el cierre del descargo [{etq}]",
+                  "la respuesta termina sin decir que ninguno de estos mapas es un "
+                  "pronóstico ni que el borde es lo más incierto")
 
     # ------------------------------------------- capa B en sus TRES estados
     #
@@ -318,7 +570,8 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         page.evaluate("([lon,lat]) => consultar(lon, lat, 'Auditoría sin cobertura')",
                       [-71.0, -37.5])
         page.wait_for_timeout(900)
-        t = page.locator("#respuesta").inner_text().lower()
+        page.evaluate("() => irAPestana('detalle', false)")
+        t = page.locator("#detalle-ficha").inner_text().lower()
         if "no pasó" in t or "no observado" in t or "no miró" in t:
             aud.ok(f"capa B distingue «no observado» de «no inundado» [{etq}]")
         else:
@@ -334,6 +587,8 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     page.wait_for_timeout(900)
 
     # ------------------------------------------------ plano sobre el mapa
+    page.evaluate("() => irAPestana('detalle', false)")
+    page.wait_for_timeout(200)
     btn = page.locator("#btn-plano")
     if btn.count():
         try:
