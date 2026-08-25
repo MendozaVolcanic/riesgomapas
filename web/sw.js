@@ -13,7 +13,7 @@
  */
 // Subir este número en cada publicación: al activarse, el service worker borra
 // las cachés de versiones anteriores.
-const VERSION = 'riesgomapas-v18';
+const VERSION = 'riesgomapas-v19';
 const CACHE_APP = `${VERSION}-app`;
 const CACHE_TILES = `${VERSION}-tiles`;
 

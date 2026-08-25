@@ -11,8 +11,12 @@ Este proyecto reúne lo que sí es consultable, lo etiqueta por calidad de
 evidencia, y construye lo que falta.
 
 > ⚠️ **Esto no es información oficial del Estado.** Es un proyecto abierto y
-> personal. No reemplaza al Plan Regulador de tu comuna ni a las instrucciones de
-> SENAPRED durante una emergencia.
+> personal de **Nicolás Mendoza y Roberto Laregla**, geólogos, hecho a título
+> personal y sin respaldo institucional. No reemplaza al Plan Regulador de tu
+> comuna ni a las instrucciones de SENAPRED durante una emergencia.
+>
+> **Y el objetivo es dejar de hacer falta.** Si algún día existe un visor oficial
+> de inundaciones y este repositorio se puede archivar, el proyecto cumplió.
 
 📄 [Inventario de fuentes](docs/INVENTARIO_FUENTES.md) · [Propuesta y arquitectura](docs/PROPUESTA.md) · [Cómo publicarlo y difundirlo](docs/DIFUSION.md) · [Cómo continuar](docs/PROXIMA_SESION.md)
 

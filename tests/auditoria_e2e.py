@@ -160,6 +160,48 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         aud.falla(f"render del mapa [{etq}]",
                   f"la captura del mapa tiene sólo {colores} colores — ¿tiles no cargan?")
 
+    # ------------------------------------ quiénes lo hacen y para qué
+    #
+    # La autoría explícita y el «esperamos dejar de hacer falta» no son adorno:
+    # son lo que separa un proyecto ciudadano de algo que se puede leer como
+    # información oficial, y lo que desarma la lectura de «un particular
+    # compitiendo con el Estado». Si desaparecen, cambia el encuadre legal del
+    # sitio entero. Ver docs/DIFUSION.md §5.
+    page.evaluate("() => irAPestana('detalle', false)")
+    page.wait_for_timeout(250)
+    t_pag = page.locator("main").inner_text().lower() + " " +         page.locator("footer").inner_text().lower()
+    for etiqueta, aguja in {
+        "nombra a sus autores": "roberto laregla",
+        "declara que no tiene respaldo institucional": "sin respaldo institucional",
+        "dice que espera dejar de hacer falta": "se pueda apagar",
+    }.items():
+        if aguja in t_pag:
+            aud.ok(f"el sitio {etiqueta} [{etq}]")
+        else:
+            aud.falla(f"encuadre del proyecto [{etq}]",
+                      f"falta que {etiqueta}: no aparece «{aguja}»")
+
+    # Toda fuente cuyo dato se publique tiene que estar en el pie. Faltaban
+    # MINVU —la única capa con efecto legal— y el GORE —la más grande—, lo que
+    # contradecía la regla del propio sitio.
+    pie = page.locator("footer").inner_text().lower()
+    faltan = [f for f in ("minvu", "gobierno regional", "senapred", "ine",
+                          "openstreetmap", "esri") if f not in pie]
+    if not faltan:
+        aud.ok(f"el pie declara todas las fuentes publicadas [{etq}]")
+    else:
+        aud.falla(f"atribución de fuentes [{etq}]",
+                  f"el pie no menciona: {faltan}; el sitio publica sus datos")
+    if "no registra nada" in pie:
+        aud.ok(f"el sitio declara que no registra datos personales [{etq}]")
+    else:
+        aud.falla(f"aviso de privacidad [{etq}]",
+                  "no declara que la consulta ocurre en el dispositivo; la Ley "
+                  "21.719 rige desde el 1-dic-2026 y la ubicación es dato personal",
+                  gravedad="media")
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.wait_for_timeout(200)
+
     # -------------------------------- el inventario del vacío por comuna
     #
     # Es la unidad que se comparte, y la razón es de fondo: «en mi comuna no hay

@@ -479,7 +479,8 @@ function textoComuna(c) {
     'Que falte el mapa NO significa que no se inunde: significa que nadie lo ha',
     'levantado. Chile no tiene un mapa nacional de inundaciones.',
     '',
-    'Proyecto abierto y personal, sin vínculo institucional.',
+    'Proyecto abierto de Nicolás Mendoza y Roberto Laregla, geólogos.',
+    'A título personal, sin respaldo institucional.',
     'No es información oficial ni un pronóstico.');
   return l.join('\n');
 }
