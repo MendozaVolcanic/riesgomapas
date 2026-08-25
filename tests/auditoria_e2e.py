@@ -160,6 +160,73 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         aud.falla(f"render del mapa [{etq}]",
                   f"la captura del mapa tiene sólo {colores} colores — ¿tiles no cargan?")
 
+    # ------------------------------------- lo que arregló la auditoría
+    #
+    # Cuatro fallas que no daban error y se manifestaban como «el sitio no hace
+    # nada» o «acá no hay dato». Cada una con su comprobación, porque un arreglo
+    # sin prueba se deshace solo en el siguiente cambio.
+
+    # (a) Los planos se LIBERAN al apagarlos, no se ocultan: cada uno es una
+    #     textura de ~870 KB en memoria de video y se acumulaban al panear.
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.evaluate("() => document.querySelector('details.capas-plegable').open = true")
+    page.wait_for_timeout(200)
+    # Hay que ACERCARSE primero: los planos sólo se cargan desde zoom 11, así que
+    # comprobar la liberación a escala regional pasaría sin haber cargado ninguno
+    # —«0 capas → 0 capas»— y no probaría nada.
+    page.evaluate("() => { const p = estado.planos && estado.planos[0]; "
+                  "if (!p) return; const b = p.bounds_wgs84; "
+                  "estado.mapa.jumpTo({center: [(b[0]+b[2])/2, (b[1]+b[3])/2], "
+                  "zoom: 13}); }")
+    page.wait_for_timeout(600)
+    page.locator("#cap-planos").click(timeout=3000)
+    page.wait_for_timeout(3500)
+    con = page.evaluate("() => estado.mapa.getStyle().layers.filter(l => "
+                        "l.id.startsWith('plano-')).length")
+    page.locator("#cap-planos").click(timeout=3000)
+    page.wait_for_timeout(900)
+    sin = page.evaluate("() => estado.mapa.getStyle().layers.filter(l => "
+                        "l.id.startsWith('plano-')).length")
+    fuentes = page.evaluate("() => Object.keys(estado.mapa.getStyle().sources)"
+                            ".filter(k => k.startsWith('plano-')).length")
+    if con == 0:
+        aud.falla(f"fuga de planos [{etq}]",
+                  "no se cargó ningún plano, así que la comprobación de liberación "
+                  "no miró nada: es un verde que no dice nada")
+    elif sin == 0 and fuentes == 0:
+        aud.ok(f"los planos liberan memoria al apagarlos [{etq}]",
+               f"{con} capa(s) cargadas → 0 capas y 0 fuentes")
+    else:
+        aud.falla(f"fuga de planos [{etq}]",
+                  f"quedaron {sin} capa(s) y {fuentes} fuente(s) tras apagar")
+
+    # (b) La capa regional del GORE tiene que estar precacheada: sin ella, sin
+    #     señal la ficha decía «no disponible» para una capa que sí existe.
+    sw = (WEB / "sw.js").read_text(encoding="utf-8")
+    if "data/gore/amenaza-inundacion.geojson" in sw:
+        aud.ok(f"la capa regional se precachea para uso sin señal [{etq}]")
+    else:
+        aud.falla(f"precaché de la capa regional [{etq}]",
+                  "sin ella el visor offline afirma que no está publicada")
+
+    # (c) Elegir una comuna en las sugerencias tiene que ENTREGAR respuesta, no
+    #     sólo mover el mapa: es la única vía para quien no usa el mapa.
+    page.fill("#q", "Angol")
+    page.wait_for_timeout(600)
+    sug = page.locator("#sugerencias li")
+    if sug.count():
+        sug.first.click(timeout=3000)
+        page.wait_for_timeout(900)
+        t = page.locator("#respuesta").inner_text().lower()
+        if "angol" in t and len(t) > 60:
+            aud.ok(f"elegir una comuna entrega ficha, no sólo mueve el mapa [{etq}]")
+        else:
+            aud.falla(f"sugerencia de comuna [{etq}]",
+                      "mueve el mapa pero no responde; sin mapa no hay respuesta")
+    else:
+        aud.falla(f"sugerencia de comuna [{etq}]", "no aparecieron sugerencias")
+    page.fill("#q", "")
+
     # ------------------------------------------------------- las pestañas
     #
     # La primera contesta; la segunda respalda. Se comprueba que la respuesta

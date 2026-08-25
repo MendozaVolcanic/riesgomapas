@@ -216,11 +216,30 @@ function mostrarPlano(p) {
 
 function ocultarPlanos() {
   const m = estado.mapa;
-  if (!m || !m.isStyleLoaded()) return;
+  if (!m) return;
+  // Se LIBERAN, no se ocultan. Cada plano es una textura de ~870 KB en memoria
+  // de video, y `MAX_PLANOS_SIMULTANEOS` limita cuántos se ven a la vez, no
+  // cuántos quedan cargados: al panear la región se llegaban a acumular las 20.
+  // El público objetivo son celulares de gama baja, donde eso es la diferencia
+  // entre un mapa que anda y una pestaña que el sistema mata.
+  //
+  // ⚠️ NO se pone `isStyleLoaded()` como guardián.
+  //
+  // Apagar la capa ocurre justo después de cargar una imagen, que es cuando el
+  // estilo está ocupado y `isStyleLoaded()` devuelve false. Con esa guarda la
+  // limpieza se saltaba ENTERA y en silencio: no había error, sólo texturas que
+  // quedaban vivas para siempre. `getLayer`/`removeLayer` funcionan igual
+  // mientras el estilo exista; si todavía no existe, se reintenta al quedar
+  // quieto el mapa.
+  let listo = true;
   for (const p of estado.planos || []) {
     const id = `plano-${p.archivo.replace(/[^\w]/g, '')}`;
-    if (m.getLayer(id)) m.setLayoutProperty(id, 'visibility', 'none');
+    try {
+      if (m.getLayer(id)) m.removeLayer(id);
+      if (m.getSource(id)) m.removeSource(id);
+    } catch { listo = false; }
   }
+  if (!listo) m.once('idle', ocultarPlanos);
 }
 
 function planosEnVista() {
@@ -988,6 +1007,13 @@ function pedirSugerencias() {
 }
 
 async function consultar(lon, lat, etiqueta) {
+  // La interfaz se enlaza antes de que lleguen los datos, a propósito. Si
+  // alguien alcanza a consultar en ese rato, se le dice — que es infinitamente
+  // mejor que un error de JavaScript o una ficha en blanco.
+  if (!estado.puntos) {
+    elEstado().textContent = 'Todavía se están cargando los datos. Un momento…';
+    return;
+  }
   // Fuera del alcance no se evalúa. Si se dejara pasar, `evaluar` devolvería
   // «SIN DATO» —que es una afirmación sobre La Araucanía— para un punto de
   // Antofagasta, y la ficha se leería como que ahí no se inunda.
@@ -1573,39 +1599,35 @@ function notaSar() {
 }
 
 function zoomComuna(c) {
+  if (!estado.puntos) return;
   const feats = estado.puntos.features.filter((f) => f.properties.comuna === c.comuna);
-  if (!feats.length || !estado.mapa) return;
+  if (!feats.length) return;
   const lons = feats.map((f) => f.geometry.coordinates[0]);
   const lats = feats.map((f) => f.geometry.coordinates[1]);
-  estado.mapa.fitBounds(
-    [[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]],
-    { padding: 50, maxZoom: 13 });
-  document.querySelector('.mapa-envoltorio').scrollIntoView({ behavior: 'smooth' });
+  if (estado.mapa) {
+    estado.mapa.fitBounds(
+      [[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]],
+      { padding: 50, maxZoom: 13 });
+  }
+  // Y además se RESPONDE, no sólo se mueve el mapa.
+  //
+  // Elegir «Angol» en las sugerencias movía la vista y nada más: quien navega
+  // con teclado, quien usa lector de pantalla o quien tiene el mapa caído por
+  // WebGL elegía su comuna y no obtenía ninguna ficha. El mapa quedaba como
+  // única vía real de respuesta, que es justo lo contrario de lo que este visor
+  // necesita — y el caso rural, el más frecuente, es el que peor lo pasaba.
+  const cx = (Math.min(...lons) + Math.max(...lons)) / 2;
+  const cy = (Math.min(...lats) + Math.max(...lats)) / 2;
+  consultar(cx, cy, `${c.comuna} (centro de los registros de la comuna)`);
 }
 
 /* ------------------------------------------------------------------ inicio */
 
-async function inicio() {
-  try {
-    await cargarDatos();
-  } catch (e) {
-    elEstado().textContent = `No se pudieron cargar los datos: ${e.message}`;
-    return;
-  }
-  // El mapa es secundario: lo que importa es la respuesta. Si el dispositivo no
-  // soporta WebGL —gama baja, que es justo el público objetivo— el sitio tiene
-  // que seguir funcionando por buscador y por ubicación.
-  try {
-    iniciarMapa();
-  } catch (e) {
-    document.querySelector('.mapa-envoltorio').innerHTML =
-      '<p class="nota">El mapa no se puede mostrar en este dispositivo, pero la ' +
-      'consulta por dirección y por ubicación funciona igual.</p>';
-  }
-  renderCifras();
-  renderComunas();
-  notaSar();
-  $('#btn-buscar').addEventListener('click', () => { cerrarSugerencias(); buscar(); });
+/** Enlaza todos los controles. Se llama ANTES de cargar los datos para que la
+ *  interfaz responda desde el primer instante: en una conexión lenta, un botón
+ *  que no hace nada durante un minuto se lee como sitio roto. Los manejadores
+ *  que necesitan datos comprueban que estén; los que no, funcionan igual. */
+function enlazarInterfaz() {
   for (const cual of Object.keys(BASES)) {
     const el = $(`#base-${cual}`);
     if (el) el.addEventListener('change', () => { if (el.checked) aplicarBase(cual); });
@@ -1645,6 +1667,39 @@ async function inicio() {
     }
   });
 
+}
+
+
+async function inicio() {
+  // Los controles se enlazan ANTES de esperar los datos.
+  //
+  // `cargarDatos` baja del orden de 3,7 MB de GeoJSON. En 3G eso es más de un
+  // minuto en que tocar «Buscar» no hacía absolutamente nada y la pantalla no
+  // decía nada: el sitio parecía roto justo para quien tiene peor conexión, que
+  // es buena parte del público de esto. Ahora el botón responde desde el primer
+  // instante, y si los datos aún no están, lo dice.
+  enlazarInterfaz();
+  elEstado().textContent = 'Cargando los datos de la región…';
+  try {
+    await cargarDatos();
+    elEstado().textContent = '';
+  } catch (e) {
+    elEstado().textContent = `No se pudieron cargar los datos: ${e.message}`;
+    return;
+  }
+  // El mapa es secundario: lo que importa es la respuesta. Si el dispositivo no
+  // soporta WebGL —gama baja, que es justo el público objetivo— el sitio tiene
+  // que seguir funcionando por buscador y por ubicación.
+  try {
+    iniciarMapa();
+  } catch (e) {
+    document.querySelector('.mapa-envoltorio').innerHTML =
+      '<p class="nota">El mapa no se puede mostrar en este dispositivo, pero la ' +
+      'consulta por dirección y por ubicación funciona igual.</p>';
+  }
+  renderCifras();
+  renderComunas();
+  notaSar();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     navigator.serviceWorker.register('sw.js').catch(() => { /* offline opcional */ });
   }

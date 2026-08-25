@@ -13,7 +13,7 @@
  */
 // Subir este número en cada publicación: al activarse, el service worker borra
 // las cachés de versiones anteriores.
-const VERSION = 'riesgomapas-v16';
+const VERSION = 'riesgomapas-v17';
 const CACHE_APP = `${VERSION}-app`;
 const CACHE_TILES = `${VERSION}-tiles`;
 
@@ -41,6 +41,11 @@ self.addEventListener('install', (e) => {
     // una capa opcional ausente no impida instalar el service worker.
     await Promise.all(ARMAZON.map((u) => c.add(u).catch(() => null)));
     await c.add('data/jrc/rp100.geojson').catch(() => null);
+    // Capa C regional del GORE. Faltaba, y su ausencia MENTÍA: sin señal la
+    // ficha decía «capa no disponible en esta instalación» para una capa que sí
+    // está publicada — y es la más fina que tiene el visor.
+    await c.add('data/gore/amenaza-inundacion.geojson').catch(() => null);
+    await c.add('data/planos/indice.json').catch(() => null);
     // Capa B (huella observada por Sentinel-1). Igual que el JRC: se agregan de
     // a uno y con `.catch`, porque todavía pueden no existir y un 404 dentro de
     // `addAll` dejaría al service worker sin instalar — o sea, sin visor offline,
