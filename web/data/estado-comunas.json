@@ -1,0 +1,634 @@
+{
+ "procedencia": {
+  "fuente": "Cruce de todas las fuentes reunidas por el proyecto",
+  "url": "",
+  "metodo": "Para cada comuna se cuenta qué existe: población del Censo 2024, puntos críticos de SENAPRED, polígonos de área de riesgo del vectorial del MINVU, documentos y láminas del catálogo, planos georreferenciados y polígonos vectorizados por el proyecto.",
+  "capa_evidencia": "inventario",
+  "incertidumbre": "Es un inventario de LO QUE ENCONTRAMOS, no de lo que existe. Que una comuna aparezca sin cartografía significa que no la hallamos en fuentes públicas consultables, no que no se inunde ni que el municipio no la tenga en papel. AUSENCIA DE DATO NO ES AUSENCIA DE RIESGO.",
+  "escala_original": null,
+  "fecha_dato": "cruce al día de la corrida",
+  "generado": "2026-08-25T18:43:08+00:00"
+ },
+ "fuente": "varias",
+ "anio": "no declarado por la fuente",
+ "comunas": [
+  {
+   "comuna": "Angol",
+   "slug": "angol",
+   "personas": 52605,
+   "mayores_60": 11370,
+   "viviendas_hacinadas": 904,
+   "hogares_agua_de_rio": 495,
+   "puntos_inundacion": 14,
+   "puntos_cronicos": 3,
+   "poligonos_area_riesgo": 0,
+   "documentos": 41,
+   "laminas_localizadas": 11,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 124,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Carahue",
+   "slug": "carahue",
+   "personas": 25586,
+   "mayores_60": 6198,
+   "viviendas_hacinadas": 480,
+   "hogares_agua_de_rio": 1229,
+   "puntos_inundacion": 9,
+   "puntos_cronicos": 4,
+   "poligonos_area_riesgo": 9,
+   "documentos": 2,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos"
+   ]
+  },
+  {
+   "comuna": "Cholchol",
+   "slug": "cholchol",
+   "personas": 13526,
+   "mayores_60": 2864,
+   "viviendas_hacinadas": 328,
+   "hogares_agua_de_rio": 276,
+   "puntos_inundacion": 3,
+   "puntos_cronicos": 0,
+   "poligonos_area_riesgo": 0,
+   "documentos": 0,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos",
+    "no publica ningún documento de planificación territorial que hayamos podido cosechar"
+   ]
+  },
+  {
+   "comuna": "Collipulli",
+   "slug": "collipulli",
+   "personas": 23935,
+   "mayores_60": 5216,
+   "viviendas_hacinadas": 433,
+   "hogares_agua_de_rio": 500,
+   "puntos_inundacion": 10,
+   "puntos_cronicos": 0,
+   "poligonos_area_riesgo": 36,
+   "documentos": 30,
+   "laminas_localizadas": 5,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Cunco",
+   "slug": "cunco",
+   "personas": 19885,
+   "mayores_60": 5357,
+   "viviendas_hacinadas": 380,
+   "hogares_agua_de_rio": 848,
+   "puntos_inundacion": 14,
+   "puntos_cronicos": 9,
+   "poligonos_area_riesgo": 0,
+   "documentos": 15,
+   "laminas_localizadas": 2,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Curacautin",
+   "slug": "curacautin",
+   "personas": 18949,
+   "mayores_60": 4868,
+   "viviendas_hacinadas": 381,
+   "hogares_agua_de_rio": 556,
+   "puntos_inundacion": 9,
+   "puntos_cronicos": 4,
+   "poligonos_area_riesgo": 0,
+   "documentos": 3,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos"
+   ]
+  },
+  {
+   "comuna": "Curarrehue",
+   "slug": "curarrehue",
+   "personas": 8158,
+   "mayores_60": 1659,
+   "viviendas_hacinadas": 218,
+   "hogares_agua_de_rio": 1851,
+   "puntos_inundacion": 18,
+   "puntos_cronicos": 17,
+   "poligonos_area_riesgo": 0,
+   "documentos": 24,
+   "laminas_localizadas": 14,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 39,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Ercilla",
+   "slug": "ercilla",
+   "personas": 8016,
+   "mayores_60": 1729,
+   "viviendas_hacinadas": 245,
+   "hogares_agua_de_rio": 329,
+   "puntos_inundacion": 10,
+   "puntos_cronicos": 0,
+   "poligonos_area_riesgo": 0,
+   "documentos": 0,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos",
+    "no publica ningún documento de planificación territorial que hayamos podido cosechar"
+   ]
+  },
+  {
+   "comuna": "Freire",
+   "slug": "freire",
+   "personas": 27865,
+   "mayores_60": 6764,
+   "viviendas_hacinadas": 540,
+   "hogares_agua_de_rio": 314,
+   "puntos_inundacion": 26,
+   "puntos_cronicos": 15,
+   "poligonos_area_riesgo": 0,
+   "documentos": 7,
+   "laminas_localizadas": 2,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Galvarino",
+   "slug": "galvarino",
+   "personas": 12611,
+   "mayores_60": 2895,
+   "viviendas_hacinadas": 313,
+   "hogares_agua_de_rio": 543,
+   "puntos_inundacion": 14,
+   "puntos_cronicos": 9,
+   "poligonos_area_riesgo": 0,
+   "documentos": 13,
+   "laminas_localizadas": 7,
+   "planos_georreferenciados": 1,
+   "planos_por_estado": {
+    "Anteproyecto": 1
+   },
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Gorbea",
+   "slug": "gorbea",
+   "personas": 14738,
+   "mayores_60": 4076,
+   "viviendas_hacinadas": 233,
+   "hogares_agua_de_rio": 533,
+   "puntos_inundacion": 1,
+   "puntos_cronicos": 1,
+   "poligonos_area_riesgo": 1,
+   "documentos": 9,
+   "laminas_localizadas": 10,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Lautaro",
+   "slug": "lautaro",
+   "personas": 41653,
+   "mayores_60": 8004,
+   "viviendas_hacinadas": 834,
+   "hogares_agua_de_rio": 155,
+   "puntos_inundacion": 16,
+   "puntos_cronicos": 10,
+   "poligonos_area_riesgo": 0,
+   "documentos": 5,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos"
+   ]
+  },
+  {
+   "comuna": "Loncoche",
+   "slug": "loncoche",
+   "personas": 25526,
+   "mayores_60": 6391,
+   "viviendas_hacinadas": 486,
+   "hogares_agua_de_rio": 991,
+   "puntos_inundacion": 8,
+   "puntos_cronicos": 8,
+   "poligonos_area_riesgo": 2,
+   "documentos": 0,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos",
+    "no publica ningún documento de planificación territorial que hayamos podido cosechar"
+   ]
+  },
+  {
+   "comuna": "Lonquimay",
+   "slug": "lonquimay",
+   "personas": 10145,
+   "mayores_60": 2159,
+   "viviendas_hacinadas": 328,
+   "hogares_agua_de_rio": 1547,
+   "puntos_inundacion": 11,
+   "puntos_cronicos": 9,
+   "poligonos_area_riesgo": 0,
+   "documentos": 11,
+   "laminas_localizadas": 7,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Los Sauces",
+   "slug": "lossauces",
+   "personas": 7307,
+   "mayores_60": 1815,
+   "viviendas_hacinadas": 146,
+   "hogares_agua_de_rio": 369,
+   "puntos_inundacion": 16,
+   "puntos_cronicos": 9,
+   "poligonos_area_riesgo": 0,
+   "documentos": 0,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos",
+    "no publica ningún documento de planificación territorial que hayamos podido cosechar"
+   ]
+  },
+  {
+   "comuna": "Lumaco",
+   "slug": "lumaco",
+   "personas": 9220,
+   "mayores_60": 2177,
+   "viviendas_hacinadas": 245,
+   "hogares_agua_de_rio": 1036,
+   "puntos_inundacion": 4,
+   "puntos_cronicos": 0,
+   "poligonos_area_riesgo": 0,
+   "documentos": 3,
+   "laminas_localizadas": 2,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Melipeuco",
+   "slug": "melipeuco",
+   "personas": 6758,
+   "mayores_60": 1725,
+   "viviendas_hacinadas": 148,
+   "hogares_agua_de_rio": 822,
+   "puntos_inundacion": 7,
+   "puntos_cronicos": 3,
+   "poligonos_area_riesgo": 0,
+   "documentos": 0,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos",
+    "no publica ningún documento de planificación territorial que hayamos podido cosechar"
+   ]
+  },
+  {
+   "comuna": "Nueva Imperial",
+   "slug": "nuevaimperial",
+   "personas": 34149,
+   "mayores_60": 7994,
+   "viviendas_hacinadas": 748,
+   "hogares_agua_de_rio": 154,
+   "puntos_inundacion": 34,
+   "puntos_cronicos": 12,
+   "poligonos_area_riesgo": 1,
+   "documentos": 4,
+   "laminas_localizadas": 8,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Padre Las Casas",
+   "slug": "padrelascasas",
+   "personas": 80384,
+   "mayores_60": 14333,
+   "viviendas_hacinadas": 1834,
+   "hogares_agua_de_rio": 155,
+   "puntos_inundacion": 30,
+   "puntos_cronicos": 21,
+   "poligonos_area_riesgo": 0,
+   "documentos": 0,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos",
+    "no publica ningún documento de planificación territorial que hayamos podido cosechar"
+   ]
+  },
+  {
+   "comuna": "Perquenco",
+   "slug": "perquenco",
+   "personas": 7399,
+   "mayores_60": 1659,
+   "viviendas_hacinadas": 152,
+   "hogares_agua_de_rio": 33,
+   "puntos_inundacion": 4,
+   "puntos_cronicos": 1,
+   "poligonos_area_riesgo": 0,
+   "documentos": 0,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos",
+    "no publica ningún documento de planificación territorial que hayamos podido cosechar"
+   ]
+  },
+  {
+   "comuna": "Pitrufquen",
+   "slug": "pitrufquen",
+   "personas": 26848,
+   "mayores_60": 6247,
+   "viviendas_hacinadas": 507,
+   "hogares_agua_de_rio": 209,
+   "puntos_inundacion": 23,
+   "puntos_cronicos": 5,
+   "poligonos_area_riesgo": 4,
+   "documentos": 12,
+   "laminas_localizadas": 6,
+   "planos_georreferenciados": 4,
+   "planos_por_estado": {
+    "Anteproyecto": 4
+   },
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Pucon",
+   "slug": "pucon",
+   "personas": 32719,
+   "mayores_60": 6258,
+   "viviendas_hacinadas": 665,
+   "hogares_agua_de_rio": 2324,
+   "puntos_inundacion": 26,
+   "puntos_cronicos": 11,
+   "poligonos_area_riesgo": 0,
+   "documentos": 26,
+   "laminas_localizadas": 21,
+   "planos_georreferenciados": 4,
+   "planos_por_estado": {
+    "Anteproyecto": 4
+   },
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Puren",
+   "slug": "puren",
+   "personas": 12678,
+   "mayores_60": 3080,
+   "viviendas_hacinadas": 257,
+   "hogares_agua_de_rio": 514,
+   "puntos_inundacion": 10,
+   "puntos_cronicos": 8,
+   "poligonos_area_riesgo": 0,
+   "documentos": 50,
+   "laminas_localizadas": 25,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Renaico",
+   "slug": "renaico",
+   "personas": 10665,
+   "mayores_60": 2342,
+   "viviendas_hacinadas": 219,
+   "hogares_agua_de_rio": 103,
+   "puntos_inundacion": 19,
+   "puntos_cronicos": 0,
+   "poligonos_area_riesgo": 1,
+   "documentos": 10,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos"
+   ]
+  },
+  {
+   "comuna": "Saavedra",
+   "slug": "saavedra",
+   "personas": 13228,
+   "mayores_60": 3449,
+   "viviendas_hacinadas": 314,
+   "hogares_agua_de_rio": 316,
+   "puntos_inundacion": 23,
+   "puntos_cronicos": 15,
+   "poligonos_area_riesgo": 1,
+   "documentos": 12,
+   "laminas_localizadas": 8,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Temuco",
+   "slug": "temuco",
+   "personas": 292413,
+   "mayores_60": 54330,
+   "viviendas_hacinadas": 4800,
+   "hogares_agua_de_rio": 175,
+   "puntos_inundacion": 0,
+   "puntos_cronicos": 0,
+   "poligonos_area_riesgo": 1,
+   "documentos": 16,
+   "laminas_localizadas": 18,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Teodoro Schmidt",
+   "slug": "teodoroschmidt",
+   "personas": 16834,
+   "mayores_60": 4510,
+   "viviendas_hacinadas": 385,
+   "hogares_agua_de_rio": 322,
+   "puntos_inundacion": 32,
+   "puntos_cronicos": 17,
+   "poligonos_area_riesgo": 0,
+   "documentos": 14,
+   "laminas_localizadas": 31,
+   "planos_georreferenciados": 1,
+   "planos_por_estado": {
+    "Anteproyecto": 1
+   },
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Tolten",
+   "slug": "tolten",
+   "personas": 11798,
+   "mayores_60": 3005,
+   "viviendas_hacinadas": 244,
+   "hogares_agua_de_rio": 957,
+   "puntos_inundacion": 13,
+   "puntos_cronicos": 11,
+   "poligonos_area_riesgo": 4,
+   "documentos": 8,
+   "laminas_localizadas": 20,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Traiguen",
+   "slug": "traiguen",
+   "personas": 18790,
+   "mayores_60": 4864,
+   "viviendas_hacinadas": 391,
+   "hogares_agua_de_rio": 294,
+   "puntos_inundacion": 8,
+   "puntos_cronicos": 6,
+   "poligonos_area_riesgo": 1,
+   "documentos": 14,
+   "laminas_localizadas": 14,
+   "planos_georreferenciados": 2,
+   "planos_por_estado": {
+    "Anteproyecto": 2
+   },
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  },
+  {
+   "comuna": "Victoria",
+   "slug": "victoria",
+   "personas": 36073,
+   "mayores_60": 8587,
+   "viviendas_hacinadas": 794,
+   "hogares_agua_de_rio": 228,
+   "puntos_inundacion": 0,
+   "puntos_cronicos": 0,
+   "poligonos_area_riesgo": 0,
+   "documentos": 4,
+   "laminas_localizadas": 0,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU",
+    "no le encontramos ninguna lámina de cartografía de inundación en documentos públicos"
+   ]
+  },
+  {
+   "comuna": "Vilcun",
+   "slug": "vilcun",
+   "personas": 32735,
+   "mayores_60": 6357,
+   "viviendas_hacinadas": 746,
+   "hogares_agua_de_rio": 281,
+   "puntos_inundacion": 10,
+   "puntos_cronicos": 1,
+   "poligonos_area_riesgo": 0,
+   "documentos": 10,
+   "laminas_localizadas": 8,
+   "planos_georreferenciados": 5,
+   "planos_por_estado": {
+    "Anteproyecto": 5
+   },
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": [
+    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
+   ]
+  },
+  {
+   "comuna": "Villarrica",
+   "slug": "villarrica",
+   "personas": 68237,
+   "mayores_60": 13985,
+   "viviendas_hacinadas": 1457,
+   "hogares_agua_de_rio": 3051,
+   "puntos_inundacion": 18,
+   "puntos_cronicos": 2,
+   "poligonos_area_riesgo": 2,
+   "documentos": 11,
+   "laminas_localizadas": 5,
+   "planos_georreferenciados": 0,
+   "planos_por_estado": {},
+   "poligonos_vectorizados_por_nosotros": 0,
+   "le_falta": []
+  }
+ ]
+}

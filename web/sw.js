@@ -13,7 +13,7 @@
  */
 // Subir este número en cada publicación: al activarse, el service worker borra
 // las cachés de versiones anteriores.
-const VERSION = 'riesgomapas-v17';
+const VERSION = 'riesgomapas-v18';
 const CACHE_APP = `${VERSION}-app`;
 const CACHE_TILES = `${VERSION}-tiles`;
 
@@ -32,6 +32,7 @@ const ARMAZON = [
   'data/areas-riesgo-inundacion.geojson',
   'data/campamentos-inundacion.geojson',
   'data/indice-comunas.json',
+  'data/estado-comunas.json',
 ];
 
 self.addEventListener('install', (e) => {

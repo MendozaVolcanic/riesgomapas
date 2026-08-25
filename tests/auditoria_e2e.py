@@ -160,6 +160,37 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         aud.falla(f"render del mapa [{etq}]",
                   f"la captura del mapa tiene sólo {colores} colores — ¿tiles no cargan?")
 
+    # -------------------------------- el inventario del vacío por comuna
+    #
+    # Es la unidad que se comparte, y la razón es de fondo: «en mi comuna no hay
+    # mapa» es verificable y no empuja a nadie a una mala decisión; un veredicto
+    # sobre una casa reenviado por WhatsApp sí puede. Si este bloque
+    # desapareciera, el sitio perdería justo lo que puede mover a una
+    # institución. Ver docs/DIFUSION.md §0b.
+    page.evaluate("() => consultar(-72.5904, -38.7359, 'Auditoría inventario')")
+    page.wait_for_timeout(700)
+    page.evaluate("() => irAPestana('detalle', false)")
+    page.wait_for_timeout(300)
+    bloque = page.locator(".bloque-comuna")
+    if bloque.count():
+        t = bloque.inner_text().lower()
+        aud.ok(f"la ficha dice con qué cuenta la comuna [{etq}]")
+        if "no dice si tu casa se inunda" in t:
+            aud.ok(f"el inventario se distingue de la evidencia de amenaza [{etq}]")
+        else:
+            aud.falla(f"inventario de la comuna [{etq}]",
+                      "no aclara que habla de la información disponible, no del "
+                      "riesgo; «acá no hay mapa» se leería como «acá no se inunda»")
+        if page.locator("#btn-compartir-comuna").count():
+            aud.ok(f"el estado de la comuna se puede compartir [{etq}]")
+        else:
+            aud.falla(f"inventario de la comuna [{etq}]", "no se puede compartir")
+    else:
+        aud.falla(f"inventario de la comuna [{etq}]",
+                  "no aparece el bloque de qué tiene y qué le falta a la comuna")
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.wait_for_timeout(200)
+
     # ------------------------------------- lo que arregló la auditoría
     #
     # Cuatro fallas que no daban error y se manifestaban como «el sitio no hace

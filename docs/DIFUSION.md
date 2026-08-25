@@ -14,9 +14,74 @@ difunde algo así en Chile.
 
 ## 0. La conclusión en una frase
 
-**Web primero, PWA instalable, teselas propias, y el éxito no se mide en
-visitas.** Una app en tienda cuesta plata y fricción para llegar a menos gente
-que un enlace pegado en WhatsApp.
+**El producto no es el mapa: es el vacío que el mapa documenta.** Web primero,
+PWA instalable, teselas propias — pero lo que hay que hacer circular no es un
+visor bonito, es un hecho incómodo y verificable, comuna por comuna.
+
+## 0b. Para qué queremos que llegue
+
+Esto no busca prestigio ni usuarios. Busca que **la institución que corresponde
+—DGA/MOP para la amenaza, MINVU para el instrumento, SENAPRED para la alerta—
+se haga cargo y construya la versión oficial**.
+
+Eso cambia todo lo demás, y conviene tenerlo escrito porque es contraintuitivo:
+
+- **El éxito es volverse innecesario.** Si en dos años existe un visor oficial de
+  inundación y éste se puede apagar, ganamos. Conviene **decirlo en el propio
+  sitio**: desarma de entrada la lectura de «un particular compitiendo con el
+  Estado», que es el principal riesgo reputacional del proyecto, y convierte
+  cada visita en un argumento a favor de la política pública en vez de en un
+  reemplazo de ella.
+- **Las visitas no mueven a una institución.** Lo que la mueve es un vacío
+  documentado que alguien tenga que responder por escrito.
+- **El activo más fuerte no es el visor, es el inventario.** Saber que 19 de 32
+  comunas no tienen su área de riesgo en el vectorial del MINVU, o que Padre Las
+  Casas tiene 76.000 habitantes, 38 puntos críticos crónicos y **cero documentos
+  de planificación**, es más accionable que cualquier mapa.
+- **Y el visor es la prueba de que se puede.** Dos personas, sin presupuesto,
+  con datos públicos. Ese es exactamente el argumento que un servicio necesita
+  para justificar internamente que vale la pena hacerlo bien.
+
+### La palanca real: la Ley de Transparencia
+
+Más eficaz que la prensa, y mucho más barata. La **Ley 20.285** obliga a
+responder por escrito en 20 días hábiles. Una solicitud bien hecha tiene dos
+salidas y las dos sirven:
+
+- **«Sí lo tenemos»** → se pide el dato y el visor mejora.
+- **«No lo tenemos»** → queda **documentado oficialmente** que el vacío existe,
+  con timbre y fecha. Eso es lo que se le muestra a un medio, a un concejo
+  municipal o a un parlamentario, y ya no es opinión de dos geólogos.
+
+Solicitudes concretas que vale la pena hacer, una por organismo:
+
+| A quién | Qué preguntar |
+|---|---|
+| **DGA / MOP** | Qué cuencas tienen Mapa de Amenaza de Inundación aprobado; si hay alguno en curso para La Araucanía; cuál es el plan de cobertura nacional |
+| **MINVU (SEREMI Araucanía)** | Por qué el servicio vectorial de áreas de riesgo no incluye a Angol, teniendo PRC vigente con AR-2a graficada en la lámina PRC 09201-1 |
+| **SENAPRED** | Si existe una capa nacional de amenaza de inundación fluvial y, si no, quién debería producirla |
+| **Municipios sin documentos** | El Estudio Fundado de Riesgos de su PRC (los 7 que no publican nada) |
+
+> ⚠️ **Ojo con quién firma.** Una solicitud de transparencia de un funcionario
+> público a otro servicio, sobre una materia sectorial, puede leerse como
+> gestión institucional aunque se haga a título personal. Conviene que la firme
+> quien no tenga ese conflicto, o hacerla explícitamente como ciudadano y sin
+> mencionar el cargo en ninguna parte.
+
+### El gancho compartible, y por qué éste sí es honesto
+
+La lección de Gopletos era que lo compartible fue la **identidad**, no la
+utilidad. Acá la identidad es la comuna, y hay un hecho que se comparte solo:
+
+> **«En mi comuna no hay ningún mapa de inundación.»**
+
+Compartir eso **no asusta a nadie hacia una mala decisión**, no predice nada, no
+compite con SENAPRED y pone la presión exactamente donde corresponde. Es lo
+contrario de compartir un veredicto de riesgo sobre una casa, que es lo que no
+hay que hacer nunca.
+
+Por eso la unidad compartible del sitio debe ser la **ficha de estado de la
+comuna** —qué hay y qué falta— y no la ficha de un punto.
 
 ---
 

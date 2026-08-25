@@ -276,11 +276,20 @@ def procedencia(
 ) -> dict:
     """Bloque de procedencia que acompaña a TODO producto del pipeline.
 
-    `capa_evidencia` es una de: A_normativo | B_observado | C_modelado | D_operacional.
-    Esta etiqueta es la que el frontend usa para no mezclar evidencia legal con
-    modelo global. Si un producto no puede declarar su capa, no se publica.
+    `capa_evidencia` es una de: A_normativo | B_observado | C_modelado |
+    D_operacional | inventario. Esta etiqueta es la que el frontend usa para no
+    mezclar evidencia legal con modelo global. Si un producto no puede declarar
+    su capa, no se publica.
     """
-    assert capa_evidencia in ("A_normativo", "B_observado", "C_modelado", "D_operacional")
+    # Las cuatro capas de evidencia dicen algo sobre EL TERRITORIO y nunca se
+    # fusionan entre sí. `inventario` es de otra naturaleza: no habla del
+    # territorio sino de **lo que sabemos de él** — qué comuna tiene mapa y cuál
+    # no. Se admite como categoría aparte justamente para que no pueda colarse
+    # como si fuera evidencia de amenaza: nadie debe poder mezclar «esta comuna
+    # no tiene cartografía» con «esta comuna no se inunda».
+    assert capa_evidencia in ("A_normativo", "B_observado", "C_modelado",
+                              "D_operacional", "inventario"), (
+        f"capa de evidencia desconocida: {capa_evidencia!r}")
     return {
         "fuente": fuente,
         "url": url,

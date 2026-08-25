@@ -601,3 +601,13 @@ body.base-satelite .maplibregl-ctrl-attrib a { color: #eaf4ff; }
 }
 .capas-acciones { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .3rem; }
 .capas-acciones button { font-size: var(--paso-2); padding: .35rem .8rem; }
+
+/* ------------------------------------------- inventario: qué falta y dónde */
+/* Va con otro tratamiento que las capas de evidencia a propósito: no habla del
+   territorio, habla de lo que sabemos de él. Que no se confunda «acá no hay
+   mapa» con «acá no se inunda». */
+.bloque-comuna { border-left: 3px solid var(--acento); }
+.cifras-comuna { list-style: none; padding: 0; margin: .5rem 0; }
+.cifras-comuna li { margin: .2rem 0; }
+.bloque-comuna ul.falta li { color: var(--tinta); }
+.bloque-comuna ul.falta { margin: .3rem 0 .8rem 1.1rem; }

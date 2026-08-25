@@ -59,6 +59,7 @@ const estado = {
   marcador: null,
   ultimo: null,        // último resultado, para compartir
   base: 'calles',      // mapa base activo: 'calles' o 'satelite'
+  estadoComunas: null, // qué tiene y qué le falta a cada comuna
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -92,6 +93,15 @@ async function cargarDatos() {
   try {
     estado.planos = (await cargarJSON('data/planos/indice.json')).planos || [];
   } catch { estado.planos = []; }
+
+  // Inventario del vacío por comuna. Es lo que se comparte: «en mi comuna no
+  // hay ningún mapa de inundación» es un hecho verificable que no predice nada
+  // y no asusta a nadie hacia una mala decisión, al revés que un veredicto
+  // sobre una casa. Ver docs/DIFUSION.md §0b.
+  try {
+    estado.estadoComunas =
+      (await cargarJSON('data/estado-comunas.json')).comunas || [];
+  } catch { estado.estadoComunas = []; }
   try {
     estado.campamentos = await cargarJSON('data/campamentos-inundacion.geojson');
   } catch { estado.campamentos = null; }
@@ -365,6 +375,113 @@ function evaluar(lon, lat) {
            campamentos: poligonosQueContienen(lon, lat, estado.campamentos),
            enMancha: dentroDeMancha(lon, lat, estado.jrc),
            gore: poligonosQueContienen(lon, lat, estado.gore) };
+}
+
+/* ------------------------------------------------- estado de la comuna */
+
+/** Busca en el inventario la comuna a la que pertenece el punto consultado.
+ *  Se resuelve por el punto crítico más cercano, que ya trae su comuna: es más
+ *  fiable que geocodificar de vuelta y funciona sin señal. */
+function comunaDe(res, lon, lat) {
+  if (!estado.estadoComunas || !estado.puntos) return null;
+  // Se busca en TODOS los puntos, no sólo en los de 1,5 km.
+  //
+  // Con el radio de contexto, un lugar sin registros cerca no tenía comuna — y
+  // ése es justo el caso donde el inventario más importa: quien recibe «sin
+  // registros» es quien más necesita leer «tu comuna no tiene mapa». Era la
+  // única persona que no lo veía.
+  //
+  // Cerca de un deslinde esto puede atribuir la comuna vecina. Por eso el
+  // bloque muestra el nombre en grande: un error se ve al tiro. Resolverlo bien
+  // pide el límite administrativo oficial, que el proyecto todavía no tiene.
+  let mejor = null;
+  let dmin = Infinity;
+  for (const f of estado.puntos.features) {
+    const [flon, flat] = f.geometry.coordinates;
+    const d = distancia(lat, lon, flat, flon);
+    if (d < dmin) { dmin = d; mejor = f.properties.comuna; }
+  }
+  if (!mejor) return null;
+  const k = (t) => String(t || '').normalize('NFD')
+    .replace(/[̀-ͯ]/g, '').replace(/[^a-z]/gi, '').toLowerCase();
+  const c = estado.estadoComunas.find((x) => k(x.comuna) === k(mejor));
+  return c ? { ...c, _km: Math.round(dmin / 100) / 10 } : null;
+}
+
+/** Qué tiene y qué le falta a la comuna, en la pestaña de detalle.
+ *
+ *  Es deliberadamente la unidad que se comparte, y no la ficha de un punto.
+ *  «En mi comuna no hay ningún mapa de inundación» es verificable, no predice
+ *  nada y no empuja a nadie a una mala decisión; un veredicto sobre una casa
+ *  reenviado por WhatsApp sí puede. Ver docs/DIFUSION.md §0b.
+ */
+function bloqueComuna(c) {
+  if (!c) return '';
+  const n = (v) => (v === null || v === undefined)
+    ? '<span class="incert">sin dato</span>' : v.toLocaleString('es-CL');
+  const tiene = [];
+  if (c.poligonos_area_riesgo) {
+    tiene.push(`${c.poligonos_area_riesgo} polígono(s) de área de riesgo en el
+                vectorial público del MINVU`);
+  }
+  if (c.laminas_localizadas) {
+    tiene.push(`${c.laminas_localizadas} lámina(s) de cartografía localizadas
+                dentro de ${c.documentos} documento(s) públicos`);
+  }
+  if (c.planos_georreferenciados) {
+    const est = Object.entries(c.planos_por_estado || {})
+      .map(([k, v]) => `${v} ${k.toLowerCase()}`).join(', ');
+    tiene.push(`${c.planos_georreferenciados} plano(s) ubicados sobre el mapa
+                (${esc(est)})`);
+  }
+  if (c.poligonos_vectorizados_por_nosotros) {
+    tiene.push(`${c.poligonos_vectorizados_por_nosotros} polígono(s) que
+                convertimos nosotros desde una lámina impresa`);
+  }
+
+  return `<div class="evidencia bloque-comuna">
+    <h3>Con qué cuenta ${esc(c.comuna)} <span class="etiqueta">INVENTARIO</span></h3>
+    <p class="incert">Esto no dice si tu casa se inunda. Dice qué información
+       existe para saberlo, y es lo que hace falta para exigir que la haya.</p>
+    <ul class="cifras-comuna">
+      <li><strong>${n(c.personas)}</strong> habitantes (Censo 2024)</li>
+      <li><strong>${n(c.puntos_inundacion)}</strong> puntos donde el municipio
+          reportó inundación, <strong>${n(c.puntos_cronicos)}</strong> de ellos
+          repetidos en 3 o más temporadas</li>
+    </ul>
+    ${tiene.length
+      ? `<p><strong>Qué hay:</strong></p><ul><li>${tiene.join('</li><li>')}</li></ul>`
+      : '<p><strong>No encontramos nada consultable para esta comuna.</strong></p>'}
+    ${c.le_falta.length
+      ? `<p><strong>Qué falta:</strong></p><ul class="falta"><li>${
+          c.le_falta.map(esc).join('</li><li>')}</li></ul>`
+      : '<p>No detectamos vacíos en las fuentes que revisamos.</p>'}
+    <button type="button" class="secundario" id="btn-compartir-comuna">
+      Compartir el estado de ${esc(c.comuna)}</button>
+  </div>`;
+}
+
+/** El texto que se reenvía. Se arma acá y no se deriva del HTML para que diga
+ *  exactamente lo mismo que la pantalla, sin adornos ni recortes. */
+function textoComuna(c) {
+  const l = [`${c.comuna.toUpperCase()} — ¿qué información hay sobre inundaciones?`, ''];
+  if (c.personas) l.push(`${c.personas.toLocaleString('es-CL')} habitantes (Censo 2024)`);
+  l.push(`${c.puntos_inundacion} puntos con inundación reportada por el municipio`
+         + (c.puntos_cronicos ? `, ${c.puntos_cronicos} de ellos crónicos` : ''));
+  l.push('');
+  if (c.le_falta.length) {
+    l.push('LO QUE FALTA:');
+    for (const f of c.le_falta) l.push(`• ${f}`);
+  } else {
+    l.push('No detectamos vacíos en las fuentes que revisamos.');
+  }
+  l.push('',
+    'Que falte el mapa NO significa que no se inunde: significa que nadie lo ha',
+    'levantado. Chile no tiene un mapa nacional de inundaciones.',
+    '',
+    'Proyecto abierto y personal, sin vínculo institucional.',
+    'No es información oficial ni un pronóstico.');
+  return l.join('\n');
 }
 
 /* ---------------------------------------------------------------- resumen */
@@ -750,6 +867,8 @@ function render(res, etiqueta, lon, lat) {
      ninguna de ellas es un pronóstico, y que el borde de la mancha es justo
      donde el mapa se equivoca más. Va acá y no en el encabezado a propósito —
      antes de leer la evidencia suena a excusa, después suena a instrucción. */
+  html += bloqueComuna(comunaDe(res, lon, lat));
+
   html += `<p class="incert cierre-ficha">Ninguno de estos mapas predice la
            próxima inundación: cada uno es la conclusión de un estudio, con su
            fecha y su método, y están hechos con métodos distintos. <strong>Mira
@@ -769,6 +888,23 @@ function render(res, etiqueta, lon, lat) {
   $('#btn-compartir').addEventListener('click', compartir);
   $('#btn-centrar').addEventListener('click', () =>
     estado.mapa && estado.mapa.flyTo({ center: [lon, lat], zoom: 14 }));
+
+  const btnComuna = $('#btn-compartir-comuna');
+  if (btnComuna) {
+    btnComuna.addEventListener('click', async () => {
+      const c = comunaDe(res, lon, lat);
+      if (!c) return;
+      const texto = textoComuna(c);
+      if (navigator.share) {
+        try { await navigator.share({ title: `Inundaciones en ${c.comuna}`, text: texto }); return; }
+        catch { /* el usuario canceló */ }
+      }
+      try {
+        await navigator.clipboard.writeText(texto);
+        elEstado().textContent = `Estado de ${c.comuna} copiado. Ya lo puedes pegar.`;
+      } catch { elEstado().textContent = 'No se pudo copiar automáticamente.'; }
+    });
+  }
 
   const btnPlano = $('#btn-plano');
   if (btnPlano) {
