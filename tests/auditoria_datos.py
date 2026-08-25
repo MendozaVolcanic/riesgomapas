@@ -344,9 +344,52 @@ def auditar_cifras_en_documentos() -> None:
         ok(f"cifra vigente — {etiqueta}", str(n))
 
 
+def auditar_alcance_regional() -> None:
+    """Nada publicado puede salirse de La Araucanía.
+
+    El visor es un prototipo regional y así lo declara: el mapa no se deja
+    desplazar fuera del recuadro y un punto de otra región recibe «fuera del
+    alcance» en vez de una ficha vacía. Si una capa publicada tuviera geometría
+    nacional, se dibujaría igual en el borde y contradiría esa promesa — con el
+    agravante de que sería visible sólo desde afuera del área que se prueba.
+
+    El bbox es el mismo de config/araucania.yaml y de `REGION` en web/app.js.
+    Las tres copias tienen que coincidir; ésta es la que avisa si se separan.
+    """
+    O, S, E, N = -73.70, -39.65, -70.90, -37.35
+    TOL = 0.01          # margen por redondeo de coordenadas
+    revisados = 0
+    for ruta in sorted(WEB.rglob("*.geojson")) + sorted(WEB.rglob("*.json")):
+        datos = cargar(ruta)
+        if not isinstance(datos, dict) or not datos.get("features"):
+            continue
+        revisados += 1
+        xs, ys = [], []
+        for f in datos["features"]:
+            if not f.get("geometry"):
+                continue
+            for x, y in coords(f["geometry"]):
+                xs.append(x)
+                ys.append(y)
+        if not xs:
+            continue
+        rel = ruta.relative_to(WEB)
+        if (min(xs) < O - TOL or max(xs) > E + TOL
+                or min(ys) < S - TOL or max(ys) > N + TOL):
+            falla(f"alcance regional — {rel}",
+                  f"geometría fuera de La Araucanía: lon {min(xs):.2f}..{max(xs):.2f}, "
+                  f"lat {min(ys):.2f}..{max(ys):.2f}; el recuadro es "
+                  f"{O}..{E} / {S}..{N}")
+        else:
+            ok(f"alcance regional — {rel}", f"{len(datos['features'])} features dentro")
+    if not revisados:
+        falla("alcance regional", "no se revisó ningún GeoJSON publicado")
+
+
 def main() -> int:
     print("AUDITORÍA DE DATOS — riesgomapas")
     auditar_geojson()
+    auditar_alcance_regional()
     auditar_cifras()
     auditar_planos()
     auditar_publicacion()

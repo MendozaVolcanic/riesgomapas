@@ -145,6 +145,42 @@ def exportar(tif: Path, destino_dir: Path) -> dict | None:
             "bounds_wgs84": [round(v, 7) for v in bounds_wgs]}
 
 
+# Estado de tramitación del instrumento del que sale cada plano.
+#
+# POR QUÉ IMPORTA Y NO ES UN DETALLE: un **anteproyecto** es la propuesta que
+# está en tramitación; puede cambiar y todavía no obliga a nadie. El plano
+# **vigente** es el que rige tu terreno hoy. Los 20 planos publicados hasta ahora
+# son los tres primeros: salen del expediente ambiental, donde lo que se publica
+# es la propuesta, no el decreto. Mostrarlos rotulados «Plano original del Plan
+# Regulador», bajo una capa que el sitio describe como «la única con efecto
+# jurídico», le atribuye a una propuesta un peso que no tiene — y alguien podría
+# tomar una decisión sobre su terreno con eso.
+ESTADO_TRAMITE = {
+    "anteproyecto": ("Anteproyecto",
+                     "Propuesta en tramitación. Puede cambiar y todavía no tiene "
+                     "efecto legal."),
+    "vigente": ("Vigente",
+                "Instrumento aprobado y promulgado. Rige hoy sobre el territorio."),
+}
+
+
+def estado_de_tramite(nombre: str) -> tuple[str, str]:
+    """Deduce el estado desde el nombre del archivo, y sólo cuando es explícito.
+
+    No adivina: si el nombre no lo dice, devuelve «no declarado». Suponer
+    «vigente» porque sí sería exactamente el error que este campo existe para
+    evitar.
+    """
+    n = nombre.lower()
+    if "anteproyecto" in n:
+        return ESTADO_TRAMITE["anteproyecto"]
+    if "promulga" in n or "aprueba" in n or "publicacion" in n or "publicación" in n:
+        return ESTADO_TRAMITE["vigente"]
+    return ("No declarado",
+            "El documento de origen no dice si es propuesta o instrumento "
+            "vigente. Trátalo como referencia, no como norma.")
+
+
 def main() -> None:
     origen = DATA_PROC / "georreferenciado"
     tifs = sorted(origen.glob("*.tif"))
@@ -182,9 +218,12 @@ def main() -> None:
         aj = rep.get("ajuste", {})
         # Un plano con error de decenas de metros no se publica como si nada:
         # se marca para que el visor lo muestre con advertencia.
+        estado, nota_estado = estado_de_tramite(r["archivo"])
         items.append({
             **r,
             "titulo": t.stem.replace("_", " ").replace(".pdf", ""),
+            "estado_tramite": estado,
+            "estado_tramite_nota": nota_estado,
             "crs_original": rep.get("crs"),
             "resolucion_m_px": (rep.get("raster") or {}).get("resolucion_m"),
             "rmse_loo_m": aj.get("rmse_loo_m"),
@@ -205,7 +244,10 @@ def main() -> None:
         capa_evidencia="A_normativo",
         incertidumbre="Cada plano declara su propio RMSE. La imagen web está "
                       "remuestreada: para trabajo de precisión hay que usar el "
-                      "GeoTIFF original, no esta versión.",
+                      "GeoTIFF original, no esta versión. Y cada plano declara su "
+                      "ESTADO DE TRAMITACIÓN: un anteproyecto es una propuesta que "
+                      "puede cambiar y no obliga a nadie; sólo el instrumento "
+                      "vigente rige sobre el territorio.",
     )
     (destino_dir / "indice.json").write_text(
         json.dumps({"procedencia": meta, "planos": items}, ensure_ascii=False, indent=1),

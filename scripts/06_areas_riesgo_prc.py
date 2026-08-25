@@ -38,6 +38,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comun import (  # noqa: E402
+    anillos_a_geojson,
     DATA_PROC,
     WEB_DATA,
     cargar_config,
@@ -66,42 +67,6 @@ def norm(t: str | None) -> str:
 
 def es_hidrica(clasificacion: str | None) -> bool:
     return any(k in norm(clasificacion) for k in CLAVES_HIDRICAS)
-
-
-def anillos_a_geojson(geom: dict) -> dict | None:
-    """ArcGIS entrega polígonos como lista de anillos con orientación implícita.
-
-    Convención ArcGIS: anillo exterior en sentido horario, huecos en antihorario.
-    GeoJSON no comparte esa regla, así que hay que separarlos por el signo del
-    área firmada; si no, los huecos se dibujan como polígonos macizos y una zona
-    excluida del área de riesgo aparece como incluida.
-    """
-    anillos = geom.get("rings") or []
-    if not anillos:
-        return None
-
-    def area(a):
-        return sum((a[i][0] * a[i + 1][1] - a[i + 1][0] * a[i][1])
-                   for i in range(len(a) - 1)) / 2.0
-
-    exteriores, huecos = [], []
-    for a in anillos:
-        if len(a) < 4:
-            continue
-        (exteriores if area(a) < 0 else huecos).append([[float(x), float(y)] for x, y, *_ in a])
-
-    if not exteriores:  # todos dieron el mismo signo: tratarlos como exteriores
-        exteriores = [[[float(x), float(y)] for x, y, *_ in a] for a in anillos if len(a) >= 4]
-        huecos = []
-    if not exteriores:
-        return None
-
-    polis = [[e] for e in exteriores]
-    for h in huecos:                       # cada hueco al primer exterior disponible
-        polis[0].append(h)
-    if len(polis) == 1:
-        return {"type": "Polygon", "coordinates": polis[0]}
-    return {"type": "MultiPolygon", "coordinates": polis}
 
 
 def a_feature(attrs: dict, geom: dict, origen: str) -> dict | None:
@@ -297,6 +262,34 @@ def main() -> None:
         fecha_dato="consulta al servicio de MINVU; el año de cada instrumento va "
                    "por polígono en el campo `anio`",
     )
+
+    # Nombre de comuna canónico. Ver `correcciones_nombre_comuna` en
+    # config/araucania.yaml: el nombre es la llave de todos los cruces, y una
+    # discrepancia no da error sino un cruce vacío.
+    oficiales = {norm(c): c.title() for prov in cfg["provincias"].values() for c in prov}
+    correcciones = {norm(k): v for k, v in
+                    (cfg.get("correcciones_nombre_comuna") or {}).items()}
+    corregidos, sin_clasificar = 0, set()
+    for f in feats:
+        bruto = (f["properties"].get("comuna") or "").strip()
+        clave = norm(bruto)
+        if clave in correcciones:
+            f["properties"]["comuna_fuente"] = bruto
+            f["properties"]["comuna"] = correcciones[clave]
+            corregidos += 1
+        elif clave in oficiales:
+            pass                      # ya coincide con una comuna de la región
+        elif bruto:
+            sin_clasificar.add(bruto)
+    if sin_clasificar:
+        raise SystemExit(
+            "el servicio del MINVU trae nombres de comuna que no son ninguna "
+            f"comuna de La Araucanía ni están en `correcciones_nombre_comuna`: "
+            f"{sorted(sin_clasificar)}. Revísalos y agrégalos a "
+            "config/araucania.yaml — si se dejan pasar, esa comuna queda sin "
+            "cruzar contra SENAPRED, el censo y el catálogo, y el síntoma es mudo.")
+    log(f"  nombre de comuna corregido en {corregidos} polígono(s); la ortografía "
+        f"original queda en `comuna_fuente`")
 
     # Año del instrumento vigente por comuna. MINVU no lo publica en la capa —el
     # campo venía «no declarado por la fuente» en los 124 polígonos—, y sin él no

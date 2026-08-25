@@ -53,6 +53,14 @@ CLAVES_DOC = [
     "riesgo", "riesgos", "inunda", "anegam", "amenaza", "peligro",
     "plan-regulador", "plan_regulador", "planregulador", "prc",
     "aguas-lluvia", "aguaslluvia", "fundado", "zonificacion",
+    # gestión del riesgo de desastres (Ley 21.364) y cambio climático (21.455).
+    # Ver la nota extensa en BUSQUEDAS_WP: son los mismos peligros bajo otro
+    # marco legal, con nombres de archivo que no comparten ni una palabra con
+    # los del plan regulador.
+    "rrd", "reduccion-del-riesgo", "reduccion_del_riesgo", "desastre",
+    "emergencia", "proteccion-civil", "pladeco", "evacuacion",
+    "cambio-climatico", "cambio_climatico", "climatico", "paccc",
+    "vulnerabilidad", "defensa-fluvial", "ribera", "desborde", "drenaje",
 ]
 # Palabras que sólo valen ACOMPAÑADAS. Una municipalidad publica decenas de
 # ordenanzas y memorias que no tienen nada que ver: la de tenencia de mascotas,
@@ -145,6 +153,8 @@ def interesante_enlace(href: str) -> bool:
 
 def interesante_doc(href: str) -> bool:
     h = slug_guion(urllib.parse.unquote(href))
+    if RUIDO_NOMBRE.search(h):
+        return False
     if any(k in h for k in CLAVES_DOC):
         return True
     # "ordenanza", "memoria", "decreto" o "plano" sólo cuentan si además hay algo
@@ -155,11 +165,45 @@ def interesante_doc(href: str) -> bool:
 
 # Términos con que se consulta la biblioteca de medios. Son los que aparecen en
 # los nombres reales de estos documentos, no sinónimos genéricos.
+#
+# Las tres familias están acá a propósito, porque el municipio publica la misma
+# amenaza bajo tres marcos legales distintos y con vocabularios que no se tocan:
+#
+#   1. Planificación territorial (Ley General de Urbanismo). El Estudio Fundado
+#      de Riesgos que sostiene la zonificación del plan regulador.
+#   2. Gestión del riesgo de desastres (Ley 21.364, 2021). El Plan Comunal para
+#      la Reducción del Riesgo de Desastres y el plan de emergencia comunal.
+#   3. Cambio climático (Ley 21.455, 2022). El Plan de Acción Comunal de Cambio
+#      Climático (PACCC), que trae diagnóstico de amenazas y sus láminas.
+#
+# La primera versión de este cosechador sólo tenía el vocabulario de la familia 1
+# y pasaba por encima de las otras dos sin verlas. Al agregarlas aparecieron 31
+# documentos —el plan de RRD de Lautaro, el PACCC de Collipulli con su lámina de
+# vulnerabilidad en A3, el plan de cambio climático de Lonquimay— y dos comunas
+# que figuraban «sin cartografía» dejaron de estarlo. Un plan reciente pesa más
+# que uno viejo: los de las familias 2 y 3 son de 2024-2026 y por tanto
+# posteriores a casi todo el registro EAE.
 BUSQUEDAS_WP = [
+    # 1 · planificación territorial
     "riesgo", "riesgos", "inundacion", "anegamiento", "plan regulador",
     "prc", "aguas lluvias", "memoria explicativa", "ordenanza", "zonificacion",
     "amenaza", "estudio fundado",
+    # 2 · gestión del riesgo de desastres
+    "reduccion del riesgo", "gestion del riesgo", "proteccion civil",
+    "emergencia", "desastre", "plan comunal", "pladeco", "evacuacion",
+    # 3 · cambio climático
+    "cambio climatico", "climatico", "paccc", "adaptacion", "vulnerabilidad",
+    # 4 · obras y cauces
+    "defensa fluvial", "ribera", "cauce", "drenaje", "desborde", "mitigacion",
 ]
+
+# "emergencia", "adaptacion" y "vulnerabilidad" son necesarias pero traen ruido
+# propio: compras de vehículos de emergencia, bases de concurso para jefaturas de
+# protección civil, el Ingreso Familiar de Emergencia. Se descartan por nombre
+# antes de gastar una descarga.
+RUIDO_NOMBRE = re.compile(
+    r"(vehiculo|bases?-jefatura|ingreso-familiar|nota-de-prensa|costos-operacion"
+    r"|llamado-a-concurso|acta-de-evaluacion)", re.I)
 
 
 def cosechar_wp(base: str) -> tuple[list[dict], bool]:

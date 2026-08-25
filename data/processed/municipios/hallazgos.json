@@ -192,12 +192,42 @@
   "comuna": "ANGOL"
  },
  {
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2022/03/Pladeco-2019-2022-Final-V11.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "Pladeco 2019-2022 Final V11",
+  "fecha_subida": "2022-03-28",
+  "archivo_local": "documentos\\collipulli\\Pladeco-2019-2022-Final-V11.pdf",
+  "kb": 28552,
+  "estado": "ya estaba",
+  "comuna": "COLLIPULLI"
+ },
+ {
   "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2022/07/PRC-1.pdf",
   "encontrado_en": "wp-json (buscando «prc»)",
   "titulo": "PRC (1)",
   "fecha_subida": "2022-07-28",
   "archivo_local": "documentos\\collipulli\\PRC-1.pdf",
   "kb": 1153,
+  "estado": "ya estaba",
+  "comuna": "COLLIPULLI"
+ },
+ {
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2023/01/Pladeco-municipalidad-Collipulli-2023-2026_compressed.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "Pladeco municipalidad Collipulli (2023-2026)_compressed",
+  "fecha_subida": "2023-01-06",
+  "archivo_local": "documentos\\collipulli\\Pladeco-municipalidad-Collipulli-2023-2026_compressed.pdf",
+  "kb": 18684,
+  "estado": "ya estaba",
+  "comuna": "COLLIPULLI"
+ },
+ {
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2024/03/Decreto-N°-812-Apruba-Plan-de-Emergencia-Comunal-Collipulli.pdf",
+  "encontrado_en": "wp-json (buscando «emergencia»)",
+  "titulo": "Decreto N° 812 Apruba Plan de Emergencia Comunal Collipulli",
+  "fecha_subida": "2024-03-18",
+  "archivo_local": "documentos\\collipulli\\Decreto-N°-812-Apruba-Plan-de-Emergencia-Comunal-Collipulli.pdf",
+  "kb": 4989,
   "estado": "ya estaba",
   "comuna": "COLLIPULLI"
  },
@@ -222,12 +252,52 @@
   "comuna": "COLLIPULLI"
  },
  {
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/15-07-2025-Decreto-N°1752-Aprobacion-del-PACCC.pdf",
+  "encontrado_en": "wp-json (buscando «paccc»)",
+  "titulo": "15-07-2025, Decreto N°1752 &#8211; Aprobación del PACCC",
+  "fecha_subida": "2025-10-21",
+  "archivo_local": "documentos\\collipulli\\15-07-2025-Decreto-N°1752-Aprobacion-del-PACCC.pdf",
+  "kb": 4465,
+  "estado": "ya estaba",
+  "comuna": "COLLIPULLI"
+ },
+ {
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/15-11-2024-Decreto-N°3917-Aprobacion-de-equipo-para-la-elaboracion-del-plan-de-accion-de-cambio-climatico.pdf",
+  "encontrado_en": "wp-json (buscando «cambio climatico»)",
+  "titulo": "15-11-2024, Decreto N°3917 &#8211; Aprobación de equipo para la elaboración del plan de acción de cambio climático",
+  "fecha_subida": "2025-10-21",
+  "archivo_local": "documentos\\collipulli\\15-11-2024-Decreto-N°3917-Aprobacion-de-equipo-para-la-elaboracion-del-plan-de-accion-de-cambio-climatico.pdf",
+  "kb": 22444,
+  "estado": "ya estaba",
+  "comuna": "COLLIPULLI"
+ },
+ {
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/15.-y-16.-Mapa-de-Vulnerabilidad-fusionado.pdf",
+  "encontrado_en": "wp-json (buscando «vulnerabilidad»)",
+  "titulo": "15. y 16. Mapa de Vulnerabilidad-fusionado",
+  "fecha_subida": "2025-10-23",
+  "archivo_local": "documentos\\collipulli\\15.-y-16.-Mapa-de-Vulnerabilidad-fusionado.pdf",
+  "kb": 5414,
+  "estado": "ya estaba",
+  "comuna": "COLLIPULLI"
+ },
+ {
   "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/8.-Mapa-Inundaciones.pdf",
   "encontrado_en": "wp-json (buscando «inundacion»)",
   "titulo": "8. Mapa Inundaciones",
   "fecha_subida": "2025-10-23",
   "archivo_local": "documentos\\collipulli\\8.-Mapa-Inundaciones.pdf",
   "kb": 1054,
+  "estado": "ya estaba",
+  "comuna": "COLLIPULLI"
+ },
+ {
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/PACCC.pdf",
+  "encontrado_en": "wp-json (buscando «paccc»)",
+  "titulo": "PACCC",
+  "fecha_subida": "2025-10-21",
+  "archivo_local": "documentos\\collipulli\\PACCC.pdf",
+  "kb": 3265,
   "estado": "ya estaba",
   "comuna": "COLLIPULLI"
  },
@@ -304,13 +374,63 @@
   "comuna": "CURARREHUE"
  },
  {
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2024/06/Certificado-N°89-Aprueba-PLADECO-2024-2029.pdf",
+  "encontrado_en": "https://curarrehue.cl/on/documents/certificado-n-89-09-04-2024-acuerdo-concejo-aprueba-plan-de-desarrollo-comunal-pladeco/",
+  "archivo_local": "documentos\\curarrehue\\Certificado-N°89-Aprueba-PLADECO-2024-2029.pdf",
+  "kb": 203,
+  "estado": "descargado",
+  "comuna": "CURARREHUE"
+ },
+ {
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2024/06/decreto-839-30-04-2024-aprueba-pladeco.pdf",
+  "encontrado_en": "https://curarrehue.cl/on/documents/decreto-n-839-30-04-2024-aprueba-plan-de-desarrollo-comunal-pladeco/",
+  "archivo_local": "documentos\\curarrehue\\decreto-839-30-04-2024-aprueba-pladeco.pdf",
+  "kb": 275,
+  "estado": "descargado",
+  "comuna": "CURARREHUE"
+ },
+ {
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2025/08/decreto-exento-950-23-07-2025-aprueba-plan-accion-comunal-cambio-climatico-curarrehue.pdf",
+  "encontrado_en": "https://curarrehue.cl/on/documents/decreto-exento-n-950-23-07-2025-aprueba-plan-de-accion-comunal-de-cambio-climatico-de-curarrehue/",
+  "archivo_local": "documentos\\curarrehue\\decreto-exento-950-23-07-2025-aprueba-plan-accion-comunal-cambio-climatico-curarrehue.pdf",
+  "kb": 2806,
+  "estado": "descargado",
+  "comuna": "CURARREHUE"
+ },
+ {
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2026/02/Decreto-Exento-1802-30-12-2025-Aprueba-PLAN-RRD.pdf",
+  "encontrado_en": "https://curarrehue.cl/on/documents/decreto-exento-n-1802-30-12-2025-aprueba-plan-rrd-2026-2027/",
+  "archivo_local": "documentos\\curarrehue\\Decreto-Exento-1802-30-12-2025-Aprueba-PLAN-RRD.pdf",
+  "kb": 7791,
+  "estado": "descargado",
+  "comuna": "CURARREHUE"
+ },
+ {
+  "url": "https://munifreire.cl/wp-content/uploads/2021/07/Pladeco_2018_2022.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "Pladeco_2018_2022",
+  "fecha_subida": "2021-07-12",
+  "archivo_local": "documentos\\freire\\Pladeco_2018_2022.pdf",
+  "kb": 1776,
+  "estado": "ya estaba",
+  "comuna": "FREIRE"
+ },
+ {
+  "url": "https://munifreire.cl/wp-content/uploads/2025/08/PLADECO_2024-2030.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO_2024-2030",
+  "fecha_subida": "2025-08-06",
+  "estado": "error: HTTP Error 404: Not Found",
+  "comuna": "FREIRE"
+ },
+ {
   "url": "https://munilautaro.cl/wp-content/uploads/2025/02/09108_PRC_ARAUCANIA_USO-DE-SUELO_MO_DO_88.pdf",
   "encontrado_en": "wp-json (buscando «prc»)",
   "titulo": "09108_PRC_ARAUCANIA_USO-DE-SUELO_MO_DO_88",
   "fecha_subida": "2025-02-09",
   "archivo_local": "documentos\\lautaro\\09108_PRC_ARAUCANIA_USO-DE-SUELO_MO_DO_88.pdf",
   "kb": 1522,
-  "estado": "descargado",
+  "estado": "ya estaba",
   "comuna": "LAUTARO"
  },
  {
@@ -320,7 +440,7 @@
   "fecha_subida": "2025-02-09",
   "archivo_local": "documentos\\lautaro\\ORDENANZA-PLAN-REGULADOR-LAUTARO.pdf",
   "kb": 10518,
-  "estado": "descargado",
+  "estado": "ya estaba",
   "comuna": "LAUTARO"
  },
  {
@@ -330,7 +450,27 @@
   "fecha_subida": "2025-02-09",
   "archivo_local": "documentos\\lautaro\\ORDENANZA-PLAN-REGULADOR-PILLANLELBUN.pdf",
   "kb": 7404,
-  "estado": "descargado",
+  "estado": "ya estaba",
+  "comuna": "LAUTARO"
+ },
+ {
+  "url": "https://munilautaro.cl/wp-content/uploads/2025/02/PLAN-COMUNAL-EMERGENCIA-LAUTARO.pdf",
+  "encontrado_en": "wp-json (buscando «emergencia»)",
+  "titulo": "PLAN-COMUNAL-EMERGENCIA-LAUTARO",
+  "fecha_subida": "2025-02-08",
+  "archivo_local": "documentos\\lautaro\\PLAN-COMUNAL-EMERGENCIA-LAUTARO.pdf",
+  "kb": 1653,
+  "estado": "ya estaba",
+  "comuna": "LAUTARO"
+ },
+ {
+  "url": "https://munilautaro.cl/wp-content/uploads/2025/02/PLAN-COMUNAL-PARA-LA-RRD-FINAL.pdf",
+  "encontrado_en": "wp-json (buscando «plan comunal»)",
+  "titulo": "PLAN-COMUNAL-PARA-LA-RRD-FINAL",
+  "fecha_subida": "2025-02-08",
+  "archivo_local": "documentos\\lautaro\\PLAN-COMUNAL-PARA-LA-RRD-FINAL.pdf",
+  "kb": 3714,
+  "estado": "ya estaba",
   "comuna": "LAUTARO"
  },
  {
@@ -340,7 +480,7 @@
   "fecha_subida": "2025-02-09",
   "archivo_local": "documentos\\lautaro\\Plan-Regulador-Vigente-Lautaro-escaneado.pdf",
   "kb": 8039,
-  "estado": "descargado",
+  "estado": "ya estaba",
   "comuna": "LAUTARO"
  },
  {
@@ -350,8 +490,56 @@
   "fecha_subida": "2025-02-09",
   "archivo_local": "documentos\\lautaro\\Plan-regulador-vigente-Pillanlelbun-escaneado.pdf",
   "kb": 8484,
-  "estado": "descargado",
+  "estado": "ya estaba",
   "comuna": "LAUTARO"
+ },
+ {
+  "url": "https://www.mlonquimay.cl/web/wp-content/uploads/2019/06/PLADECO-LONQUIMAY-2018-2022.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO LONQUIMAY 2018 2022",
+  "fecha_subida": "2019-06-27",
+  "archivo_local": "documentos\\lonquimay\\PLADECO-LONQUIMAY-2018-2022.pdf",
+  "kb": 2985,
+  "estado": "ya estaba",
+  "comuna": "LONQUIMAY"
+ },
+ {
+  "url": "https://www.mlonquimay.cl/web/wp-content/uploads/2023/06/PLADECO-LONQUIMAY-2018-2022.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO-LONQUIMAY-2018-2022",
+  "fecha_subida": "2023-06-08",
+  "archivo_local": "documentos\\lonquimay\\PLADECO-LONQUIMAY-2018-2022.pdf",
+  "kb": 2985,
+  "estado": "ya estaba",
+  "comuna": "LONQUIMAY"
+ },
+ {
+  "url": "https://www.mlonquimay.cl/web/wp-content/uploads/2025/06/Plan-de-Cambio-Climatico-Comuna-Lonquimay-JUNIO-2025.pdf",
+  "encontrado_en": "wp-json (buscando «cambio climatico»)",
+  "titulo": "Plan de Cambio Climatico Comuna Lonquimay &#8211; JUNIO 2025",
+  "fecha_subida": "2025-06-10",
+  "archivo_local": "documentos\\lonquimay\\Plan-de-Cambio-Climatico-Comuna-Lonquimay-JUNIO-2025.pdf",
+  "kb": 7304,
+  "estado": "ya estaba",
+  "comuna": "LONQUIMAY"
+ },
+ {
+  "url": "https://munipuren.cl/wp-content/uploads/2017/11/PLADECO-PUREN-REVISION-2012-2016-REVISION2.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO PUREN REVISION 2012 &#8211; 2016 (REVISION2)",
+  "fecha_subida": "2017-11-16",
+  "estado": "error: HTTP Error 404: Not Found",
+  "comuna": "PUREN"
+ },
+ {
+  "url": "https://munipuren.cl/wp-content/uploads/2022/11/PLADECO-PUREN-2017-2021.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO PUREN 2017-2021",
+  "fecha_subida": "2022-11-25",
+  "archivo_local": "documentos\\puren\\PLADECO-PUREN-2017-2021.pdf",
+  "kb": 11029,
+  "estado": "ya estaba",
+  "comuna": "PUREN"
  },
  {
   "url": "https://munipuren.cl/wp-content/uploads/2023/01/Ordenanza-Sobre-Terminales-de-Buses-de-Locomocion-Colectiva-no-Urbana.pdf",
@@ -424,12 +612,42 @@
   "comuna": "PUREN"
  },
  {
+  "url": "https://munipuren.cl/wp-content/uploads/2024/04/A.C.M.-No583-2024-ACTUALIZACION-PLAN-DE-DESARROLLO-COMUNAL-PLADECO-2024-2028.pdf",
+  "encontrado_en": "wp-json (buscando «plan comunal»)",
+  "titulo": "A.C.M. Nº583-2024 ACTUALIZACION PLAN DE DESARROLLO COMUNAL PLADECO 2024-2028",
+  "fecha_subida": "2024-04-19",
+  "archivo_local": "documentos\\puren\\A.C.M.-No583-2024-ACTUALIZACION-PLAN-DE-DESARROLLO-COMUNAL-PLADECO-2024-2028.pdf",
+  "kb": 296,
+  "estado": "ya estaba",
+  "comuna": "PUREN"
+ },
+ {
   "url": "https://munipuren.cl/wp-content/uploads/2024/04/ESTUDIO-DE-RIESGOS_-PUREN_2024.pdf",
   "encontrado_en": "wp-json (buscando «riesgo»)",
   "titulo": "ESTUDIO DE RIESGOS_ PURÉN_2024",
   "fecha_subida": "2024-04-03",
   "archivo_local": "documentos\\puren\\ESTUDIO-DE-RIESGOS_-PUREN_2024.pdf",
   "kb": 3822,
+  "estado": "ya estaba",
+  "comuna": "PUREN"
+ },
+ {
+  "url": "https://munipuren.cl/wp-content/uploads/2024/09/EXPEDIENTE-COMPLETO-S.O.-No102-CON-INFORME-PLADECO.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "EXPEDIENTE COMPLETO S.O. Nº102 CON INFORME PLADECO",
+  "fecha_subida": "2024-09-16",
+  "archivo_local": "documentos\\puren\\EXPEDIENTE-COMPLETO-S.O.-No102-CON-INFORME-PLADECO.pdf",
+  "kb": 12318,
+  "estado": "ya estaba",
+  "comuna": "PUREN"
+ },
+ {
+  "url": "https://munipuren.cl/wp-content/uploads/2024/09/PLADECO-2024-2028-1.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO 2024-2028 (1)",
+  "fecha_subida": "2024-09-02",
+  "archivo_local": "documentos\\puren\\PLADECO-2024-2028-1.pdf",
+  "kb": 20315,
   "estado": "ya estaba",
   "comuna": "PUREN"
  },
@@ -714,6 +932,34 @@
   "comuna": "PUREN"
  },
  {
+  "url": "https://www.municipalidadrenaico.cl/wp-content/uploads/2023/07/PLADECO-Renaico.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO Renaico",
+  "fecha_subida": "2023-07-19",
+  "archivo_local": "documentos\\renaico\\PLADECO-Renaico.pdf",
+  "kb": 4974,
+  "estado": "ya estaba",
+  "comuna": "RENAICO"
+ },
+ {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2019/05/PLADECO-2014-2018_Compressed.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO 2014-2018_Compressed",
+  "fecha_subida": "2019-05-31",
+  "estado": "error: <urlopen error [Errno 11001] getaddrinfo failed>",
+  "comuna": "SAAVEDRA"
+ },
+ {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2019/06/Plan-de-Emergencia-Comunal.pdf",
+  "encontrado_en": "wp-json (buscando «emergencia»)",
+  "titulo": "Plan de Emergencia Comunal",
+  "fecha_subida": "2019-06-07",
+  "archivo_local": "documentos\\saavedra\\Plan-de-Emergencia-Comunal.pdf",
+  "kb": 2171,
+  "estado": "descargado",
+  "comuna": "SAAVEDRA"
+ },
+ {
   "url": "https://munisaavedra.cl/wp-content/uploads/2019/06/Plan-de-Emergencia-por-variable-de-riesgo-evento-meteorologico.pdf",
   "encontrado_en": "wp-json (buscando «riesgo»)",
   "titulo": "Plan de Emergencia por variable de riesgo  evento meteorologico",
@@ -724,6 +970,22 @@
   "comuna": "SAAVEDRA"
  },
  {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2021/09/Decreto-Aprueba-Pladeco-2021-2025.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "Decreto Aprueba Pladeco 2021-2025",
+  "fecha_subida": "2021-09-27",
+  "estado": "error: <urlopen error [Errno 11001] getaddrinfo failed>",
+  "comuna": "SAAVEDRA"
+ },
+ {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2021/11/PLADECO.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "PLADECO",
+  "fecha_subida": "2021-11-15",
+  "estado": "error: IncompleteRead(7831315 bytes read, 914236 more expected)",
+  "comuna": "SAAVEDRA"
+ },
+ {
   "url": "https://munisaavedra.cl/wp-content/uploads/2024/07/ANEXO-INUNDACIONES-2.0.pdf",
   "encontrado_en": "wp-json (buscando «inundacion»)",
   "titulo": "ANEXO INUNDACIONES 2.0",
@@ -731,6 +993,16 @@
   "archivo_local": "documentos\\saavedra\\ANEXO-INUNDACIONES-2.0.pdf",
   "kb": 705,
   "estado": "ya estaba",
+  "comuna": "SAAVEDRA"
+ },
+ {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2024/07/PLAN-COMUNAL-EMERGENCIA-2.0.pdf",
+  "encontrado_en": "wp-json (buscando «emergencia»)",
+  "titulo": "PLAN COMUNAL EMERGENCIA 2.0",
+  "fecha_subida": "2024-07-24",
+  "archivo_local": "documentos\\saavedra\\PLAN-COMUNAL-EMERGENCIA-2.0.pdf",
+  "kb": 806,
+  "estado": "descargado",
   "comuna": "SAAVEDRA"
  },
  {
@@ -751,6 +1023,36 @@
   "archivo_local": "documentos\\saavedra\\Aprueba-PRC-y-ordenanza-local-PRC-del-6-enero-ano-1964.pdf",
   "kb": 1892,
   "estado": "ya estaba",
+  "comuna": "SAAVEDRA"
+ },
+ {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2025/12/Resumen-ejecutivo-PLADECO-Saavedra.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "Resumen ejecutivo PLADECO Saavedra",
+  "fecha_subida": "2025-12-23",
+  "archivo_local": "documentos\\saavedra\\Resumen-ejecutivo-PLADECO-Saavedra.pdf",
+  "kb": 831,
+  "estado": "descargado",
+  "comuna": "SAAVEDRA"
+ },
+ {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2025/12/cert-320-2025-se-aprueba-prorroga-PLADECO-actual-mientras-se-desarrolle-el-estudio-vigente-1.pdf",
+  "encontrado_en": "wp-json (buscando «pladeco»)",
+  "titulo": "cert 320-2025 se aprueba prórroga PLADECO actual mientras se desarrolle el estudio vigente (1)",
+  "fecha_subida": "2025-12-23",
+  "archivo_local": "documentos\\saavedra\\cert-320-2025-se-aprueba-prorroga-PLADECO-actual-mientras-se-desarrolle-el-estudio-vigente-1.pdf",
+  "kb": 171,
+  "estado": "descargado",
+  "comuna": "SAAVEDRA"
+ },
+ {
+  "url": "https://munisaavedra.cl/wp-content/uploads/2026/08/3.-Decreto-Alcaldicio-N°1352-Acto-de-Inicio-de-modificacion-Plan-Regulador-Comunal.pdf",
+  "encontrado_en": "wp-json (buscando «plan regulador»)",
+  "titulo": "3. Decreto Alcaldicio N°1352 Acto de Inicio de modificación Plan Regulador Comunal",
+  "fecha_subida": "2026-08-14",
+  "archivo_local": "documentos\\saavedra\\3.-Decreto-Alcaldicio-N°1352-Acto-de-Inicio-de-modificacion-Plan-Regulador-Comunal.pdf",
+  "kb": 387,
+  "estado": "descargado",
   "comuna": "SAAVEDRA"
  },
  {

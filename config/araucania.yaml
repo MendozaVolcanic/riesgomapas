@@ -239,3 +239,25 @@ anio_instrumento_comuna:
   "Collipulli": 2009
   "Renaico": 2023
   "Traiguén": 1991
+
+# ---------------------------------------------------------------------------
+# NOMBRES DE COMUNA QUE LA FUENTE ESCRIBE DISTINTO
+#
+# El servicio del MINVU publica el campo COMUNA tal como lo cargó cada
+# municipio, y ahí hay dos clases de discrepancia con el nombre oficial:
+#
+#   · errores de tipeo    — «Pitufquén» por Pitrufquén (4 polígonos)
+#   · localidad por comuna — «Puerto Saavedra» es el pueblo; la comuna es Saavedra
+#
+# Importa más de lo que parece: el nombre de comuna es la llave con que se cruza
+# esta capa contra los puntos de SENAPRED, el censo y el catálogo de documentos.
+# Un nombre distinto no da error, da un cruce vacío — y una comuna entera deja de
+# responder en el visor sin que nada avise.
+#
+# No se corrige adivinando ni por parecido: va esta tabla, revisada a mano, y el
+# script 06 se cae si aparece un nombre que no es ninguna comuna de la región ni
+# está acá. La ortografía original se conserva en `comuna_fuente`, para que la
+# corrección sea auditable y no un borrado silencioso.
+correcciones_nombre_comuna:
+  "Pitufquén": "Pitrufquén"
+  "Puerto Saavedra": "Saavedra"

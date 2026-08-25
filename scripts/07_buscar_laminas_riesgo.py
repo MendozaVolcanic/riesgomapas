@@ -355,8 +355,39 @@ def main() -> None:
                        "paginas_con_amenaza": hits,
                        "n_laminas_candidatas": len(laminas)})
 
+    # Se FUSIONA con lo que ya había, no se reemplaza.
+    #
+    # Este script casi nunca procesa el corpus entero: `--limite` vale 40 por
+    # omisión y los documentos municipales pasan de 150, así que hasta la corrida
+    # normal —sin `--comuna` ni ningún filtro— dejaba fuera todo lo que no
+    # alcanzó a mirar. Y lo que quedaba fuera no era «pendiente»: desaparecía del
+    # índice, y con él del catálogo público que arma el script 09. El síntoma es
+    # mudo: no hay error, sólo comunas que dejan de existir.
+    #
+    # Es la cuarta vez que este patrón muerde al proyecto. La clave es la ruta
+    # local del PDF, que identifica al documento sin depender de la URL.
     dest = DATA_PROC / "eae" / f"laminas_candidatas_{a.prioridad}.json"
-    dest.write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
+    previo: dict[str, dict] = {}
+    if dest.exists():
+        try:
+            for x in json.loads(dest.read_text(encoding="utf-8")):
+                previo[x.get("archivo_local") or x.get("archivo")] = x
+        except Exception as exc:  # noqa: BLE001
+            # Un índice ilegible es motivo para parar, no para reescribirlo desde
+            # cero: seguir adelante lo borraría en silencio, que es justo el daño
+            # que esta fusión existe para evitar.
+            raise SystemExit(
+                f"{dest} existe pero no se puede leer ({type(exc).__name__}: {exc}). "
+                "Revísalo o muévelo a mano; no se reescribe automáticamente para "
+                "no perder lo que ya estaba indexado.")
+    antes = len(previo)
+    for x in salida:
+        previo[x.get("archivo_local") or x.get("archivo")] = x
+    fusionado = list(previo.values())
+    dest.write_text(json.dumps(fusionado, ensure_ascii=False, indent=1), encoding="utf-8")
+    log(f"índice: {antes} documento(s) previos + {len(salida)} de esta corrida "
+        f"= {len(fusionado)} en total")
+    salida = fusionado
 
     total_lam = sum(x["n_laminas_candidatas"] for x in salida)
     con = [x for x in salida if x["n_laminas_candidatas"]]

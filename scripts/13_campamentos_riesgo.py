@@ -29,6 +29,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comun import (  # noqa: E402
+    anillos_a_geojson,
     DATA_PROC,
     WEB_DATA,
     consultar_capa_arcgis,
@@ -50,34 +51,6 @@ def norm(t) -> str:
 
 def es_hidrico(tipo) -> bool:
     return any(k in norm(tipo) for k in CLAVES_HIDRICAS)
-
-
-def anillos_a_geojson(geom: dict) -> dict | None:
-    """Mismo criterio que en el script 06: el signo del área separa exteriores
-    de huecos, porque GeoJSON no comparte la convención de orientación ArcGIS."""
-    anillos = (geom or {}).get("rings") or []
-    if not anillos:
-        return None
-
-    def area(a):
-        return sum((a[i][0] * a[i + 1][1] - a[i + 1][0] * a[i][1])
-                   for i in range(len(a) - 1)) / 2.0
-
-    ext, huecos = [], []
-    for a in anillos:
-        if len(a) < 4:
-            continue
-        (ext if area(a) < 0 else huecos).append([[float(x), float(y)] for x, y, *_ in a])
-    if not ext:
-        ext = [[[float(x), float(y)] for x, y, *_ in a] for a in anillos if len(a) >= 4]
-        huecos = []
-    if not ext:
-        return None
-    polis = [[e] for e in ext]
-    for h in huecos:
-        polis[0].append(h)
-    return ({"type": "Polygon", "coordinates": polis[0]} if len(polis) == 1
-            else {"type": "MultiPolygon", "coordinates": polis})
 
 
 def anio_catastro(valor) -> str | None:

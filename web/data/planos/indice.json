@@ -4,7 +4,7 @@
   "url": "https://eae.mma.gob.cl/reporte-general",
   "metodo": "Reproyección a EPSG:3857 y reducción a un máximo de 2600 px de lado; el blanco de la hoja se vuelve semitransparente para no tapar el mapa base",
   "capa_evidencia": "A_normativo",
-  "incertidumbre": "Cada plano declara su propio RMSE. La imagen web está remuestreada: para trabajo de precisión hay que usar el GeoTIFF original, no esta versión.",
+  "incertidumbre": "Cada plano declara su propio RMSE. La imagen web está remuestreada: para trabajo de precisión hay que usar el GeoTIFF original, no esta versión. Y cada plano declara su ESTADO DE TRAMITACIÓN: un anteproyecto es una propuesta que puede cambiar y no obliga a nadie; sólo el instrumento vigente rige sobre el territorio.",
   "escala_original": null,
   "fecha_dato": null,
   "generado": "2026-08-12T18:05:40+00:00"
@@ -29,7 +29,9 @@
    "puntos_control": 42,
    "fuente": "Plan Regulador — 04_Anteproyecto-Plano_Actualizacion_PRC_Traiguén.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 42 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 42 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Galvarino_2.pdf_p001.png",
@@ -50,7 +52,9 @@
    "puntos_control": 28,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Galvarino_2.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 28 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 28 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_2_p001.png",
@@ -71,7 +75,9 @@
    "puntos_control": 9,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén_2",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 9 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 9 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_2_p002.png",
@@ -92,7 +98,9 @@
    "puntos_control": 90,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén_2",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_p001.png",
@@ -113,7 +121,9 @@
    "puntos_control": 9,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 9 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 9 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pitrufquen_p002.png",
@@ -134,7 +144,9 @@
    "puntos_control": 90,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pitrufquén",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v3.pdf_p001.png",
@@ -155,7 +167,9 @@
    "puntos_control": 112,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v3.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 112 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 112 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v3.pdf_p002.png",
@@ -176,7 +190,9 @@
    "puntos_control": 96,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v3.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 96 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 96 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v4.pdf_p001.png",
@@ -197,7 +213,9 @@
    "puntos_control": 96,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v4.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 96 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 96 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Pucon_v4.pdf_p002.png",
@@ -218,7 +236,9 @@
    "puntos_control": 112,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Pucón_v4.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 112 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 112 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1_p001.png",
@@ -239,7 +259,9 @@
    "puntos_control": 80,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 80 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 80 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1_p002.png",
@@ -260,7 +282,9 @@
    "puntos_control": 100,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 100 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 100 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1_p003.png",
@@ -281,7 +305,9 @@
    "puntos_control": 132,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Teodoro_Schimdt_1",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 132 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 132 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p001.png",
@@ -302,7 +328,9 @@
    "puntos_control": 65,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p002.png",
@@ -323,7 +351,9 @@
    "puntos_control": 65,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p006.png",
@@ -344,7 +374,9 @@
    "puntos_control": 20,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 20 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 20 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p007.png",
@@ -365,7 +397,9 @@
    "puntos_control": 65,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto-Planos_PRC_Vilcun_p008.png",
@@ -386,7 +420,9 @@
    "puntos_control": 65,
    "fuente": "Plan Regulador — 04_Anteproyecto-Planos_PRC_Vilcún",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 65 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf_p003.png",
@@ -407,7 +443,9 @@
    "puntos_control": 90,
    "fuente": "Plan Regulador — 04_Anteproyecto_Planos_PRC_Teodoro_Schmidt_v2.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 90 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   },
   {
    "archivo": "04_Anteproyecto_Planos_PRC_Traiguen.pdf_p001.png",
@@ -428,7 +466,9 @@
    "puntos_control": 42,
    "fuente": "Plan Regulador — 04_Anteproyecto_Planos_PRC_Traiguén.pdf",
    "anio": "no declarado por la fuente",
-   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 42 puntos de control, transformación afín, render a 300 dpi"
+   "procedencia_metodo": "Lectura automática de los rótulos de la retícula UTM del PDF, 42 puntos de control, transformación afín, render a 300 dpi",
+   "estado_tramite": "Anteproyecto",
+   "estado_tramite_nota": "Propuesta en tramitación. Puede cambiar y todavía no tiene efecto legal."
   }
  ]
 }

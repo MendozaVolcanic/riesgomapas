@@ -6,7 +6,7 @@
   "archivo": "prc_estudio_riesgos.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/04/Cap9-5-Estudio-Fundado-Riesgos.pdf",
   "archivo_local": "documentos\\temuco\\prc_estudio_riesgos.pdf",
-  "mb": 0.0,
+  "mb": 7.5,
   "paginas_con_amenaza": [
    {
     "pagina": 2,
@@ -1300,7 +1300,7 @@
   "archivo": "estudio_aguas_lluvias.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/04/Cap9-2-Estudio-Aguas-Lluvias.pdf",
   "archivo_local": "documentos\\temuco\\estudio_aguas_lluvias.pdf",
-  "mb": 0.0,
+  "mb": 2.0,
   "paginas_con_amenaza": [
    {
     "pagina": 2,
@@ -4842,6 +4842,39 @@
  },
  {
   "comuna": "Collipulli",
+  "procedimiento": "15-07-2025, Decreto N°1752 &#8211; Aprobación del PACCC",
+  "codigo": "sitio municipal",
+  "archivo": "15-07-2025-Decreto-N°1752-Aprobacion-del-PACCC.pdf",
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/15-07-2025-Decreto-N°1752-Aprobacion-del-PACCC.pdf",
+  "archivo_local": "documentos\\collipulli\\15-07-2025-Decreto-N°1752-Aprobacion-del-PACCC.pdf",
+  "mb": 4.6,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
+  "procedimiento": "15-11-2024, Decreto N°3917 &#8211; Aprobación de equipo para la elaboración del plan de acción de cambio climático",
+  "codigo": "sitio municipal",
+  "archivo": "15-11-2024-Decreto-N°3917-Aprobacion-de-equipo-para-la-elaboracion-del-plan-de-accion-de-cambio-climatico.pdf",
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/15-11-2024-Decreto-N°3917-Aprobacion-de-equipo-para-la-elaboracion-del-plan-de-accion-de-cambio-climatico.pdf",
+  "archivo_local": "documentos\\collipulli\\15-11-2024-Decreto-N°3917-Aprobacion-de-equipo-para-la-elaboracion-del-plan-de-accion-de-cambio-climatico.pdf",
+  "mb": 23.0,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
+  "procedimiento": "15. y 16. Mapa de Vulnerabilidad-fusionado",
+  "codigo": "sitio municipal",
+  "archivo": "15.-y-16.-Mapa-de-Vulnerabilidad-fusionado.pdf",
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/15.-y-16.-Mapa-de-Vulnerabilidad-fusionado.pdf",
+  "archivo_local": "documentos\\collipulli\\15.-y-16.-Mapa-de-Vulnerabilidad-fusionado.pdf",
+  "mb": 5.5,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
   "procedimiento": "18 12 2024 Decreto N°4330 Aprueba Ordenanza Municipal de Medio Ambiente 1",
   "codigo": "sitio municipal",
   "archivo": "18-12-2024-Decreto-N°4330-Aprueba-Ordenanza-Municipal-de-Medio-Ambiente-1.pdf",
@@ -4925,6 +4958,17 @@
   "url": "",
   "archivo_local": "documentos\\collipulli\\DECRETO-EXENTO-N°-000915-APRUEBA-ORDENANZA-MUNICIPAL-PARA-DEINAR-TARIFA-DE-ASEO-COBRO-Y-EXENCIONES.pdf",
   "mb": 0.0,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
+  "procedimiento": "Decreto N° 812 Apruba Plan de Emergencia Comunal Collipulli",
+  "codigo": "sitio municipal",
+  "archivo": "Decreto-N°-812-Apruba-Plan-de-Emergencia-Comunal-Collipulli.pdf",
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2024/03/Decreto-N°-812-Apruba-Plan-de-Emergencia-Comunal-Collipulli.pdf",
+  "archivo_local": "documentos\\collipulli\\Decreto-N°-812-Apruba-Plan-de-Emergencia-Comunal-Collipulli.pdf",
+  "mb": 5.1,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
  },
@@ -5035,6 +5079,228 @@
   "url": "",
   "archivo_local": "documentos\\collipulli\\Ordenanza_Ambiental_12.pdf",
   "mb": 0.0,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
+  "procedimiento": "PACCC",
+  "codigo": "sitio municipal",
+  "archivo": "PACCC.pdf",
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2025/10/PACCC.pdf",
+  "archivo_local": "documentos\\collipulli\\PACCC.pdf",
+  "mb": 3.3,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 4875,
+    "imagenes": 2,
+    "fraccion_imagen": 0.088,
+    "trazos": 2,
+    "objetos_texto": 363,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 9,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 4292,
+    "imagenes": 2,
+    "fraccion_imagen": 0.088,
+    "trazos": 2,
+    "objetos_texto": 127,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 18,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 3360,
+    "imagenes": 8,
+    "fraccion_imagen": 0.088,
+    "trazos": 74,
+    "objetos_texto": 132,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 49,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2808,
+    "imagenes": 3,
+    "fraccion_imagen": 0.175,
+    "trazos": 2,
+    "objetos_texto": 109,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 50,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 3353,
+    "imagenes": 2,
+    "fraccion_imagen": 0.088,
+    "trazos": 2,
+    "objetos_texto": 131,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 53,
+    "terminos": [
+     "cauce",
+     "quebrada"
+    ],
+    "caracteres": 2849,
+    "imagenes": 3,
+    "fraccion_imagen": 0.121,
+    "trazos": 2,
+    "objetos_texto": 125,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 63,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3585,
+    "imagenes": 2,
+    "fraccion_imagen": 0.088,
+    "trazos": 83,
+    "objetos_texto": 203,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 115,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 4145,
+    "imagenes": 2,
+    "fraccion_imagen": 0.088,
+    "trazos": 23,
+    "objetos_texto": 253,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 118,
+    "terminos": [
+     "inundacion",
+     "area de riesgo",
+     "cauce",
+     "quebrada"
+    ],
+    "caracteres": 3084,
+    "imagenes": 2,
+    "fraccion_imagen": 0.088,
+    "trazos": 95,
+    "objetos_texto": 275,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 121,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2252,
+    "imagenes": 2,
+    "fraccion_imagen": 0.088,
+    "trazos": 272,
+    "objetos_texto": 273,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
+  "procedimiento": "Pladeco 2019-2022 Final V11",
+  "codigo": "sitio municipal",
+  "archivo": "Pladeco-2019-2022-Final-V11.pdf",
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2022/03/Pladeco-2019-2022-Final-V11.pdf",
+  "archivo_local": "documentos\\collipulli\\Pladeco-2019-2022-Final-V11.pdf",
+  "mb": 29.2,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Collipulli",
+  "procedimiento": "Pladeco municipalidad Collipulli (2023-2026)_compressed",
+  "codigo": "sitio municipal",
+  "archivo": "Pladeco-municipalidad-Collipulli-2023-2026_compressed.pdf",
+  "url": "https://municipalidadcollipulli.cl/wp-content/uploads/2023/01/Pladeco-municipalidad-Collipulli-2023-2026_compressed.pdf",
+  "archivo_local": "documentos\\collipulli\\Pladeco-municipalidad-Collipulli-2023-2026_compressed.pdf",
+  "mb": 19.1,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
  },
@@ -5617,6 +5883,17 @@
  },
  {
   "comuna": "Curarrehue",
+  "procedimiento": "Certificado N°89 Aprueba PLADECO 2024 2029",
+  "codigo": "sitio municipal",
+  "archivo": "Certificado-N°89-Aprueba-PLADECO-2024-2029.pdf",
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2024/06/Certificado-N°89-Aprueba-PLADECO-2024-2029.pdf",
+  "archivo_local": "documentos\\curarrehue\\Certificado-N°89-Aprueba-PLADECO-2024-2029.pdf",
+  "mb": 0.2,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Curarrehue",
   "procedimiento": "Certificado recepcion PRC",
   "codigo": "sitio municipal",
   "archivo": "Certificado-recepcion-PRC.pdf",
@@ -5634,6 +5911,17 @@
   "url": "",
   "archivo_local": "documentos\\curarrehue\\DECRETO-1.130-APROBACION-ORDENANZA.pdf",
   "mb": 0.0,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Curarrehue",
+  "procedimiento": "decreto 839 30 04 2024 aprueba pladeco",
+  "codigo": "sitio municipal",
+  "archivo": "decreto-839-30-04-2024-aprueba-pladeco.pdf",
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2024/06/decreto-839-30-04-2024-aprueba-pladeco.pdf",
+  "archivo_local": "documentos\\curarrehue\\decreto-839-30-04-2024-aprueba-pladeco.pdf",
+  "mb": 0.3,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
  },
@@ -5705,6 +5993,864 @@
  },
  {
   "comuna": "Curarrehue",
+  "procedimiento": "Decreto Exento 1802 30 12 2025 Aprueba PLAN RRD",
+  "codigo": "sitio municipal",
+  "archivo": "Decreto-Exento-1802-30-12-2025-Aprueba-PLAN-RRD.pdf",
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2026/02/Decreto-Exento-1802-30-12-2025-Aprueba-PLAN-RRD.pdf",
+  "archivo_local": "documentos\\curarrehue\\Decreto-Exento-1802-30-12-2025-Aprueba-PLAN-RRD.pdf",
+  "mb": 8.0,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3431,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 267,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 5,
+    "terminos": [
+     "inundacion",
+     "desborde"
+    ],
+    "caracteres": 3780,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 93,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 6,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 1310,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 55,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 8,
+    "terminos": [
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 3017,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 42,
+    "objetos_texto": 161,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 9,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 3118,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 104,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 17,
+    "terminos": [
+     "inundable"
+    ],
+    "caracteres": 2490,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 86,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 31,
+    "terminos": [
+     "cauce",
+     "quebrada"
+    ],
+    "caracteres": 2534,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 42,
+    "objetos_texto": 107,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 32,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 1241,
+    "imagenes": 4,
+    "fraccion_imagen": 0.068,
+    "trazos": 47,
+    "objetos_texto": 96,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 33,
+    "terminos": [
+     "desborde"
+    ],
+    "caracteres": 1933,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 42,
+    "objetos_texto": 127,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 34,
+    "terminos": [
+     "desborde"
+    ],
+    "caracteres": 372,
+    "imagenes": 9,
+    "fraccion_imagen": 0.052,
+    "trazos": 49,
+    "objetos_texto": 78,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 40,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 1121,
+    "imagenes": 5,
+    "fraccion_imagen": 0.152,
+    "trazos": 45,
+    "objetos_texto": 88,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 42,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "cauce"
+    ],
+    "caracteres": 2699,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 96,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 43,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "cauce"
+    ],
+    "caracteres": 3329,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 42,
+    "objetos_texto": 89,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 44,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida",
+     "cauce"
+    ],
+    "caracteres": 2595,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 42,
+    "objetos_texto": 111,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 45,
+    "terminos": [
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 1442,
+    "imagenes": 2,
+    "fraccion_imagen": 0.142,
+    "trazos": 41,
+    "objetos_texto": 84,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 46,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "crecida",
+     "cauce"
+    ],
+    "caracteres": 1602,
+    "imagenes": 3,
+    "fraccion_imagen": 0.08,
+    "trazos": 41,
+    "objetos_texto": 76,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 47,
+    "terminos": [
+     "anegamiento",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 997,
+    "imagenes": 3,
+    "fraccion_imagen": 0.138,
+    "trazos": 43,
+    "objetos_texto": 70,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 48,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "crecida"
+    ],
+    "caracteres": 1475,
+    "imagenes": 3,
+    "fraccion_imagen": 0.135,
+    "trazos": 114,
+    "objetos_texto": 118,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 49,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 2265,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 107,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 52,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2282,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 116,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 54,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 686,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 145,
+    "objetos_texto": 87,
+    "cm": [
+     33,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 56,
+    "terminos": [
+     "inundacion",
+     "quebrada"
+    ],
+    "caracteres": 2687,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 108,
+    "objetos_texto": 216,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 63,
+    "terminos": [
+     "inundacion",
+     "desborde"
+    ],
+    "caracteres": 3061,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 105,
+    "objetos_texto": 156,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 64,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 2819,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 74,
+    "objetos_texto": 202,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 65,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "cauce",
+     "quebrada"
+    ],
+    "caracteres": 2175,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 176,
+    "objetos_texto": 196,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 68,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida",
+     "cauce"
+    ],
+    "caracteres": 2644,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 106,
+    "objetos_texto": 138,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 69,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 2323,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 58,
+    "objetos_texto": 94,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 70,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 2532,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 74,
+    "objetos_texto": 212,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 71,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "cauce",
+     "quebrada"
+    ],
+    "caracteres": 1351,
+    "imagenes": 2,
+    "fraccion_imagen": 0.216,
+    "trazos": 156,
+    "objetos_texto": 129,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 72,
+    "terminos": [
+     "inundable"
+    ],
+    "caracteres": 274,
+    "imagenes": 2,
+    "fraccion_imagen": 0.287,
+    "trazos": 54,
+    "objetos_texto": 38,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 73,
+    "terminos": [
+     "inundacion",
+     "inundable"
+    ],
+    "caracteres": 455,
+    "imagenes": 2,
+    "fraccion_imagen": 0.476,
+    "trazos": 64,
+    "objetos_texto": 51,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 74,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2818,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 124,
+    "objetos_texto": 199,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 75,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "cauce",
+     "quebrada"
+    ],
+    "caracteres": 2685,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 134,
+    "objetos_texto": 200,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 77,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3285,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 129,
+    "objetos_texto": 245,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 78,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "cauce",
+     "quebrada"
+    ],
+    "caracteres": 2279,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 79,
+    "objetos_texto": 183,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 80,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2985,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 154,
+    "objetos_texto": 193,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 82,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2390,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 221,
+    "objetos_texto": 191,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 84,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 2902,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 154,
+    "objetos_texto": 201,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 85,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2941,
+    "imagenes": 8,
+    "fraccion_imagen": 0.007,
+    "trazos": 182,
+    "objetos_texto": 185,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 86,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2718,
+    "imagenes": 13,
+    "fraccion_imagen": 0.007,
+    "trazos": 190,
+    "objetos_texto": 183,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 89,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3014,
+    "imagenes": 20,
+    "fraccion_imagen": 0.007,
+    "trazos": 206,
+    "objetos_texto": 193,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 93,
+    "terminos": [
+     "inundacion",
+     "crecida"
+    ],
+    "caracteres": 1564,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 238,
+    "objetos_texto": 160,
+    "cm": [
+     28,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 97,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 1936,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 89,
+    "objetos_texto": 139,
+    "cm": [
+     33,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 99,
+    "terminos": [
+     "crecida"
+    ],
+    "caracteres": 2571,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 100,
+    "objetos_texto": 106,
+    "cm": [
+     33,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 3
+ },
+ {
+  "comuna": "Curarrehue",
   "procedimiento": "decreto exento 1883 07 011 2022 nueva ordenanza turismo",
   "codigo": "sitio municipal",
   "archivo": "decreto-exento-1883-07-011-2022-nueva-ordenanza-turismo.pdf",
@@ -5724,6 +6870,126 @@
   "mb": 0.0,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Curarrehue",
+  "procedimiento": "decreto exento 950 23 07 2025 aprueba plan accion comunal cambio climatico curarrehue",
+  "codigo": "sitio municipal",
+  "archivo": "decreto-exento-950-23-07-2025-aprueba-plan-accion-comunal-cambio-climatico-curarrehue.pdf",
+  "url": "https://curarrehue.cl/on/wp-content/uploads/2025/08/decreto-exento-950-23-07-2025-aprueba-plan-accion-comunal-cambio-climatico-curarrehue.pdf",
+  "archivo_local": "documentos\\curarrehue\\decreto-exento-950-23-07-2025-aprueba-plan-accion-comunal-cambio-climatico-curarrehue.pdf",
+  "mb": 2.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 19,
+    "terminos": [
+     "crecida"
+    ],
+    "caracteres": 575,
+    "imagenes": 1,
+    "fraccion_imagen": 0.398,
+    "trazos": 1,
+    "objetos_texto": 17,
+    "cm": [
+     21,
+     30
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 24,
+    "terminos": [
+     "desborde"
+    ],
+    "caracteres": 2855,
+    "imagenes": 0,
+    "fraccion_imagen": 0.0,
+    "trazos": 0,
+    "objetos_texto": 70,
+    "cm": [
+     21,
+     30
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 35,
+    "terminos": [
+     "desborde"
+    ],
+    "caracteres": 1549,
+    "imagenes": 1,
+    "fraccion_imagen": 0.292,
+    "trazos": 1,
+    "objetos_texto": 36,
+    "cm": [
+     21,
+     30
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 37,
+    "terminos": [
+     "crecida"
+    ],
+    "caracteres": 1540,
+    "imagenes": 1,
+    "fraccion_imagen": 0.287,
+    "trazos": 0,
+    "objetos_texto": 43,
+    "cm": [
+     21,
+     30
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 40,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 1134,
+    "imagenes": 1,
+    "fraccion_imagen": 0.237,
+    "trazos": 43,
+    "objetos_texto": 44,
+    "cm": [
+     21,
+     30
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 50,
+    "terminos": [
+     "crecida"
+    ],
+    "caracteres": 1034,
+    "imagenes": 0,
+    "fraccion_imagen": 0.0,
+    "trazos": 197,
+    "objetos_texto": 92,
+    "cm": [
+     30,
+     21
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 2
  },
  {
   "comuna": "Curarrehue",
@@ -5960,6 +7226,36 @@
   "n_laminas_candidatas": 4
  },
  {
+  "comuna": "Freire",
+  "procedimiento": "Pladeco_2018_2022",
+  "codigo": "sitio municipal",
+  "archivo": "Pladeco_2018_2022.pdf",
+  "url": "https://munifreire.cl/wp-content/uploads/2021/07/Pladeco_2018_2022.pdf",
+  "archivo_local": "documentos\\freire\\Pladeco_2018_2022.pdf",
+  "mb": 1.8,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 46,
+    "terminos": [
+     "anegamiento"
+    ],
+    "caracteres": 554,
+    "imagenes": 0,
+    "fraccion_imagen": 0.0,
+    "trazos": 59,
+    "objetos_texto": 56,
+    "cm": [
+     28,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
   "comuna": "Lautaro",
   "procedimiento": "09108_PRC_ARAUCANIA_USO-DE-SUELO_MO_DO_88",
   "codigo": "sitio municipal",
@@ -6033,6 +7329,503 @@
  },
  {
   "comuna": "Lautaro",
+  "procedimiento": "PLAN-COMUNAL-EMERGENCIA-LAUTARO",
+  "codigo": "sitio municipal",
+  "archivo": "PLAN-COMUNAL-EMERGENCIA-LAUTARO.pdf",
+  "url": "https://munilautaro.cl/wp-content/uploads/2025/02/PLAN-COMUNAL-EMERGENCIA-LAUTARO.pdf",
+  "archivo_local": "documentos\\lautaro\\PLAN-COMUNAL-EMERGENCIA-LAUTARO.pdf",
+  "mb": 1.7,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 408,
+    "imagenes": 1,
+    "fraccion_imagen": 0.008,
+    "trazos": 43,
+    "objetos_texto": 106,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2499,
+    "imagenes": 1,
+    "fraccion_imagen": 0.008,
+    "trazos": 41,
+    "objetos_texto": 110,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 4,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2934,
+    "imagenes": 1,
+    "fraccion_imagen": 0.008,
+    "trazos": 41,
+    "objetos_texto": 143,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 7,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2085,
+    "imagenes": 3,
+    "fraccion_imagen": 0.197,
+    "trazos": 41,
+    "objetos_texto": 89,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 8,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3603,
+    "imagenes": 1,
+    "fraccion_imagen": 0.008,
+    "trazos": 41,
+    "objetos_texto": 117,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 9,
+    "terminos": [
+     "inundacion",
+     "inundable",
+     "crecida"
+    ],
+    "caracteres": 3397,
+    "imagenes": 1,
+    "fraccion_imagen": 0.008,
+    "trazos": 41,
+    "objetos_texto": 122,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Lautaro",
+  "procedimiento": "PLAN-COMUNAL-PARA-LA-RRD-FINAL",
+  "codigo": "sitio municipal",
+  "archivo": "PLAN-COMUNAL-PARA-LA-RRD-FINAL.pdf",
+  "url": "https://munilautaro.cl/wp-content/uploads/2025/02/PLAN-COMUNAL-PARA-LA-RRD-FINAL.pdf",
+  "archivo_local": "documentos\\lautaro\\PLAN-COMUNAL-PARA-LA-RRD-FINAL.pdf",
+  "mb": 3.8,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3732,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 41,
+    "objetos_texto": 142,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 10,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 1993,
+    "imagenes": 3,
+    "fraccion_imagen": 0.245,
+    "trazos": 42,
+    "objetos_texto": 86,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 14,
+    "terminos": [
+     "inundacion",
+     "inundable"
+    ],
+    "caracteres": 3356,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 41,
+    "objetos_texto": 204,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 15,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3150,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 41,
+    "objetos_texto": 164,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 17,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 1424,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 181,
+    "objetos_texto": 133,
+    "cm": [
+     33,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 18,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2922,
+    "imagenes": 12,
+    "fraccion_imagen": 0.092,
+    "trazos": 141,
+    "objetos_texto": 222,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 20,
+    "terminos": [
+     "inundacion",
+     "crecida"
+    ],
+    "caracteres": 2935,
+    "imagenes": 11,
+    "fraccion_imagen": 0.013,
+    "trazos": 141,
+    "objetos_texto": 170,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 23,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2594,
+    "imagenes": 13,
+    "fraccion_imagen": 0.135,
+    "trazos": 140,
+    "objetos_texto": 198,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 25,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2573,
+    "imagenes": 12,
+    "fraccion_imagen": 0.013,
+    "trazos": 148,
+    "objetos_texto": 182,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 28,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2940,
+    "imagenes": 13,
+    "fraccion_imagen": 0.013,
+    "trazos": 192,
+    "objetos_texto": 234,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 29,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3007,
+    "imagenes": 19,
+    "fraccion_imagen": 0.013,
+    "trazos": 286,
+    "objetos_texto": 207,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 30,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2946,
+    "imagenes": 19,
+    "fraccion_imagen": 0.013,
+    "trazos": 269,
+    "objetos_texto": 235,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 31,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2799,
+    "imagenes": 16,
+    "fraccion_imagen": 0.013,
+    "trazos": 280,
+    "objetos_texto": 212,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 32,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2806,
+    "imagenes": 18,
+    "fraccion_imagen": 0.013,
+    "trazos": 304,
+    "objetos_texto": 232,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 33,
+    "terminos": [
+     "inundacion",
+     "cauce"
+    ],
+    "caracteres": 3050,
+    "imagenes": 13,
+    "fraccion_imagen": 0.013,
+    "trazos": 253,
+    "objetos_texto": 235,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 35,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2842,
+    "imagenes": 18,
+    "fraccion_imagen": 0.013,
+    "trazos": 275,
+    "objetos_texto": 192,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 36,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2758,
+    "imagenes": 18,
+    "fraccion_imagen": 0.013,
+    "trazos": 291,
+    "objetos_texto": 220,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 37,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2856,
+    "imagenes": 18,
+    "fraccion_imagen": 0.013,
+    "trazos": 258,
+    "objetos_texto": 207,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 38,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2863,
+    "imagenes": 18,
+    "fraccion_imagen": 0.013,
+    "trazos": 271,
+    "objetos_texto": 201,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 39,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2849,
+    "imagenes": 20,
+    "fraccion_imagen": 0.013,
+    "trazos": 265,
+    "objetos_texto": 224,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Lautaro",
   "procedimiento": "Plan-Regulador-Vigente-Lautaro-escaneado",
   "codigo": "sitio municipal",
   "archivo": "Plan-Regulador-Vigente-Lautaro-escaneado.pdf",
@@ -6052,6 +7845,215 @@
   "mb": 8.7,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Lonquimay",
+  "procedimiento": "PLADECO-LONQUIMAY-2018-2022",
+  "codigo": "sitio municipal",
+  "archivo": "PLADECO-LONQUIMAY-2018-2022.pdf",
+  "url": "https://www.mlonquimay.cl/web/wp-content/uploads/2023/06/PLADECO-LONQUIMAY-2018-2022.pdf",
+  "archivo_local": "documentos\\lonquimay\\PLADECO-LONQUIMAY-2018-2022.pdf",
+  "mb": 3.1,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 25,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 2667,
+    "imagenes": 0,
+    "fraccion_imagen": 0.0,
+    "trazos": 0,
+    "objetos_texto": 111,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Lonquimay",
+  "procedimiento": "Plan de Cambio Climatico Comuna Lonquimay &#8211; JUNIO 2025",
+  "codigo": "sitio municipal",
+  "archivo": "Plan-de-Cambio-Climatico-Comuna-Lonquimay-JUNIO-2025.pdf",
+  "url": "https://www.mlonquimay.cl/web/wp-content/uploads/2025/06/Plan-de-Cambio-Climatico-Comuna-Lonquimay-JUNIO-2025.pdf",
+  "archivo_local": "documentos\\lonquimay\\Plan-de-Cambio-Climatico-Comuna-Lonquimay-JUNIO-2025.pdf",
+  "mb": 7.5,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 5,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 1389,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 0,
+    "objetos_texto": 52,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 9,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 3283,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 0,
+    "objetos_texto": 66,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 13,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 2898,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 0,
+    "objetos_texto": 70,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 15,
+    "terminos": [
+     "inundacion",
+     "desborde",
+     "crecida",
+     "cauce"
+    ],
+    "caracteres": 1352,
+    "imagenes": 5,
+    "fraccion_imagen": 0.203,
+    "trazos": 0,
+    "objetos_texto": 66,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 49,
+    "terminos": [
+     "inundacion",
+     "crecida"
+    ],
+    "caracteres": 2984,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 93,
+    "objetos_texto": 211,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 52,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3103,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 402,
+    "objetos_texto": 193,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 55,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2344,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 300,
+    "objetos_texto": 179,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 56,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2610,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 301,
+    "objetos_texto": 198,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 58,
+    "terminos": [
+     "inundacion",
+     "area de riesgo"
+    ],
+    "caracteres": 2619,
+    "imagenes": 4,
+    "fraccion_imagen": 0.009,
+    "trazos": 301,
+    "objetos_texto": 198,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 1
  },
  {
   "comuna": "Puren",
@@ -6291,6 +8293,17 @@
   "archivo": "A.C.M.-No317-2026-APRUEBA-PLAN-REGULADOR-COMUNAL-DE-PUREN-Y-SU-DERIVACION-A-LA-SEREMI-DE-VIVIENDA-Y-URBANISMO.pdf",
   "url": "https://munipuren.cl/wp-content/uploads/2026/02/A.C.M.-No317-2026-APRUEBA-PLAN-REGULADOR-COMUNAL-DE-PUREN-Y-SU-DERIVACION-A-LA-SEREMI-DE-VIVIENDA-Y-URBANISMO.pdf",
   "archivo_local": "documentos\\puren\\A.C.M.-No317-2026-APRUEBA-PLAN-REGULADOR-COMUNAL-DE-PUREN-Y-SU-DERIVACION-A-LA-SEREMI-DE-VIVIENDA-Y-URBANISMO.pdf",
+  "mb": 0.3,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Puren",
+  "procedimiento": "A.C.M. Nº583-2024 ACTUALIZACION PLAN DE DESARROLLO COMUNAL PLADECO 2024-2028",
+  "codigo": "sitio municipal",
+  "archivo": "A.C.M.-No583-2024-ACTUALIZACION-PLAN-DE-DESARROLLO-COMUNAL-PLADECO-2024-2028.pdf",
+  "url": "https://munipuren.cl/wp-content/uploads/2024/04/A.C.M.-No583-2024-ACTUALIZACION-PLAN-DE-DESARROLLO-COMUNAL-PLADECO-2024-2028.pdf",
+  "archivo_local": "documentos\\puren\\A.C.M.-No583-2024-ACTUALIZACION-PLAN-DE-DESARROLLO-COMUNAL-PLADECO-2024-2028.pdf",
   "mb": 0.3,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
@@ -7259,6 +9272,170 @@
  },
  {
   "comuna": "Puren",
+  "procedimiento": "EXPEDIENTE COMPLETO S.O. Nº102 CON INFORME PLADECO",
+  "codigo": "sitio municipal",
+  "archivo": "EXPEDIENTE-COMPLETO-S.O.-No102-CON-INFORME-PLADECO.pdf",
+  "url": "https://munipuren.cl/wp-content/uploads/2024/09/EXPEDIENTE-COMPLETO-S.O.-No102-CON-INFORME-PLADECO.pdf",
+  "archivo_local": "documentos\\puren\\EXPEDIENTE-COMPLETO-S.O.-No102-CON-INFORME-PLADECO.pdf",
+  "mb": 12.6,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 78,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 7902,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 1,
+    "objetos_texto": 247,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 79,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 3306,
+    "imagenes": 2,
+    "fraccion_imagen": 0.281,
+    "trazos": 2,
+    "objetos_texto": 83,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 125,
+    "terminos": [
+     "desborde"
+    ],
+    "caracteres": 6810,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 0,
+    "objetos_texto": 169,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 168,
+    "terminos": [
+     "inundacion",
+     "desborde"
+    ],
+    "caracteres": 7601,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 297,
+    "objetos_texto": 319,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 169,
+    "terminos": [
+     "inundacion",
+     "inundable"
+    ],
+    "caracteres": 6102,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 88,
+    "objetos_texto": 276,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 171,
+    "terminos": [
+     "inundacion",
+     "cauce"
+    ],
+    "caracteres": 4804,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 143,
+    "objetos_texto": 396,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 174,
+    "terminos": [
+     "crecida",
+     "zona de riesgo"
+    ],
+    "caracteres": 5039,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 165,
+    "objetos_texto": 451,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 175,
+    "terminos": [
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 2308,
+    "imagenes": 2,
+    "fraccion_imagen": 0.298,
+    "trazos": 56,
+    "objetos_texto": 162,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Puren",
   "procedimiento": "FACT_SANITARIA PRC PUREN_OCTUBRE 2025",
   "codigo": "sitio municipal",
   "archivo": "FACT_SANITARIA-PRC-PUREN_OCTUBRE-2025.pdf",
@@ -7595,6 +9772,471 @@
  },
  {
   "comuna": "Puren",
+  "procedimiento": "PLADECO 2024-2028 (1)",
+  "codigo": "sitio municipal",
+  "archivo": "PLADECO-2024-2028-1.pdf",
+  "url": "https://munipuren.cl/wp-content/uploads/2024/09/PLADECO-2024-2028-1.pdf",
+  "archivo_local": "documentos\\puren\\PLADECO-2024-2028-1.pdf",
+  "mb": 20.8,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 47,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 6870,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 1,
+    "objetos_texto": 247,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 49,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 3602,
+    "imagenes": 2,
+    "fraccion_imagen": 0.214,
+    "trazos": 2,
+    "objetos_texto": 87,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 101,
+    "terminos": [
+     "desborde"
+    ],
+    "caracteres": 5328,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 0,
+    "objetos_texto": 152,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 152,
+    "terminos": [
+     "inundacion",
+     "desborde"
+    ],
+    "caracteres": 6538,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 84,
+    "objetos_texto": 254,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 153,
+    "terminos": [
+     "inundacion",
+     "inundable"
+    ],
+    "caracteres": 5530,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 175,
+    "objetos_texto": 324,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 154,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 4764,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 205,
+    "objetos_texto": 347,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 155,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 4642,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 208,
+    "objetos_texto": 374,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 158,
+    "terminos": [
+     "desborde",
+     "crecida",
+     "zona de riesgo"
+    ],
+    "caracteres": 5077,
+    "imagenes": 1,
+    "fraccion_imagen": 0.046,
+    "trazos": 247,
+    "objetos_texto": 435,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 159,
+    "terminos": [
+     "anegamiento"
+    ],
+    "caracteres": 2026,
+    "imagenes": 2,
+    "fraccion_imagen": 0.306,
+    "trazos": 43,
+    "objetos_texto": 101,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Puren",
+  "procedimiento": "PLADECO PUREN 2017-2021",
+  "codigo": "sitio municipal",
+  "archivo": "PLADECO-PUREN-2017-2021.pdf",
+  "url": "https://munipuren.cl/wp-content/uploads/2022/11/PLADECO-PUREN-2017-2021.pdf",
+  "archivo_local": "documentos\\puren\\PLADECO-PUREN-2017-2021.pdf",
+  "mb": 11.3,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 18,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 2698,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 5,
+    "objetos_texto": 94,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 19,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 1612,
+    "imagenes": 2,
+    "fraccion_imagen": 0.265,
+    "trazos": 1,
+    "objetos_texto": 63,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 83,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3226,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 1,
+    "objetos_texto": 116,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 85,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 3061,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 1,
+    "objetos_texto": 138,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 114,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2758,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 34,
+    "objetos_texto": 163,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 115,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3184,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 0,
+    "objetos_texto": 183,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 116,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2818,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 0,
+    "objetos_texto": 164,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 138,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2215,
+    "imagenes": 2,
+    "fraccion_imagen": 0.207,
+    "trazos": 7,
+    "objetos_texto": 78,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 164,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 2644,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 110,
+    "objetos_texto": 141,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 165,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 1830,
+    "imagenes": 2,
+    "fraccion_imagen": 0.149,
+    "trazos": 1,
+    "objetos_texto": 67,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 174,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 1530,
+    "imagenes": 4,
+    "fraccion_imagen": 0.042,
+    "trazos": 1,
+    "objetos_texto": 65,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 177,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2551,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 97,
+    "objetos_texto": 189,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 178,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 2140,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 0,
+    "objetos_texto": 102,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 190,
+    "terminos": [
+     "inundacion",
+     "desborde"
+    ],
+    "caracteres": 1468,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 12,
+    "objetos_texto": 113,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 196,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2811,
+    "imagenes": 1,
+    "fraccion_imagen": 0.042,
+    "trazos": 427,
+    "objetos_texto": 306,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Puren",
   "procedimiento": "Plano PRC Caupolican 2024",
   "codigo": "sitio municipal",
   "archivo": "Plano-PRC-Caupolican-2024-1.pdf",
@@ -7805,6 +10447,156 @@
    }
   ],
   "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Renaico",
+  "procedimiento": "PLADECO Renaico",
+  "codigo": "sitio municipal",
+  "archivo": "PLADECO-Renaico.pdf",
+  "url": "https://www.municipalidadrenaico.cl/wp-content/uploads/2023/07/PLADECO-Renaico.pdf",
+  "archivo_local": "documentos\\renaico\\PLADECO-Renaico.pdf",
+  "mb": 5.1,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 2,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 4014,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 2,
+    "objetos_texto": 340,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 8,
+    "terminos": [
+     "inundacion",
+     "crecida"
+    ],
+    "caracteres": 653,
+    "imagenes": 2,
+    "fraccion_imagen": 0.256,
+    "trazos": 0,
+    "objetos_texto": 38,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 27,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2116,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 59,
+    "objetos_texto": 110,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 28,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2193,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 0,
+    "objetos_texto": 68,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 29,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 1199,
+    "imagenes": 2,
+    "fraccion_imagen": 0.189,
+    "trazos": 1,
+    "objetos_texto": 72,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 83,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 1339,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 174,
+    "objetos_texto": 136,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 85,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2650,
+    "imagenes": 1,
+    "fraccion_imagen": 0.013,
+    "trazos": 116,
+    "objetos_texto": 315,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 2
+ },
+ {
+  "comuna": "Saavedra",
+  "procedimiento": "3. Decreto Alcaldicio N°1352 Acto de Inicio de modificación Plan Regulador Comunal",
+  "codigo": "sitio municipal",
+  "archivo": "3.-Decreto-Alcaldicio-N°1352-Acto-de-Inicio-de-modificacion-Plan-Regulador-Comunal.pdf",
+  "url": "https://munisaavedra.cl/wp-content/uploads/2026/08/3.-Decreto-Alcaldicio-N°1352-Acto-de-Inicio-de-modificacion-Plan-Regulador-Comunal.pdf",
+  "archivo_local": "documentos\\saavedra\\3.-Decreto-Alcaldicio-N°1352-Acto-de-Inicio-de-modificacion-Plan-Regulador-Comunal.pdf",
+  "mb": 0.4,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
  },
  {
   "comuna": "Saavedra",
@@ -8090,6 +10882,122 @@
   "archivo_local": "documentos\\saavedra\\Aprueba-PRC-y-ordenanza-local-PRC-del-6-enero-ano-1964.pdf",
   "mb": 1.9,
   "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Saavedra",
+  "procedimiento": "cert 320-2025 se aprueba prórroga PLADECO actual mientras se desarrolle el estudio vigente (1)",
+  "codigo": "sitio municipal",
+  "archivo": "cert-320-2025-se-aprueba-prorroga-PLADECO-actual-mientras-se-desarrolle-el-estudio-vigente-1.pdf",
+  "url": "https://munisaavedra.cl/wp-content/uploads/2025/12/cert-320-2025-se-aprueba-prorroga-PLADECO-actual-mientras-se-desarrolle-el-estudio-vigente-1.pdf",
+  "archivo_local": "documentos\\saavedra\\cert-320-2025-se-aprueba-prorroga-PLADECO-actual-mientras-se-desarrolle-el-estudio-vigente-1.pdf",
+  "mb": 0.2,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Saavedra",
+  "procedimiento": "PLAN COMUNAL EMERGENCIA 2.0",
+  "codigo": "sitio municipal",
+  "archivo": "PLAN-COMUNAL-EMERGENCIA-2.0.pdf",
+  "url": "https://munisaavedra.cl/wp-content/uploads/2024/07/PLAN-COMUNAL-EMERGENCIA-2.0.pdf",
+  "archivo_local": "documentos\\saavedra\\PLAN-COMUNAL-EMERGENCIA-2.0.pdf",
+  "mb": 0.8,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 1,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 428,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 97,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3354,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 142,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 5,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 3668,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 149,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 6,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 3933,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 41,
+    "objetos_texto": 120,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 12,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3629,
+    "imagenes": 1,
+    "fraccion_imagen": 0.009,
+    "trazos": 124,
+    "objetos_texto": 231,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
   "n_laminas_candidatas": 0
  },
  {
@@ -8526,6 +11434,17 @@
  },
  {
   "comuna": "Saavedra",
+  "procedimiento": "Plan de Emergencia Comunal",
+  "codigo": "sitio municipal",
+  "archivo": "Plan-de-Emergencia-Comunal.pdf",
+  "url": "https://munisaavedra.cl/wp-content/uploads/2019/06/Plan-de-Emergencia-Comunal.pdf",
+  "archivo_local": "documentos\\saavedra\\Plan-de-Emergencia-Comunal.pdf",
+  "mb": 2.2,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Saavedra",
   "procedimiento": "Plan de Emergencia por variable de riesgo  evento meteorologico",
   "codigo": "sitio municipal",
   "archivo": "Plan-de-Emergencia-por-variable-de-riesgo-evento-meteorologico.pdf",
@@ -8706,13 +11625,43 @@
   "n_laminas_candidatas": 0
  },
  {
+  "comuna": "Saavedra",
+  "procedimiento": "Resumen ejecutivo PLADECO Saavedra",
+  "codigo": "sitio municipal",
+  "archivo": "Resumen-ejecutivo-PLADECO-Saavedra.pdf",
+  "url": "https://munisaavedra.cl/wp-content/uploads/2025/12/Resumen-ejecutivo-PLADECO-Saavedra.pdf",
+  "archivo_local": "documentos\\saavedra\\Resumen-ejecutivo-PLADECO-Saavedra.pdf",
+  "mb": 0.9,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 37,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 1990,
+    "imagenes": 2,
+    "fraccion_imagen": 0.014,
+    "trazos": 157,
+    "objetos_texto": 206,
+    "cm": [
+     28,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
   "comuna": "Temuco",
   "procedimiento": "4.-autorizacion-municipal-segun-plano-regulador-1868-26",
   "codigo": "sitio municipal",
   "archivo": "4.-autorizacion-municipal-segun-plano-regulador-1868-26.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/03/4.-autorizacion-municipal-segun-plano-regulador-1868-26.pdf",
   "archivo_local": "documentos\\temuco\\4.-autorizacion-municipal-segun-plano-regulador-1868-26.pdf",
-  "mb": 0.0,
+  "mb": 0.1,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
  },
@@ -8723,7 +11672,7 @@
   "archivo": "Cap10-Diagnostivo-EV-PRC.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/04/Cap10-Diagnostivo-EV-PRC.pdf",
   "archivo_local": "documentos\\temuco\\Cap10-Diagnostivo-EV-PRC.pdf",
-  "mb": 0.0,
+  "mb": 3.9,
   "paginas_con_amenaza": [
    {
     "pagina": 6,
@@ -8789,7 +11738,7 @@
   "archivo": "Cap9-2-Estudio-Aguas-Lluvias.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/04/Cap9-2-Estudio-Aguas-Lluvias.pdf",
   "archivo_local": "documentos\\temuco\\Cap9-2-Estudio-Aguas-Lluvias.pdf",
-  "mb": 0.0,
+  "mb": 2.0,
   "paginas_con_amenaza": [
    {
     "pagina": 2,
@@ -9170,7 +12119,7 @@
   "archivo": "Cap9-5-Estudio-Fundado-Riesgos.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/04/Cap9-5-Estudio-Fundado-Riesgos.pdf",
   "archivo_local": "documentos\\temuco\\Cap9-5-Estudio-Fundado-Riesgos.pdf",
-  "mb": 0.0,
+  "mb": 7.5,
   "paginas_con_amenaza": [
    {
     "pagina": 2,
@@ -10470,12 +13419,23 @@
  },
  {
   "comuna": "Temuco",
+  "procedimiento": "PLADECO20202024 1",
+  "codigo": "sitio municipal",
+  "archivo": "PLADECO20202024_1.pdf",
+  "url": "",
+  "archivo_local": "documentos\\temuco\\PLADECO20202024_1.pdf",
+  "mb": 0.0,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Temuco",
   "procedimiento": "planregulador_Antecedentes-inicio-EAE",
   "codigo": "sitio municipal",
   "archivo": "planregulador_Antecedentes-inicio-EAE.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/04/planregulador_Antecedentes-inicio-EAE.pdf",
   "archivo_local": "documentos\\temuco\\planregulador_Antecedentes-inicio-EAE.pdf",
-  "mb": 0.0,
+  "mb": 3.3,
   "paginas_con_amenaza": [
    {
     "pagina": 4,
@@ -10878,7 +13838,7 @@
   "archivo": "planregulador_DecretoEAE_23agosto2017.pdf",
   "url": "https://www.temuco.cl/wp-content/uploads/2022/04/planregulador_DecretoEAE_23agosto2017.pdf",
   "archivo_local": "documentos\\temuco\\planregulador_DecretoEAE_23agosto2017.pdf",
-  "mb": 0.0,
+  "mb": 2.6,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
  },
@@ -10977,6 +13937,96 @@
    }
   ],
   "n_laminas_candidatas": 1
+ },
+ {
+  "comuna": "Temuco",
+  "procedimiento": "RESUMEN EJECUTIVO PLADECO TEMUCO 2020 2024 ",
+  "codigo": "sitio municipal",
+  "archivo": "RESUMEN-EJECUTIVO-PLADECO-TEMUCO-2020-2024-.pdf",
+  "url": "",
+  "archivo_local": "documentos\\temuco\\RESUMEN-EJECUTIVO-PLADECO-TEMUCO-2020-2024-.pdf",
+  "mb": 0.0,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 100,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 2009,
+    "imagenes": 2,
+    "fraccion_imagen": 1.0,
+    "trazos": 178,
+    "objetos_texto": 195,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 108,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 1974,
+    "imagenes": 2,
+    "fraccion_imagen": 1.0,
+    "trazos": 130,
+    "objetos_texto": 197,
+    "cm": [
+     22,
+     28
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Villarrica",
+  "procedimiento": "emergencia 2019",
+  "codigo": "sitio municipal",
+  "archivo": "emergencia_2019.pdf",
+  "url": "",
+  "archivo_local": "documentos\\villarrica\\emergencia_2019.pdf",
+  "mb": 0.0,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 8,
+    "terminos": [
+     "zona de riesgo"
+    ],
+    "caracteres": 1016,
+    "imagenes": 1,
+    "fraccion_imagen": 0.007,
+    "trazos": 37,
+    "objetos_texto": 126,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Villarrica",
+  "procedimiento": "evacuacion",
+  "codigo": "sitio municipal",
+  "archivo": "evacuacion.pdf",
+  "url": "",
+  "archivo_local": "documentos\\villarrica\\evacuacion.pdf",
+  "mb": 0.0,
+  "paginas_con_amenaza": [],
+  "n_laminas_candidatas": 0
  },
  {
   "comuna": "Villarrica",
@@ -11159,6 +14209,84 @@
  },
  {
   "comuna": "Villarrica",
+  "procedimiento": "pladeco 2011 020",
+  "codigo": "sitio municipal",
+  "archivo": "pladeco_2011_020.pdf",
+  "url": "",
+  "archivo_local": "documentos\\villarrica\\pladeco_2011_020.pdf",
+  "mb": 0.0,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 95,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 2138,
+    "imagenes": 0,
+    "fraccion_imagen": 0.0,
+    "trazos": 1,
+    "objetos_texto": 44,
+    "cm": [
+     28,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Villarrica",
+  "procedimiento": "pladeco 2023",
+  "codigo": "sitio municipal",
+  "archivo": "pladeco_2023.pdf",
+  "url": "",
+  "archivo_local": "documentos\\villarrica\\pladeco_2023.pdf",
+  "mb": 0.0,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 54,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 2445,
+    "imagenes": 3,
+    "fraccion_imagen": 0.085,
+    "trazos": 2,
+    "objetos_texto": 91,
+    "cm": [
+     28,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 55,
+    "terminos": [
+     "quebrada"
+    ],
+    "caracteres": 1334,
+    "imagenes": 4,
+    "fraccion_imagen": 0.145,
+    "trazos": 1,
+    "objetos_texto": 62,
+    "cm": [
+     28,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   }
+  ],
+  "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Villarrica",
   "procedimiento": "Plan regulador",
   "codigo": "sitio municipal",
   "archivo": "Plan-regulador.pdf",
@@ -11167,6 +14295,648 @@
   "mb": 0.1,
   "paginas_con_amenaza": [],
   "n_laminas_candidatas": 0
+ },
+ {
+  "comuna": "Villarrica",
+  "procedimiento": "plan emergencia 2025",
+  "codigo": "sitio municipal",
+  "archivo": "plan_emergencia_2025.pdf",
+  "url": "",
+  "archivo_local": "documentos\\villarrica\\plan_emergencia_2025.pdf",
+  "mb": 0.0,
+  "paginas_con_amenaza": [
+   {
+    "pagina": 3,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 1980,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 118,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 5,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2779,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 197,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 6,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 3517,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 172,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 7,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 2572,
+    "imagenes": 2,
+    "fraccion_imagen": 0.173,
+    "trazos": 42,
+    "objetos_texto": 80,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 11,
+    "terminos": [
+     "zona de riesgo"
+    ],
+    "caracteres": 2014,
+    "imagenes": 2,
+    "fraccion_imagen": 0.22,
+    "trazos": 42,
+    "objetos_texto": 112,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 15,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 2238,
+    "imagenes": 2,
+    "fraccion_imagen": 0.183,
+    "trazos": 60,
+    "objetos_texto": 79,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 31,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 3213,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 223,
+    "objetos_texto": 277,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 33,
+    "terminos": [
+     "zona de riesgo"
+    ],
+    "caracteres": 2718,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 191,
+    "objetos_texto": 210,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 34,
+    "terminos": [
+     "inundacion"
+    ],
+    "caracteres": 2841,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 175,
+    "objetos_texto": 220,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 54,
+    "terminos": [
+     "cauce"
+    ],
+    "caracteres": 1959,
+    "imagenes": 2,
+    "fraccion_imagen": 0.173,
+    "trazos": 42,
+    "objetos_texto": 74,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 58,
+    "terminos": [
+     "zona de riesgo"
+    ],
+    "caracteres": 1044,
+    "imagenes": 2,
+    "fraccion_imagen": 0.256,
+    "trazos": 45,
+    "objetos_texto": 52,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   },
+   {
+    "pagina": 68,
+    "terminos": [
+     "zona de riesgo"
+    ],
+    "caracteres": 3041,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 184,
+    "objetos_texto": 298,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 117,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 1731,
+    "imagenes": 2,
+    "fraccion_imagen": 0.112,
+    "trazos": 120,
+    "objetos_texto": 144,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 122,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 187,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 80,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 123,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2478,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 216,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 124,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "crecida"
+    ],
+    "caracteres": 3084,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 136,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 125,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2072,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 182,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 126,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "crecida",
+     "cauce"
+    ],
+    "caracteres": 2925,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 181,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 127,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "crecida"
+    ],
+    "caracteres": 3948,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 133,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 128,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 993,
+    "imagenes": 3,
+    "fraccion_imagen": 0.129,
+    "trazos": 41,
+    "objetos_texto": 66,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 129,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde"
+    ],
+    "caracteres": 2962,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 55,
+    "objetos_texto": 153,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 130,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2091,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 101,
+    "objetos_texto": 280,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 131,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2458,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 133,
+    "objetos_texto": 257,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 132,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2809,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 140,
+    "objetos_texto": 231,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 133,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 3861,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 50,
+    "objetos_texto": 156,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 134,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2150,
+    "imagenes": 2,
+    "fraccion_imagen": 0.043,
+    "trazos": 129,
+    "objetos_texto": 161,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 135,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2491,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 129,
+    "objetos_texto": 224,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 136,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2015,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 98,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 137,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 1266,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 282,
+    "objetos_texto": 149,
+    "cm": [
+     33,
+     22
+    ],
+    "apaisada": true,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 138,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "desborde",
+     "cauce"
+    ],
+    "caracteres": 3229,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 41,
+    "objetos_texto": 128,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 139,
+    "terminos": [
+     "inundacion",
+     "anegamiento",
+     "cauce"
+    ],
+    "caracteres": 1780,
+    "imagenes": 19,
+    "fraccion_imagen": 0.11,
+    "trazos": 131,
+    "objetos_texto": 190,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 140,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 2290,
+    "imagenes": 1,
+    "fraccion_imagen": 0.01,
+    "trazos": 154,
+    "objetos_texto": 226,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": null,
+    "es_probable_lamina": false
+   },
+   {
+    "pagina": 141,
+    "terminos": [
+     "inundacion",
+     "anegamiento"
+    ],
+    "caracteres": 208,
+    "imagenes": 2,
+    "fraccion_imagen": 0.221,
+    "trazos": 41,
+    "objetos_texto": 32,
+    "cm": [
+     22,
+     33
+    ],
+    "apaisada": false,
+    "tipo_lamina": "raster",
+    "es_probable_lamina": true
+   }
+  ],
+  "n_laminas_candidatas": 2
  },
  {
   "comuna": "Villarrica",

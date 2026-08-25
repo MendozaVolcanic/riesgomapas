@@ -208,6 +208,44 @@ def consultar_capa_arcgis(
     return feats
 
 
+def anillos_a_geojson(geom: dict | None) -> dict | None:
+    """ArcGIS entrega polígonos como lista de anillos con orientación implícita.
+
+    Convención ArcGIS: anillo exterior en sentido horario, huecos en antihorario.
+    GeoJSON no comparte esa regla, así que hay que separarlos por el signo del
+    área firmada; si no, los huecos se dibujan como polígonos macizos y una zona
+    excluida del área de riesgo aparece como incluida.
+    """
+    anillos = (geom or {}).get("rings") or []
+    if not anillos:
+        return None
+
+    def area(a):
+        return sum((a[i][0] * a[i + 1][1] - a[i + 1][0] * a[i][1])
+                   for i in range(len(a) - 1)) / 2.0
+
+    exteriores, huecos = [], []
+    for a in anillos:
+        if len(a) < 4:
+            continue
+        (exteriores if area(a) < 0 else huecos).append(
+            [[float(x), float(y)] for x, y, *_ in a])
+
+    if not exteriores:  # todos dieron el mismo signo: tratarlos como exteriores
+        exteriores = [[[float(x), float(y)] for x, y, *_ in a]
+                      for a in anillos if len(a) >= 4]
+        huecos = []
+    if not exteriores:
+        return None
+
+    polis = [[e] for e in exteriores]
+    for h in huecos:                       # cada hueco al primer exterior disponible
+        polis[0].append(h)
+    if len(polis) == 1:
+        return {"type": "Polygon", "coordinates": polis[0]}
+    return {"type": "MultiPolygon", "coordinates": polis}
+
+
 def sello(fuente: str, anio: str | int | None) -> dict:
     """Sello de fuente y año que va PEGADO A CADA FEATURE, no sólo a la colección.
 
