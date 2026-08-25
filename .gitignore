@@ -6,6 +6,16 @@ data/raw/
 data/processed/jrc/*.tif
 data/processed/georreferenciado/*.tif
 
+# Recortes de trabajo del inspector de láminas: se regeneran con
+# `18_vectorizar_laminas.py --inspeccionar` y sólo sirven para que una persona
+# lea los rótulos UTM una vez.
+data/processed/laminas/_inspeccion/
+
+# Censo 2024: 73 MB que se regeneran con `scripts/16_censo_2024.py`. El script
+# valida los totales contra el servicio y se cae si cambiaron, así que el archivo
+# no aporta nada en el historial.
+data/processed/censo/
+
 # Derivados del modelo regional del GORE: ~18 MB que se regeneran con
 # `scripts/15_gore_amenaza.py`. Lo que el visor consume es la versión recortada
 # de `web/data/gore/`, que sí se versiona.
