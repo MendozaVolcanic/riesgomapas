@@ -154,3 +154,38 @@ laminas:
         ventana_celdas: 5
         densidad_minima: 8
     area_minima_m2: 2000
+
+  # ---------------------------------------------------------------------------
+  # ❌ RECHAZADA — no se publica. Se deja documentada para que nadie la reintente.
+  #
+  # `dga-sit449-malleco-vergara-2019`, lámina 5432-PLA-012 del álbum de planos
+  # del Sistema de Alerta Temprana de crecidas del Biobío (DGA, 2019).
+  #
+  # La buscamos porque su título dice «Mapa Inundación Subcuenca Ríos Malleco y
+  # Vergara» y prometía ser la única cartografía que alcanzara a Ercilla y Los
+  # Sauces. Se georreferenció bien —escala verificada en ambos ejes con 0,09 % de
+  # diferencia, y los puntos de SENAPRED caen exactos sobre Renaico, Angol, Los
+  # Sauces, Collipulli y Ercilla— y aun así NO SIRVE:
+  #
+  #   · Las «Zonas de Riesgo de Inundación» que dibuja están TODAS en el corredor
+  #     del Biobío, entre Nacimiento y Negrete, fuera de La Araucanía. Dentro de
+  #     la subcuenca Malleco-Vergara no hay ni un polígono de riesgo: la subcuenca
+  #     aparece como marco de contexto, no como área mapeada.
+  #   · 0 de 77 puntos críticos de SENAPRED de Malleco quedan a menos de 300 m.
+  #     El más cercano está a 504 m y la mayoría entre 4 y 16 km.
+  #   · Contra el modelo del GORE 2016 en el mismo marco: 11 ha de intersección
+  #     sobre 10.887, o sea 0,1 %. Desplazarla hasta 3 km en cualquier dirección
+  #     no mejora nada, así que tampoco es un corrimiento.
+  #
+  # LECCIÓN: el título de una lámina nombra su MARCO, no necesariamente lo que
+  # mapea. Antes de invertir en georreferenciar hay que mirar dónde caen las
+  # clases de la leyenda, no dónde llega la hoja.
+
+  # ---------------------------------------------------------------------------
+  # La única cartografía de inundación que alcanza a Ercilla y Los Sauces, las
+  # dos comunas de Malleco sin ningún documento propio. Viene del álbum de planos
+  # del Sistema de Alerta Temprana de crecidas del Biobío, cuyo marco se extiende
+  # sobre la subcuenca de los ríos Malleco y Vergara.
+  #
+  # ⚠️ Es gruesa: 43,8 m/píxel, comparable al modelo regional del GORE. No es una
+  # ganancia de precisión, es una ganancia de COBERTURA donde no hay nada.

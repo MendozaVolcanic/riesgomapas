@@ -76,6 +76,25 @@ SALIDA = DATA_PROC / "laminas"
 
 # ---------------------------------------------------------------- imagen
 
+def renderizar(pdf: Path, pagina: int, escala: float) -> Image.Image:
+    """Rasteriza la página completa.
+
+    Hace falta cuando la lámina NO es una imagen incrustada sino un dibujo
+    vectorial: las láminas de plóter de la DGA traen el mapa como ~1.500 trazos
+    más unas pocas imágenes sueltas, así que extraer «la imagen» devuelve un
+    logo o un recuadro, no el mapa.
+
+    La escala se declara en la configuración y no se elige sola, porque las
+    posiciones de la retícula se anotan en píxeles de ESTE render: cambiarla
+    invalidaría los rótulos ya leídos.
+    """
+    doc = pdfium.PdfDocument(str(pdf))
+    try:
+        return doc[pagina - 1].render(scale=escala).to_pil().convert("RGB")
+    finally:
+        doc.close()
+
+
 def imagenes_de(pdf: Path, pagina: int) -> list[Image.Image]:
     """Imágenes incrustadas en una página, en orden de aparición."""
     doc = pdfium.PdfDocument(str(pdf))
@@ -282,13 +301,18 @@ def procesar(cfg: dict, region: dict) -> dict | None:
         log(f"  [{cfg['id']}] falta el PDF: {pdf}")
         return None
 
-    ims = imagenes_de(pdf, cfg["pagina"])
-    idx = cfg.get("imagen", 0)
-    if idx >= len(ims):
-        log(f"  [{cfg['id']}] la página {cfg['pagina']} tiene {len(ims)} imagen(es), "
-            f"se pidió la #{idx}")
-        return None
-    a = np.array(ims[idx]).astype(int)
+    if cfg.get("renderizar"):
+        im = renderizar(pdf, cfg["pagina"], float(cfg["renderizar"]))
+        log(f"  página rasterizada a escala {cfg['renderizar']}")
+    else:
+        ims = imagenes_de(pdf, cfg["pagina"])
+        idx = cfg.get("imagen", 0)
+        if idx >= len(ims):
+            log(f"  [{cfg['id']}] la página {cfg['pagina']} tiene {len(ims)} "
+                f"imagen(es), se pidió la #{idx}")
+            return None
+        im = ims[idx]
+    a = np.array(im).astype(int)
     h, w, _ = a.shape
     log(f"  imagen {w}×{h} px")
 
@@ -306,6 +330,20 @@ def procesar(cfg: dict, region: dict) -> dict | None:
 
     # Distancia a cada color de la leyenda; cada píxel se asigna al más cercano
     # dentro de la tolerancia, para que «Alto» y «Medio» no se solapen.
+    # Una lámina de plóter suele traer VARIOS mapas en la misma hoja: el de
+    # detalle, uno general de contexto y uno de ubicación regional. Todos usan
+    # los mismos colores de leyenda y están a escalas distintas, así que
+    # clasificar la hoja entera georreferencia el mapa de contexto con la afín
+    # del de detalle — y produce polígonos plausibles en el lugar equivocado.
+    # `excluir_x` recorta a la derecha del mapa que sí corresponde.
+    if cfg.get("excluir_x"):
+        a = a[:, :int(cfg["excluir_x"])]
+        log(f"  recortado a los primeros {cfg['excluir_x']} px de ancho "
+            "(el resto de la hoja son otros mapas)")
+    if cfg.get("excluir_y"):
+        a = a[:int(cfg["excluir_y"]), :]
+        log(f"  recortado a los primeros {cfg['excluir_y']} px de alto")
+
     dists = [np.linalg.norm(a - np.array(c["rgb"]), axis=2) for c in cfg["clases"]]
     apilado = np.stack(dists)
     ganador = apilado.argmin(0)

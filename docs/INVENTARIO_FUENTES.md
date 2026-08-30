@@ -322,14 +322,44 @@ La lámina **5432-PLA-012, «Mapa Inundación Subcuenca Ríos Malleco y Vergara�
 5775000–5825000 N—, declara **UTM 19S WGS84** y su leyenda distingue «Zonas de
 Riesgo de Inundación» de «Zonas de Riesgo de Inundación Plan Maestro».
 
-**Cubre Angol, Renaico, Collipulli, Los Sauces y Ercilla** — o sea, incluye a las
-**dos comunas de Malleco que hoy no tienen ningún documento**. Es el formato
-exacto que consume `08_georreferenciar_grilla.py`.
+### ❌ …y NO sirve. Verificado el 30-ago-2026.
 
-⚠️ Dos salvedades verificadas: la página **no tiene capa de texto** (0
-caracteres, 1.490 trazos), así que los rótulos son ráster y necesitan lectura a
-ojo o puntos de control a mano; y la leyenda declara como fuente al **Gobierno
-Regional del Biobío**, o sea es recopilación, no modelación nueva.
+Prometía ser la única cartografía que alcanzara a Ercilla y Los Sauces. Se
+vectorizó y **se descartó**. Vale la pena contar cómo se descubrió, porque el
+error era convincente:
+
+Se georreferenció **bien**: escala verificada en ambos ejes con 0,09 % de
+diferencia, y al superponer los puntos críticos de SENAPRED caen **exactos**
+sobre Renaico, Angol, Los Sauces, Collipulli y Ercilla. La posición no era el
+problema.
+
+El problema es qué mapea. Las «Zonas de Riesgo de Inundación» que dibuja están
+**todas en el corredor del Biobío**, entre Nacimiento y Negrete, fuera de La
+Araucanía. Dentro de la subcuenca Malleco–Vergara —el polígono rosado, donde
+están todas nuestras comunas— **no hay ni un solo polígono de riesgo**: la
+subcuenca aparece como marco de contexto, no como área mapeada.
+
+Las tres comprobaciones, por si alguien quiere rehacerlas:
+
+| Prueba | Resultado |
+|---|---|
+| Puntos SENAPRED de Malleco a ≤300 m | **0 de 77**; el más cercano a 504 m, la mayoría entre 4 y 16 km |
+| Intersección con el modelo GORE 2016 en el mismo marco | **11 ha de 10.887 = 0,1 %** |
+| ¿Es un corrimiento? | No: desplazarla hasta 3 km en cualquier dirección no mejora la coincidencia |
+
+> **La lección, y es reutilizable**: el título de una lámina nombra su **marco**,
+> no necesariamente lo que mapea. «Mapa Inundación Subcuenca Ríos Malleco y
+> Vergara» describe la hoja, no su contenido. Antes de invertir en
+> georreferenciar hay que mirar **dónde caen las clases de la leyenda**, no hasta
+> dónde llega la hoja.
+
+Queda en `config/laminas.yaml` como bloque comentado con el detalle, para que
+nadie la reintente.
+
+⚠️ Otras dos salvedades verificadas: la página **no tiene capa de texto** (0
+caracteres, 1.490 trazos vectoriales), así que hubo que rasterizarla —para eso se
+agregó el modo `renderizar:` al script 18—; y la leyenda declara como fuente al
+**Gobierno Regional del Biobío**, o sea es recopilación, no modelación nueva.
 
 ### Plan Maestro de Aguas Lluvias de Angol (2018) — con hidráulica de verdad
 
