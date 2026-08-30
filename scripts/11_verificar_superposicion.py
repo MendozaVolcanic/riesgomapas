@@ -12,6 +12,8 @@ Uso:
     python 11_verificar_superposicion.py                    # el primer plano
     python 11_verificar_superposicion.py Vilcún_p007        # por nombre
     python 11_verificar_superposicion.py --todos
+
+Salida: data/processed/verificacion/verif_<plano>.jpg
 """
 from __future__ import annotations
 

@@ -611,8 +611,19 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
         aud.ok(f"«apagar todo» apaga las 8 capas [{etq}]")
     else:
         aud.falla(f"apagar todo [{etq}]", f"quedaron {8 - apagadas} encendidas")
-    page.locator("#cap-areas").click(timeout=3000)
-    page.locator("#cap-puntos").click(timeout=3000)   # volver al estado inicial
+    # Restaurar el estado inicial por ESTADO, no por clic.
+    #
+    # Restaurar clicando dependía de que las casillas siguieran visibles y
+    # alcanzables en ese momento, y no siempre lo están: el bloque anterior
+    # cambia de pestaña y despliega paneles. Un clic que se cae acá tumba la
+    # auditoría entera por un detalle de limpieza, no por un defecto del visor.
+    page.evaluate("""
+        () => { for (const [id, v] of [['cap-areas', true], ['cap-puntos', true]]) {
+            const el = document.getElementById(id);
+            if (el && el.checked !== v) { el.checked = v;
+                el.dispatchEvent(new Event('change')); } } }
+    """)
+    page.wait_for_timeout(200)
 
     # ------------------------------------------- los dos mapas base
     #

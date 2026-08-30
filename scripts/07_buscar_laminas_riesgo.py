@@ -22,6 +22,9 @@ Uso:
     python 07_buscar_laminas_riesgo.py --solo-listar
     python 07_buscar_laminas_riesgo.py --prioridad planos --max-mb 60
     python 07_buscar_laminas_riesgo.py --comuna Angol
+
+Salida: data/processed/eae/laminas_candidatas_<prioridad>.json  (se FUSIONA
+        con lo que ya había; ver regla 5 de docs/REGLAS.md)
 """
 from __future__ import annotations
 

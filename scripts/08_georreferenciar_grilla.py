@@ -35,6 +35,9 @@ Controles que aplica antes de dar nada por bueno:
 Uso:
     python 08_georreferenciar_grilla.py <pdf> --pagina 7
     python 08_georreferenciar_grilla.py --todas          # todas las candidatas
+
+Salida: data/processed/georreferenciado/*.tif + *.json
+        data/processed/eae/georreferenciacion_grilla.json
 """
 from __future__ import annotations
 

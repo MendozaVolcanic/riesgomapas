@@ -185,17 +185,15 @@ def main() -> None:
     origen = DATA_PROC / "georreferenciado"
     tifs = sorted(origen.glob("*.tif"))
     if not tifs:
-        raise SystemExit("no hay GeoTIFF — corre antes el script 08")
+        raise SystemExit(
+            f"no hay ningún GeoTIFF en {origen}.\n"
+            "Los .tif no se versionan (298 MB): en un clon limpio hay que "
+            "regenerarlos antes con:\n"
+            "    python scripts/08_georreferenciar_grilla.py --todas\n"
+            "que a su vez necesita los PDF de data/raw/ (scripts 03 y 12).\n"
+            "No se reescribe web/data/planos/indice.json para no borrar lo que "
+            "ya está publicado.")
 
-    # Metadatos del ajuste, para no publicar nada sin su error declarado.
-    reportes = {}
-    for j in origen.glob("*.json"):
-        try:
-            reportes[j.stem] = json.loads(j.read_text(encoding="utf-8"))
-        except Exception:  # noqa: BLE001
-            pass
-
-    destino_dir = WEB_DATA / "planos"
     log(f"{len(tifs)} planos georreferenciados a publicar")
     items = []
     # Un mismo plano puede venir repetido en el expediente: el anteproyecto se

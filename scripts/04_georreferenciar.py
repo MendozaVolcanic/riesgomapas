@@ -29,6 +29,8 @@ Uso:
 
 `puntos.json` también acepta el formato `.points` que exporta el Georreferenciador
 de QGIS, que es como se van a producir los GCP en la práctica.
+
+Salida: data/processed/georreferenciado/<lamina>.tif + su .json de procedencia
 """
 from __future__ import annotations
 

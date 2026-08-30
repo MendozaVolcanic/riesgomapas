@@ -388,6 +388,21 @@ que el proyecto entero existe para evitar.
 fusionan, se pierde lo único que hace confiable a este proyecto: poder decir de
 dónde salió cada borde.
 
+## Antes de tocar nada, lee las reglas
+
+`docs/REGLAS.md` del repositorio. Son doce y todas nacieron de un error real que
+ya se cometió. Las cuatro que más te van a tocar:
+
+- Las **cuatro capas de evidencia nunca se fusionan**.
+- **Nunca se inventa un valor**: si la fuente no lo dice, va «no declarado».
+- Los **índices agregados se fusionan**, jamás se sobrescriben. Este error mordió
+  cuatro veces y su síntoma es mudo.
+- **El título de una lámina nombra su marco, no lo que mapea.** Mira dónde caen
+  las clases de la leyenda antes de invertir horas en georreferenciarla.
+
+⚠️ Y ojo: **la numeración de los scripts NO es el orden de ejecución.** El orden
+real está en `docs/REGLAS.md`.
+
 ## Reglas que hay que respetar al entregar
 
 1. **Todo lo que produzcas lleva su procedencia**: fuente, año, método y error.

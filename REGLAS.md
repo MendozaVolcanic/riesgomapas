@@ -166,6 +166,23 @@ PEGH están ahí: existen, se bajan, y **no traen cartografía de inundación**
 
 ---
 
+### 5.4 El título de una lámina nombra su MARCO, no lo que mapea
+
+Descubierto el 30-ago-2026 y caro: la lámina «Mapa Inundación Subcuenca Ríos
+Malleco y Vergara» de la DGA (SIT N°449) se bajó y se vectorizó porque prometía
+ser la única cartografía que alcanzara a Ercilla y Los Sauces.
+
+Se georreferenció **perfecto** —escala verificada en ambos ejes con 0,09 % de
+diferencia, y los puntos de SENAPRED caen exactos sobre cada pueblo— y aun así no
+mapea **ni un solo polígono de riesgo** dentro de esa subcuenca: el rojo de la
+leyenda está todo en el corredor del Biobío. La subcuenca era el marco del mapa,
+no su contenido.
+
+**Antes de invertir en georreferenciar, mirar dónde caen las clases de la
+leyenda, no hasta dónde llega la hoja.** Y validar siempre contra algo que no
+haya participado en la derivación: 0 de 77 puntos críticos a menos de 300 m, y
+0,1 % de intersección con el modelo del GORE, lo dijeron sin ambigüedad.
+
 ## 6. Sobre el orden del repositorio
 
 ### 6.1 El número del script NO es el orden de ejecución
