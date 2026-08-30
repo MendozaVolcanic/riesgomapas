@@ -310,6 +310,12 @@ def main() -> None:
     if repetidos:
         raise SystemExit(f"nombres de comuna que colisionan al shardear: {repetidos}")
 
+    # Un archivo por comuna. Hoy el visor NO los consume —carga la capa
+    # completa— y aun así se publican, por dos razones: la auditoría de datos los
+    # usa para verificar que el shardeo no pierda puntos por colisión de nombres,
+    # y son la vía para cargar por comuna cuando el peso del archivo único
+    # empiece a doler en celulares de gama baja. Si algún día se decide sacarlos,
+    # hay que sacarlos TAMBIÉN de tests/auditoria_datos.py, no sólo del disco.
     dir_shards = WEB_DATA / "puntos-criticos"
     dir_shards.mkdir(parents=True, exist_ok=True)
     indice = []
