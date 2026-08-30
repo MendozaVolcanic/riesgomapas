@@ -60,6 +60,7 @@ const estado = {
   ultimo: null,        // último resultado, para compartir
   base: 'calles',      // mapa base activo: 'calles' o 'satelite'
   estadoComunas: null, // qué tiene y qué le falta a cada comuna
+  laminas: null,       // capa A DERIVADA: láminas que vectorizamos nosotros
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -98,6 +99,13 @@ async function cargarDatos() {
   // hay ningún mapa de inundación» es un hecho verificable que no predice nada
   // y no asusta a nadie hacia una mala decisión, al revés que un veredicto
   // sobre una casa. Ver docs/DIFUSION.md §0b.
+  // Capa A DERIVADA: láminas que convertimos nosotros desde documentos
+  // impresos. Va aparte de `areasRiesgo` a propósito y nunca se fusiona: el
+  // vectorial del MINVU tiene efecto legal y esto no.
+  try {
+    estado.laminas = await cargarJSON('data/laminas/vectorizadas.geojson');
+  } catch { estado.laminas = null; }
+
   try {
     estado.estadoComunas =
       (await cargarJSON('data/estado-comunas.json')).comunas || [];
@@ -611,6 +619,15 @@ function resumen(res, etiqueta) {
 /* ----------------------------------------------------------------- render */
 
 const ICONO = { alto: '⚠️', medio: '⚡', bajo: 'ℹ️', sindato: '❔' };
+
+/* Cómo se nombra cada fenómeno hídrico en pantalla. Sólo se muestra cuando NO
+ * es fluvial: el visor es de inundación fluvial, así que lo que hay que
+ * advertir es cuando un polígono declara otra cosa. */
+const FENOMENO = {
+  anegamiento: 'anegamiento, no desborde',
+  napa_freatica: 'afloramiento de napa',
+  litoral: 'inundación litoral (marejada), no fluvial',
+};
 const CLASE_NIVEL = {
   'Muy Alto': 'p-muyalto', 'Alto': 'p-alto', 'Medio': 'p-medio', 'Bajo': 'p-bajo',
 };
@@ -665,6 +682,14 @@ function render(res, etiqueta, lon, lat) {
     for (const a of res.areas) {
       const p = a.properties;
       html += `<li><strong>${esc(p.clasificacion || 'Área de riesgo')}</strong>`;
+      // El fenómeno, dicho aparte del código de la zona. No es lo mismo que el
+      // río se salga a que el colector no dé abasto: otra física, otra
+      // mitigación y otro servicio a quién reclamarle. El sitio argumenta esa
+      // distinción en todas partes y aun así los mostraba a todos juntos.
+      if (p.tipo_hidrico && p.tipo_hidrico !== 'fluvial') {
+        html += ` <span class="sello sello-anteproyecto">${esc(
+          FENOMENO[p.tipo_hidrico] || p.tipo_hidrico)}</span>`;
+      }
       if (p.zona) html += ` <span class="incert">(zona ${esc(p.zona)})</span>`;
       if (p.usos_prohibidos) {
         html += `<br><span class="incert">Usos prohibidos: ${esc(p.usos_prohibidos)}</span>`;
@@ -1521,6 +1546,23 @@ function iniciarMapa() {
       // es lo que responde "el agua llegó hasta acá el tal día" con toda la ficha
       // detrás. Un globo con menos información sería un peor destino del clic.
     }
+    if (estado.laminas) {
+      m.addSource('lam', { type: 'geojson', data: estado.laminas });
+      // ACHURADO, no relleno sólido: la simbología tiene que decir sola que
+      // esto no es el vectorial oficial. Un relleno igual al de la capa
+      // normativa haría pasar por instrumento legal algo que construimos
+      // nosotros desde una figura impresa.
+      m.addLayer({
+        id: 'lam-fill', type: 'fill', source: 'lam',
+        layout: { visibility: 'none' },
+        paint: { 'fill-color': '#c98a1e', 'fill-opacity': 0.28 },
+      });
+      m.addLayer({
+        id: 'lam-line', type: 'line', source: 'lam',
+        layout: { visibility: 'none' },
+        paint: { 'line-color': '#c98a1e', 'line-width': 1.4, 'line-dasharray': [3, 2] },
+      });
+    }
     if (estado.areasRiesgo) {
       m.addSource('ar', { type: 'geojson', data: estado.areasRiesgo });
       m.addLayer({
@@ -1651,6 +1693,18 @@ function iniciarMapa() {
   const alternar = (id, capa) => $(id).addEventListener('change', (e) => {
     if (m.getLayer(capa)) {
       m.setLayoutProperty(capa, 'visibility', e.target.checked ? 'visible' : 'none');
+    }
+  });
+  // La capa derivada enciende relleno y borde a la vez: el achurado punteado
+  // del borde es lo que la distingue de la normativa.
+  $('#cap-derivadas').addEventListener('change', (e) => {
+    const v = e.target.checked ? 'visible' : 'none';
+    for (const c of ['lam-fill', 'lam-line']) {
+      if (m.getLayer(c)) m.setLayoutProperty(c, 'visibility', v);
+    }
+    if (e.target.checked && !estado.laminas) {
+      elEstado().textContent = 'Las láminas vectorizadas no están en esta '
+        + 'instalación: corre el script 19 para publicarlas.';
     }
   });
   alternar('#cap-puntos', 'pc-circ');
@@ -1855,8 +1909,8 @@ function enlazarInterfaz() {
   // Encender / apagar todo. Con las capas agrupadas por familia, comparar «lo
   // que dice la norma» contra «lo que se midió» es el gesto más útil del visor,
   // y a mano son siete toques.
-  const CASILLAS = ['cap-areas', 'cap-planos', 'cap-sar', 'cap-gore', 'cap-jrc',
-                    'cap-puntos', 'cap-camp'];
+  const CASILLAS = ['cap-areas', 'cap-derivadas', 'cap-planos', 'cap-sar',
+                    'cap-gore', 'cap-jrc', 'cap-puntos', 'cap-camp'];
   const todas = (encender) => {
     for (const id of CASILLAS) {
       const el = $(`#${id}`);

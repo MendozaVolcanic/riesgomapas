@@ -10,6 +10,8 @@ data/processed/georreferenciado/*.tif
 # `18_vectorizar_laminas.py --inspeccionar` y sólo sirven para que una persona
 # lea los rótulos UTM una vez.
 data/processed/laminas/_inspeccion/
+data/processed/verificacion/
+data/processed/paquete_*/
 
 # Censo 2024: 73 MB que se regeneran con `scripts/16_censo_2024.py`. El script
 # valida los totales contra el servicio y se cae si cambiaron, así que el archivo

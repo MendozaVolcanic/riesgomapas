@@ -298,7 +298,12 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     #     textura de ~870 KB en memoria de video y se acumulaban al panear.
     page.evaluate("() => irAPestana('respuesta', false)")
     page.evaluate("() => document.querySelector('details.capas-plegable').open = true")
-    page.wait_for_timeout(200)
+    # El panel del mapa venía OCULTO del bloque anterior, así que MapLibre midió
+    # cero. Tras volver a mostrarlo hay que dejar que se reasiente: si no,
+    # `getBounds()` devuelve la vista vieja, `planosEnVista()` no encuentra
+    # ninguno y la comprobación siguiente se queda sin nada que mirar.
+    page.evaluate("() => estado.mapa.resize()")
+    page.wait_for_timeout(800)
     # Hay que ACERCARSE primero: los planos sólo se cargan desde zoom 11, así que
     # comprobar la liberación a escala regional pasaría sin haber cargado ninguno
     # —«0 capas → 0 capas»— y no probaría nada.
@@ -306,7 +311,7 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
                   "if (!p) return; const b = p.bounds_wgs84; "
                   "estado.mapa.jumpTo({center: [(b[0]+b[2])/2, (b[1]+b[3])/2], "
                   "zoom: 13}); }")
-    page.wait_for_timeout(600)
+    page.wait_for_timeout(900)
     page.locator("#cap-planos").click(timeout=3000)
     page.wait_for_timeout(3500)
     con = page.evaluate("() => estado.mapa.getStyle().layers.filter(l => "
@@ -445,8 +450,29 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     else:
         aud.falla(f"sello de tramitación [{etq}]",
                   "la capa de planos no dice que son anteproyectos")
-    for cid in ["cap-areas", "cap-planos", "cap-puntos", "cap-camp", "cap-jrc",
-                "cap-sar", "cap-gore"]:
+    # La capa DERIVADA existe y va achurada, no rellena. Es lo que impide que
+    # una geometría que construimos nosotros desde una figura impresa se lea
+    # como el vectorial oficial. Y el inventario la anuncia por comuna: si el
+    # archivo no estuviera publicado, el sitio prometería evidencia invisible.
+    if page.evaluate("() => !!estado.laminas"):
+        n = page.evaluate("() => estado.laminas.features.length")
+        aud.ok(f"las láminas vectorizadas están publicadas [{etq}]", f"{n} polígonos")
+        guiones = page.evaluate(
+            "() => estado.mapa.getLayer('lam-line') && "
+            "estado.mapa.getPaintProperty('lam-line','line-dasharray')")
+        if guiones:
+            aud.ok(f"la capa derivada se dibuja achurada [{etq}]")
+        else:
+            aud.falla(f"simbología de la capa derivada [{etq}]",
+                      "se dibuja igual que la normativa; se leería como "
+                      "instrumento legal sin serlo")
+    else:
+        aud.falla(f"láminas vectorizadas [{etq}]",
+                  "el inventario las cuenta por comuna pero no están publicadas: "
+                  "el sitio promete evidencia que no se puede ver")
+
+    for cid in ["cap-areas", "cap-derivadas", "cap-planos", "cap-puntos",
+                "cap-camp", "cap-jrc", "cap-sar", "cap-gore"]:
         el = page.locator(f"#{cid}")
         if el.count() == 0:
             aud.falla(f"control #{cid} [{etq}]", "no existe en el DOM")
@@ -568,21 +594,23 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     page.locator("#btn-capas-todas").click(timeout=3000)
     page.wait_for_timeout(400)
     prendidas = page.evaluate(
-        "() => ['cap-areas','cap-planos','cap-sar','cap-gore','cap-jrc','cap-puntos',"
-        "'cap-camp'].filter(i => document.getElementById(i).checked).length")
-    if prendidas == 7:
-        aud.ok(f"«encender todo» prende las 7 capas [{etq}]")
+        "() => ['cap-areas','cap-derivadas','cap-planos','cap-sar','cap-gore',"
+        "'cap-jrc','cap-puntos','cap-camp']"
+        ".filter(i => document.getElementById(i).checked).length")
+    if prendidas == 8:
+        aud.ok(f"«encender todo» prende las 8 capas [{etq}]")
     else:
-        aud.falla(f"encender todo [{etq}]", f"quedaron {prendidas} de 7")
+        aud.falla(f"encender todo [{etq}]", f"quedaron {prendidas} de 8")
     page.locator("#btn-capas-ninguna").click(timeout=3000)
     page.wait_for_timeout(400)
     apagadas = page.evaluate(
-        "() => ['cap-areas','cap-planos','cap-sar','cap-gore','cap-jrc','cap-puntos',"
-        "'cap-camp'].filter(i => !document.getElementById(i).checked).length")
-    if apagadas == 7:
-        aud.ok(f"«apagar todo» apaga las 7 capas [{etq}]")
+        "() => ['cap-areas','cap-derivadas','cap-planos','cap-sar','cap-gore',"
+        "'cap-jrc','cap-puntos','cap-camp']"
+        ".filter(i => !document.getElementById(i).checked).length")
+    if apagadas == 8:
+        aud.ok(f"«apagar todo» apaga las 8 capas [{etq}]")
     else:
-        aud.falla(f"apagar todo [{etq}]", f"quedaron {7 - apagadas} encendidas")
+        aud.falla(f"apagar todo [{etq}]", f"quedaron {8 - apagadas} encendidas")
     page.locator("#cap-areas").click(timeout=3000)
     page.locator("#cap-puntos").click(timeout=3000)   # volver al estado inicial
 

@@ -54,19 +54,52 @@ ORG = "https://services3.arcgis.com/cTnMkBRk4HWkUCRo/arcgis/rest/services"
 NACIONAL = f"{ORG}/prc_riesgo_nacional_visor_P/FeatureServer/0"
 REGIONAL = f"{ORG}/09_PRC_La_Araucania/FeatureServer"
 
-# Qué clasificaciones cuentan como amenaza hídrica. La lista es explícita porque
-# el campo viene con erratas de origen ("REMOSION"), combinaciones y espacios
-# sobrantes: cualquier heurística silenciosa acá clasifica mal un polígono con
-# efecto legal.
-CLAVES_HIDRICAS = ("INUND", "ANEGAM", "QUEBRAD", "NAPAS")
+# Qué clasificaciones son de amenaza hídrica, y de qué TIPO.
+#
+# La lista es explícita porque el campo viene con erratas de origen ("REMOSION"),
+# combinaciones y espacios sobrantes: cualquier heurística silenciosa acá
+# clasifica mal un polígono con efecto legal.
+#
+# ⚠️ Y se separa el tipo, no sólo si es hídrica o no. El proyecto argumenta en
+# todas partes que **inundación fluvial y anegamiento por drenaje son fenómenos
+# distintos** —otra física, otra mitigación, otro servicio responsable— y lo
+# demuestra con datos: los puntos de colector no muestran ninguna señal contra la
+# huella satelital (×1,0, azar puro) mientras los de desborde dan ×2,1. Aun así,
+# esta capa los publicaba juntos bajo el titular «área de riesgo por inundación»:
+# 3 polígonos de anegamiento, 1 de afloramiento de napas y 2 de inundación
+# litoral —que es marejada o tsunami, ni siquiera es fluvial— entre los 63.
+#
+# Se conservan todos, porque son áreas de riesgo reales y con efecto legal, pero
+# cada uno dice QUÉ fenómeno declara y el visor deja de llamarlos a todos
+# inundación.
+TIPO_HIDRICO = {
+    "INUND LITORAL": "litoral",      # va primero: contiene "INUND" y NO es fluvial
+    "INUND": "fluvial",
+    "QUEBRAD": "fluvial",            # activación de quebrada: agua que sale de un cauce
+    "ANEGAM": "anegamiento",         # drenaje insuficiente, no desborde
+    "NAPAS": "napa_freatica",        # afloramiento, tampoco es desborde
+}
 
 
 def norm(t: str | None) -> str:
     return unicodedata.normalize("NFKD", (t or "")).encode("ascii", "ignore").decode().upper()
 
 
+def tipo_hidrico(clasificacion: str | None) -> str | None:
+    """Devuelve el fenómeno hídrico declarado, o None si no es hídrico.
+
+    El orden del diccionario importa: «INUNDACION LITORAL» contiene «INUND» y
+    NO es inundación fluvial, así que se comprueba antes.
+    """
+    n = norm(clasificacion)
+    for clave, tipo in TIPO_HIDRICO.items():
+        if all(parte in n for parte in clave.split()):
+            return tipo
+    return None
+
+
 def es_hidrica(clasificacion: str | None) -> bool:
-    return any(k in norm(clasificacion) for k in CLAVES_HIDRICAS)
+    return tipo_hidrico(clasificacion) is not None
 
 
 def a_feature(attrs: dict, geom: dict, origen: str) -> dict | None:
@@ -97,6 +130,10 @@ def a_feature(attrs: dict, geom: dict, origen: str) -> dict | None:
             "ordenanza_url": (attrs.get("URL") or "").strip() or None,
             "ordenanza_url_vigente": False,
             "es_inundacion": es_hidrica(cls),
+            # Qué fenómeno hídrico declara el instrumento. Es la diferencia entre
+            # «el río se sale» y «el colector no da abasto»: otra física, otra
+            # mitigación y otro servicio responsable.
+            "tipo_hidrico": tipo_hidrico(cls),
             "origen_capa": origen,
             **sello("MINVU — áreas de riesgo de instrumentos de planificación "
                     "territorial (Art. 2.1.17 OGUC)", None),
@@ -146,6 +183,8 @@ def desde_regional() -> list[dict]:
             for f in conv:
                 f["properties"]["es_inundacion"] = True
                 f["properties"]["clasificacion"] = f["properties"]["clasificacion"] or nom
+                if not f["properties"].get("tipo_hidrico"):
+                    f["properties"]["tipo_hidrico"] = tipo_hidrico(nom)
         out.extend(conv)
         log(f"  capa {capa['id']:2d} '{nom[:48]}': {len(conv)} polígonos")
     return out
@@ -313,8 +352,25 @@ def main() -> None:
         f"({len(anios)} comunas con año conocido)")
 
     escribir_geojson(feats, DATA_PROC / "areas_riesgo_prc_araucania.geojson", meta)
+
+    # Se publican TODOS los hídricos, pero cada uno diciendo qué fenómeno es.
+    #
+    # No se filtra a sólo fluvial porque un área de riesgo por anegamiento es un
+    # área de riesgo real, con efecto legal, y quien consulta su terreno la tiene
+    # que ver. Lo que no puede pasar es que se llamen todas «inundación»: el
+    # visor usa `tipo_hidrico` para titular cada una por lo que declara.
     inund = [f for f in feats if f["properties"]["es_inundacion"]]
+    sin_tipo = [f for f in inund if not f["properties"].get("tipo_hidrico")]
+    if sin_tipo:
+        raise SystemExit(
+            f"{len(sin_tipo)} polígono(s) marcados como hídricos sin fenómeno "
+            f"clasificado: {sorted({f['properties'].get('clasificacion') for f in sin_tipo})}. "
+            "Agrégalos a TIPO_HIDRICO. Publicarlos sin tipo los haría aparecer "
+            "como inundación fluvial, que es la mezcla que este proyecto existe "
+            "para no hacer.")
     escribir_geojson(inund, WEB_DATA / "areas-riesgo-inundacion.geojson", meta)
+    por_tipo = collections.Counter(f["properties"]["tipo_hidrico"] for f in inund)
+    log(f"  publicados por fenómeno: {dict(por_tipo)}")
 
     log("")
     log(f"TOTAL: {len(feats)} polígonos de área de riesgo")

@@ -291,6 +291,98 @@ Contenido de riesgo de inundación ya identificado en los anteproyectos 🔎:
   `Peligros_Geológicos_de_Flujos_Cuencas_Alta_Cordillera`), peligro volcánico y minería.
   → El supuesto inicial "SERNAGEOMIN solo tiene remociones" es **correcto**.
 
+
+## 2b. Los dos repositorios del MOP que faltaban (30-ago-2026) ✅ verificado
+
+**Corrección a §6b.** Ahí se anotó «DOH publica casi nada» tras mirar
+`doh.mop.gob.cl`. Era cierto de ese CMS y **falso del MOP**: el acervo vive en
+dos repositorios DSpace con API abierta que nadie había interrogado. Es el mismo
+error de razonamiento que con Sentinel-1 — se anotó una propiedad del *sitio*
+como si fuera del *organismo*.
+
+| Repositorio | API | Acceso |
+|---|---|---|
+| **«Kimen», DIRPLAN** | `repositoriodirplan.mop.gob.cl/biblioteca/server/api` | abierta, sin credenciales |
+| **Catálogo Documental DGA** (SNIA/PIA) | `snia.mop.gob.cl/PIA/server/api` | **403 a curl pelado; 200 con User-Agent de navegador + `Referer: https://snia.mop.gob.cl/PIA/`** |
+
+> **Regla que queda, y ya van tres veces**: un 403 o un 500 no significa
+> «cerrado». Antes de anotar una fuente como caída hay que reintentar con
+> encabezados de navegador real. Pasó con el GORE, con el SEIA y ahora con la
+> DGA.
+
+### El hallazgo que más rinde: SIT N°449 (DGA, 2019)
+
+**Álbum de planos del Sistema de Alerta Temprana de crecidas del Biobío**,
+febrero 2019. Ficha:
+`repositoriodirplan.mop.gob.cl/biblioteca/items/067efa9d-01d0-4060-abaf-78308fbd20c8`
+· PDF de 23,8 MB, verificado leyendo bytes.
+
+La lámina **5432-PLA-012, «Mapa Inundación Subcuenca Ríos Malleco y Vergara»**
+(página 13) trae **retícula UTM impresa y rotulada** —150000/175000/200000 E,
+5775000–5825000 N—, declara **UTM 19S WGS84** y su leyenda distingue «Zonas de
+Riesgo de Inundación» de «Zonas de Riesgo de Inundación Plan Maestro».
+
+**Cubre Angol, Renaico, Collipulli, Los Sauces y Ercilla** — o sea, incluye a las
+**dos comunas de Malleco que hoy no tienen ningún documento**. Es el formato
+exacto que consume `08_georreferenciar_grilla.py`.
+
+⚠️ Dos salvedades verificadas: la página **no tiene capa de texto** (0
+caracteres, 1.490 trazos), así que los rótulos son ráster y necesitan lectura a
+ojo o puntos de control a mano; y la leyenda declara como fuente al **Gobierno
+Regional del Biobío**, o sea es recopilación, no modelación nueva.
+
+### Plan Maestro de Aguas Lluvias de Angol (2018) — con hidráulica de verdad
+
+`repositoriodirplan.mop.gob.cl/biblioteca/items/ae38d1ec-…` · 14 MB. Es sólo el
+**Resumen Ejecutivo**, pero trae caudales de crecida T=2…100 para el Picoiquén y
+el Rehue, 92 puntos de inundación, y modelación **SWMM + Iber 2D**.
+
+Eso importa mucho: **es más reciente y con hidráulica** que el Estudio de Riesgo
+de 2013 que el proyecto ya vectorizó, que era álgebra de mapas sin caudales. Las
+manchas están en el informe final, que **no está publicado** — candidato directo
+a solicitud por Ley 20.285.
+
+En La Araucanía sólo existen plan maestro de Angol y el diagnóstico de Villarrica
+(2016). **Victoria, Traiguén y Collipulli no tienen.**
+
+### Los PEGH existen y NO sirven para esto
+
+Planes Estratégicos de Gestión Hídrica en Cuencas, descargables sin
+credenciales: **Imperial 2021-07** (309 pp) y **Biobío 2021-08** (284 pp). Se
+contaron sus figuras: 120 y 187 respectivamente, y **ninguna** lleva
+«inundación», «crecida», «amenaza» ni «riesgo» en el título. Queda anotado para
+no volver a mirarlos.
+
+### El GORE reparte los expedientes de PRC por Google Drive
+
+Ya **no responde 403** con encabezados de navegador. No publica el PROT ni el
+informe metodológico del modelo 2016 —que sigue siendo el pendiente—, pero
+reparte los **expedientes completos de Plan Regulador en una carpeta pública de
+Google Drive** que incluye las 11 comunas de Malleco:
+`drive.google.com/…/1eVpc0vrpnMFJjbgHbzgvC-4_V5yrry2Q`. Verificado bajando el
+`Estudio_Riesgo.pdf` de Angol.
+
+**Es la vía para Ercilla y Los Sauces**, que hoy no tienen ningún documento.
+
+### SEIA: se automatiza, y responde
+
+`POST seia.sea.gob.cl/busqueda/buscarProyectoResumenAction.php` con
+`selectRegion=9` devuelve **214 expedientes** en las 11 comunas de Malleco. Los
+anexos se bajan sin login: por ejemplo el «Anexo 01 Hidráulica» de la extracción
+de áridos Piedras Negras, Renaico (expediente 2145188301),
+`seia.sea.gob.cl/archivos/2019/12/11/01_Hidraulica.rar`, responde 200.
+🔎 Que ese anexo traiga mancha de inundación **no está verificado**: no se abrió.
+
+### Sin hallazgo
+
+- **Tesis**: no hay modelación hidráulica 2D en Malleco. La UdeC tiene hidrología
+  del Vergara (2024, 2025) — caudales, no manchas.
+  ⚠️ `repositoriodigital.ufro.cl` **ya no existe**; el vivo es `repositorio.ufro.cl`.
+- **Servicios OGC**: `ide.mop.gob.cl`, `geoportal.dga.mop.gob.cl` e `ide.cl` no
+  exponen GeoServer (404).
+- **CDA47 de la DGA** (1986): narra desbordes en Victoria, Traiguén y el camino
+  Lumaco–Purén, pero sus planos son de Carahue y Nueva Imperial.
+
 ---
 
 ## 3. Capa operacional — el hallazgo principal ✅ verificado

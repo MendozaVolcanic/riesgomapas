@@ -125,12 +125,47 @@ def main() -> None:
                    "laminas": sum(len(x.get("laminas") or []) for x in dd)}
 
     # Láminas que nosotros convertimos en geometría (capa A derivada).
+    #
+    # Y se PUBLICAN, no sólo se cuentan. El bloque de comuna anunciaba «N
+    # polígonos que convertimos nosotros» y esos polígonos no estaban en
+    # web/data/: prometer evidencia que no se puede ver es peor que no
+    # mencionarla. Van a un archivo aparte y con su propio sello, porque son
+    # producto DERIVADO y no pueden mezclarse con el vectorial del MINVU, que sí
+    # tiene efecto legal.
     vect: dict[str, int] = {}
+    derivados = []
     for f in sorted((DATA_PROC / "laminas").glob("*.geojson")):
         d = cargar(f)
         for ft in (d or {}).get("features", []):
-            vect[norm(ft["properties"].get("comuna"))] = \
-                vect.get(norm(ft["properties"].get("comuna")), 0) + 1
+            k2 = norm(ft["properties"].get("comuna"))
+            vect[k2] = vect.get(k2, 0) + 1
+            derivados.append({**ft, "properties": {**ft["properties"],
+                                                   "origen_lamina": f.stem}})
+    if derivados:
+        (WEB_DATA / "laminas").mkdir(exist_ok=True)
+        (WEB_DATA / "laminas" / "vectorizadas.geojson").write_text(json.dumps({
+            "procedencia": procedencia(
+                fuente="Láminas de peligro publicadas en documentos oficiales, "
+                       "vectorizadas por el proyecto",
+                url="",
+                metodo="Georreferenciación desde la retícula UTM impresa o desde "
+                       "los vértices rotulados del plano, y clasificación de las "
+                       "clases de la leyenda por color o por trama. El RMSE de "
+                       "cada lámina está en su archivo de origen, en "
+                       "data/processed/laminas/.",
+                capa_evidencia="A_normativo",
+                incertidumbre="PRODUCTO DERIVADO: la geometría la construimos "
+                              "nosotros a partir de una lámina impresa; el "
+                              "organismo NO la publica así. El contenido es del "
+                              "estudio original, con su año y su método; la "
+                              "ubicación y el trazado son nuestros. NO tiene el "
+                              "efecto legal del vectorial del MINVU.",
+                fecha_dato="según la lámina de origen"),
+            "type": "FeatureCollection", "features": derivados},
+            ensure_ascii=False), encoding="utf-8")
+        log(f"  láminas vectorizadas publicadas: {len(derivados)} polígonos "
+            f"→ web/data/laminas/vectorizadas.geojson")
+
 
     # --- armar la ficha por comuna ------------------------------------------
     salida = []

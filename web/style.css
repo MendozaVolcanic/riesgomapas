@@ -650,3 +650,10 @@ body.base-satelite .maplibregl-ctrl-attrib a { color: #eaf4ff; }
   background: color-mix(in srgb, var(--acento) 10%, var(--panel));
   border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
 }
+
+.m-derivadas { background: repeating-linear-gradient(45deg,
+  #c98a1e 0 3px, transparent 3px 6px), color-mix(in srgb, #c98a1e 25%, transparent); }
+.sello-derivado {
+  background: color-mix(in srgb, #c98a1e 18%, var(--panel));
+  border: 1px dotted color-mix(in srgb, #c98a1e 70%, transparent);
+}

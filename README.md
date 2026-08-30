@@ -18,7 +18,7 @@ evidencia, y construye lo que falta.
 > **Y el objetivo es dejar de hacer falta.** Si algún día existe un visor oficial
 > de inundaciones y este repositorio se puede archivar, el proyecto cumplió.
 
-📄 [Inventario de fuentes](docs/INVENTARIO_FUENTES.md) · [Propuesta y arquitectura](docs/PROPUESTA.md) · [Cómo publicarlo y difundirlo](docs/DIFUSION.md) · [Cómo continuar](docs/PROXIMA_SESION.md)
+📄 [**Reglas del proyecto**](REGLAS.md) · [Orden de ejecución](scripts/ORDEN.md) · [Inventario de fuentes](docs/INVENTARIO_FUENTES.md) · [Propuesta y arquitectura](docs/PROPUESTA.md) · [Cómo publicarlo y difundirlo](docs/DIFUSION.md) · [Cómo continuar](docs/PROXIMA_SESION.md)
 
 ---
 
