@@ -267,6 +267,12 @@ function planosQueCubren(lon, lat) {
 // mide menos de 50 px en pantalla —a zoom regional son 9x7 px, invisibles— y
 // cargar 23 imágenes de ~870 KB para no mostrar nada es lo peor de los dos
 // mundos: el usuario cree que el control no funciona mientras baja 19 MB.
+/** Las ocho casillas que encienden capas del mapa. Vive acá arriba porque la
+ *  usan dos cosas: el botón «todas / ninguna» y la sincronización que corre
+ *  cuando el mapa termina de agregar capas. */
+const CASILLAS_CAPAS = ['cap-areas', 'cap-derivadas', 'cap-planos', 'cap-sar',
+                        'cap-gore', 'cap-jrc', 'cap-puntos', 'cap-camp'];
+
 const ZOOM_MIN_PLANO = 11;
 const MAX_PLANOS_SIMULTANEOS = 6;
 
@@ -740,13 +746,13 @@ function porQue(res) {
       : `El estudio de riesgo de tu comuna (${esc(p.anio)}) marcó esta zona como
          <strong>${esc(String(p.clase).toLowerCase())}</strong>`}.
       Ese documento existe sólo en papel: la mancha la dibujamos nosotros desde
-      la lámina impresa, con ±${esc(String(incertidumbreBorde(res.laminas[0])))} m
+      la lámina impresa, con ±${esc(num(incertidumbreBorde(res.laminas[0])))} m
       de incertidumbre en el borde.`;
   }
   if (res.borde) {
     const i = incertidumbreBorde(res.borde.f);
     return `Estás a ${Math.round(res.borde.d)} metros del borde de un área marcada
-            como inundable. Ese borde tiene ±${i} m de incertidumbre${
+            como inundable. Ese borde tiene ±${num(i)} m de incertidumbre${
               estado.precisionPos ? ` y tu ubicación ±${Math.round(estado.precisionPos)} m` : ''},
             así que a esta distancia <strong>adentro y afuera no se distinguen</strong>.`;
   }
@@ -839,14 +845,24 @@ function esc(t) {
  *  mismo que una de 2022, y un modelo de 2016 no conoce las obras posteriores.
  *  Se lee del sello que cada feature trae pegado, no de una constante del
  *  frontend, para que no se pueda desincronizar del dato. */
+/** Un número en el español de Chile: coma decimal. El resto del sitio ya lo
+ *  hace en la ficha del satélite; la incertidumbre del borde salía «7.7 m». */
+function num(x) {
+  return String(x).replace('.', ',');
+}
+
 function atribucion(fc, primerFeature) {
   const p = primerFeature?.properties || {};
   const proc = fc?.procedencia || {};
   const fuente = p.fuente || proc.fuente || 'fuente no declarada';
-  const anio = p.anio || proc.fecha_dato || 'año no declarado';
+  // Sin un polígono concreto no hay año que atribuir. Antes se caía al año de
+  // la procedencia, que describe la descarga y no el instrumento: bajo un punto
+  // de Angol —que no tiene ni un polígono en el vectorial del MINVU— salía
+  // «Año: 2010», que es el del plan de Temuco.
+  const anio = primerFeature ? (p.anio || proc.fecha_dato || 'año no declarado') : null;
   const bajado = (proc.generado || '').slice(0, 10);
-  return `<p class="fuente"><strong>Fuente:</strong> ${esc(fuente)} · ` +
-         `<strong>Año:</strong> ${esc(anio)}` +
+  return `<p class="fuente"><strong>Fuente:</strong> ${esc(fuente)}` +
+         (anio ? ` · <strong>Año:</strong> ${esc(anio)}` : '') +
          (bajado ? ` · <span class="incert">datos obtenidos ${esc(bajado)}</span>` : '') +
          `</p>`;
 }
@@ -931,7 +947,10 @@ function render(res, etiqueta, lon, lat) {
              declarado ningún área de riesgo. Consulta en la Dirección de Obras de tu
              municipalidad.</p>`;
   }
-  html += atribucion(estado.areasRiesgo, res.areas[0] || estado.areasRiesgo?.features[0]);
+  // Sin polígono en el punto no hay año que atribuir: pasarle el primero de la
+  // capa mostraba el año del instrumento de OTRA comuna —«Año: 2010», que es el
+  // de Temuco— bajo un punto de Angol que no tiene ni un polígono del MINVU.
+  html += atribucion(estado.areasRiesgo, res.areas[0] || null);
   if (res.areas.length) {
     const conEae = res.areas.filter((a) => a.properties.eae_fecha_ingreso);
     if (conEae.length) {
@@ -988,7 +1007,7 @@ function render(res, etiqueta, lon, lat) {
         : `; es un levantamiento de riesgo, no una norma`}. Lo que construimos
       nosotros es el <strong>trazado</strong>: esa cartografía existe sólo como
       figura impresa, así que la georreferenciamos y la convertimos en geometría.
-      El borde tiene ±${esc(String(incertidumbreBorde(res.laminas[0])))} m de
+      El borde tiene ±${esc(num(incertidumbreBorde(res.laminas[0])))} m de
       incertidumbre, y no es el borde del vectorial oficial del MINVU.</p>`;
     html += atribucion(estado.laminas, res.laminas[0]);
     html += `</div>`;
@@ -1800,7 +1819,16 @@ function iniciarMapa() {
   // sin ningún error visible.
   let capasPuestas = false;
   const agregarCapas = () => {
-    if (capasPuestas || !m.isStyleLoaded()) return;
+    // La condición es que el estilo ACEPTE capas, no que esté «cargado».
+    // `isStyleLoaded()` sólo es cierto cuando además terminaron de bajar las
+    // teselas del mapa base, así que sin señal —o con el servidor de teselas
+    // caído, que es el escenario para el que existe este sitio— se quedaba
+    // permanentemente en falso y el mapa nunca recibía NINGUNA capa de datos:
+    // ni áreas de riesgo, ni puntos críticos, ni la huella del satélite. Sin
+    // error y con las casillas ofreciendo encender lo que no existe. Que la
+    // capa base ya esté en el estilo sí es una condición sobre contenido, y es
+    // suficiente para agregar: el flag de más abajo evita repetirlo.
+    if (capasPuestas || !(m.getLayer('osm') || m.isStyleLoaded())) return;
     capasPuestas = true;
 
     // En tema oscuro el mapa base de OSM queda como un rectángulo blanco dentro
@@ -2001,9 +2029,46 @@ function iniciarMapa() {
 
   // Cada vez que el estilo se recarga hay que volver a fijar cuál base se
   // muestra: MapLibre la deja en su valor por defecto.
-  m.on('styledata', () => { agregarCapas(); aplicarBase(estado.base); });
-  m.on('load', () => { agregarCapas(); aplicarBase(estado.base); });
-  agregarCapas();
+  // Las capas se agregan apagadas y cada casilla las enciende. Si alguien marca
+  // una casilla ANTES de que su capa exista —el mapa tarda, la pestaña está en
+  // segundo plano, el dispositivo es lento— el manejador no encuentra la capa,
+  // no hace nada y no avisa: la casilla queda marcada y la capa apagada. La
+  // interfaz miente sobre lo que se está viendo, que es el mismo modo de falla
+  // que este proyecto persigue en los datos. Después de agregar capas se
+  // vuelven a aplicar las casillas ya marcadas, reusando la lógica de cada una.
+  const sincronizarCasillas = () => {
+    for (const id of CASILLAS_CAPAS) {
+      const el = $(`#${id}`);
+      if (el && el.checked) el.dispatchEvent(new Event('change'));
+    }
+  };
+  const intentar = () => { agregarCapas(); aplicarBase(estado.base); sincronizarCasillas(); };
+  m.on('styledata', intentar);
+  m.on('style.load', intentar);
+  m.on('load', intentar);
+  intentar();
+
+  // Y un reintento por RELOJ, que es la red de seguridad de todo lo anterior.
+  //
+  // `agregarCapas` no hace nada mientras `isStyleLoaded()` sea falso, y el
+  // estilo puede pasar a listo SIN emitir ningún evento más: entonces la última
+  // llamada llegó demasiado temprano, no hay una siguiente, y el mapa se queda
+  // con la base y NINGUNA capa de datos. Sin error, sin aviso, con las casillas
+  // ofreciendo encender capas que no existen. Visto el 7-sep-2026 en una
+  // pestaña nueva: estilo cargado, los siete GeoJSON en memoria, cero capas.
+  // Esperar por CONTENIDO y no por un evento es la misma regla que el proyecto
+  // ya aplica en sus pruebas (REGLAS §4.4).
+  let intentos = 0;
+  const reloj = setInterval(() => {
+    intentar();
+    if (m.getLayer('pc-circ') || ++intentos > 80) {   // ~20 s
+      clearInterval(reloj);
+      if (!m.getLayer('pc-circ')) {
+        elEstado().textContent = 'El mapa no pudo dibujar las capas de datos. '
+          + 'La consulta por dirección y por ubicación funciona igual.';
+      }
+    }
+  }, 250);
   aplicarBase(baseGuardada());
 
   const alternar = (id, capa) => $(id).addEventListener('change', (e) => {
@@ -2231,10 +2296,8 @@ function enlazarInterfaz() {
   // Encender / apagar todo. Con las capas agrupadas por familia, comparar «lo
   // que dice la norma» contra «lo que se midió» es el gesto más útil del visor,
   // y a mano son siete toques.
-  const CASILLAS = ['cap-areas', 'cap-derivadas', 'cap-planos', 'cap-sar',
-                    'cap-gore', 'cap-jrc', 'cap-puntos', 'cap-camp'];
   const todas = (encender) => {
-    for (const id of CASILLAS) {
+    for (const id of CASILLAS_CAPAS) {
       const el = $(`#${id}`);
       if (!el || el.checked === encender) continue;
       el.checked = encender;
