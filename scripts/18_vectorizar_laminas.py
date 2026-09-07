@@ -271,6 +271,33 @@ def mascara_por_trama(a, cfg_clase: dict, s_m_px: float, excluir_x: int | None):
 
 # ---------------------------------------------------------------- vectorizar
 
+def limpiar_por_grosor(cruda: np.ndarray, ancho: int) -> np.ndarray:
+    """Borra los rasgos más delgados que `ancho` píxeles SIN morder el borde de
+    los que conserva.
+
+    Lo obvio —y lo que había— es una apertura morfológica: erosionar y volver a
+    dilatar. Borra lo fino, sí, pero de paso muerde el borde de toda mancha que
+    conserva, y con un elemento de lado PAR la corre además un píxel entero,
+    porque el ancla queda descentrada. Medido el 7-sep-2026 con un cuadrado
+    sintético: entraba en 100..199 px y salía en 101..200, o sea que cada
+    polígono publicado quedaba un píxel al sureste de donde la lámina lo dibuja
+    —7,7 m en Angol, 5,3 m en Catripulli—. Y la mordida no era cosmética: se
+    llevaba el 25 % de la clase «Alto» y el 41 % de «Medio» de Angol, sobre todo
+    franjas delgadas a lo largo de esteros, que son riesgo legítimo y no ruido.
+
+    La reconstrucción hace lo que aquí se quiere: la erosión sólo DECIDE qué
+    componentes sobreviven, y las que sobreviven se devuelven enteras, con su
+    borde intacto y con las franjas finas que cuelgan de ellas.
+    """
+    import cv2
+
+    el = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (ancho, ancho))
+    marcador = cv2.erode(cruda.astype("uint8"), el).astype(bool)
+    _, etiquetas = cv2.connectedComponents(cruda.astype("uint8"), connectivity=8)
+    vivas = np.unique(etiquetas[marcador])
+    return np.isin(etiquetas, vivas[vivas > 0])
+
+
 def poligonos(mask: np.ndarray, transform, area_min: float):
     """Máscara booleana → geometrías en la proyección del transform."""
     from rasterio.features import shapes
@@ -377,10 +404,7 @@ def procesar(cfg: dict, region: dict) -> dict | None:
         cruda = (ganador == i) & (dmin < tol) & ~excluidas
         px_crudos = int(cruda.sum())
 
-        # Apertura morfológica: borra lo que sea más delgado que `ancho`. Es lo
-        # que saca la red hídrica, que comparte color con la clase «Alto».
-        k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (ancho, ancho))
-        limpia = cv2.morphologyEx(cruda.astype("uint8"), cv2.MORPH_OPEN, k).astype(bool)
+        limpia = limpiar_por_grosor(cruda, ancho)
         px_limpios = int(limpia.sum())
 
         gs = poligonos(limpia, transform, area_min)
@@ -436,9 +460,9 @@ def procesar(cfg: dict, region: dict) -> dict | None:
             f"del PDF de origen) por clasificación de los colores de su leyenda. "
             f"Georreferenciada desde la retícula UTM impresa: {nota_escala}. "
             f"Resolución de la figura: {s:.2f} m por píxel. Se descartan los "
-            f"rasgos de menos de {ancho} píxeles de ancho para no confundir la red "
-            f"hídrica —que se dibuja en el mismo color que la clase de mayor "
-            f"peligro— con área inundable. "
+            f"rasgos más delgados que {ancho} píxeles —texto, símbolos y trazos "
+            f"sueltos que comparten color con una clase—; lo que se conserva se "
+            f"conserva entero, sin recortarle el borde. "
             f"MÉTODO DEL ESTUDIO ORIGINAL: {cfg['metodo_original']}."
         ),
         capa_evidencia="A_normativo",

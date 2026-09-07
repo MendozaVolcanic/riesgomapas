@@ -64,7 +64,7 @@ laminas:
     # Descarta lo más delgado que esto: texto, símbolos y trazos sueltos que
     # comparten color con una clase. No corroe el borde de lo que conserva
     # —ver `limpiar_por_grosor` en el script— así que se puede exigir de verdad.
-    ancho_minimo_px: 4
+    ancho_minimo_px: 5
     # Descarta motas sueltas del antialiasing de una figura a 200 dpi.
     area_minima_m2: 2000
 
@@ -110,7 +110,7 @@ laminas:
       - { nombre: "Susceptibilidad alta",  rgb: [0, 116, 255] }
       - { nombre: "Susceptibilidad media", rgb: [191, 231, 255] }
     tolerancia_color: 40
-    ancho_minimo_px: 4
+    ancho_minimo_px: 5
     area_minima_m2: 2000
 
     # El cajetín de abajo a la derecha (información cartográfica + simbología),

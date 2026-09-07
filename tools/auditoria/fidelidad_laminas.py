@@ -114,6 +114,12 @@ def analizar_color(cfg: dict) -> dict:
     T = Affine(s, 0, e_ref - x_ref * s, 0, -s, n_ref + y_ref * s)
     tol = cfg.get("tolerancia_color", 45)
     ancho = int(cfg.get("ancho_minimo_px", 4))
+    # Las cajas de leyenda se excluyen igual que en el script: si no, la máscara
+    # «cruda» incluiría los cuadros de muestra y el IoU castigaría al publicado
+    # por NO traer la leyenda, que es justo lo que queremos que no traiga.
+    excluidas = np.zeros((h, w), bool)
+    for x0, y0, x1, y1 in (cfg.get("excluir_cajas") or []):
+        excluidas[int(y0):int(y1), int(x0):int(x1)] = True
     pub = publicados(lid, cfg["epsg"])
     dists = [np.linalg.norm(a - np.array(c["rgb"]), axis=2) for c in cfg["clases"]]
     apilado = np.stack(dists)
@@ -127,8 +133,12 @@ def analizar_color(cfg: dict) -> dict:
     colores = [(255, 0, 0), (255, 140, 0), (0, 200, 0)]
     for i, clase in enumerate(cfg["clases"]):
         nombre = clase["nombre"]
-        cruda = (ganador == i) & (dmin < tol)
-        limpia = cv2.morphologyEx(cruda.astype("uint8"), cv2.MORPH_OPEN, k).astype(bool)
+        cruda = (ganador == i) & (dmin < tol) & ~excluidas
+        # La limpieza se toma del propio script, no se re-implementa: así este
+        # instrumento no puede quedar midiendo una versión que ya no existe
+        # —pasó el 7-sep-2026, cuando la apertura pasó a reconstrucción y el
+        # control interno «IoU publicado vs limpia» se cayó de 0,98 a 0,88.
+        limpia = vec.limpiar_por_grosor(cruda, ancho)
         geoms = [g for g, _ in pub.get(nombre, [])]
         rast = rasterizar(geoms, T, (h, w))
         # control 1: el mismo GeoJSON corrido 5 px debe bajar el IoU
@@ -149,12 +159,15 @@ def analizar_color(cfg: dict) -> dict:
                 linea_px += area
                 bw, bh = int(st[j, cv2.CC_STAT_WIDTH]), int(st[j, cv2.CC_STAT_HEIGHT])
                 comp_linea.append((area, max(bw, bh)))
-        # leyenda: polígonos publicados cuyo centroide cae en la franja inferior (y > 0,75·h)
+        # Polígonos publicados cuyo centroide cae dentro de una caja declarada como
+        # leyenda. Antes se usaba la franja inferior (y > 0,75·h), que acusaba
+        # también a polígonos de mapa legítimos que viven abajo en la hoja.
         leyenda = []
         for g, p in pub.get(nombre, []):
             cx, cy = g.centroid.x, g.centroid.y
             px_, py_ = x_ref + (cx - e_ref) / s, y_ref + (n_ref - cy) / s
-            if py_ > 0.75 * h:
+            if any(x0 <= px_ <= x1 and y0 <= py_ <= y1
+                   for x0, y0, x1, y1 in (cfg.get("excluir_cajas") or [])):
                 leyenda.append({"px": [round(px_), round(py_)], "ha": p["hectareas"]})
         kmask, kdist, kcentro = km[i]
         res["clases"][nombre] = {
