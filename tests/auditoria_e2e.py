@@ -471,6 +471,85 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
                   "el inventario las cuenta por comuna pero no están publicadas: "
                   "el sitio promete evidencia que no se puede ver")
 
+    # --- La capa derivada tiene que llegar al VEREDICTO, no sólo al mapa -----
+    #
+    # Hasta el 7-sep-2026 estas comprobaciones no existían y por eso la
+    # auditoría daba 273/273 mientras el visor respondía «no cae dentro de un
+    # área de riesgo» a un punto dentro del AR-2a del plan regulador vigente de
+    # Angol. Es el mismo error que se cometió con la capa B: agregar una capa
+    # sin agregarle comprobaciones (REGLAS §4.1). La regla vale para lo que la
+    # capa PROMETE —que el veredicto la use—, no para que el archivo exista.
+    if page.evaluate("() => !!estado.laminas"):
+        dentro = page.evaluate("""() => {
+            for (const f of estado.laminas.features) {
+              const g = f.geometry;
+              if (!g || g.type !== 'Polygon') continue;
+              // Punto interior de verdad: el centroide de un polígono cóncavo
+              // puede caer fuera, así que se comprueba con el mismo ray-casting
+              // que usa el veredicto.
+              const anillo = g.coordinates[0];
+              let sx = 0, sy = 0;
+              for (const [x, y] of anillo) { sx += x; sy += y; }
+              const c = [sx / anillo.length, sy / anillo.length];
+              if (poligonosQueContienen(c[0], c[1], estado.laminas).length) return c;
+            }
+            return null;
+        }""")
+        if dentro:
+            page.evaluate("([lon,lat]) => consultar(lon, lat, 'Auditoría lámina')", dentro)
+            page.wait_for_timeout(700)
+            titular = page.locator("#respuesta .veredicto h2").inner_text().lower()
+            if "sin registros" in titular:
+                aud.falla(f"la capa derivada entra al veredicto [{etq}]",
+                          "dentro de una zona vectorizada del documento comunal el "
+                          f"visor responde «{titular}»")
+            else:
+                aud.ok(f"la capa derivada entra al veredicto [{etq}]", titular[:60])
+            page.evaluate("() => irAPestana('detalle', false)")
+            page.wait_for_timeout(300)
+            ficha = page.locator("#detalle-ficha").inner_text()
+            if "A · DERIVADO" in ficha and "derivado" in ficha.lower():
+                aud.ok(f"la ficha muestra la capa derivada y su sello [{etq}]")
+            else:
+                aud.falla(f"bloque de la capa derivada [{etq}]",
+                          "el veredicto la usa pero la ficha no la explica ni "
+                          "dice que el trazado es nuestro (REGLAS §1.5)")
+            # Y el borde tiene que declarar su incertidumbre en metros.
+            if "m de" in ficha and "incertidumbre" in ficha.lower():
+                aud.ok(f"la capa derivada declara la incertidumbre del borde [{etq}]")
+            else:
+                aud.falla(f"incertidumbre del borde [{etq}]",
+                          "la mancha se muestra sin decir cuánto puede moverse su borde")
+        else:
+            aud.falla(f"punto interior de una lámina [{etq}]",
+                      "no se encontró ninguno: la comprobación no puede correr")
+
+    # --- El texto que se reenvía tiene que llevar la advertencia -------------
+    #
+    # La ficha se comparte por WhatsApp y ahí «sin registros» queda solo. La
+    # advertencia estaba en pantalla y no en el texto, por leer un campo que no
+    # existía: en pantalla se veía bien y nadie lo notó durante semanas.
+    page.evaluate("() => consultar(-72.7, -38.75, 'Auditoría texto compartido')")
+    page.wait_for_timeout(700)
+    nivel = page.evaluate("() => estado.ultimo && estado.ultimo.res.nivel")
+    if nivel == "sindato":
+        txt = page.evaluate("() => textoFicha()")
+        if "no significa que acá no se inunde" in txt.lower():
+            aud.ok(f"el texto compartido lleva la advertencia de «sin registros» [{etq}]")
+        else:
+            aud.falla(f"advertencia en el texto compartido [{etq}]",
+                      "«sin registros» se reenvía sin el aviso de que no significa "
+                      "que no se inunde: es la lectura al revés que el sitio "
+                      "entero se esfuerza en evitar")
+    else:
+        aud.falla(f"punto sin registros para probar el texto [{etq}]",
+                  f"el punto de control dio «{nivel}»; la comprobación no corre")
+    # Se devuelve el estado que este bloque encontró (REGLAS §4.3): si queda
+    # abierta la pestaña de detalle, el bloque siguiente no alcanza el buscador
+    # ni las casillas de capas y falla por una razón que no es la suya.
+    page.evaluate("() => irAPestana('respuesta', false)")
+    page.wait_for_timeout(200)
+
     for cid in ["cap-areas", "cap-derivadas", "cap-planos", "cap-puntos",
                 "cap-camp", "cap-jrc", "cap-sar", "cap-gore"]:
         el = page.locator(f"#{cid}")
