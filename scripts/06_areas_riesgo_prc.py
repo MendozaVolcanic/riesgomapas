@@ -79,6 +79,7 @@ TIPO_HIDRICO = {
     "INUND LITORAL": "litoral",      # va primero: contiene "INUND" y NO es fluvial
     "INUND": "fluvial",
     "QUEBRAD": "fluvial",            # activación de quebrada: agua que sale de un cauce
+    "CANAL": "fluvial",              # un canal es un cauce, artificial pero cauce
     "ANEGAM": "anegamiento",         # drenaje insuficiente, no desborde
     "NAPAS": "napa_freatica",        # afloramiento, tampoco es desborde
 }
@@ -194,9 +195,20 @@ def desde_regional() -> list[dict]:
 
 
 def centroide(geom: dict) -> tuple[float, float]:
-    """Centroide aproximado por promedio de vértices del primer anillo exterior."""
+    """Centroide aproximado por promedio de vértices del primer anillo exterior.
+
+    Se descarta el vértice de cierre —el que repite al primero— antes de
+    promediar. Sin eso el resultado depende de POR DÓNDE empieza el anillo: el
+    mismo polígono publicado por dos servicios con distinto vértice inicial
+    repite un punto distinto, el promedio cambia en el quinto decimal y la clave
+    de deduplicación deja de coincidir. Así se colaron dos copias exactas de un
+    área de 10,2 ha en Collipulli (mismos 229 vértices), y el visor decía «cae
+    dentro de 2 áreas de riesgo» donde hay una.
+    """
     c = geom["coordinates"]
     anillo = c[0] if geom["type"] == "Polygon" else c[0][0]
+    if len(anillo) > 1 and anillo[0] == anillo[-1]:
+        anillo = anillo[:-1]
     xs = [p[0] for p in anillo]
     ys = [p[1] for p in anillo]
     return round(sum(xs) / len(xs), 5), round(sum(ys) / len(ys), 5)
@@ -218,7 +230,9 @@ def deduplicar(feats: list[dict]) -> list[dict]:
         g = f["geometry"]
         anillo = (g["coordinates"][0] if g["type"] == "Polygon"
                   else g["coordinates"][0][0])
-        clave = (norm(f["properties"]["comuna"]), centroide(g), len(anillo))
+        # El número de vértices también se cuenta sin el de cierre, por lo mismo.
+        n_vert = len(anillo) - (1 if len(anillo) > 1 and anillo[0] == anillo[-1] else 0)
+        clave = (norm(f["properties"]["comuna"]), centroide(g), n_vert)
         previo = vistos.get(clave)
         if previo is None:
             vistos[clave] = f
@@ -345,7 +359,13 @@ def main() -> None:
     anios = cfg.get("anio_instrumento_comuna") or {}
     puestos = 0
     for f in feats:
-        a = anios.get((f["properties"].get("comuna") or "").strip())
+        # Se busca por el nombre oficial Y por el que traía la fuente. El
+        # renombre ocurre antes que esto —«Puerto Saavedra» pasa a «Saavedra»—
+        # y el catastro del Atlas usa el nombre largo, así que buscar sólo por
+        # el corregido dejaba a esa comuna sin año, indistinguible de una que
+        # el Atlas de verdad no cubre.
+        a = (anios.get((f["properties"].get("comuna") or "").strip())
+             or anios.get((f["properties"].get("comuna_fuente") or "").strip()))
         if a:
             f["properties"]["anio"] = a
             f["properties"]["anio_fuente"] = ("Atlas del Riesgo de Desastre, "

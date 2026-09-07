@@ -7,7 +7,7 @@
   "incertidumbre": "Es un inventario de LO QUE ENCONTRAMOS, no de lo que existe. Que una comuna aparezca sin cartografía significa que no la hallamos en fuentes públicas consultables, no que no se inunde ni que el municipio no la tenga en papel. AUSENCIA DE DATO NO ES AUSENCIA DE RIESGO.",
   "escala_original": null,
   "fecha_dato": "cruce al día de la corrida",
-  "generado": "2026-09-07T06:30:05+00:00"
+  "generado": "2026-09-07T06:54:10+00:00"
  },
  "fuente": "varias",
  "anio": "no declarado por la fuente",
@@ -80,7 +80,7 @@
    "hogares_agua_de_rio": 500,
    "puntos_inundacion": 10,
    "puntos_cronicos": 0,
-   "poligonos_area_riesgo": 36,
+   "poligonos_area_riesgo": 38,
    "documentos": 30,
    "laminas_localizadas": 5,
    "planos_georreferenciados": 0,
