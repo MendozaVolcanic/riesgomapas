@@ -1,38 +1,69 @@
 # Continuar riesgomapas — prompt para la próxima sesión
 
-## Estado al 6-sep-2026 (noche) — la auditoría profunda está hecha; sigue el ciclo de arreglo
+## Estado al 7-sep-2026 — el ciclo de arreglo de la auditoría está hecho
 
-**Las tres pruebas siguen verdes (63 · 151 con 1 medio · 273) y el árbol de código no cambió**:
-la auditoría no tocó `scripts/`, `web/`, `tests/` ni `config/`. Sólo agregó `tools/auditoria/`
-(34 instrumentos con control positivo), `docs/_prompts/PREAMBULO-AUDITOR.md` y
-`docs/auditorias/2026-09-06/` (siete frentes, dos verificaciones con contexto limpio, y el
-**INFORME.md** con 22 familias, cola de campo C-01…C-13, decisiones D-1…D-10 y el prompt de la
-próxima sesión).
+**Verde y árbol limpio**: 64 tests · 151 comprobaciones de datos con 2 hallazgos medios
+declarados · **285** comprobaciones en navegador real (eran 273; las 12 nuevas son las que
+faltaban para que el defecto grande no pudiera volver a pasar).
 
-**Lo que la auditoría encontró y los verdes no ven:** el veredicto decide con cuatro de las siete
-capas que dibuja —los 163 polígonos derivados de láminas, el GORE y el JRC nunca entran—, así que
-dentro del AR-2a del PRC vigente de Angol el visor dice «no cae dentro de un área de riesgo»
-(F-01); los cuadros de la leyenda de dos láminas están publicados como área de riesgo, 6 ha de
-«Alto» en un potrero de Angol (F-03); la apertura con núcleo par corre toda mancha 1 px al
-sureste y el grosor mínimo se come franjas legítimas (F-04); el botón «Buscar» no hace nada desde
-el 25-ago (F-11); el texto de WhatsApp pierde el «no significa que no se inunde» (F-07); sin red
-el service worker entrega `index.html` como plano (F-06); Temuco sale siempre como Padre Las
-Casas (F-10).
+**Lo que se arregló**, en once commits, cada uno con su medición antes y después. El informe
+completo de la auditoría sigue en `docs/auditorias/2026-09-06/INFORME.md` y su numeración F-xx
+es la que usan los mensajes de commit.
 
-**¿Reconocemos bien los polígonos?** Forma y posición sí, dentro de 1 px, probado con una lámina
-sintética que pasa por el mismo `procesar()` (IoU 0,956 / 0,975, controles negativo y guardián
-OK) y con la coincidencia (0, 0) m entre las dos láminas de Angol georreferenciadas por métodos
-distintos. Lo que falla es borde, leyenda, etiqueta y que no llegan al veredicto. Detalle en
-`docs/auditorias/2026-09-06/INFORME.md` §1.
+- **El veredicto miraba cuatro de las siete capas que el visor dibuja** (F-01). La capa
+  derivada, el modelo del GORE y el JRC no entraban. Un vecino de Angol dentro del AR-2a de su
+  plan regulador vigente leía «no cae dentro de un área de riesgo»: Angol y Curarrehue no
+  tienen ni un polígono en el vectorial del MINVU, así que ésa era su única evidencia
+  normativa. Ahora entra, con bloque propio, sello «trazado derivado» en texto y los metros de
+  incertidumbre del borde.
+- **Los cuadros de la leyenda se publicaban como territorio** (F-03): 6,1 y 5,6 ha de «Alto» y
+  «Medio» sobre un potrero al sur de Angol. Se declara la caja de leyenda y se excluye.
+- **La limpieza por grosor mordía el borde y corría la mancha** (F-04). La apertura con núcleo
+  par desplazaba todo 1 px al sureste y se comía el 25 % de «Alto» de Angol. Se cambió por
+  apertura por reconstrucción: IoU contra la lámina de 0,70 a 0,84 en Angol y de 0,83 a 0,96 en
+  Catripulli, desplazamiento del control sintético de 5,23 m a 0,04 m.
+- **Faltaba media Angol** (F-05): el plano del PRC son dos pliegos y sólo estaba vectorizado
+  uno. Al cargar el segundo, los tres puntos crónicos «Alto» de SENAPRED que estaban a 1,1-1,3
+  km del AR-2a caen **dentro**. RMSE 1,22 m con 4 grados de libertad.
+- **Sin señal el service worker servía `index.html` como si fuera un plano** (F-06), y el botón
+  decía «Plano cargado». Y **la advertencia «no significa que acá no se inunde» nunca viajaba**
+  en el texto que se reenvía (F-07), por leer un campo que no existe.
+- **A tres metros del borde el visor decía «sin registros»** (F-09) mientras el sitio pide
+  «mira la mancha, no su borde». Hay banda de borde con los dos números, y se usa la precisión
+  que informa el GPS.
+- La comuna se atribuía por el punto crítico más cercano a cualquier distancia (F-10): Temuco
+  salía como Padre Las Casas. Una entrada ausente publicaba un inventario falso en silencio
+  (F-12). La capa A tenía un duplicado exacto, tres canales fuera del filtro y un año perdido
+  (F-14). La capa B sumaba órbitas que se solapan (F-15).
 
-**La próxima sesión es el ciclo de arreglo, no otra auditoría.** El prompt está al final del
-INFORME (§6), con las decisiones ya tomadas (D-1…D-10) y el orden 1-13. Termina en el **paquete
-de Malleco para el practicante**, que Nicolás pidió el 6-sep: se regenera con
-`20_paquete_practicante.py` sólo después de los arreglos, con un LEEME por capa. Y queda pendiente
-revisar el visor juntos con el informe abierto.
+**Lo que queda pendiente y por qué:**
 
-**Modelos:** Opus para decidir y verificar, Sonnet para lo mecánico, Fable sólo para censos
-semánticos grandes (pedido del dueño el 6-sep).
+1. **Regenerar la capa B.** El script ya calcula el total por unión, pero el dato publicado es
+   anterior y declara 5.776 ha donde la unión da 5.082 (+14 %). Exige volver a bajar los
+   rásters. La auditoría de datos lo mide en cada corrida y lo reporta como hallazgo medio: se
+   apaga solo cuando se regenere. También quedan por aplicar `make_valid` al vectorizar (585 de
+   1.075 polígonos son inválidos, sin efecto medido en el visor) y medir el enriquecimiento
+   sobre lo publicado y no sobre la máscara ráster.
+2. **Cuatro polígonos sin año** en la capa A: Loncoche (dos sectores), Nueva Imperial y Pucón
+   no están en el Atlas de CIGIDEN. El año hay que sacarlo del decreto.
+3. **El «Medio» de Angol se reconoce mal**: el centro real de su color en el mapa está a 54
+   unidades RGB del cuadro de leyenda, fuera de la tolerancia declarada, y el IoU contra un
+   clasificador independiente es 0,20. Está en la cola de campo como C-10: hay que mirar la
+   lámina y decidir si el color declarado o la tolerancia. **No se tocó a propósito**: ajustar
+   un umbral hasta que el número quede bonito es el error que esta auditoría vino a evitar.
+4. **La cola de validación en campo** (C-01 a C-13 del informe) sigue abierta: son las
+   preguntas que sólo se responden mirando el terreno, la ortofoto o el documento.
+
+**El paquete de Malleco para el practicante está generado** con los arreglos ya aplicados:
+`data/processed/paquete_malleco/` — 12 capas en un GeoPackage, con la procedencia embebida capa
+por capa, las tres láminas derivadas de Angol (150 polígonos) con su `estado_tramite` y su
+incertidumbre en metros, y `TAREAS.md` priorizado por comunas con gente y registro de
+inundación pero sin cartografía: Los Sauces, Curacautín, Victoria y Ercilla no tienen nada. Se
+regenera con `python scripts/20_paquete_practicante.py --provincia Malleco`.
+
+**Lo siguiente es una decisión, no una tarea**: publicar. Falta hosting, gzip, y geocodificador
+y teselas propios — hoy usa Nominatim y el servidor de OSM, cuyas políticas no admiten tráfico
+de producción.
 
 Lo de abajo es el traspaso anterior (9-ago-2026); sigue vigente como contexto.
 
