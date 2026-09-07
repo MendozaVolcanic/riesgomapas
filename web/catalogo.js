@@ -37,8 +37,9 @@ function tarjetaLamina(l, urlDoc) {
   // abre el documento directamente en la página del mapa. Es la diferencia entre
   // "está en este PDF de 300 páginas" y "está acá".
   let html = `<li class="lamina">
-    <a class="pag" href="${esc(urlDoc)}#page=${l.pagina}" rel="noopener"
-       title="Abre el PDF oficial en esa página">pág. ${l.pagina} →</a>
+    ${urlDoc ? `<a class="pag" href="${esc(urlDoc)}#page=${l.pagina}" rel="noopener"
+       title="Abre el PDF oficial en esa página">pág. ${l.pagina} →</a>`
+             : `<span class="pag" title="El documento no tiene copia en línea">pág. ${l.pagina}</span>`}
     <span class="tipo">${esc(tipo)}</span>
     <span class="terminos">${esc((l.terminos || []).slice(0, 3).join(' · '))}</span>`;
   if (g) {
@@ -60,8 +61,14 @@ function tarjetaDocumento(d) {
   }
   if (d.estado_eae) meta.push(esc(d.estado_eae));
 
+  // 38 de los documentos del catálogo no traen URL: el enlace quedaba con
+  // href="" y recargaba la página, que se lee como «el sitio está roto» y no
+  // como «este documento no tiene copia en línea».
+  const titulo = esc(nombreLegible(d.archivo));
   let html = `<div class="doc ${conMapa ? 'con-mapa' : ''}">
-    <a class="doc-titulo" href="${esc(d.url)}" rel="noopener">${esc(nombreLegible(d.archivo))}</a>
+    ${d.url ? `<a class="doc-titulo" href="${esc(d.url)}" rel="noopener">${titulo}</a>`
+            : `<span class="doc-titulo">${titulo}</span>
+               <span class="incert">(sin copia en línea: pídelo en el municipio)</span>`}
     <p class="doc-meta">${meta.filter(Boolean).join(' · ')}</p>`;
   if (conMapa) {
     html += `<p class="doc-hallazgo"><strong>${d.laminas.length}</strong>

@@ -13,9 +13,15 @@
  */
 // Subir este número en cada publicación: al activarse, el service worker borra
 // las cachés de versiones anteriores.
-const VERSION = 'riesgomapas-v21';
+const VERSION = 'riesgomapas-v22';
 const CACHE_APP = `${VERSION}-app`;
-const CACHE_TILES = `${VERSION}-tiles`;
+// La caché de teselas NO lleva la versión en el nombre, a propósito: son
+// imágenes del mapa base que no cambian cuando cambia el sitio, y son lo más
+// caro de volver a bajar. Llevándola, cada publicación —y REGLAS §7.4 obliga a
+// publicar en cada cambio del frontend— dejaba a quien ya había navegado su
+// comuna sin mapa base la próxima vez que se quedara sin señal, que es
+// exactamente el escenario para el que existe este archivo.
+const CACHE_TILES = 'riesgomapas-tiles';
 
 const ARMAZON = [
   './',
@@ -64,8 +70,9 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil((async () => {
     const nombres = await caches.keys();
-    await Promise.all(
-      nombres.filter((n) => !n.startsWith(VERSION)).map((n) => caches.delete(n)));
+    await Promise.all(nombres
+      .filter((n) => !n.startsWith(VERSION) && n !== CACHE_TILES)
+      .map((n) => caches.delete(n)));
     await self.clients.claim();
   })());
 });
@@ -79,7 +86,11 @@ self.addEventListener('fetch', (e) => {
   // de forma visible, no devolver un resultado viejo de otra consulta.
   if (url.hostname.includes('nominatim')) return;
 
-  if (url.hostname.includes('tile.openstreetmap.org')) {
+  // Las dos bases del visor van a la caché de teselas. La satelital quedaba
+  // fuera y caía en la rama de la app: quien dejó elegida esa vista abría el
+  // visor durante un corte y recibía un lienzo vacío.
+  if (url.hostname.includes('tile.openstreetmap.org')
+      || url.hostname.includes('arcgisonline.com')) {
     e.respondWith((async () => {
       const c = await caches.open(CACHE_TILES);
       const hit = await c.match(req);
@@ -103,9 +114,19 @@ self.addEventListener('fetch', (e) => {
       if (r.ok) c.put(req, r.clone());
       return r;
     } catch {
-      const hit = await c.match(req) || await c.match('index.html');
+      const hit = await c.match(req);
       if (hit) return hit;
-      throw new Error('sin red y sin caché');
+      // Sin red y sin copia. El index.html sólo sirve como respaldo de una
+      // NAVEGACIÓN; devolverlo para cualquier cosa hacía que un PNG de plano o
+      // un GeoJSON volvieran con 200 OK y contenido HTML, y el visor los daba
+      // por buenos: el botón llegaba a decir «Plano cargado sobre el mapa» sin
+      // que hubiera plano ninguno. Un error visible es mejor que un éxito falso.
+      if (req.mode === 'navigate') {
+        const inicio = await c.match('index.html');
+        if (inicio) return inicio;
+      }
+      return new Response('sin red y sin copia guardada de este archivo',
+        { status: 504, statusText: 'sin red', headers: { 'Content-Type': 'text/plain' } });
     }
   })());
 });
