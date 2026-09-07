@@ -10,6 +10,7 @@ Un punto que aparece año tras año en el registro es un problema crónico, no u
 probabilidad.
 
 Fuente: https://services5.arcgis.com/i7S5PSnIJAUcWvSE/arcgis/rest/services/
+Requiere: nada (baja directo del ArcGIS de SENAPRED)
 Salida: data/processed/senapred_*.geojson + web/data/puntos-criticos/<comuna>.geojson
 """
 from __future__ import annotations

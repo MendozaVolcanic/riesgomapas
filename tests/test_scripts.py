@@ -68,3 +68,26 @@ def test_cada_script_declara_su_salida():
         if "Salida:" not in doc and "Salida " not in doc:
             sin.append(p.name)
     assert not sin, f"scripts sin «Salida:» en su docstring: {sin}"
+
+
+def test_cada_script_declara_lo_que_requiere():
+    """Todo script numerado dice en su docstring qué necesita antes de correr.
+
+    Es la otra mitad de REGLAS.md §6.1: la numeración 01..20 no es el orden de
+    ejecución, y el grafo real hoy sólo vive en scripts/ORDEN.md, un documento
+    escrito a mano que nadie obliga a mantener sincronizado con el código. Sin
+    «Requiere:» en el propio script, alguien que abre un archivo suelto no
+    tiene cómo saber qué correr antes — tiene que confiar en que ORDEN.md no se
+    desactualizó, que es precisamente lo que pasó con el hallazgo 215 (auditoría
+    2026-09-06, familia F-21).
+    """
+    import ast
+    from pathlib import Path
+
+    raiz = Path(__file__).resolve().parent.parent
+    sin = []
+    for p in sorted((raiz / "scripts").glob("[0-9][0-9]_*.py")):
+        doc = ast.get_docstring(ast.parse(p.read_text(encoding="utf-8"))) or ""
+        if "Requiere:" not in doc:
+            sin.append(p.name)
+    assert not sin, f"scripts sin «Requiere:» en su docstring: {sin}"

@@ -34,6 +34,10 @@ condiciones están en `sar.py`, que es donde vive la lógica probable sin red.
 Emparejar por órbita relativa y no por fecha no es un detalle: dos pasadas de
 geometría de vista distinta difieren por el terreno, no por el agua.
 
+Requiere: nada para calcular la huella — opcional: 01_senapred_puntos_criticos.py
+  (web/data/puntos-criticos-inundacion.geojson), sólo si se usa --verificar,
+  para contrastar contra los puntos críticos; si falta, la verificación se omite.
+
 Salida:
   data/processed/sar/<evento>/<track>/<fecha>.tif   σ⁰ dB por fecha (caché)
   data/processed/sar/<evento>/<track>/estadistica_pre.tif

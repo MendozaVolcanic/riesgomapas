@@ -15,6 +15,8 @@ Es decir: un solo portal da acceso a los expedientes de planificación de todo e
 país, sin autenticación. No hay índice de documentos ni buscador de texto — por
 eso este script arma el índice que falta.
 
+Requiere: nada (rastrea eae.mma.gob.cl directo; sólo relee su propia caché en
+        data/processed/eae/indice_nacional.json si ya existe)
 Salida: data/processed/eae/indice_nacional.json
         data/processed/eae/araucania.json
         data/processed/eae/araucania.csv   (para revisar a ojo qué vale la pena bajar)

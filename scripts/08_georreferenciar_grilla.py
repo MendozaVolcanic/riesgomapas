@@ -36,6 +36,7 @@ Uso:
     python 08_georreferenciar_grilla.py <pdf> --pagina 7
     python 08_georreferenciar_grilla.py --todas          # todas las candidatas
 
+Requiere: 07_buscar_laminas_riesgo.py (data/processed/eae/laminas_candidatas_*.json)
 Salida: data/processed/georreferenciado/*.tif + *.json
         data/processed/eae/georreferenciacion_grilla.json
 """

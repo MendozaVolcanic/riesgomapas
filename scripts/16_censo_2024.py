@@ -24,6 +24,7 @@ vez de una descarga a mano:
 Límite del proyecto, no negociable: agregado por unidad censal, NUNCA por persona.
 
 Fuente: Microdatos Censo 2024, servicio de Esri Chile (espejo, no del INE).
+Requiere: nada (baja del servicio censal del INE)
 Salida: data/processed/censo/censo-2024-araucania.geojson
 """
 from __future__ import annotations

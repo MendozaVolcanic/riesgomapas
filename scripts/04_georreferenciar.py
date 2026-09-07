@@ -30,6 +30,11 @@ Uso:
 `puntos.json` también acepta el formato `.points` que exporta el Georreferenciador
 de QGIS, que es como se van a producir los GCP en la práctica.
 
+Requiere: nada por código — la lámina PNG y los puntos de control se pasan
+        como argumentos. En la práctica, la lámina viene de
+        03_descargar_documentos.py o 07_buscar_laminas_riesgo.py, y los puntos
+        de control se arman a mano (o se exportan desde QGIS): es el camino
+        para cuando 08_georreferenciar_grilla.py rechaza una lámina.
 Salida: data/processed/georreferenciado/<lamina>.tif + su .json de procedencia
 """
 from __future__ import annotations

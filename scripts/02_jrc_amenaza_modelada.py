@@ -18,6 +18,7 @@ Araucanía. Donde no hay estudio local ni huella observada, esto es lo que hay.
    distribuye vía Google Earth Engine, que requiere cuenta. Ver README.
 
 Fuente: https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/FLOODS/GlobalMaps/
+Requiere: nada (baja los GeoTIFF globales del JRC)
 Salida: data/processed/jrc/araucania_rp<N>.tif  (+ GeoJSON de contorno para el web)
 """
 from __future__ import annotations

@@ -14,6 +14,8 @@ cubre buena parte de la hoja. Es una heurística — el inventario que se escrib
 `laminas.json` está para que una persona revise y corrija antes de invertir
 tiempo en poner puntos de control.
 
+Requiere: nada (URLs propias, codificadas en este mismo script; descarga
+        directa de los sitios municipales y del sitio de Temuco)
 Salida: data/raw/documentos/<comuna>/<doc>.pdf
         data/raw/laminas/<comuna>/<doc>_p<NNN>.png
         data/raw/laminas/<comuna>/inventario.json

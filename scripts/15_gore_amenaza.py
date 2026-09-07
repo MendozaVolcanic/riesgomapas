@@ -40,6 +40,9 @@ ningún canal del Gobierno Regional, así que **no sabemos cómo se construyó**
 
 Tampoco declara licencia. Antes de publicarlo hay que preguntarle al GORE.
 
+Requiere: nada para el modelo — opcional: 01_senapred_puntos_criticos.py
+  (web/data/puntos-criticos-inundacion.geojson), sólo con --verificar.
+
 Salida:
   data/processed/gore/amenaza-inundacion.geojson
   data/processed/gore/unidades-geomorfologicas.geojson

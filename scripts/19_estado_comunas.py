@@ -25,6 +25,12 @@ dicho qué existe y qué no:
 riesgo**. Que una comuna aparezca sin cartografía NO significa que no se inunde;
 significa que nadie levantó el mapa. Es justamente lo que se quiere mostrar.
 
+Requiere: 01_senapred_puntos_criticos.py (web/data/indice-comunas.json),
+        06_areas_riesgo_prc.py (web/data/areas-riesgo-inundacion.geojson),
+        10_exportar_superposiciones.py (web/data/planos/indice.json, que a su
+        vez necesita 08) y 09_exportar_catalogo.py (web/data/catalogo-documentos.json)
+        — las cuatro son obligatorias, ver requerido() más abajo. Opcional:
+        16_censo_2024.py (población) y 18_vectorizar_laminas.py (data/processed/laminas/*.geojson).
 Salida: web/data/estado-comunas.json
 """
 from __future__ import annotations

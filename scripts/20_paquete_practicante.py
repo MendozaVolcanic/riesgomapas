@@ -19,6 +19,10 @@ Uso:
     python 20_paquete_practicante.py --provincia Malleco
     python 20_paquete_practicante.py --provincia Cautin --salida /ruta/
 
+Requiere: 19_estado_comunas.py (web/data/estado-comunas.json — obligatorio,
+        alimenta TAREAS.md) — opcional, cada capa entra si existe: 01, 02, 06,
+        13, 14, 15 y 17 (las ocho capas de web/data/ y data/processed/arclim/
+        listadas en CAPAS) y 18 (láminas vectorizadas y censo de retículas).
 Salida: data/processed/paquete_<provincia>/
           capas_<provincia>.gpkg   todas las capas recortadas a la provincia
           TAREAS.md                qué falta, por comuna, ordenado por prioridad

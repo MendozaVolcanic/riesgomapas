@@ -23,6 +23,11 @@ Uso:
     python 07_buscar_laminas_riesgo.py --prioridad planos --max-mb 60
     python 07_buscar_laminas_riesgo.py --comuna Angol
 
+Requiere: 05_eae_documentos.py (data/processed/eae/araucania.json — obligatorio
+        salvo con --prioridad municipales) y los PDF que ya estén en
+        data/raw/documentos/, dejados ahí por 03_descargar_documentos.py o
+        12_cosechar_municipios.py (12 es opcional: sólo aporta la URL de origen
+        cuando el PDF no vino de la lista fija de 03)
 Salida: data/processed/eae/laminas_candidatas_<prioridad>.json  (se FUSIONA
         con lo que ya había; ver regla 5 de REGLAS.md)
 """

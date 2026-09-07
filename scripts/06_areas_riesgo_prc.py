@@ -24,6 +24,9 @@ literalmente qué no se puede hacer en ese terreno.
 arriba. Un catálogo oficial desactualizado es la razón habitual de concluir que
 "el dato no existe".
 
+Requiere: nada del pipeline para la capa misma — opcional: 05_eae_documentos.py
+        (data/processed/eae/araucania.json, sólo para agregar la fecha del
+        procedimiento EAE; si no está, sigue corriendo sin esa fecha)
 Salida: data/processed/areas_riesgo_prc_araucania.geojson
         web/data/areas-riesgo-inundacion.geojson
 """

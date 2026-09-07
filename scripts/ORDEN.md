@@ -11,23 +11,29 @@
 | 12 | `12_cosechar_municipios.py` | los sitios municipales → data/raw/documentos/ | — |
 | 03 | `03_descargar_documentos.py` | documentos del registro EAE → data/raw/ | — |
 | 05 | `05_eae_documentos.py` | índice nacional EAE → processed/eae/araucania.json | 03 |
-| 07 | `07_buscar_laminas_riesgo.py` | abre los PDF y localiza las láminas | 05, 12 |
+| 07 | `07_buscar_laminas_riesgo.py` | abre los PDF y localiza las láminas | 05 + los PDF de 03; 12 opcional |
 | 08 | `08_georreferenciar_grilla.py` | planos con retícula vectorial → GeoTIFF | 07 |
 | 10 | `10_exportar_superposiciones.py` | publica los planos al visor | 08 |
 | 01 | `01_senapred_puntos_criticos.py` | capa D + índice de comunas | — |
-| 06 | `06_areas_riesgo_prc.py` | capa A: áreas de riesgo del MINVU | — |
-| 13 | `13_campamentos_riesgo.py` | campamentos dentro de área de riesgo | 06 |
+| 06 | `06_areas_riesgo_prc.py` | capa A: áreas de riesgo del MINVU | — (05 opcional: fecha EAE) |
+| 13 | `13_campamentos_riesgo.py` | campamentos dentro de área de riesgo | — (MINVU entrega el cruce hecho) |
 | 02 | `02_jrc_amenaza_modelada.py` | capa C global | — |
 | 15 | `15_gore_amenaza.py` | capa C regional a 35 m | — |
 | 14 | `14_sar_huella_observada.py` | capa B: huella por Sentinel-1 | 01 (para verificar) |
 | 16 | `16_censo_2024.py` | población por manzana y entidad | — |
 | 17 | `17_arclim_desbordes.py` | sitios de desborde de ARClim | — |
 | 18 | `18_vectorizar_laminas.py` | láminas impresas → polígonos | 07 |
-| 09 | `09_exportar_catalogo.py` | catálogo público de documentos | 07, 08 |
+| 09 | `09_exportar_catalogo.py` | catálogo público de documentos | 05, 07, 08 |
 | 11 | `11_verificar_superposicion.py` | control visual de los planos | 10 |
 | 19 | `19_estado_comunas.py` | inventario del vacío + publica los derivados | 01,06,09,10,16,18 |
-| 20 | `20_paquete_practicante.py` | paquete por provincia para QGIS | 01,06,14,15,18,19 |
+| 20 | `20_paquete_practicante.py` | paquete por provincia para QGIS | 19; opcionales 01,02,06,13,14,15,17,18 |
 | 04 | `04_georreferenciar.py` | planos a mano, con .points de QGIS | cuando 08 rechaza uno |
+
+> La columna «Requiere» se verificó contra el código el 7-sep-2026 y cinco filas
+> estaban mal: 13 no lee la salida de 06, 09 se cae sin 05, 07 también necesita
+> los PDF de 03, y 20 usa más capas de las que decía. Cada script declara ahora
+> lo mismo en su propio docstring (`Requiere:`), y una prueba lo exige — así esta
+> tabla deja de ser la única fuente y se puede contrastar.
 
 ## Camino corto
 

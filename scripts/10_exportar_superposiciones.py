@@ -13,6 +13,7 @@ las superposiciones de imagen por sus cuatro esquinas en lon/lat, e interpola
 linealmente entre ellas: una imagen en UTM se vería progresivamente corrida hacia
 los bordes de la hoja.
 
+Requiere: 08_georreferenciar_grilla.py (los GeoTIFF de data/processed/georreferenciado/)
 Salida: web/data/planos/<nombre>.png + web/data/planos/indice.json
 """
 from __future__ import annotations

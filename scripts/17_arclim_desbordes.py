@@ -36,6 +36,7 @@ El script se cae si la fuente cambia de tamaño o si la constante deja de serlo:
 un pipeline que publica en silencio números distintos de los documentados es peor
 que uno que falla.
 
+Requiere: nada (baja del ArcGIS de ARClim/MMA)
 Salida: data/processed/arclim/desbordes-araucania.geojson
 """
 from __future__ import annotations

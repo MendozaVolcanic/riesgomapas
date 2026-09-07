@@ -16,6 +16,9 @@ permita identificar personas, ni se cruza con otras fuentes para enriquecer el
 perfil de esos hogares.
 
 Fuente: services3.arcgis.com/cTnMkBRk4HWkUCRo — `Campamentos_AR_2024/3`
+Requiere: nada. El cruce con el área de riesgo (campos AR_IPT/TIP_AR_IPT) ya
+        viene resuelto por MINVU en origen — este script no lo recalcula, así
+        que NO depende de 06_areas_riesgo_prc.py pese a lo que dice scripts/ORDEN.md.
 Salida: data/processed/campamentos_araucania.geojson
         web/data/campamentos-inundacion.geojson
 """

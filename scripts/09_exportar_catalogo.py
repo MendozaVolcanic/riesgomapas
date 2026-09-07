@@ -13,6 +13,12 @@ Consolida lo producido por:
   · 07_buscar_laminas_riesgo.py — en qué página está la cartografía
   · 08_georreferenciar_grilla.py — cuáles ya quedaron georreferenciadas
 
+Requiere: 05_eae_documentos.py (araucania.json — obligatorio), 07_buscar_laminas_riesgo.py
+        (laminas_candidatas_*.json) y 08_georreferenciar_grilla.py
+        (georreferenciado/*.json) — opcional: 07 corrido con --prioridad
+        municipales (laminas_candidatas_municipales.json, que a su vez
+        necesita 12_cosechar_municipios.py); si falta, el catálogo sale sin los
+        documentos municipales pero sigue siendo correcto con lo que sí tiene.
 Salida: web/data/catalogo-documentos.json
 """
 from __future__ import annotations

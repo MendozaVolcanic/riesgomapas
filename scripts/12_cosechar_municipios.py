@@ -20,6 +20,8 @@ Cómo funciona:
 Es deliberadamente conservador con los sitios del Estado: un hilo, pausa entre
 peticiones y profundidad 2. No es un scraper masivo, es un barrido de cortesía.
 
+Requiere: nada (descubre los dominios municipales solo; sólo relee su propia
+        caché en data/processed/municipios/ si ya existe)
 Salida: config/municipios.yaml           (dominios descubiertos, editable a mano)
         data/processed/municipios/hallazgos.json
         data/raw/documentos/<comuna>/<archivo>.pdf
