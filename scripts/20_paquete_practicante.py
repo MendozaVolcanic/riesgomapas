@@ -231,8 +231,23 @@ def main() -> None:
         log(f"  (sin datos) {n}: {motivo}")
 
     # ------------------------------------------------------------- las tareas
-    estado = {nz(c["comuna"]): c for c in
-              (cargar(WEB_DATA / "estado-comunas.json") or {"comunas": []})["comunas"]}
+    #
+    # estado-comunas.json (script 19) está en el Requiere: de este script
+    # (scripts/ORDEN.md). TAREAS.md existe para decirle al practicante qué
+    # falta por comuna: si este archivo no está, la línea de abajo lo
+    # reemplazaba por `{"comunas": []}` y el paquete salía con TAREAS.md
+    # diciendo, en silencio, «nada falta en ninguna comuna» — el resultado
+    # falso opuesto a lo que el archivo promete (F-12, auditoría 2026-09-06).
+    _estado_ruta = WEB_DATA / "estado-comunas.json"
+    _estado_json = cargar(_estado_ruta)
+    if _estado_json is None:
+        raise SystemExit(
+            f"no existe {_estado_ruta}.\n"
+            "TAREAS.md se arma a partir de ese inventario: sin él saldría "
+            "diciendo que a ninguna comuna le falta nada, que es falso. Corre "
+            "antes:\n"
+            "    python scripts/19_estado_comunas.py")
+    estado = {nz(c["comuna"]): c for c in _estado_json["comunas"]}
     censo = cargar(DATA_PROC / "laminas" / "_censo_reticulas.json") or []
     ret_por_comuna: dict[str, list] = {}
     for r in censo:
@@ -390,8 +405,8 @@ dónde salió cada borde.
 
 ## Antes de tocar nada, lee las reglas
 
-`docs/REGLAS.md` del repositorio. Son doce y todas nacieron de un error real que
-ya se cometió. Las cuatro que más te van a tocar:
+`REGLAS.md`, en la raíz del repositorio. Son ocho capítulos y todas sus reglas
+nacieron de un error real que ya se cometió. Las cuatro que más te van a tocar:
 
 - Las **cuatro capas de evidencia nunca se fusionan**.
 - **Nunca se inventa un valor**: si la fuente no lo dice, va «no declarado».
@@ -401,7 +416,7 @@ ya se cometió. Las cuatro que más te van a tocar:
   las clases de la leyenda antes de invertir horas en georreferenciarla.
 
 ⚠️ Y ojo: **la numeración de los scripts NO es el orden de ejecución.** El orden
-real está en `docs/REGLAS.md`.
+real está en `scripts/ORDEN.md`.
 
 ## Reglas que hay que respetar al entregar
 

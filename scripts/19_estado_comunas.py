@@ -71,6 +71,31 @@ def cargar(ruta: Path):
         raise SystemExit(f"{ruta} no se puede leer ({type(exc).__name__}: {exc})")
 
 
+def requerido(ruta: Path, script: str):
+    """Como `cargar()`, pero para una entrada que scripts/ORDEN.md declara en
+    el `Requiere:` de este script.
+
+    La diferencia con el censo (que sí puede faltar de verdad) es que estas
+    cuatro SIEMPRE existen si el pipeline corrió hasta acá: si faltan, no es
+    que el dato no exista, es que este paso corrió fuera de orden. Publicar
+    igual —con `or {"comunas": []}`— es lo que hacía la auditoría de
+    2026-09-06 (familia F-12): 32 comunas saliendo con «no publica ningún
+    documento» o «0 puntos críticos» cuando en realidad el archivo nunca se
+    generó. Eso es un resultado FALSO, no uno ausente (REGLAS §2), y en esta
+    capa en particular —el inventario del vacío— es el peor lugar posible
+    para mentir: es exactamente el archivo que el sitio muestra como «acá no
+    hay nada».
+    """
+    d = cargar(ruta)
+    if d is None:
+        raise SystemExit(
+            f"no existe {ruta}.\n"
+            "Este inventario lo declara como entrada requerida (scripts/ORDEN.md): "
+            "sin él, el resultado por comuna sería falso, no ausente. Corre antes:\n"
+            f"    python scripts/{script}")
+    return d
+
+
 def main() -> None:
     cfg = cargar_config()
     comunas = [c for prov in cfg["provincias"].values() for c in prov]
@@ -100,13 +125,17 @@ def main() -> None:
         log("  censo 2024 no descargado — la población irá como «no disponible»")
 
     # --- lo que ya se publica ------------------------------------------------
-    idx = cargar(WEB_DATA / "indice-comunas.json") or {"comunas": []}
+    # Las cuatro llamadas siguientes usan requerido(), no cargar(): están en el
+    # Requiere: de este script (01, 06, 10, 09 respectivamente) y su ausencia
+    # produciría un inventario falso, no uno incompleto. Ver requerido() arriba.
+    idx = requerido(WEB_DATA / "indice-comunas.json", "01_senapred_puntos_criticos.py")
     puntos = {norm(c["comuna"]): c for c in idx["comunas"]}
 
-    areas = cargar(WEB_DATA / "areas-riesgo-inundacion.geojson") or {"features": []}
+    areas = requerido(WEB_DATA / "areas-riesgo-inundacion.geojson", "06_areas_riesgo_prc.py")
     con_area = Counter(norm(f["properties"].get("comuna")) for f in areas["features"])
 
-    planos = (cargar(WEB_DATA / "planos" / "indice.json") or {}).get("planos", [])
+    planos = requerido(WEB_DATA / "planos" / "indice.json",
+                       "10_exportar_superposiciones.py (que a su vez necesita 08)").get("planos", [])
     # El estado de tramitación importa: un anteproyecto no rige sobre nadie.
     planos_por_comuna: dict[str, Counter] = {}
     for p in planos:
@@ -116,7 +145,7 @@ def main() -> None:
                 planos_por_comuna.setdefault(norm(c), Counter())[
                     p.get("estado_tramite") or "No declarado"] += 1
 
-    catalogo = cargar(WEB_DATA / "catalogo-documentos.json") or {"comunas": []}
+    catalogo = requerido(WEB_DATA / "catalogo-documentos.json", "09_exportar_catalogo.py")
     docs = {}
     for c in catalogo["comunas"]:
         k = norm(c.get("comuna") or c.get("nombre"))

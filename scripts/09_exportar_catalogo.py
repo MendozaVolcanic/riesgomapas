@@ -123,6 +123,13 @@ def main() -> None:
                 })
 
     # --- documentos bajados de sitios municipales (vía distinta al registro EAE)
+    #
+    # Este barrido es ausente LEGÍTIMO, no incoherente: lo produce una corrida
+    # aparte de 07 (`--prioridad municipales`, que a su vez necesita 12), y
+    # scripts/ORDEN.md sólo declara 07/08 como Requeridos de este script en su
+    # forma genérica. Si falta, el catálogo sigue siendo correcto con lo que
+    # sí tiene — sólo hay que decirlo, porque antes el catálogo salía sin los
+    # documentos municipales y sin ningún aviso (F-12, auditoría 2026-09-06).
     muni = DATA_PROC / "eae" / "laminas_candidatas_municipales.json"
     if muni.exists():
         # Las dos vías escriben el nombre de comuna distinto ("Pucon" vs
@@ -149,6 +156,10 @@ def main() -> None:
                     "georreferenciada": geo.get((d["archivo"], h["pagina"])),
                 } for h in sorted(hits, key=lambda x: x["pagina"])],
             })
+    else:
+        log(f"  {muni} no existe — catálogo publicado SIN documentos municipales "
+            "(corre 07_buscar_laminas_riesgo.py --prioridad municipales si ya "
+            "cosechaste sitios con 12_cosechar_municipios.py)")
 
     # Ordenar: primero los documentos que tienen cartografía.
     for e in comunas.values():

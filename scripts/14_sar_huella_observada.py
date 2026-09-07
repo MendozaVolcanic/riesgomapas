@@ -874,7 +874,18 @@ def main() -> None:
         fecha_dato=f"{ev['nombre']} — pasadas {', '.join(d['fecha_observacion'] for d in diagnostico)}",
     )
 
-    salida = WEB_DATA / "sar"
+    # --bbox existe para «probar rápido» sobre un recorte del territorio: la
+    # huella que produce cubre una fracción real del evento, no el evento
+    # completo. Si se escribiera en la misma ruta que publica el visor,
+    # correr una prueba pisaría la capa B real con esa fracción, sin ningún
+    # error que lo delate (F-12, auditoría 2026-09-06). Se manda a una
+    # carpeta aparte; la corrida normal (sin --bbox) no cambia.
+    if args.bbox:
+        salida = WEB_DATA / "sar_prueba_bbox"
+        log(f"  --bbox activo: se escribe en web/data/sar_prueba_bbox/, "
+            "NO en web/data/sar/ (para no pisar la capa B publicada)")
+    else:
+        salida = WEB_DATA / "sar"
     escribir_geojson(huella_feats, salida / "huella-observada.geojson", meta)
     escribir_geojson(cobertura_feats, salida / "cobertura-sar.geojson", meta)
 
@@ -899,7 +910,7 @@ def main() -> None:
     }
     (salida / "indice.json").write_text(
         json.dumps(indice, ensure_ascii=False, indent=1), encoding="utf-8")
-    log(f"  escrito web/data/sar/indice.json")
+    log(f"  escrito web/data/{salida.name}/indice.json")
 
     log("")
     log(f"TOTAL: {len(huella_feats)} polígonos · {area_total:.1f} km² "
