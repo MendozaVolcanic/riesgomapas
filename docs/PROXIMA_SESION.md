@@ -1,5 +1,33 @@
 # Continuar riesgomapas — prompt para la próxima sesión
 
+## Estado al 6-sep-2026 y qué sigue
+
+**Todo verde y árbol limpio**: 63 tests · 151 comprobaciones de datos · 273 en navegador
+real, 0 hallazgos. Último commit de trabajo `a6c08f1`.
+
+**Lo que cerró esa sesión:** una falla silenciosa y destructiva en el script 10 (en un clon
+limpio reescribía vacío el índice de planos); dos pruebas que obligan a que `scripts/ORDEN.md`
+nombre todos los scripts y a que cada uno declare `Salida:`; la lección de la lámina de la DGA
+como regla 5.4 de `REGLAS.md`; y una restauración por estado en la auditoría e2e que antes se
+caía por un clic tapado.
+
+**Lo que NO se hizo, a propósito:** no se borraron los shards de `web/data/puntos-criticos/`
+(una auditoría los dio por muertos; `tests/auditoria_datos.py` los usa para comprobar que
+suman el total) y no se creó otro documento de reglas (ya existían `REGLAS.md` y
+`scripts/ORDEN.md`; el duplicado se borró).
+
+**La próxima sesión es una auditoría profunda, no desarrollo.** El prompt completo, escrito
+según `GUIA_MAESTRA_AUDITORIAS.md` y la guía de prompting de Fable 5.1, está en
+[`docs/_prompts/AUDITORIA-2026-09.md`](_prompts/AUDITORIA-2026-09.md). Su pregunta central,
+que nadie ha medido sobre el artefacto: **¿estamos reconociendo bien los polígonos?** —
+IoU por clase de las tres láminas vectorizadas contra su lámina de origen, confusión
+río↔«Alto», control positivo con lámina sintética, control negativo, ray-casting adversarial,
+y por qué Collipulli concentra 36 de los 63 polígonos de la capa A.
+
+Lo de abajo es el traspaso anterior (9-ago-2026); sigue vigente como contexto.
+
+---
+
 Estado al **9-ago-2026**. Copiar y pegar la sección de abajo al abrir la próxima
 sesión.
 
