@@ -8,75 +8,52 @@
   "m_por_px": 7.74,
   "clases": {
    "Alto": {
-    "poligonos_publicados": 70,
-    "px_publicados": 31385,
-    "px_cruda": 39872,
-    "px_limpia": 31999,
-    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9808,
-    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.6976,
-    "iou_publicado_vs_kmeans (clasificador independiente)": 0.6465,
+    "poligonos_publicados": 67,
+    "px_publicados": 32549,
+    "px_cruda": 38846,
+    "px_limpia": 32725,
+    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9946,
+    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.8379,
+    "iou_publicado_vs_kmeans (clasificador independiente)": 0.7087,
     "kmeans_centro_rgb": [
      13.0,
      73.0,
      154.0
     ],
     "kmeans_dist_al_color_leyenda": 13.8,
-    "control_corrido_5px_iou_vs_cruda": 0.4313,
-    "comido_por_apertura_ha": 47.16,
-    "  de eso, FRANJA pegada a lo publicado_ha": 25.57,
-    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 34.93,
+    "control_corrido_5px_iou_vs_cruda": 0.4574,
+    "comido_por_apertura_ha": 36.67,
+    "  de eso, FRANJA pegada a lo publicado_ha": 0.0,
+    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 36.67,
     "  componentes de línea (n, la más larga en px)": [
-     733,
+     723,
      58
     ],
-    "publicados_en_zona_de_leyenda": [
-     {
-      "px": [
-       1027,
-       782
-      ],
-      "ha": 0.28
-     },
-     {
-      "px": [
-       588,
-       866
-      ],
-      "ha": 6.12
-     }
-    ]
+    "publicados_en_zona_de_leyenda": []
    },
    "Medio": {
-    "poligonos_publicados": 28,
-    "px_publicados": 3420,
-    "px_cruda": 5788,
-    "px_limpia": 3788,
-    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9029,
-    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.4934,
-    "iou_publicado_vs_kmeans (clasificador independiente)": 0.2197,
+    "poligonos_publicados": 29,
+    "px_publicados": 3025,
+    "px_cruda": 4846,
+    "px_limpia": 3063,
+    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9876,
+    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.6242,
+    "iou_publicado_vs_kmeans (clasificador independiente)": 0.1981,
     "kmeans_centro_rgb": [
      32.0,
      102.0,
      213.0
     ],
     "kmeans_dist_al_color_leyenda": 54.1,
-    "control_corrido_5px_iou_vs_cruda": 0.2082,
-    "comido_por_apertura_ha": 11.98,
-    "  de eso, FRANJA pegada a lo publicado_ha": 4.71,
-    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 9.89,
+    "control_corrido_5px_iou_vs_cruda": 0.1607,
+    "comido_por_apertura_ha": 10.68,
+    "  de eso, FRANJA pegada a lo publicado_ha": 0.0,
+    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 10.68,
     "  componentes de línea (n, la más larga en px)": [
-     151,
+     140,
      24
     ],
-    "publicados_en_zona_de_leyenda": [
-     {
-      "px": [
-       588,
-       898
-      ],
-      "ha": 5.62
-     }
-    ]
+    "publicados_en_zona_de_leyenda": []
    }
   }
  },
@@ -89,68 +66,52 @@
   "m_por_px": 5.337,
   "clases": {
    "Susceptibilidad alta": {
-    "poligonos_publicados": 12,
-    "px_publicados": 32940,
-    "px_cruda": 35116,
-    "px_limpia": 33083,
-    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9957,
-    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.8275,
-    "iou_publicado_vs_kmeans (clasificador independiente)": 0.732,
+    "poligonos_publicados": 6,
+    "px_publicados": 33484,
+    "px_cruda": 35006,
+    "px_limpia": 33496,
+    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9996,
+    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.9565,
+    "iou_publicado_vs_kmeans (clasificador independiente)": 0.7599,
     "kmeans_centro_rgb": [
      9.0,
      114.0,
      240.0
     ],
     "kmeans_dist_al_color_leyenda": 17.5,
-    "control_corrido_5px_iou_vs_cruda": 0.6006,
-    "comido_por_apertura_ha": 5.79,
-    "  de eso, FRANJA pegada a lo publicado_ha": 7.54,
-    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 4.35,
+    "control_corrido_5px_iou_vs_cruda": 0.6332,
+    "comido_por_apertura_ha": 4.3,
+    "  de eso, FRANJA pegada a lo publicado_ha": 0.0,
+    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 4.3,
     "  componentes de línea (n, la más larga en px)": [
-     88,
+     83,
      44
     ],
-    "publicados_en_zona_de_leyenda": [
-     {
-      "px": [
-       1081,
-       895
-      ],
-      "ha": 0.3
-     }
-    ]
+    "publicados_en_zona_de_leyenda": []
    },
    "Susceptibilidad media": {
-    "poligonos_publicados": 27,
-    "px_publicados": 251148,
-    "px_cruda": 257412,
-    "px_limpia": 251792,
-    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9974,
-    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.9416,
-    "iou_publicado_vs_kmeans (clasificador independiente)": 0.9372,
+    "poligonos_publicados": 18,
+    "px_publicados": 254115,
+    "px_cruda": 257181,
+    "px_limpia": 254568,
+    "iou_publicado_vs_limpia (réplica del pipeline, debe ser ~1)": 0.9982,
+    "iou_publicado_vs_cruda (fidelidad al color de la lámina)": 0.9881,
+    "iou_publicado_vs_kmeans (clasificador independiente)": 0.9694,
     "kmeans_centro_rgb": [
      190.0,
      231.0,
      253.0
     ],
     "kmeans_dist_al_color_leyenda": 1.9,
-    "control_corrido_5px_iou_vs_cruda": 0.8474,
-    "comido_por_apertura_ha": 16.01,
-    "  de eso, FRANJA pegada a lo publicado_ha": 20.66,
-    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 8.49,
+    "control_corrido_5px_iou_vs_cruda": 0.8576,
+    "comido_por_apertura_ha": 7.44,
+    "  de eso, FRANJA pegada a lo publicado_ha": 0.0,
+    "  de eso, LÍNEA aislada (río u otro trazo)_ha": 7.44,
     "  componentes de línea (n, la más larga en px)": [
-     505,
-     25
+     457,
+     32
     ],
-    "publicados_en_zona_de_leyenda": [
-     {
-      "px": [
-       1081,
-       908
-      ],
-      "ha": 0.5
-     }
-    ]
+    "publicados_en_zona_de_leyenda": []
    }
   }
  },

@@ -59,6 +59,10 @@ Uso:
     python 18_vectorizar_laminas.py --inspeccionar <pdf> --pagina 30
     python 18_vectorizar_laminas.py --censo               # ¿qué otras se pueden?
 
+Requiere: config/laminas.yaml curado a mano (comuna, PDF y página, ya
+        localizados por 07_buscar_laminas_riesgo.py) + el PDF correspondiente
+        ya en data/raw/. El modo --censo requiere además 07 corrido con
+        --prioridad municipales (data/processed/eae/laminas_candidatas_municipales.json).
 Salida: data/processed/laminas/<id>.geojson
 """
 from __future__ import annotations
@@ -229,7 +233,30 @@ def afin_por_vertices(cfg: dict):
 
 # ------------------------------------------------------- detección por trama
 
-def mascara_por_trama(a, cfg_clase: dict, s_m_px: float, excluir_x: int | None):
+def cajas_a_excluir(cfg: dict, ancho_px: int, alto_px: int) -> np.ndarray:
+    """Máscara de las regiones de la hoja que no son territorio.
+
+    Unifica las dos formas de decirlo en la configuración: `excluir_cajas`, que
+    es una lista de rectángulos [x0, y0, x1, y1] —la caja de leyenda, el
+    cajetín de firmas—, y `excluir_x`, que es el caso particular «de esta
+    columna a la derecha hay otro mapa» y se conserva porque una lámina ya lo
+    declara así.
+    """
+    m = np.zeros((alto_px, ancho_px), bool)
+    for caja in cfg.get("excluir_cajas") or []:
+        x0, y0, x1, y1 = (int(v) for v in caja)
+        if not (0 <= x0 < x1 <= ancho_px and 0 <= y0 < y1 <= alto_px):
+            raise SystemExit(
+                f"[{cfg['id']}] la caja a excluir {caja} se sale de la imagen "
+                f"({ancho_px}×{alto_px} px) o está al revés. Van en píxeles de "
+                "ESTA imagen, como [x0, y0, x1, y1]; revisa config/laminas.yaml.")
+        m[y0:y1, x0:x1] = True
+    if cfg.get("excluir_x"):
+        m[:, int(cfg["excluir_x"]):] = True
+    return m
+
+
+def mascara_por_trama(a, cfg_clase: dict, s_m_px: float, excluidas: np.ndarray):
     """Máscara de una clase que se distingue por su ACHURADO, no por su color.
 
     Los planos de zonificación no colorean las áreas de riesgo: las achuran
@@ -266,8 +293,10 @@ def mascara_por_trama(a, cfg_clase: dict, s_m_px: float, excluir_x: int | None):
     h, w = g.shape
     dens = np.zeros((h // cel + 1, w // cel + 1), "float32")
     for x, y in marcas:
-        if excluir_x is not None and x >= excluir_x:
-            continue          # bloque de leyenda: tiene las mismas tramas de muestra
+        # El bloque de leyenda y el cajetín traen las mismas tramas de muestra
+        # que el mapa: si no se descartan, se vectoriza la leyenda.
+        if excluidas[int(y), int(x)]:
+            continue
         dens[int(y) // cel, int(x) // cel] += 1
 
     ventana = int(cfg_clase.get("ventana_celdas", 5))
@@ -389,16 +418,8 @@ def procesar(cfg: dict, region: dict) -> dict | None:
     # recuadro de leyenda de un recuadro de mapa es de una mirada para una
     # persona y no para un detector. Va DESPUÉS de los recortes de arriba porque
     # ésos siempre cortan desde el origen y no mueven el origen de coordenadas.
-    excluidas = np.zeros(a.shape[:2], bool)
-    for caja in cfg.get("excluir_cajas") or []:
-        x0, y0, x1, y1 = (int(v) for v in caja)
-        if not (0 <= x0 < x1 <= a.shape[1] and 0 <= y0 < y1 <= a.shape[0]):
-            raise SystemExit(
-                f"[{cfg['id']}] la caja a excluir {caja} se sale de la imagen "
-                f"({a.shape[1]}×{a.shape[0]} px) o está al revés. Las cajas van "
-                "en píxeles de ESTA imagen, como [x0, y0, x1, y1]; revisa "
-                "config/laminas.yaml.")
-        excluidas[y0:y1, x0:x1] = True
+    excluidas = cajas_a_excluir(
+        {**cfg, "excluir_x": None}, a.shape[1], a.shape[0])
     if excluidas.any():
         log(f"  {len(cfg['excluir_cajas'])} caja(s) excluidas (leyenda): "
             f"{int(excluidas.sum())} px")
@@ -549,7 +570,7 @@ def procesar_plano(cfg: dict, region: dict) -> dict | None:
     feats, resumen = [], []
     for clase in cfg["clases"]:
         m, cel, n_marcas, n_usadas = mascara_por_trama(
-            a, clase, s, cfg.get("excluir_x"))
+            a, clase, s, cajas_a_excluir(cfg, a.shape[1], a.shape[0]))
         T = Affine(a_ * cel, b_ * cel, tx, b_ * cel, -a_ * cel, ty)
         area_min = float(cfg.get("area_minima_m2", 2000))
         gs = []

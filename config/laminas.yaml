@@ -171,6 +171,65 @@ laminas:
     area_minima_m2: 2000
 
   # ---------------------------------------------------------------------------
+  # La OTRA mitad del mismo plan regulador. El plano de Angol viene en dos
+  # pliegos y hasta el 7-sep-2026 sólo se había vectorizado el primero, sin que
+  # ningún documento lo dijera: el visor podía responder «no cae en área de
+  # riesgo del plan regulador» en la mitad sur del pueblo porque esa mitad no
+  # estaba cargada. Ahí viven los tres puntos críticos crónicos «Alto» de
+  # SENAPRED —Villa La Arboleda, Santa Teresita y Los Ríos—, que quedaban a
+  # 1,1-1,3 km del AR-2a de la lámina 1 y a 30 m de la mancha del estudio 2013.
+  #
+  # Ojo: este pliego viene rotado al REVÉS que el otro dentro del PDF (+90 en
+  # vez de -90); con el signo equivocado el texto sale en espejo.
+  - id: angol-prc-ar2a-lamina2
+    comuna: ANGOL
+    pdf: documentos/angol/Plano_Zonificacion_Vialidad-PRC_09201-2.pdf
+    pagina: 1
+    imagen: 0
+    rotar: 90
+    dpi: 150
+    titulo: "Plano de Zonificación y Vialidad, lámina PRC 09201-2"
+    fuente: >-
+      Plan Regulador Comunal de Angol, Plano de Zonificación y Vialidad lámina
+      PRC 09201-2, aprobado por la SEREMI de Vivienda y Urbanismo de La
+      Araucanía; ordenanza local actualizada a marzo de 2026
+    url: https://angol.cl/index.php/plan-regulador
+    anio_estudio: 2026
+    escala_impresa: "1:5.000"
+    epsg: 32718
+    efecto_legal: >-
+      Zona restringida al desarrollo urbano. Los predios afectados deben cumplir
+      el artículo 2.1.17 de la OGUC; cumplido eso rigen las normas de su zona
+      urbana. Ninguna edificación puede superar 14 m de altura en el área
+      afectada (Ordenanza Local, marzo 2026).
+    # [nombre, x, y, Este, Norte] — leídos de los rótulos del propio plano, en
+    # píxeles de la imagen YA rotada. Son cuatro y no tres, así que el ajuste
+    # deja 4 grados de libertad en vez de 2 y su RMSE mide algo: 1,22 m, contra
+    # los 4,94 m de la lámina 1. La escala que sale, 0,847 m/px, coincide con la
+    # de la otra lámina (0,849) dentro del 0,2 %, que es una verificación
+    # independiente de que ambas lecturas están bien.
+    vertices:
+      - ['8', 2850.0, 1275.3, 701147, 5812402]
+      - ['5', 4536.5, 2172.5, 702576, 5811639]
+      - ['3', 6027.8, 2821.4, 703836, 5811084]
+      - ['2', 7686.1, 2819.5, 705240, 5811081]
+    rmse_maximo_m: 15
+    # Acá el cajetín de firmas y la leyenda están a la IZQUIERDA, al revés que
+    # en la lámina 1: por eso va como caja y no como `excluir_x`.
+    excluir_cajas:
+      - [0, 0, 1400, 3796]
+    clases:
+      - nombre: "AR-2a"
+        descripcion: "Áreas de Riesgo Inundables o Potencialmente Inundables"
+        marca_area: [8, 45]
+        marca_lado: [4, 11]
+        contraste_minimo: 28
+        celda_px: 8
+        ventana_celdas: 5
+        densidad_minima: 8
+    area_minima_m2: 2000
+
+  # ---------------------------------------------------------------------------
   # ❌ RECHAZADA — no se publica. Se deja documentada para que nadie la reintente.
   #
   # `dga-sit449-malleco-vergara-2019`, lámina 5432-PLA-012 del álbum de planos

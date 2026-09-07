@@ -7,7 +7,7 @@
   "incertidumbre": "Es un inventario de LO QUE ENCONTRAMOS, no de lo que existe. Que una comuna aparezca sin cartografía significa que no la hallamos en fuentes públicas consultables, no que no se inunde ni que el municipio no la tenga en papel. AUSENCIA DE DATO NO ES AUSENCIA DE RIESGO.",
   "escala_original": null,
   "fecha_dato": "cruce al día de la corrida",
-  "generado": "2026-09-07T06:22:06+00:00"
+  "generado": "2026-09-07T06:30:05+00:00"
  },
  "fuente": "varias",
  "anio": "no declarado por la fuente",
@@ -26,7 +26,7 @@
    "laminas_localizadas": 11,
    "planos_georreferenciados": 0,
    "planos_por_estado": {},
-   "poligonos_vectorizados_por_nosotros": 122,
+   "poligonos_vectorizados_por_nosotros": 150,
    "le_falta": [
     "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
    ]
