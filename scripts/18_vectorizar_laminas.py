@@ -24,11 +24,20 @@ que Angol tenía.
 
 Las tres trampas, y qué se hace con cada una
 --------------------------------------------
-1. **La red hídrica se dibuja en el mismo azul que la clase «Alto».** Una
-   clasificación por color convierte el cauce en mancha de inundación, y el
-   resultado queda plausible porque el río sí está dentro del área inundable. Se
-   separa por **grosor**, no por tono: apertura morfológica con un elemento del
-   ancho declarado en `ancho_minimo_px`.
+1. **La hoja no es sólo mapa.** La caja de leyenda dibuja los cuadros de muestra
+   con el color EXACTO de cada clase, y a la escala del mapa un cuadro mide
+   varias hectáreas: se vectoriza como territorio. En Angol salieron publicados
+   dos rectángulos de 6,1 y 5,6 ha sobre un potrero hasta que se midió. La caja
+   se declara en `excluir_cajas` y punto. Aparte de eso hay texto y trazos
+   sueltos que comparten color con una clase, y ésos se sacan por **grosor**
+   (`ancho_minimo_px`), con una limpieza que no le muerde el borde a lo que
+   conserva — ver `limpiar_por_grosor`.
+
+   Lo que NO hay que suponer: que el río comparta color con una clase. Se
+   verificó en las dos láminas y en ninguna es así — en Angol la red hídrica va
+   en azul marino, a distancia RGB 135 del azul de «Alto»; en Catripulli la
+   banda azul ES la clase y el cauce es la línea punteada cian que la recorre.
+   Suponerlo costó el 25 % de la clase «Alto» de Angol durante dos semanas.
 
 2. **Los rótulos de la grilla están dentro del ráster.** Leerlos exige OCR y el
    binario de tesseract no está instalado. Se declaran a mano en
@@ -433,6 +442,16 @@ def procesar(cfg: dict, region: dict) -> dict | None:
                     "metodo_original": cfg["metodo_original"],
                     "escala_original": cfg["escala_impresa"],
                     "hectareas": round(g.area / 10_000, 2),
+                    # REGLAS §1.5: el peso legal va escrito en el dato y se
+                    # muestra con TEXTO, no sólo con color. «derivado» es la
+                    # geometría que construimos nosotros desde una figura
+                    # impresa: el contenido es de la fuente, el trazado nuestro.
+                    "estado_tramite": "derivado",
+                    # La incertidumbre del borde, en metros, viaja pegada al
+                    # polígono. Antes vivía sólo en el texto de la procedencia
+                    # del archivo de origen, que no se publica: el visor no
+                    # tenía ningún número que mostrar junto a la mancha.
+                    "incertidumbre_borde_m": round(s, 1),
                 },
             })
 
@@ -465,7 +484,7 @@ def procesar(cfg: dict, region: dict) -> dict | None:
             f"conserva entero, sin recortarle el borde. "
             f"MÉTODO DEL ESTUDIO ORIGINAL: {cfg['metodo_original']}."
         ),
-        capa_evidencia="A_normativo",
+        capa_evidencia="A_derivado",
         incertidumbre=(
             f"Producto DERIVADO: la geometría la construimos nosotros a partir de "
             f"una figura impresa, no la publica la fuente. El contenido es del "
@@ -559,6 +578,15 @@ def procesar_plano(cfg: dict, region: dict) -> dict | None:
                     "efecto_legal": cfg.get("efecto_legal", ""),
                     "escala_original": cfg["escala_impresa"],
                     "hectareas": round(g.area / 10_000, 2),
+                    # Ver la nota equivalente en `procesar`. Acá el contenido
+                    # SÍ tiene efecto legal —es el plano del plan regulador— y
+                    # eso va en `efecto_legal`; lo derivado es el trazado.
+                    "estado_tramite": "derivado",
+                    # Acá el borde no lo limita el píxel sino el ajuste sobre
+                    # los vértices rotulados y el grosor del achurado: se suma
+                    # el RMSE y la media celda de la rejilla de densidad.
+                    "incertidumbre_borde_m": round(
+                        rmse + s * clase.get("celda_px", 8) / 2, 1),
                 },
             })
     if not feats:
@@ -582,7 +610,7 @@ def procesar_plano(cfg: dict, region: dict) -> dict | None:
             f"{rot:+.3f}°, {s:.3f} m por píxel. Las clases no tienen color "
             f"propio —se achuran sobre la zona urbana— así que se identifican "
             f"por el tamaño de su marca y su densidad local, no por el tono."),
-        capa_evidencia="A_normativo",
+        capa_evidencia="A_derivado",
         incertidumbre=(
             f"Producto DERIVADO: la geometría la construimos nosotros a partir "
             f"del plano impreso; el organismo no la publica en vectorial. El "

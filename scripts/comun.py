@@ -287,8 +287,16 @@ def procedencia(
     # no. Se admite como categoría aparte justamente para que no pueda colarse
     # como si fuera evidencia de amenaza: nadie debe poder mezclar «esta comuna
     # no tiene cartografía» con «esta comuna no se inunda».
-    assert capa_evidencia in ("A_normativo", "B_observado", "C_modelado",
-                              "D_operacional", "inventario"), (
+    # `A_derivado` es geometría que construimos NOSOTROS desde una lámina
+    # impresa (REGLAS §1.5): el contenido y su peso legal son de la fuente, el
+    # trazado y la ubicación son nuestros. Existe aparte de `A_normativo`
+    # porque hasta el 7-sep-2026 las 163 láminas vectorizadas se sellaban como
+    # `A_normativo` —la etiqueta de más peso— junto al vectorial del MINVU, que
+    # el organismo sí publica y que sí tiene efecto legal por sí mismo. El
+    # docstring del script 18 prometía esta etiqueta desde el principio; el
+    # `assert` la rechazaba, así que quedaba la de más peso por omisión.
+    assert capa_evidencia in ("A_normativo", "A_derivado", "B_observado",
+                              "C_modelado", "D_operacional", "inventario"), (
         f"capa de evidencia desconocida: {capa_evidencia!r}")
     return {
         "fuente": fuente,

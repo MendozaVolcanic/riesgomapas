@@ -179,16 +179,28 @@ def main() -> None:
                 url="",
                 metodo="Georreferenciación desde la retícula UTM impresa o desde "
                        "los vértices rotulados del plano, y clasificación de las "
-                       "clases de la leyenda por color o por trama. El RMSE de "
-                       "cada lámina está en su archivo de origen, en "
-                       "data/processed/laminas/.",
-                capa_evidencia="A_normativo",
-                incertidumbre="PRODUCTO DERIVADO: la geometría la construimos "
-                              "nosotros a partir de una lámina impresa; el "
-                              "organismo NO la publica así. El contenido es del "
-                              "estudio original, con su año y su método; la "
-                              "ubicación y el trazado son nuestros. NO tiene el "
-                              "efecto legal del vectorial del MINVU.",
+                       "clases de la leyenda por color o por trama. Cada polígono "
+                       "lleva su propia `incertidumbre_borde_m`: el tamaño del "
+                       "píxel de la figura, o el RMSE del ajuste más media celda "
+                       "del achurado en el caso de un plano.",
+                capa_evidencia="A_derivado",
+                # El descargo distingue el CONTENIDO del TRAZADO. Decir de todo
+                # el archivo «no tiene efecto legal» era cómodo y falso al revés:
+                # 26 de estos polígonos son el área AR-2a del plan regulador
+                # VIGENTE de Angol, la única evidencia normativa que existe para
+                # esa comuna, y quedaban subvendidos junto a un estudio de 2013.
+                # Lo derivado es dónde dibujamos el borde, no lo que la norma dice.
+                incertidumbre="PRODUCTO DERIVADO: el trazado y la ubicación los "
+                              "construimos nosotros desde una lámina impresa; el "
+                              "organismo NO publica esta geometría. El contenido "
+                              "es del instrumento o estudio de origen, con su año "
+                              "y su método, y su peso legal es el que ese "
+                              "instrumento tenga: los polígonos que traen el campo "
+                              "`efecto_legal` vienen de un plan regulador vigente "
+                              "y ese efecto rige; los demás son levantamientos de "
+                              "riesgo sin efecto normativo propio. En ningún caso "
+                              "el borde es el del vectorial oficial del MINVU: "
+                              "cada polígono declara su `incertidumbre_borde_m`.",
                 fecha_dato="según la lámina de origen"),
             "type": "FeatureCollection", "features": derivados},
             ensure_ascii=False), encoding="utf-8")

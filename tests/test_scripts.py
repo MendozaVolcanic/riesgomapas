@@ -53,12 +53,18 @@ def test_cada_script_declara_su_salida():
     Sin eso no se puede reconstruir el grafo de dependencias, que es justamente
     lo que hace que la numeración engañe.
     """
+    import ast
     from pathlib import Path
 
+    # Se lee el docstring de verdad y no los primeros 3.000 caracteres del
+    # archivo, que es lo que había: el 7-sep-2026 esta prueba se puso roja
+    # porque el docstring del script 18 creció y su línea «Salida:» quedó más
+    # allá del corte. Acusaba de no declarar su salida a un script que sí la
+    # declara — el defecto estaba en la regla de medición, no en lo medido.
     raiz = Path(__file__).resolve().parent.parent
     sin = []
     for p in sorted((raiz / "scripts").glob("[0-9][0-9]_*.py")):
-        doc = p.read_text(encoding="utf-8")[:3000]
+        doc = ast.get_docstring(ast.parse(p.read_text(encoding="utf-8"))) or ""
         if "Salida:" not in doc and "Salida " not in doc:
             sin.append(p.name)
     assert not sin, f"scripts sin «Salida:» en su docstring: {sin}"
