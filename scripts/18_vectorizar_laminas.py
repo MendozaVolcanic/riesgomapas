@@ -344,6 +344,29 @@ def procesar(cfg: dict, region: dict) -> dict | None:
         a = a[:int(cfg["excluir_y"]), :]
         log(f"  recortado a los primeros {cfg['excluir_y']} px de alto")
 
+    # La caja de leyenda dibuja los cuadros de muestra con el color EXACTO de
+    # cada clase, y a la escala del mapa un cuadro de 30×20 px mide varias
+    # hectáreas: se vectoriza como si fuera territorio. Medido el 6-sep-2026
+    # sobre lo ya publicado — en Angol salían dos rectángulos de 6,1 y 5,6 ha en
+    # un potrero al sur del pueblo, y en Catripulli otros dos de 0,3 y 0,5 ha.
+    # La caja se declara a mano, igual que los rótulos de la retícula: separar un
+    # recuadro de leyenda de un recuadro de mapa es de una mirada para una
+    # persona y no para un detector. Va DESPUÉS de los recortes de arriba porque
+    # ésos siempre cortan desde el origen y no mueven el origen de coordenadas.
+    excluidas = np.zeros(a.shape[:2], bool)
+    for caja in cfg.get("excluir_cajas") or []:
+        x0, y0, x1, y1 = (int(v) for v in caja)
+        if not (0 <= x0 < x1 <= a.shape[1] and 0 <= y0 < y1 <= a.shape[0]):
+            raise SystemExit(
+                f"[{cfg['id']}] la caja a excluir {caja} se sale de la imagen "
+                f"({a.shape[1]}×{a.shape[0]} px) o está al revés. Las cajas van "
+                "en píxeles de ESTA imagen, como [x0, y0, x1, y1]; revisa "
+                "config/laminas.yaml.")
+        excluidas[y0:y1, x0:x1] = True
+    if excluidas.any():
+        log(f"  {len(cfg['excluir_cajas'])} caja(s) excluidas (leyenda): "
+            f"{int(excluidas.sum())} px")
+
     dists = [np.linalg.norm(a - np.array(c["rgb"]), axis=2) for c in cfg["clases"]]
     apilado = np.stack(dists)
     ganador = apilado.argmin(0)
@@ -351,7 +374,7 @@ def procesar(cfg: dict, region: dict) -> dict | None:
 
     feats, resumen = [], []
     for i, clase in enumerate(cfg["clases"]):
-        cruda = (ganador == i) & (dmin < tol)
+        cruda = (ganador == i) & (dmin < tol) & ~excluidas
         px_crudos = int(cruda.sum())
 
         # Apertura morfológica: borra lo que sea más delgado que `ancho`. Es lo

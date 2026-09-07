@@ -61,13 +61,20 @@ laminas:
       - { nombre: "Medio", rgb: [0, 114, 255] }
     tolerancia_color: 45
 
-    # La red hídrica se dibuja en el MISMO azul oscuro que la clase «Alto». Sin
-    # esto el cauce entero se convierte en mancha de inundación, y queda
-    # plausible porque el río sí está dentro del área inundable. Se descarta por
-    # grosor: una línea de red hídrica es fina, un polígono de peligro no.
+    # Descarta lo más delgado que esto: texto, símbolos y trazos sueltos que
+    # comparten color con una clase. No corroe el borde de lo que conserva
+    # —ver `limpiar_por_grosor` en el script— así que se puede exigir de verdad.
     ancho_minimo_px: 4
     # Descarta motas sueltas del antialiasing de una figura a 200 dpi.
     area_minima_m2: 2000
+
+    # La caja de leyenda, en píxeles de la imagen (1266×1021): va bajo la línea
+    # del marco que la separa del mapa, en y=801. Sus cuadros de muestra tienen
+    # el color exacto de cada clase y a 7,74 m/px miden 6,1 y 5,6 ha, así que sin
+    # esto se publicaban como dos manchas de peligro en un potrero al sur del
+    # pueblo. Medido el 6-sep-2026 sobre el GeoJSON ya publicado.
+    excluir_cajas:
+      - [0, 802, 1266, 1021]
 
   - id: curarrehue-catripulli-inundacion-2025
     comuna: CURARREHUE
@@ -105,6 +112,14 @@ laminas:
     tolerancia_color: 40
     ancho_minimo_px: 4
     area_minima_m2: 2000
+
+    # El cajetín de abajo a la derecha (información cartográfica + simbología),
+    # en píxeles de la imagen (1338×946): lo encierran las líneas x=833, y=777 y
+    # el marco en x=1305, y=923. Acá la leyenda NO es una franja al pie sino un
+    # panel dentro del marco, y el mapa sigue por debajo de él hasta la fila 924:
+    # recortar por altura habría borrado esa parte del territorio.
+    excluir_cajas:
+      - [833, 777, 1305, 923]
 
   # ---------------------------------------------------------------------------
   # El instrumento con efecto legal, no una figura de informe. Se georreferencia

@@ -158,7 +158,11 @@ def cfg_base(id_: str, pdf: str) -> dict:
         "grilla": {"x": [[X0_PX, X0_E], [X1_PX, X1_E]], "y": [[Y0_PX, Y0_N]]},
         "clases": [{"nombre": "Alto", "rgb": list(ALTO)},
                    {"nombre": "Medio", "rgb": list(MEDIO)}],
-        "tolerancia_color": 45, "ancho_minimo_px": 4, "area_minima_m2": 2000,
+        "tolerancia_color": 45, "ancho_minimo_px": 5, "area_minima_m2": 2000,
+        # La caja de leyenda de la hoja. Sin esto sus cuadros de muestra se
+        # vectorizan como si fueran territorio: es el defecto que esta prueba
+        # exige que no vuelva.
+        "excluir_cajas": [[900, 780, 1180, 880]],
     }
 
 
@@ -257,6 +261,15 @@ def main() -> int:
             fallas.append(f"positivo: {m['falso_positivo_fuera_de_verdad_m2']} m² fuera de la verdad (¿río?)")
         if m["anillos_interiores_Alto"] < 1:
             fallas.append("positivo: el hueco interior no se recuperó")
+        # La caja de leyenda no es territorio: ni un polígono puede salir de ahí.
+        if any(m["n_poligonos_en_leyenda"].values()):
+            fallas.append(f"positivo: {m['n_poligonos_en_leyenda']} polígonos dentro de la "
+                          "caja de leyenda — se está vectorizando la leyenda")
+        # Una franja de riesgo delgada PEGADA a una mancha grande es riesgo
+        # legítimo: la limpieza por grosor no puede comérsela.
+        if m["franja_15m_recuperada_pct"] < 95:
+            fallas.append(f"positivo: sólo se recuperó el {m['franja_15m_recuperada_pct']} % "
+                          "de la franja de 3 px pegada al rectángulo")
 
     # --- control positivo con JPEG
     r = correr("positivo_jpeg80", dibujar(True), 80, region)
