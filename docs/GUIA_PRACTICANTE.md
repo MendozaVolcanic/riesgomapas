@@ -329,8 +329,9 @@ que hacer con ella:
    prohíbe», más adelante).
 3. **Corregir errores heredados**, empezando por la comuna escrita `Pitufquén`. Cada
    corrección se registra; el dato crudo no se edita nunca.
-4. **Cerrar los 4 polígonos sin año** — Loncoche, Nueva Imperial y Pucón no están en
-   el Atlas, así que su año hay que sacarlo del decreto.
+4. **Cerrar los 5 polígonos sin año** — Loncoche (dos sectores), Nueva Imperial, Pucón
+   y Saavedra (Puerto Saavedra) no están en el Atlas, así que su año hay que sacarlo
+   del decreto.
 
 Los años de los demás ya los tenemos: Puerto Saavedra **1964**, Pitrufquén 1984,
 Carahue 1989, Traiguén 1991, Villarrica 1992, Collipulli 2009, Temuco 2010, Gorbea y

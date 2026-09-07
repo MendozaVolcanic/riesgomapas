@@ -71,7 +71,7 @@ Además:
   funcionan sin señal.
 - Todo dato publicado lleva **fuente y año pegados a cada geometría**; el año
   nunca se inventa (va «no declarado por la fuente» cuando corresponde).
-- **60 tests unitarios** + **129 comprobaciones end-to-end** en navegador real
+- **63 tests unitarios** + **273 comprobaciones end-to-end** en navegador real
   (`python tests/auditoria_e2e.py`), sobre escritorio claro, oscuro y celular.
   ⚠️ Al integrar la capa B la auditoría daba **108/108 sin mirarla ni una vez**:
   si se agrega una capa, hay que agregarle comprobaciones o su verde no dice nada.
@@ -289,8 +289,8 @@ y tienda SERNAGEOMIN (DNS no resuelve), GORE Araucanía (403), SEIA (500).
 - **Ausencia de dato ≠ ausencia de riesgo.** Está dicho en el frontend; mantenerlo.
 - **Correr `tests/auditoria_e2e.py` antes de declarar algo arreglado.** Tres de los
   cuatro hallazgos del primer informe de auditoría eran bugs de la propia prueba.
-- **Subir `VERSION` en `web/sw.js` en cada cambio del frontend** (va en v8). Sin
-  eso el service worker sirve la versión vieja y los arreglos no llegan.
+- **Subir `VERSION` en `web/sw.js` en cada cambio del frontend** (hoy va en v21).
+  Sin eso el service worker sirve la versión vieja y los arreglos no llegan.
 - Al correr un script sobre una sola comuna o un solo archivo, **verificar que
   fusione y no sobrescriba su índice**. Ese error ya ocurrió tres veces y su
   síntoma es mudo.

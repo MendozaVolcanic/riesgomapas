@@ -24,7 +24,7 @@ Uso:
     python 07_buscar_laminas_riesgo.py --comuna Angol
 
 Salida: data/processed/eae/laminas_candidatas_<prioridad>.json  (se FUSIONA
-        con lo que ya había; ver regla 5 de docs/REGLAS.md)
+        con lo que ya había; ver regla 5 de REGLAS.md)
 """
 from __future__ import annotations
 

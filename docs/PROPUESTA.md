@@ -36,7 +36,7 @@ fusionarlas en un número único. El usuario ve de qué está hecha la respuesta
 
 | Capa | Qué es | Cobertura Araucanía | Fuente |
 |---|---|---|---|
-| **A · Normativo** | Área de riesgo de PRC, MAI DGA | 63 polígonos en 12 comunas + 23 planos georreferenciados | Servicio ArcGIS de MINVU + planos del registro EAE |
+| **A · Normativo** | Área de riesgo de PRC, MAI DGA | 63 polígonos en 12 comunas + 20 planos publicados (de 24 georreferenciados) | Servicio ArcGIS de MINVU + planos del registro EAE |
 | **B · Observado** | Huella real de inundación por SAR, con fecha | 3 órbitas sobre el evento de ago-2026 | Sentinel-1 GRD vía Planetary Computer, **sin cuenta** |
 | **C · Modelado** | Períodos de retorno 10–500 años | **Total** | JRC GloFAS v2.1 + HAND propio sobre DEM 12,5 m |
 | **D · Operacional** | Puntos críticos, nivel de río actual, pronóstico | **Total** | SENAPRED (1.374 pts), DGA HIDROlínea, Flood Hub |
@@ -164,9 +164,9 @@ esos rótulos son texto vectorial con posición exacta dentro del PDF, no una
 imagen. El producto cartesiano de las líneas de la grilla entrega decenas de
 puntos de control de coordenada exacta.
 
-Resultado sobre La Araucanía: **23 planos georreferenciados sin intervención**,
-con error de ubicación mayoritariamente bajo 20 cm. Ver
-`scripts/08_georreferenciar_grilla.py`.
+Resultado sobre La Araucanía: **24 planos georreferenciados sin intervención**
+(20 se publican; 4 resultaron ser copias exactas del mismo plano), con error de
+ubicación mayoritariamente bajo 20 cm. Ver `scripts/08_georreferenciar_grilla.py`.
 
 Los cuatro controles que decide aplicar antes de dar por bueno un plano importan
 tanto como el ajuste, porque el RMSE mide la coherencia interna de la grilla y no

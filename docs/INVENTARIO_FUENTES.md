@@ -162,8 +162,9 @@ canal Gibbs— se publicaba como si fuera un mapa.
 rótulos son **texto vectorial con posición exacta** dentro del PDF, no una imagen.
 Cada cruce de grilla es entonces un punto de control de coordenada exacta.
 
-**Resultado: 23 planos georreferenciados automáticamente** (`scripts/08_…`), con
-RMSE leave-one-out mayoritariamente bajo 0,20 m:
+**Resultado: 24 planos georreferenciados automáticamente** (`scripts/08_…`), con
+RMSE leave-one-out mayoritariamente bajo 0,20 m (20 se publican; 4 resultaron ser
+copias exactas del mismo plano):
 
 | Comuna | Planos | RMSE | Resolución |
 |---|---:|---|---|
@@ -172,7 +173,7 @@ RMSE leave-one-out mayoritariamente bajo 0,20 m:
 | Pitrufquén | 4 | 0,03 – 0,04 m | 0,42 m/px |
 | Pucón | 4 | 1,31 – 1,81 m | 0,77 m/px |
 | Galvarino | 3 | 0,11 m | 0,42 m/px |
-| Traiguén | 1 | 0,19 m | 0,42 m/px |
+| Traiguén | 2 | 0,19 m | 0,42 – 0,51 m/px |
 
 Verificación independiente sobre Vilcún: la hoja aterriza en −38,667 / −72,216
 (la localidad), 4,00 × 1,50 km, y los puntos críticos de SENAPRED —dataset que no
