@@ -162,8 +162,13 @@ def umbral_agua(
     otra geometría y otro procesamiento. Acá hay una referencia mucho mejor a
     mano: el mar, los lagos y los ríos que ya estaban ahí antes del evento son
     agua indiscutible, vista por **el mismo sensor, la misma geometría y el
-    mismo día** que la inundación que se quiere detectar. Se toma su percentil
-    90 en la imagen post: «tan oscuro como el 90 % del agua que sé que es agua».
+    mismo día** que la inundación que se quiere detectar. Se toma el percentil
+    que declare la configuración —el proyecto usa la MEDIANA, no el 90 que este
+    argumento trae por omisión—: derivarlo del percentil 90 dejaba el umbral tan
+    permisivo como el agua peor comportada de la escena, porque esa cola
+    brillante es agua rugosizada por viento y no desaparece erosionando la
+    máscara. El valor por omisión se conserva sólo para no cambiar el
+    comportamiento de quien llame a esta función sin declararlo.
 
     Se acota a [mínimo, máximo] porque una escena con poca agua permanente, o con
     oleaje ese día, puede devolver un número absurdo. Devuelve el valor aplicado,
@@ -385,6 +390,31 @@ def aligerar(geom: dict, decimales: int = 6) -> dict:
          "coordinates": [quitar_colineales(a) for a in geom["coordinates"]]},
         decimales,
     )
+
+
+def area_union_km2(feats: list[dict]) -> float:
+    """Área de la UNIÓN de una lista de features, en km².
+
+    Existe porque sumar el área de cada órbita cuenta dos y tres veces el
+    territorio donde se solapan, y ese total es el que el visor muestra como
+    «hectáreas observadas». Se disuelve con shapely, que es la única dependencia
+    del proyecto capaz de hacerlo bien con polígonos que se tocan.
+    """
+    from shapely.geometry import shape
+    from shapely.ops import unary_union
+    if not feats:
+        return 0.0
+    gs = []
+    for f in feats:
+        g = shape(f["geometry"])
+        if not g.is_valid:
+            g = g.buffer(0)
+        gs.append(g)
+    u = unary_union(gs)
+    # El área en grados se convierte con la latitud del centro: a esta escala y
+    # con la región entera dentro de dos grados, el error es menor al 1 %.
+    lat = u.centroid.y
+    return u.area * _M_POR_GRADO_LAT * _M_POR_GRADO_LAT * math.cos(math.radians(lat)) / 1e6
 
 
 def area_pixel_m2(res_grados: float, lat: float) -> float:

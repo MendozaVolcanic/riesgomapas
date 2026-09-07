@@ -864,7 +864,11 @@ def main() -> None:
             "cerrado (la copa devuelve la señal antes de llegar al suelo) ni en zona "
             "urbana densa (el doble rebote pared-suelo mantiene alta la retrodispersión), "
             "así que SUBESTIMA justo donde vive más gente. El agua con viento se rugosiza "
-            "y tampoco se detecta. Por el otro lado, la NIEVE HÚMEDA es radiométricamente "
+            "y tampoco se detecta. En la costa y en los estuarios el radar tampoco "
+            "distingue una inundación de la PLEAMAR: son agua lisa a nivel del mar, "
+            "y esta capa no consulta tablas de marea — el 15 % de la huella publicada "
+            "está a menos de 2 m de altitud, casi toda en el estuario del Imperial. "
+            "Por el otro lado, la NIEVE HÚMEDA es radiométricamente "
             "indistinguible del agua, y sólo se descarta por geomorfología: se excluye "
             f"pendiente > {cfg_sar['pendiente_max_grados']}° y altura > "
             f"{cfg_sar['altitud_max_m']:.0f} m. Eso implica que esta capa NO puede afirmar "
@@ -893,7 +897,16 @@ def main() -> None:
     escribir_geojson(huella_feats, salida / "huella-observada.geojson", meta)
     escribir_geojson(cobertura_feats, salida / "cobertura-sar.geojson", meta)
 
-    area_total = sum(d["km2"] for d in diagnostico)
+    # El total NO es la suma de las órbitas: las tres se solapan sobre el mismo
+    # territorio y la misma agua se contaba dos y hasta tres veces. Medido sobre
+    # lo publicado el 6-sep-2026: unas 700 ha de 5.776, un 12 %. La cifra viaja
+    # al visor y a la portada, así que se calcula sobre la UNIÓN de la huella.
+    area_total = sar.area_union_km2(huella_feats)
+    area_sumada = sum(d["km2"] for d in diagnostico)
+    if area_sumada > area_total:
+        log(f"  {area_sumada - area_total:.1f} km² de solape entre órbitas "
+            f"({100 * (area_sumada - area_total) / area_sumada:.0f} % de la suma "
+            "por track) — el total publicado es la unión, no la suma")
     indice = {
         "evento": {"id": ev["id"], "nombre": ev["nombre"],
                    "fecha_inicio": ev["fecha_inicio"], "fecha_fin": ev["fecha_fin"],

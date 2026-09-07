@@ -286,6 +286,31 @@ def auditar_publicacion() -> None:
     m = re.search(r"const VERSION = '([^']+)'", sw)
     ok("service worker", f"versión {m.group(1) if m else '?'}")
 
+    # Las hectáreas de la capa B: el resumen contra el dato.
+    #
+    # El script suma el área de cada órbita, y las tres se solapan sobre el mismo
+    # territorio: la misma agua se contaba dos y hasta tres veces. La cifra viaja
+    # al visor y a la portada, así que se compara con la UNIÓN de lo publicado.
+    # Si difieren, no se está mirando la misma agua.
+    idx = cargar(WEB / "sar" / "indice.json")
+    hu = cargar(WEB / "sar" / "huella-observada.geojson")
+    if idx and hu:
+        declarado = ((idx.get("resumen") or {}).get("hectareas")
+                     or idx.get("hectareas"))
+        sys.path.insert(0, str(RAIZ / "scripts"))
+        import sar as _sar
+        real = _sar.area_union_km2(hu["features"]) * 100
+        if declarado and abs(declarado - real) / real > 0.02:
+            falla("capa B — hectáreas",
+                  f"el índice declara {declarado:,.0f} ha y la unión de los "
+                  f"{len(hu['features'])} polígonos publicados da {real:,.0f} ha "
+                  f"({100 * (declarado - real) / real:+.0f} %). El script ya calcula "
+                  "la unión; la capa publicada es anterior al arreglo y se corrige "
+                  "al regenerarla (necesita bajar los rásters).",
+                  gravedad="media")
+        elif declarado:
+            ok("capa B — hectáreas", f"{real:,.0f} ha, coinciden con la unión")
+
 
 def auditar_cifras_en_documentos() -> None:
     """Las cifras citadas en la documentación contra el dato real.
