@@ -1,0 +1,290 @@
+archivo:linea	constante	expresion	pistas
+scripts/01_senapred_puntos_criticos.py:51	2026	SERIE_REFERENCIA = 2026	
+scripts/01_senapred_puntos_criticos.py:154	-66	lon < -66	
+scripts/01_senapred_puntos_criticos.py:154	-17	lat < -17	
+scripts/01_senapred_puntos_criticos.py:154	76	76 < lon	
+scripts/01_senapred_puntos_criticos.py:154	56	56 < lat	
+scripts/01_senapred_puntos_criticos.py:154	66	-66	
+scripts/01_senapred_puntos_criticos.py:154	17	-17	
+scripts/01_senapred_puntos_criticos.py:257	3	n >= 3	
+scripts/01_senapred_puntos_criticos.py:343	8	-8	
+scripts/01_senapred_puntos_criticos.py:361	8	-8	
+scripts/02_jrc_amenaza_modelada.py:56	2016	ANIO_PUBLICACION = 2016	umbral
+scripts/02_jrc_amenaza_modelada.py:61	0.25	UMBRAL_M = 0.25	metros,umbral
+scripts/03_descargar_documentos.py:36	400	DPI = 400	dpi
+scripts/03_descargar_documentos.py:44	2022	/2022	
+scripts/03_descargar_documentos.py:44	04	/04	
+scripts/03_descargar_documentos.py:44	5	-5	
+scripts/03_descargar_documentos.py:52	2022	/2022	
+scripts/03_descargar_documentos.py:52	04	/04	
+scripts/03_descargar_documentos.py:66	2022	/2022	
+scripts/03_descargar_documentos.py:66	02	/02	
+scripts/03_descargar_documentos.py:67	3	-3	
+scripts/03_descargar_documentos.py:75	2023	/2023	
+scripts/03_descargar_documentos.py:75	05	/05	
+scripts/03_descargar_documentos.py:84	2022	/2022	
+scripts/03_descargar_documentos.py:84	07	/07	
+scripts/03_descargar_documentos.py:93	2022	/2022	
+scripts/03_descargar_documentos.py:93	04	/04	
+scripts/03_descargar_documentos.py:93	14	-14	
+scripts/03_descargar_documentos.py:110	3	o.type == 3	
+scripts/03_descargar_documentos.py:119	1800	len(texto.strip()) < 1800	
+scripts/03_descargar_documentos.py:128	72.0	/ 72.0	
+scripts/03_descargar_documentos.py:165	25	len(candidatas) > 25	dpi
+scripts/03_descargar_documentos.py:176	8	-8	
+scripts/04_georreferenciar.py:73	8	-8	
+scripts/04_georreferenciar.py:95	2022	/2022	
+scripts/04_georreferenciar.py:95	04	/04	
+scripts/04_georreferenciar.py:108	72.5900	-72.5900	
+scripts/04_georreferenciar.py:108	38.7350	-38.7350	
+scripts/04_georreferenciar.py:127	8	-8	
+scripts/04_georreferenciar.py:174	8	-8	
+scripts/05_eae_documentos.py:42	700	ID_MAX = 700          # el portal tenía 536 fichas en ago-2026; se deja holgura	
+scripts/05_eae_documentos.py:42	2026	-2026	
+scripts/05_eae_documentos.py:43	0.35	PAUSA = 0.35          # cortesía con un sitio del Estado: ~3 req/s como techo	
+scripts/05_eae_documentos.py:69	8	-8	
+scripts/05_eae_documentos.py:151	8	-8	
+scripts/05_eae_documentos.py:162	25	vacias >= 25	
+scripts/05_eae_documentos.py:170	8	-8	
+scripts/05_eae_documentos.py:188	8	-8	
+scripts/05_eae_documentos.py:190	8	-8	
+scripts/06_areas_riesgo_prc.py:256	8	-8	
+scripts/06_areas_riesgo_prc.py:266	4	-4	
+scripts/06_areas_riesgo_prc.py:266	4	-4	
+scripts/06_areas_riesgo_prc.py:300	20.000	:20.000)	
+scripts/07_buscar_laminas_riesgo.py:98	8	-8	
+scripts/07_buscar_laminas_riesgo.py:128	200	OBJETOS_MIN_PLOTER = 200	umbral
+scripts/07_buscar_laminas_riesgo.py:129	0.18	FRAC_IMAGEN_MIN = 0.18	umbral
+scripts/07_buscar_laminas_riesgo.py:130	1500	TEXTO_MAX_RASTER = 1500	umbral
+scripts/07_buscar_laminas_riesgo.py:175	4	len(v) == 4	
+scripts/07_buscar_laminas_riesgo.py:244	3	o.type == 3	
+scripts/07_buscar_laminas_riesgo.py:276	28.35	/ 28.35	
+scripts/07_buscar_laminas_riesgo.py:276	28.35	/ 28.35	
+scripts/07_buscar_laminas_riesgo.py:307	8	-8	
+scripts/07_buscar_laminas_riesgo.py:332	1e6	/ 1e6	
+scripts/07_buscar_laminas_riesgo.py:376	8	-8	
+scripts/07_buscar_laminas_riesgo.py:390	8	-8	
+scripts/08_georreferenciar_grilla.py:59	300	DPI = 300           # suficiente para leer rótulos; 400 dpi en hoja de 150 cm no cabe	dpi,tolerancia
+scripts/08_georreferenciar_grilla.py:60	0.02	TOL_PASO = 0.02     # 2% de tolerancia en la regularidad de la grilla	dpi,escala,tolerancia
+scripts/08_georreferenciar_grilla.py:61	0.9999	R2_MIN = 0.9999	dpi,escala,tolerancia
+scripts/08_georreferenciar_grilla.py:62	0.01	TOL_ESCALA = 0.01   # 1% entre escala X y escala Y	dpi,escala,tolerancia
+scripts/08_georreferenciar_grilla.py:111	0.5	* 0.5	
+scripts/08_georreferenciar_grilla.py:112	0.8	0.8 <= hueco	
+scripts/08_georreferenciar_grilla.py:112	0.9	* 0.9	
+scripts/08_georreferenciar_grilla.py:115	0.6	* 0.6	
+scripts/08_georreferenciar_grilla.py:116	0.8	0.8 <= hueco	
+scripts/08_georreferenciar_grilla.py:116	0.9	* 0.9	
+scripts/08_georreferenciar_grilla.py:139	3.0	TOL_INLIER_M = 3.0   # un rótulo bien leído no se desvía más que esto del ajuste	escala
+scripts/08_georreferenciar_grilla.py:162	3	len(pares) < 3	
+scripts/08_georreferenciar_grilla.py:174	1e-6	abs(dp) < 1e-6	
+scripts/08_georreferenciar_grilla.py:174	6	-6	
+scripts/08_georreferenciar_grilla.py:184	3	mejor[0] < 3	m
+scripts/08_georreferenciar_grilla.py:227	0.3	0.3 <= lon	
+scripts/08_georreferenciar_grilla.py:227	0.3	0.3 <= lat	
+scripts/08_georreferenciar_grilla.py:227	0.3	+ 0.3	
+scripts/08_georreferenciar_grilla.py:227	0.3	+ 0.3	
+scripts/08_georreferenciar_grilla.py:294	72.0	/ 72.0	
+scripts/08_georreferenciar_grilla.py:311	28.35	/ 28.35	
+scripts/08_georreferenciar_grilla.py:311	28.35	/ 28.35	
+scripts/08_georreferenciar_grilla.py:325	8	-8	
+scripts/08_georreferenciar_grilla.py:408	8	-8	
+scripts/08_georreferenciar_grilla.py:417	8	-8	
+scripts/08_georreferenciar_grilla.py:425	8	-8	
+scripts/09_exportar_catalogo.py:48	8	-8	
+scripts/09_exportar_catalogo.py:68	8	-8	
+scripts/09_exportar_catalogo.py:94	8	-8	
+scripts/09_exportar_catalogo.py:132	8	-8	
+scripts/09_exportar_catalogo.py:178	8	-8	
+scripts/09_exportar_catalogo.py:186	1024	/ 1024	
+scripts/10_exportar_superposiciones.py:39	2600	ANCHO_MAX = 2600      # px; suficiente para leer la zonificación en pantalla	px
+scripts/10_exportar_superposiciones.py:40	900	PESO_OBJETIVO_KB = 900	px
+scripts/10_exportar_superposiciones.py:78	3	b <= 3	
+scripts/10_exportar_superposiciones.py:80	4	src.count < 4	
+scripts/10_exportar_superposiciones.py:81	255	salida[3] = 255	
+scripts/10_exportar_superposiciones.py:104	255	idx[fuera] = 255	
+scripts/10_exportar_superposiciones.py:106	3	* 3	
+scripts/10_exportar_superposiciones.py:118	3	* 3	
+scripts/10_exportar_superposiciones.py:118	3	* 3	
+scripts/10_exportar_superposiciones.py:118	3	+ 3	
+scripts/10_exportar_superposiciones.py:119	240	r > 240	
+scripts/10_exportar_superposiciones.py:119	240	g > 240	
+scripts/10_exportar_superposiciones.py:119	240	b > 240	
+scripts/10_exportar_superposiciones.py:120	28	alfas[i] = 28          # papel: casi transparente	
+scripts/10_exportar_superposiciones.py:121	215	r > 215	
+scripts/10_exportar_superposiciones.py:121	215	g > 215	
+scripts/10_exportar_superposiciones.py:121	215	b > 215	
+scripts/10_exportar_superposiciones.py:122	120	alfas[i] = 120         # grises muy claros: semitransparentes	
+scripts/10_exportar_superposiciones.py:124	255	alfas[i] = 255         # dibujo y zonificación: opacos	
+scripts/10_exportar_superposiciones.py:128	1024	/ 1024	
+scripts/10_exportar_superposiciones.py:134	0.5	* 0.5	kb
+scripts/10_exportar_superposiciones.py:137	255	* 255	kb
+scripts/10_exportar_superposiciones.py:138	127	Image.NEAREST)) > 127	kb
+scripts/10_exportar_superposiciones.py:252	8	-8	
+scripts/10_exportar_superposiciones.py:256	1024	/ 1024	
+scripts/11_verificar_superposicion.py:35	256	TAM_TESELA = 256	
+scripts/11_verificar_superposicion.py:36	17	ZOOM_MAX = 17	
+scripts/11_verificar_superposicion.py:41	180.0	+ 180.0	
+scripts/11_verificar_superposicion.py:41	360.0	/ 360.0	
+scripts/11_verificar_superposicion.py:43	2.0	/ 2.0	
+scripts/11_verificar_superposicion.py:53	1.6	* 1.6	
+scripts/11_verificar_superposicion.py:65	160	filas > 160	zoom
+scripts/11_verificar_superposicion.py:88	360.0	* 360.0	
+scripts/11_verificar_superposicion.py:88	180.0	- 180.0	
+scripts/11_verificar_superposicion.py:118	0.85	* 0.85	ancho
+scripts/11_verificar_superposicion.py:141	8	-8	
+scripts/12_cosechar_municipios.py:45	0.7	PAUSA = 0.7          # cortesía con sitios municipales, que suelen ser modestos	
+scripts/12_cosechar_municipios.py:47	60	MAX_PAGINAS = 60	
+scripts/12_cosechar_municipios.py:48	40	TIEMPO_MAX = 40	
+scripts/12_cosechar_municipios.py:89	9	-9	
+scripts/12_cosechar_municipios.py:94	9	-9	
+scripts/12_cosechar_municipios.py:118	200	cod == 200	
+scripts/12_cosechar_municipios.py:118	800	len(cuerpo) > 800	
+scripts/12_cosechar_municipios.py:128	8	-8	
+scripts/12_cosechar_municipios.py:143	8	-8	
+scripts/12_cosechar_municipios.py:235	200	cod != 200	
+scripts/12_cosechar_municipios.py:239	8	-8	
+scripts/12_cosechar_municipios.py:275	200	cod != 200	
+scripts/12_cosechar_municipios.py:277	8	-8	m
+scripts/12_cosechar_municipios.py:311	1024	/ 1024	
+scripts/12_cosechar_municipios.py:313	1e6	1e6 > max_mb	mb
+scripts/12_cosechar_municipios.py:314	1e6	/ 1e6	mb
+scripts/12_cosechar_municipios.py:315	1024	/ 1024	mb
+scripts/12_cosechar_municipios.py:325	1024	/ 1024	
+scripts/12_cosechar_municipios.py:395	8	-8	
+scripts/12_cosechar_municipios.py:403	8	-8	
+scripts/13_campamentos_riesgo.py:43	3	/3	
+scripts/13_campamentos_riesgo.py:60	4	len(d) == 4	
+scripts/14_sar_huella_observada.py:99	512	FILAS_BLOQUE = 512	bytes,mb
+scripts/14_sar_huella_observada.py:105	32	DECIMACION_COBERTURA = 32	kb,mb
+scripts/14_sar_huella_observada.py:130	00	+00	
+scripts/14_sar_huella_observada.py:131	3000	+ 3000	
+scripts/14_sar_huella_observada.py:154	5000	len(items) > 5000	
+scripts/14_sar_huella_observada.py:472	16	-16	
+scripts/14_sar_huella_observada.py:481	100	* 100	
+scripts/14_sar_huella_observada.py:482	0.5	con_dato < 0.5	
+scripts/14_sar_huella_observada.py:486	100	* 100	
+scripts/14_sar_huella_observada.py:590	4	/ 4	ancho,píxeles
+scripts/14_sar_huella_observada.py:598	5e6	sar.area_poligono_m2(geom) < 5e6	
+scripts/14_sar_huella_observada.py:639	8	-8	
+scripts/14_sar_huella_observada.py:665	20	* 20	
+scripts/14_sar_huella_observada.py:724	111320	* 111320	m
+scripts/14_sar_huella_observada.py:744	30	-30	
+scripts/14_sar_huella_observada.py:804	1e6	/ 1e6	
+scripts/14_sar_huella_observada.py:805	1e4	/ 1e4	
+scripts/14_sar_huella_observada.py:828	1e6	/ 1e6	
+scripts/14_sar_huella_observada.py:852	30	-30	
+scripts/14_sar_huella_observada.py:870	111320	* 111320	m
+scripts/14_sar_huella_observada.py:887	111320	* 111320	
+scripts/14_sar_huella_observada.py:893	100	* 100	hectareas
+scripts/14_sar_huella_observada.py:901	8	-8	
+scripts/14_sar_huella_observada.py:906	100	* 100	ha
+scripts/15_gore_amenaza.py:102	1000	PAGINA = 1000	mb
+scripts/15_gore_amenaza.py:108	5	DECIMALES = 5	m,píxel
+scripts/15_gore_amenaza.py:145	60000	offset > 60000	
+scripts/15_gore_amenaza.py:171	05	-05	
+scripts/15_gore_amenaza.py:171	02	-02	
+scripts/15_gore_amenaza.py:227	8	-8	
+scripts/15_gore_amenaza.py:228	8	-8	
+scripts/15_gore_amenaza.py:236	4	len(anillos[0]) >= 4	
+scripts/15_gore_amenaza.py:266	9	-9	
+scripts/16_censo_2024.py:51	9	REGION = 9	
+scripts/16_censo_2024.py:150	2024	-2024	
+scripts/16_censo_2024.py:182	1e6	/ 1e6	
+scripts/17_arclim_desbordes.py:64	252	SITIOS_NACIONALES = 252	
+scripts/17_arclim_desbordes.py:92	8	-8	
+scripts/17_arclim_desbordes.py:176	2065	-2065	
+scripts/18_vectorizar_laminas.py:104	3	obj.type != 3	
+scripts/18_vectorizar_laminas.py:123	25	a.min(2) < 25	
+scripts/18_vectorizar_laminas.py:123	210	a.max(2) < 210	
+scripts/18_vectorizar_laminas.py:129	0.55	* 0.55	
+scripts/18_vectorizar_laminas.py:131	8	t) > 8	
+scripts/18_vectorizar_laminas.py:133	14	len(sel) >= 14	
+scripts/18_vectorizar_laminas.py:163	0.01	dif > 0.01	
+scripts/18_vectorizar_laminas.py:203	3	len(V) < 3	
+scripts/18_vectorizar_laminas.py:244	28	.get("contraste_minimo", 28)	
+scripts/18_vectorizar_laminas.py:256	8	.get("celda_px", 8)	
+scripts/18_vectorizar_laminas.py:264	5	.get("ventana_celdas", 5)	
+scripts/18_vectorizar_laminas.py:266	8	.get("densidad_minima", 8)	
+scripts/18_vectorizar_laminas.py:289	0.5	* 0.5	píxel
+scripts/18_vectorizar_laminas.py:327	45	.get("tolerancia_color", 45)	
+scripts/18_vectorizar_laminas.py:328	4	.get("ancho_minimo_px", 4)	
+scripts/18_vectorizar_laminas.py:471	150	.get('dpi', 150)	grados
+scripts/18_vectorizar_laminas.py:471	100	/ 100	grados
+scripts/18_vectorizar_laminas.py:473	4	- 4	grados
+scripts/18_vectorizar_laminas.py:476	15	.get("rmse_maximo_m", 15)	grados
+scripts/18_vectorizar_laminas.py:488	2000	.get("area_minima_m2", 2000)	
+scripts/18_vectorizar_laminas.py:496	0.5	* 0.5	
+scripts/18_vectorizar_laminas.py:586	3	+ 3	
+scripts/18_vectorizar_laminas.py:589	3	+ 3	
+scripts/18_vectorizar_laminas.py:609	60	paso < 60	px
+scripts/18_vectorizar_laminas.py:633	8	-8	
+scripts/18_vectorizar_laminas.py:635	8	-8	
+scripts/18_vectorizar_laminas.py:653	500	im.width < 500	
+scripts/18_vectorizar_laminas.py:653	400	im.height < 400	
+scripts/18_vectorizar_laminas.py:681	8	-8	
+scripts/18_vectorizar_laminas.py:712	8	-8	
+scripts/19_estado_comunas.py:69	8	-8	
+scripts/19_estado_comunas.py:85	2024	-2024	mb
+scripts/19_estado_comunas.py:165	8	-8	
+scripts/19_estado_comunas.py:195	9	-9	
+scripts/19_estado_comunas.py:241	8	-8	
+scripts/20_paquete_practicante.py:50	8	-8	
+scripts/20_paquete_practicante.py:137	0.15	m = 0.15                      # ~15 km de margen	km,m
+scripts/20_paquete_practicante.py:229	1024	/ 1024	kb
+scripts/20_paquete_practicante.py:353	8	-8	área
+scripts/comun.py:28	8	-8	
+scripts/comun.py:29	8	-8	
+scripts/comun.py:30	8	-8	
+scripts/comun.py:48	0.1	/0.1	
+scripts/comun.py:56	8	-8	
+scripts/comun.py:71	8	-8	
+scripts/comun.py:80	8	-8	
+scripts/comun.py:112	8	-8	
+scripts/comun.py:120	8	-8	
+scripts/comun.py:137	1024	/ 1024	
+scripts/comun.py:150	1024	/ 1024	
+scripts/comun.py:225	2.0	/ 2.0	
+scripts/comun.py:229	4	len(a) < 4	
+scripts/comun.py:236	4	len(a) >= 4	
+scripts/comun.py:310	8	-8	
+scripts/comun.py:312	1024	/ 1024	
+scripts/georref.py:20	10.0	UMBRAL_PREDIAL = 10.0	dpi
+scripts/georref.py:21	25.0	UMBRAL_MANZANA = 25.0	dpi
+scripts/georref.py:138	0.5	+ 0.5	
+scripts/georref.py:139	0.5	+ 0.5	
+scripts/georref.py:151	255	* 255	
+scripts/sar.py:115	0.5	+ 0.5	ancho
+scripts/sar.py:116	0.5	+ 0.5	ancho
+scripts/sar.py:173	100	vals.size < 100	
+scripts/sar.py:308	4	n < 4	
+scripts/sar.py:315	2.0	/ 2.0	
+scripts/sar.py:325	4	len(anillos[0]) < 4	
+scripts/sar.py:333	2.0	/ 2.0	escala,hectáreas,área
+scripts/sar.py:340	12	-12	escala
+scripts/sar.py:349	4	len(anillo) < 4	píxeles,tolerancia
+scripts/sar.py:353	3	len(pts) < 3	
+scripts/sar.py:365	3	len(salida) < 3	
+web/app.js:31	73.70	-73.70	
+web/app.js:31	39.65	-39.65	
+web/app.js:31	70.90	-70.90	
+web/app.js:31	37.35	-37.35	
+web/app.js:136	6371000	const R = 6371000;	
+web/app.js:137	180	/ 180	
+web/app.js:138	180	/ 180	
+web/app.js:140	180	/ 180	
+web/app.js:140	180	/ 180	
+web/app.js:187	11	const ZOOM_MIN_PLANO = 11;	kb,mb,px,zoom
+web/app.js:188	6	const MAX_PLANOS_SIMULTANEOS = 6;	kb,mb,px,zoom
+web/app.js:366	3	en(RADIOS.cercano).length >= 3	
+web/app.js:416	100	/ 100	
+web/app.js:416	10	/ 10	
+web/app.js:817	3	strong>3	
+web/app.js:1154	4	texto.trim().length < 4	
+web/app.js:1476	72.6	-72.6	
+web/app.js:1476	38.75	-38.75	
+web/app.js:1503	0.35	-0.35	
+web/app.js:1504	0.08	-0.08	
+web/catalogo.js:95	3	comunas.length <= 3	
+web/documentos.html:4	8	-8	
+web/index.html:4	8	-8	
+# 288 constantes en 28 archivos

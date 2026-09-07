@@ -1,0 +1,125 @@
+PUNTO 02_angol_lamina_vectorizada lon=-72.69849822363237 lat=-37.77912806273094
+NIVEL CSS: veredicto v-bajo
+COMUNA (comunaDe): ['Angol', 0.8]
+EVALUAR: {"nivel": "bajo", "titulo": "Registros de inundación a cierta distancia", "areas": 0, "sar": 0, "cerca": 1, "gore": 1, "enMancha": false, "lam": 1, "areasTipo": []}
+
+=== #respuesta ===
+ℹ️
+Registros de inundación a cierta distancia
+
+📍 Auditoría Angol lámina
+
+El registro más cercano de inundación está a 785 metros.
+
+Ver todo el detalle y las fuentes
+Compartir
+
+=== #detalle-ficha ===
+
+    
+      ℹ️
+      Registros de inundación a cierta distancia
+    
+    📍 Auditoría Angol lámina
+    Plan Regulador Comunal A · NORMATIVOEste punto no cae dentro de un área de riesgo por inundación
+             declarada en el plan regulador.
+             Que no aparezca no significa que no exista: esta capa
+             sólo trae instrumentos ya vigentes y publicados, y va por detrás de las
+             aprobaciones. Además, la mayoría de las comunas de la región no ha
+             declarado ningún área de riesgo. Consulta en la Dirección de Obras de tu
+             municipalidad.Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) · Año: 2010 · datos obtenidos 2026-08-30Sólo existen dentro del límite urbano de comunas cuyo
+           plan regulador las haya zonificado: que no haya polígono no significa
+           que no se inunde, significa que el plan no lo declaró.
+    Huella de inundación observada por satélite
+        B · OBSERVADOEl satélite sí miró este punto el 3 de agosto de 2026
+             y no detectó agua
+             en esa pasada.
+             Eso no quiere decir que no se haya inundado. El radar
+             tiene cuatro límites conocidos, y los cuatro empujan en la misma
+             dirección: hacia quedarse corto.
+             
+               No ve el agua bajo bosque cerrado. El dosel
+                   devuelve la señal antes de que llegue al suelo.
+               Subestima en zona urbana densa —justo donde vive
+                   más gente—: el rebote entre la pared y el suelo inundado mantiene
+                   la señal alta, así que el agua se lee como ciudad seca.
+               No ve el agua con viento. El oleaje rompe el
+                   espejo que hace que el agua se vea negra en el radar.
+               Es la foto de un instante, no el máximo del
+                   evento. El agua que subió y bajó entre dos pasadas no aparece en
+                   ninguna de las dos.
+             
+             Un caso real de este mismo evento, para que se
+             entienda cuánto pesa el último límite: en Angol el
+             estero Rehue se desbordó la madrugada del 2 de agosto
+             y el agua superó 1,5 m dentro de las casas. Las dos pasadas satelitales
+             sobre Angol fueron el 3, y no vieron nada: el agua ya
+             había bajado. Esta capa registra 7,7 ha en esa comuna, y la inundación
+             fue de las peores de la región.Fuente: Sentinel-1 SENTINEL-1C GRD · Año: 2026 · datos obtenidos 2026-08-12
+    Registro oficial de puntos críticos D · OPERACIONALHay 1 punto crítico registrado
+             a menos de 1500 m. Los más cercanos:785 m — Inundación por desborde de cauce
+        Alto
+        PUENTE MALLECO
+        
+        Fuente: SENAPRED — Puntos Críticos, Programa Invierno · Año: 2026 · datos obtenidos 2026-08-12Son puntos, no polígonos, y reflejan lo que el
+           municipio reportó. La ausencia de registro no equivale a ausencia de
+           riesgo.
+    Modelo global de inundación C · MODELADOEste punto queda fuera de la mancha modelada de 100 años.Fuente: JRC (Comisión Europea) — Global River Flood Hazard Map, retorno 100 años · Año: 2016 · datos obtenidos 2026-08-07Resolución ~1 km: un píxel cubre varias manzanas y el
+             modelo no representa el drenaje urbano. Además es un modelo de 2016,
+             así que no incorpora obras fluviales ni cambios de uso de suelo
+             posteriores. Sirve como contexto regional, no para
+             decidir sobre una propiedad concreta.El modelo regional del Gobierno Regional clasifica este punto como
+         amenaza de inundación media.Fuente: Gobierno Regional de La Araucanía — Informe Componente Amenazas Naturales, Plan Regional de Ordenamiento Territorial · Año: 2016 · datos obtenidos 2026-08-12Resolución ~35 m, mucho más fina que el modelo
+             global, pero sus clases no significan un período de retorno:
+             «máxima» no equivale a ningún «cada tantos años». Más detalle espacial,
+             menos interpretable. Se contrastó contra los puntos críticos de
+             SENAPRED, que no participaron en su elaboración: el 39,5 % de los
+             desbordes reales cae en la clase máxima, que ocupa el 8,2 % del
+             territorio. El estudio que lo encargó nunca llegó a aprobarse.
+    Con qué cuenta Angol INVENTARIO
+    Esto no dice si tu casa se inunda. Dice qué información
+       existe para saberlo, y es lo que hace falta para exigir que la haya.
+    
+      52.605 habitantes (Censo 2024)
+      14 puntos donde el municipio
+          reportó inundación, 3 de ellos
+          repetidos en 3 o más temporadas
+    
+    Qué hay:11 lámina(s) de cartografía localizadas
+                dentro de 41 documento(s) públicos124 polígono(s) que
+                convertimos nosotros desde una lámina impresa
+    Qué falta:no tiene su área de riesgo por inundación en el vectorial público del MINVU
+    
+      
+        Compartir el estado de Angol
+      
+        Pedirle el mapa a la autoridad
+    
+    La solicitud usa la Ley 20.285: el
+       organismo está obligado a responderte por escrito en 20 días hábiles. Se
+       envía en
+       portaltransparencia.cl, es gratis y no necesitas
+       abogado.
+  Ninguno de estos mapas predice la
+           próxima inundación: cada uno es la conclusión de un estudio, con su
+           fecha y su método, y están hechos con métodos distintos. Mira
+           la mancha, no su borde — quedar justo afuera no es una buena
+           noticia. Cómo leer un mapa de inundación.
+    Compartir esta ficha
+    Ver en el mapa
+  
+
+=== textoFicha() (lo que se comparte) ===
+REGISTROS DE INUNDACIÓN A CIERTA DISTANCIA
+Ubicación: Auditoría Angol lámina
+
+El satélite miró este punto el 3 de agosto de 2026 y no detectó agua.
+  Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+  y es la foto del instante de la pasada, no el máximo del evento.
+
+Puntos críticos registrados cerca:
+• 785 m — Inundación por desborde de cauce (riesgo Alto)
+  Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)
+
+Esto NO es información oficial ni un pronóstico.
+En emergencia: SENAPRED y tu municipio.

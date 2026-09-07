@@ -1,0 +1,99 @@
+PUNTO 05_mar_frente_a_saavedra lon=-73.55 lat=-38.9
+NIVEL CSS: veredicto v-sindato
+COMUNA (comunaDe): ['Saavedra', 16.2]
+EVALUAR: {"nivel": "sindato", "titulo": "Sin registros en las fuentes consultadas", "areas": 0, "sar": 0, "cerca": 0, "gore": 0, "enMancha": false, "lam": 0, "areasTipo": []}
+
+=== #respuesta ===
+❔
+Sin registros en las fuentes consultadas
+
+📍 Auditoría mar
+
+Ninguna de las fuentes consultadas registra inundación en este punto.
+
+Que no haya registro no significa que acá no se inunde. Significa que nadie lo ha levantado. En comunas con poca capacidad técnica municipal es lo esperable.
+
+Ver todo el detalle y las fuentes
+Compartir
+
+=== #detalle-ficha ===
+
+    
+      ❔
+      Sin registros en las fuentes consultadas
+    
+    📍 Auditoría mar
+    Plan Regulador Comunal A · NORMATIVOEste punto no cae dentro de un área de riesgo por inundación
+             declarada en el plan regulador.
+             Que no aparezca no significa que no exista: esta capa
+             sólo trae instrumentos ya vigentes y publicados, y va por detrás de las
+             aprobaciones. Además, la mayoría de las comunas de la región no ha
+             declarado ningún área de riesgo. Consulta en la Dirección de Obras de tu
+             municipalidad.Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) · Año: 2010 · datos obtenidos 2026-08-30Sólo existen dentro del límite urbano de comunas cuyo
+           plan regulador las haya zonificado: que no haya polígono no significa
+           que no se inunde, significa que el plan no lo declaró.
+    Huella de inundación observada por satélite
+        B · OBSERVADOEl satélite no pasó por acá entre el 30 de julio de 2026 y el 6 de agosto de 2026, que es la ventana del evento, o pasó con una geometría que no alcanza a cubrir este punto.
+             No observado no es lo mismo que no inundado. Este
+             visor puede decir dónde vio agua; donde el radar no miró no tiene nada
+             que declarar, y ese vacío no es evidencia de que acá estuviste a
+             salvo.Fuente: Sentinel-1 SENTINEL-1D GRD · Año: 2026 · datos obtenidos 2026-08-12
+    Registro oficial de puntos críticos D · OPERACIONALNo hay puntos críticos registrados a menos de 1500 m.Fuente: SENAPRED — Puntos Críticos, Programa Invierno · Año: 2026 · datos obtenidos 2026-08-12Son puntos, no polígonos, y reflejan lo que el
+           municipio reportó. La ausencia de registro no equivale a ausencia de
+           riesgo.
+    Modelo global de inundación C · MODELADOEste punto queda fuera de la mancha modelada de 100 años.Fuente: JRC (Comisión Europea) — Global River Flood Hazard Map, retorno 100 años · Año: 2016 · datos obtenidos 2026-08-07Resolución ~1 km: un píxel cubre varias manzanas y el
+             modelo no representa el drenaje urbano. Además es un modelo de 2016,
+             así que no incorpora obras fluviales ni cambios de uso de suelo
+             posteriores. Sirve como contexto regional, no para
+             decidir sobre una propiedad concreta.El modelo regional del Gobierno Regional no clasifica
+         este punto en sus dos categorías más altas.Fuente: Gobierno Regional de La Araucanía — Informe Componente Amenazas Naturales, Plan Regional de Ordenamiento Territorial · Año: 2016 · datos obtenidos 2026-08-12Resolución ~35 m, mucho más fina que el modelo
+             global, pero sus clases no significan un período de retorno:
+             «máxima» no equivale a ningún «cada tantos años». Más detalle espacial,
+             menos interpretable. Se contrastó contra los puntos críticos de
+             SENAPRED, que no participaron en su elaboración: el 39,5 % de los
+             desbordes reales cae en la clase máxima, que ocupa el 8,2 % del
+             territorio. El estudio que lo encargó nunca llegó a aprobarse.
+    Con qué cuenta Saavedra INVENTARIO
+    Esto no dice si tu casa se inunda. Dice qué información
+       existe para saberlo, y es lo que hace falta para exigir que la haya.
+    
+      13.228 habitantes (Censo 2024)
+      23 puntos donde el municipio
+          reportó inundación, 15 de ellos
+          repetidos en 3 o más temporadas
+    
+    Qué hay:1 polígono(s) de área de riesgo en el
+                vectorial público del MINVU8 lámina(s) de cartografía localizadas
+                dentro de 12 documento(s) públicos
+    No detectamos vacíos en las fuentes que revisamos.
+    
+      
+        Compartir el estado de Saavedra
+      
+        Pedirle el mapa a la autoridad
+    
+    La solicitud usa la Ley 20.285: el
+       organismo está obligado a responderte por escrito en 20 días hábiles. Se
+       envía en
+       portaltransparencia.cl, es gratis y no necesitas
+       abogado.
+  Ninguno de estos mapas predice la
+           próxima inundación: cada uno es la conclusión de un estudio, con su
+           fecha y su método, y están hechos con métodos distintos. Mira
+           la mancha, no su borde — quedar justo afuera no es una buena
+           noticia. Cómo leer un mapa de inundación.
+    Compartir esta ficha
+    Ver en el mapa
+  
+
+=== textoFicha() (lo que se comparte) ===
+SIN REGISTROS EN LAS FUENTES CONSULTADAS
+Ubicación: Auditoría mar
+
+El satélite no pasó por acá en la ventana del evento.
+  No observado NO es lo mismo que no inundado.
+
+Sin puntos críticos registrados en 1,5 km.
+
+Esto NO es información oficial ni un pronóstico.
+En emergencia: SENAPRED y tu municipio.

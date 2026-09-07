@@ -1,0 +1,303 @@
+{
+ "01_collipulli_area_minvu": {
+  "lon": -72.43769380639036,
+  "lat": -37.96136005453543,
+  "nivel": "veredicto v-alto",
+  "comuna": [
+   "Ercilla",
+   5.7
+  ],
+  "evaluar": {
+   "nivel": "alto",
+   "titulo": "Estás en un área de riesgo por inundación del plan regulador",
+   "areas": 1,
+   "sar": 0,
+   "cerca": 0,
+   "gore": 1,
+   "enMancha": false,
+   "lam": 0,
+   "areasTipo": [
+    "fluvial"
+   ]
+  },
+  "corto": "⚠️\nEstás en un área de riesgo por inundación del plan regulador\n\n📍 Auditoría Collipulli área\n\nEl plan regulador de tu comuna declaró esta zona área de riesgo por inundación. Es la única fuente con efecto legal.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "compartido": "ESTÁS EN UN ÁREA DE RIESGO POR INUNDACIÓN DEL PLAN REGULADOR\nUbicación: Auditoría Collipulli área\n\nEl satélite miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026 y no detectó agua.\n  Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,\n  y es la foto del instante de la pasada, no el máximo del evento.\n\nPlan Regulador — área de riesgo declarada:\n• INUNDACION\n  Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) (año: 2009)\n\nSin puntos críticos registrados en 1,5 km.\n\nEsto NO es información oficial ni un pronóstico.\nEn emergencia: SENAPRED y tu municipio.",
+  "largo_len": 6280
+ },
+ "02_angol_lamina_vectorizada": {
+  "lon": -72.69849822363237,
+  "lat": -37.77912806273094,
+  "nivel": "veredicto v-bajo",
+  "comuna": [
+   "Angol",
+   0.8
+  ],
+  "evaluar": {
+   "nivel": "bajo",
+   "titulo": "Registros de inundación a cierta distancia",
+   "areas": 0,
+   "sar": 0,
+   "cerca": 1,
+   "gore": 1,
+   "enMancha": false,
+   "lam": 1,
+   "areasTipo": []
+  },
+  "corto": "ℹ️\nRegistros de inundación a cierta distancia\n\n📍 Auditoría Angol lámina\n\nEl registro más cercano de inundación está a 785 metros.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "compartido": "REGISTROS DE INUNDACIÓN A CIERTA DISTANCIA\nUbicación: Auditoría Angol lámina\n\nEl satélite miró este punto el 3 de agosto de 2026 y no detectó agua.\n  Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,\n  y es la foto del instante de la pasada, no el máximo del evento.\n\nPuntos críticos registrados cerca:\n• 785 m — Inundación por desborde de cauce (riesgo Alto)\n  Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)\n\nEsto NO es información oficial ni un pronóstico.\nEn emergencia: SENAPRED y tu municipio.",
+  "largo_len": 5618
+ },
+ "03_padre_las_casas": {
+  "lon": -72.5945,
+  "lat": -38.7636,
+  "nivel": "veredicto v-alto",
+  "comuna": [
+   "Padre Las Casas",
+   0.3
+  ],
+  "evaluar": {
+   "nivel": "alto",
+   "titulo": "Tu sector tiene registro de inundaciones",
+   "areas": 0,
+   "sar": 0,
+   "cerca": 4,
+   "gore": 0,
+   "enMancha": false,
+   "lam": 0,
+   "areasTipo": []
+  },
+  "corto": "⚠️\nTu sector tiene registro de inundaciones\n\n📍 Auditoría Padre Las Casas\n\nHay 2 puntos donde el municipio reportó inundación a menos de 500 metros, y 2 se repiten temporada tras temporada.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "compartido": "TU SECTOR TIENE REGISTRO DE INUNDACIONES\nUbicación: Auditoría Padre Las Casas\n\nEl satélite miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026 y no detectó agua.\n  Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,\n  y es la foto del instante de la pasada, no el máximo del evento.\n\nPuntos críticos registrados cerca:\n• 272 m — Inundación por desborde de cauce (riesgo Alto)\n• 407 m — Inundación por desborde de cauce (riesgo Medio)\n• 1175 m — Inundación por desborde de cauce (riesgo Alto)\n  Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)\n\nEsto NO es información oficial ni un pronóstico.\nEn emergencia: SENAPRED y tu municipio.",
+  "largo_len": 6377
+ },
+ "04_temuco_plaza": {
+  "lon": -72.5904,
+  "lat": -38.7359,
+  "nivel": "veredicto v-sindato",
+  "comuna": [
+   "Padre Las Casas",
+   1.6
+  ],
+  "evaluar": {
+   "nivel": "sindato",
+   "titulo": "Sin registros en las fuentes consultadas",
+   "areas": 0,
+   "sar": 0,
+   "cerca": 0,
+   "gore": 0,
+   "enMancha": false,
+   "lam": 0,
+   "areasTipo": []
+  },
+  "corto": "❔\nSin registros en las fuentes consultadas\n\n📍 Auditoría Temuco plaza\n\nNinguna de las fuentes consultadas registra inundación en este punto.\n\nQue no haya registro no significa que acá no se inunde. Significa que nadie lo ha levantado. En comunas con poca capacidad técnica municipal es lo esperable.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "compartido": "SIN REGISTROS EN LAS FUENTES CONSULTADAS\nUbicación: Auditoría Temuco plaza\n\nEl satélite miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026 y no detectó agua.\n  Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,\n  y es la foto del instante de la pasada, no el máximo del evento.\n\nSin puntos críticos registrados en 1,5 km.\n\nEsto NO es información oficial ni un pronóstico.\nEn emergencia: SENAPRED y tu municipio.",
+  "largo_len": 5585
+ },
+ "05_mar_frente_a_saavedra": {
+  "lon": -73.55,
+  "lat": -38.9,
+  "nivel": "veredicto v-sindato",
+  "comuna": [
+   "Saavedra",
+   16.2
+  ],
+  "evaluar": {
+   "nivel": "sindato",
+   "titulo": "Sin registros en las fuentes consultadas",
+   "areas": 0,
+   "sar": 0,
+   "cerca": 0,
+   "gore": 0,
+   "enMancha": false,
+   "lam": 0,
+   "areasTipo": []
+  },
+  "corto": "❔\nSin registros en las fuentes consultadas\n\n📍 Auditoría mar\n\nNinguna de las fuentes consultadas registra inundación en este punto.\n\nQue no haya registro no significa que acá no se inunde. Significa que nadie lo ha levantado. En comunas con poca capacidad técnica municipal es lo esperable.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "compartido": "SIN REGISTROS EN LAS FUENTES CONSULTADAS\nUbicación: Auditoría mar\n\nEl satélite no pasó por acá en la ventana del evento.\n  No observado NO es lo mismo que no inundado.\n\nSin puntos críticos registrados en 1,5 km.\n\nEsto NO es información oficial ni un pronóstico.\nEn emergencia: SENAPRED y tu municipio.",
+  "largo_len": 4408
+ },
+ "06_santiago_fuera": {
+  "lon": -70.65,
+  "lat": -33.44,
+  "nivel": "veredicto v-fuera",
+  "comuna": [
+   "Renaico",
+   499.6
+  ],
+  "evaluar": {
+   "nivel": "sindato",
+   "titulo": "Sin registros en las fuentes consultadas",
+   "areas": 0,
+   "sar": 0,
+   "cerca": 0,
+   "gore": 0,
+   "enMancha": false,
+   "lam": 0,
+   "areasTipo": []
+  },
+  "corto": "🧭\nFuera del alcance de este prototipo\n\n📍 Auditoría Santiago\n\nEste visor cubre sólo la Región de La Araucanía, y el punto que elegiste queda afuera.\n\nEso no dice nada sobre el riesgo de ese lugar. No es que no se inunde: es que acá no hay dato para responder. El resto de Chile tampoco tiene un mapa nacional de inundaciones — esa es justamente la razón de este proyecto.\n\nPara ese sector, consulta la Dirección de Obras de su municipalidad y el plan regulador de su comuna. En emergencia, SENAPRED.",
+  "compartido": null,
+  "largo_len": 88
+ },
+ "07_sin_dato_nororiente": {
+  "lon": -71.0,
+  "lat": -37.5,
+  "nivel": "veredicto v-sindato",
+  "comuna": [
+   "Lonquimay",
+   76.7
+  ],
+  "evaluar": {
+   "nivel": "sindato",
+   "titulo": "Sin registros en las fuentes consultadas",
+   "areas": 0,
+   "sar": 0,
+   "cerca": 0,
+   "gore": 0,
+   "enMancha": false,
+   "lam": 0,
+   "areasTipo": []
+  },
+  "corto": "❔\nSin registros en las fuentes consultadas\n\n📍 Auditoría sin dato\n\nNinguna de las fuentes consultadas registra inundación en este punto.\n\nQue no haya registro no significa que acá no se inunde. Significa que nadie lo ha levantado. En comunas con poca capacidad técnica municipal es lo esperable.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "compartido": "SIN REGISTROS EN LAS FUENTES CONSULTADAS\nUbicación: Auditoría sin dato\n\nEl satélite no pasó por acá en la ventana del evento.\n  No observado NO es lo mismo que no inundado.\n\nSin puntos críticos registrados en 1,5 km.\n\nEsto NO es información oficial ni un pronóstico.\nEn emergencia: SENAPRED y tu municipio.",
+  "largo_len": 4368
+ },
+ "08_area_no_fluvial": {
+  "lon": -72.61653703396965,
+  "lat": -38.75884545123389,
+  "nivel": "veredicto v-alto",
+  "comuna": [
+   "Padre Las Casas",
+   1.5
+  ],
+  "evaluar": {
+   "nivel": "alto",
+   "titulo": "Estás en un área de riesgo por inundación del plan regulador",
+   "areas": 1,
+   "sar": 0,
+   "cerca": 1,
+   "gore": 1,
+   "enMancha": false,
+   "lam": 0,
+   "areasTipo": [
+    "anegamiento"
+   ]
+  },
+  "corto": "⚠️\nEstás en un área de riesgo por inundación del plan regulador\n\n📍 Auditoría área no fluvial\n\nEl plan regulador de tu comuna declaró esta zona área de riesgo por inundación. Es la única fuente con efecto legal.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "compartido": "ESTÁS EN UN ÁREA DE RIESGO POR INUNDACIÓN DEL PLAN REGULADOR\nUbicación: Auditoría área no fluvial\n\nEl satélite miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026 y no detectó agua.\n  Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,\n  y es la foto del instante de la pasada, no el máximo del evento.\n\nPlan Regulador — área de riesgo declarada:\n• ANEGAMIENTO\n  Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) (año: 2010)\n\nPuntos críticos registrados cerca:\n• 1478 m — Inundación por desborde de cauce (riesgo Alto)\n  Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)\n\nEsto NO es información oficial ni un pronóstico.\nEn emergencia: SENAPRED y tu municipio.",
+  "largo_len": 7122
+ },
+ "09_sugerencia_comuna_angol": "ℹ️\nRegistros de inundación a cierta distancia\n\n📍 ANGOL (centro de los registros de la comuna)\n\nEl registro más cercano de inundación está a 909 metros.\n\nVer todo el detalle y las fuentes\nCompartir",
+ "10_geo_dentro": {
+  "estado": "",
+  "corto": "❔\nSin registros en las fuentes consultadas\n\n📍 Tu ubicación actual\n\nNinguna de las fuentes consultadas registra inundación en este punto.\n\nQue no haya registro no significa que acá no se inunde. Significa que nadie lo ha levantado. En comunas con poca capacidad técnica municipal es lo esperable.\n\nVer"
+ },
+ "10_geo_fuera": {
+  "estado": "Estás fuera de La Araucanía: este prototipo sólo cubre esa región.",
+  "corto": "🧭\nFuera del alcance de este prototipo\n\n📍 Tu ubicación actual\n\nEste visor cubre sólo la Región de La Araucanía, y el punto que elegiste queda afuera.\n\nEso no dice nada sobre el riesgo de ese lugar. No es que no se inunde: es que acá no hay dato para responder. El resto de Chile tampoco tiene un mapa "
+ },
+ "10_geo_denegada": "No se pudo obtener la ubicación (User denied Geolocation).",
+ "11a_boton_buscar": {
+  "estado": "Estás fuera de La Araucanía: este prototipo sólo cubre esa región.",
+  "peticiones_nominatim": 1,
+  "peticiones_de_buscar_limit1": 0,
+  "peticiones_de_sugerencias_limit5": 1,
+  "listener": "n/a"
+ },
+ "11_buscar_sin_red": {
+  "estado": "No se pudo buscar (Failed to fetch). Prueba tocando el mapa.",
+  "peticiones": 2
+ },
+ "11_buscar_con_red": {
+  "estado": "",
+  "corto": "❔\nSin registros en las fuentes consultadas\n\n📍 Avenida Balmaceda, Villa Ñielol, Centro, Temuco, Provincia de Cautín, Región de la Araucanía, 4800996, Chile\n\nNinguna de las fuentes consultadas registra inundación en este punto.\n\nQue no haya registro no significa que acá no se inunde. Significa que nadie lo ha levantado. En comunas con poca capacidad técnica municipal es lo esperable.\n\nVer todo el de"
+ },
+ "11_buscar_santiago": {
+  "estado": "No se encontró esa dirección en La Araucanía.",
+  "corto": "❔\nSin registros en las fuentes consultadas\n\n📍 Avenida Balmaceda, Villa Ñielol, Centro, Temuco, Provincia de Cautín, Región de la Araucanía, 4800996, Chile\n\nNinguna de las fuentes consultadas registra inundación en este punto.\n\nQue no haya registro no significa que acá no se inunde. Significa que nad"
+ },
+ "12_capas": {
+  "cap-areas": {
+   "vis": [
+    "visible"
+   ],
+   "estado": "No se encontró esa dirección en La Araucanía."
+  },
+  "cap-derivadas": {
+   "vis": [
+    "visible",
+    "visible"
+   ],
+   "estado": "No se encontró esa dirección en La Araucanía."
+  },
+  "cap-planos": {
+   "vis": [
+    "visible"
+   ],
+   "estado": "Preparando el mapa…"
+  },
+  "cap-sar": {
+   "vis": [
+    "visible"
+   ],
+   "estado": ""
+  },
+  "cap-gore": {
+   "vis": [
+    "visible"
+   ],
+   "estado": ""
+  },
+  "cap-jrc": {
+   "vis": [
+    "visible"
+   ],
+   "estado": ""
+  },
+  "cap-puntos": {
+   "vis": [
+    "visible"
+   ],
+   "estado": ""
+  },
+  "cap-camp": {
+   "vis": [
+    "visible"
+   ],
+   "estado": "No hay planos de plan regulador en esta zona."
+  }
+ },
+ "13_clic_area": {
+  "popup": "INUNDACION\nPlan Regulador de Collipulli · zona ZR-2\nProhibido: Todos los no indicados como permitidos.\nMINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC)\nAño: 2009\n×",
+  "respuesta": "⚠️\nEstás en un área de riesgo por inundación del plan regulador\n\n📍 Punto seleccionado (-37.9613, -72.4377)\n\nEl plan regulador de tu comuna declaró esta zona áre",
+  "box": {
+   "x": 160,
+   "y": 104.921875,
+   "width": 960,
+   "height": 540
+  }
+ },
+ "14_cifras": "\n      440\n      puntos críticos de inundación registrados por SENAPRED\n    \n      211\n      de ellos son crónicos: se repiten temporada tras temporada\n    \n      63\n      áreas de riesgo con efecto legal, en 12 comunas\n    \n      20\n      planos de plan regulador ubicados sobre el mapa\n    \n      5.776\n      hectáreas donde el satélite vio agua — Sistema frontal 30-jul a 4-ago 2026\n    \n      537\n      hogares en 15 campamentos dentro de área de riesgo por inundación\n    ",
+ "14_sello": "440 puntos críticos de origen hídrico · temporada 2026 · datos generados 2026-08-12",
+ "14_nota_sar": "",
+ "15_offline": {
+  "cargadas": {
+   "puntos": true,
+   "areas": false,
+   "laminas": false,
+   "gore": false,
+   "jrc": true,
+   "sar": false,
+   "cob": false,
+   "camp": false,
+   "planos": 0,
+   "estadoComunas": 0
+  },
+  "estado": "Cargando los datos de la región…",
+  "respuesta": "⚠️\nTu sector tiene registro de inundaciones\n\n📍 Auditoría offline PLC\n\nHay 2 puntos donde el municipio reportó inundación a menos de 500 metros, y 2 se repiten temporada tras temporada.\n\nVer todo el detalle y las fuentes\nCompartir",
+  "buscar": "",
+  "sugerencias": "◧\nANGOL\n14 puntos críticos de inundación",
+  "catalogo": "25 comunas · 354 documentos · 224 láminas con contenido de inundación"
+ },
+ "errores_js": []
+}

@@ -1,0 +1,549 @@
+{
+ "angol-peligro-inundacion-2013": {
+  "comuna": "ANGOL",
+  "epsg": 32718,
+  "puntos_fluviales_comuna": 14,
+  "puntos_en_caja_2km": 7,
+  "rmse_declarado_m": "no declarado",
+  "m_por_px": 7.74,
+  "distancias_a_Alto": {
+   "n": 7,
+   "d_m": [
+    29,
+    810,
+    836,
+    31,
+    636,
+    37,
+    12
+   ],
+   "sectores": [
+    [
+     "VILLA LA ARBOLEDA",
+     "Alto",
+     29
+    ],
+    [
+     "VILLA MANANTIAL",
+     "Medio",
+     810
+    ],
+    [
+     "LAS NACIONES",
+     "Medio",
+     836
+    ],
+    [
+     "VILLA SANTA TERESITA",
+     "Alto",
+     31
+    ],
+    [
+     "HIJUELAS PUENTE MALLECO",
+     "Medio",
+     636
+    ],
+    [
+     "VILLA LOS RIOS",
+     "Alto",
+     37
+    ],
+    [
+     "PUENTE MALLECO",
+     "Alto",
+     12
+    ]
+   ],
+   "<=0": 0,
+   "<=50": 4,
+   "<=100": 4,
+   "<=300": 4,
+   "mediana_m": 37
+  },
+  "distancias_a_Medio": {
+   "n": 7,
+   "d_m": [
+    574,
+    716,
+    704,
+    682,
+    2466,
+    815,
+    1950
+   ],
+   "sectores": [
+    [
+     "VILLA LA ARBOLEDA",
+     "Alto",
+     574
+    ],
+    [
+     "VILLA MANANTIAL",
+     "Medio",
+     716
+    ],
+    [
+     "LAS NACIONES",
+     "Medio",
+     704
+    ],
+    [
+     "VILLA SANTA TERESITA",
+     "Alto",
+     682
+    ],
+    [
+     "HIJUELAS PUENTE MALLECO",
+     "Medio",
+     2466
+    ],
+    [
+     "VILLA LOS RIOS",
+     "Alto",
+     815
+    ],
+    [
+     "PUENTE MALLECO",
+     "Alto",
+     1950
+    ]
+   ],
+   "<=0": 0,
+   "<=50": 0,
+   "<=100": 0,
+   "<=300": 0,
+   "mediana_m": 716
+  },
+  "distancias_a_cualquier_clase": {
+   "n": 7,
+   "d_m": [
+    29,
+    716,
+    704,
+    31,
+    636,
+    37,
+    12
+   ],
+   "sectores": [
+    [
+     "VILLA LA ARBOLEDA",
+     "Alto",
+     29
+    ],
+    [
+     "VILLA MANANTIAL",
+     "Medio",
+     716
+    ],
+    [
+     "LAS NACIONES",
+     "Medio",
+     704
+    ],
+    [
+     "VILLA SANTA TERESITA",
+     "Alto",
+     31
+    ],
+    [
+     "HIJUELAS PUENTE MALLECO",
+     "Medio",
+     636
+    ],
+    [
+     "VILLA LOS RIOS",
+     "Alto",
+     37
+    ],
+    [
+     "PUENTE MALLECO",
+     "Alto",
+     12
+    ]
+   ],
+   "<=0": 0,
+   "<=50": 4,
+   "<=100": 4,
+   "<=300": 4,
+   "mediana_m": 37
+  },
+  "barrido_corrimiento": {
+   "puntos_usados": 7,
+   "distancias_acotadas_a_m": 300,
+   "media_acotada_en_(0,0)_m": 144.0,
+   "mejor_(dx,dy,media)": [
+    50,
+    0,
+    128.6
+   ],
+   "paso_m": 25
+  },
+  "barrido_control_positivo(+150E → espera dx≈-150)": [
+   -100,
+   0,
+   128.6
+  ],
+  "gore_Alto": {
+   "fraccion_pct_por_clase_GORE": {
+    "MEDIA": 10.8,
+    "MAXIMA": 66.2,
+    "fuera_del_modelo": 23.0
+   },
+   "cobertura_de_GORE_MAXIMA_en_caja_pct": 2.5,
+   "poligonos_gore_en_caja": 32
+  },
+  "gore_Medio": {
+   "fraccion_pct_por_clase_GORE": {
+    "MAXIMA": 15.5,
+    "MEDIA": 20.0,
+    "fuera_del_modelo": 64.5
+   },
+   "cobertura_de_GORE_MAXIMA_en_caja_pct": 0.1,
+   "poligonos_gore_en_caja": 18
+  }
+ },
+ "curarrehue-catripulli-inundacion-2025": {
+  "comuna": "CURARREHUE",
+  "epsg": 32719,
+  "puntos_fluviales_comuna": 18,
+  "puntos_en_caja_2km": 6,
+  "rmse_declarado_m": "no declarado",
+  "m_por_px": 5.337,
+  "distancias_a_Susceptibilidad alta": {
+   "n": 6,
+   "d_m": [
+    47,
+    78,
+    0,
+    1622,
+    17,
+    236
+   ],
+   "sectores": [
+    [
+     "CASA DE LATA",
+     "Muy Alto",
+     47
+    ],
+    [
+     "CASA DE LATA",
+     "Alto",
+     78
+    ],
+    [
+     "CASA DE LATA",
+     "Muy Alto",
+     0
+    ],
+    [
+     "ANGOSTURA",
+     "Muy Alto",
+     1622
+    ],
+    [
+     "CATRIPULLI",
+     "Muy Alto",
+     17
+    ],
+    [
+     "CORREO VIEJO",
+     "Muy Alto",
+     236
+    ]
+   ],
+   "<=0": 1,
+   "<=50": 3,
+   "<=100": 4,
+   "<=300": 5,
+   "mediana_m": 63
+  },
+  "distancias_a_Susceptibilidad media": {
+   "n": 6,
+   "d_m": [
+    0,
+    0,
+    83,
+    1685,
+    38,
+    0
+   ],
+   "sectores": [
+    [
+     "CASA DE LATA",
+     "Muy Alto",
+     0
+    ],
+    [
+     "CASA DE LATA",
+     "Alto",
+     0
+    ],
+    [
+     "CASA DE LATA",
+     "Muy Alto",
+     83
+    ],
+    [
+     "ANGOSTURA",
+     "Muy Alto",
+     1685
+    ],
+    [
+     "CATRIPULLI",
+     "Muy Alto",
+     38
+    ],
+    [
+     "CORREO VIEJO",
+     "Muy Alto",
+     0
+    ]
+   ],
+   "<=0": 3,
+   "<=50": 4,
+   "<=100": 5,
+   "<=300": 5,
+   "mediana_m": 19
+  },
+  "distancias_a_cualquier_clase": {
+   "n": 6,
+   "d_m": [
+    0,
+    0,
+    0,
+    1622,
+    17,
+    0
+   ],
+   "sectores": [
+    [
+     "CASA DE LATA",
+     "Muy Alto",
+     0
+    ],
+    [
+     "CASA DE LATA",
+     "Alto",
+     0
+    ],
+    [
+     "CASA DE LATA",
+     "Muy Alto",
+     0
+    ],
+    [
+     "ANGOSTURA",
+     "Muy Alto",
+     1622
+    ],
+    [
+     "CATRIPULLI",
+     "Muy Alto",
+     17
+    ],
+    [
+     "CORREO VIEJO",
+     "Muy Alto",
+     0
+    ]
+   ],
+   "<=0": 4,
+   "<=50": 5,
+   "<=100": 5,
+   "<=300": 5,
+   "mediana_m": 0
+  },
+  "barrido_corrimiento": {
+   "puntos_usados": 6,
+   "distancias_acotadas_a_m": 300,
+   "media_acotada_en_(0,0)_m": 52.8,
+   "mejor_(dx,dy,media)": [
+    -400,
+    225,
+    50.0
+   ],
+   "paso_m": 25
+  },
+  "barrido_control_positivo(+150E → espera dx≈-150)": [
+   -400,
+   0,
+   50.0
+  ],
+  "gore_Susceptibilidad alta": {
+   "fraccion_pct_por_clase_GORE": {
+    "MEDIA": 12.6,
+    "MAXIMA": 87.1,
+    "fuera_del_modelo": 0.3
+   },
+   "cobertura_de_GORE_MAXIMA_en_caja_pct": 4.2,
+   "poligonos_gore_en_caja": 12
+  },
+  "gore_Susceptibilidad media": {
+   "fraccion_pct_por_clase_GORE": {
+    "MEDIA": 30.2,
+    "MAXIMA": 57.1,
+    "fuera_del_modelo": 12.7
+   },
+   "cobertura_de_GORE_MAXIMA_en_caja_pct": 21.1,
+   "poligonos_gore_en_caja": 12
+  }
+ },
+ "angol-prc-ar2a-lamina1": {
+  "comuna": "ANGOL",
+  "epsg": 32718,
+  "puntos_fluviales_comuna": 14,
+  "puntos_en_caja_2km": 7,
+  "rmse_declarado_m": 4.94,
+  "m_por_px": 0.8486,
+  "distancias_a_AR-2a": {
+   "n": 7,
+   "d_m": [
+    1058,
+    130,
+    1568,
+    1159,
+    1892,
+    1274,
+    55
+   ],
+   "sectores": [
+    [
+     "VILLA LA ARBOLEDA",
+     "Alto",
+     1058
+    ],
+    [
+     "VILLA MANANTIAL",
+     "Medio",
+     130
+    ],
+    [
+     "LAS NACIONES",
+     "Medio",
+     1568
+    ],
+    [
+     "VILLA SANTA TERESITA",
+     "Alto",
+     1159
+    ],
+    [
+     "HIJUELAS PUENTE MALLECO",
+     "Medio",
+     1892
+    ],
+    [
+     "VILLA LOS RIOS",
+     "Alto",
+     1274
+    ],
+    [
+     "PUENTE MALLECO",
+     "Alto",
+     55
+    ]
+   ],
+   "<=0": 0,
+   "<=50": 0,
+   "<=100": 1,
+   "<=300": 2,
+   "mediana_m": 1159
+  },
+  "distancias_a_cualquier_clase": {
+   "n": 7,
+   "d_m": [
+    1058,
+    130,
+    1568,
+    1159,
+    1892,
+    1274,
+    55
+   ],
+   "sectores": [
+    [
+     "VILLA LA ARBOLEDA",
+     "Alto",
+     1058
+    ],
+    [
+     "VILLA MANANTIAL",
+     "Medio",
+     130
+    ],
+    [
+     "LAS NACIONES",
+     "Medio",
+     1568
+    ],
+    [
+     "VILLA SANTA TERESITA",
+     "Alto",
+     1159
+    ],
+    [
+     "HIJUELAS PUENTE MALLECO",
+     "Medio",
+     1892
+    ],
+    [
+     "VILLA LOS RIOS",
+     "Alto",
+     1274
+    ],
+    [
+     "PUENTE MALLECO",
+     "Alto",
+     55
+    ]
+   ],
+   "<=0": 0,
+   "<=50": 0,
+   "<=100": 1,
+   "<=300": 2,
+   "mediana_m": 1159
+  },
+  "barrido_corrimiento": {
+   "puntos_usados": 7,
+   "distancias_acotadas_a_m": 300,
+   "media_acotada_en_(0,0)_m": 240.8,
+   "mejor_(dx,dy,media)": [
+    -325,
+    -25,
+    225.2
+   ],
+   "paso_m": 25
+  },
+  "barrido_control_positivo(+150E → espera dx≈-150)": [
+   -400,
+   -50,
+   228.8
+  ],
+  "gore_AR-2a": {
+   "fraccion_pct_por_clase_GORE": {
+    "MEDIA": 13.8,
+    "MAXIMA": 73.8,
+    "fuera_del_modelo": 12.4
+   },
+   "cobertura_de_GORE_MAXIMA_en_caja_pct": 1.7,
+   "poligonos_gore_en_caja": 18
+  }
+ },
+ "consistencia_angol": {
+  "AR-2a_ha": 110.5,
+  "Alto2013_ha": 188.0,
+  "Medio2013_ha": 20.5,
+  "iou_AR2a_vs_Alto∪Medio": 0.174,
+  "fraccion_AR2a_dentro_de_Alto_pct": 40.7,
+  "fraccion_AR2a_dentro_de_Alto∪Medio_pct": 42.8,
+  "fraccion_Alto_dentro_de_AR2a_pct": 23.9,
+  "fraccion_Alto_dentro_de_caja_AR2a_que_cae_en_AR2a_pct": 53.8,
+  "interseccion_AR2a_Alto_sin_corrimiento_ha": 45.0,
+  "corrimiento_AR2a_que_maximiza_interseccion_con_Alto (dx,dy,ha)": [
+   0,
+   0,
+   45.0
+  ]
+ }
+}

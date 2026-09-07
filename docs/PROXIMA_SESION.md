@@ -1,28 +1,38 @@
 # Continuar riesgomapas — prompt para la próxima sesión
 
-## Estado al 6-sep-2026 y qué sigue
+## Estado al 6-sep-2026 (noche) — la auditoría profunda está hecha; sigue el ciclo de arreglo
 
-**Todo verde y árbol limpio**: 63 tests · 151 comprobaciones de datos · 273 en navegador
-real, 0 hallazgos. Último commit de trabajo `a6c08f1`.
+**Las tres pruebas siguen verdes (63 · 151 con 1 medio · 273) y el árbol de código no cambió**:
+la auditoría no tocó `scripts/`, `web/`, `tests/` ni `config/`. Sólo agregó `tools/auditoria/`
+(34 instrumentos con control positivo), `docs/_prompts/PREAMBULO-AUDITOR.md` y
+`docs/auditorias/2026-09-06/` (siete frentes, dos verificaciones con contexto limpio, y el
+**INFORME.md** con 22 familias, cola de campo C-01…C-13, decisiones D-1…D-10 y el prompt de la
+próxima sesión).
 
-**Lo que cerró esa sesión:** una falla silenciosa y destructiva en el script 10 (en un clon
-limpio reescribía vacío el índice de planos); dos pruebas que obligan a que `scripts/ORDEN.md`
-nombre todos los scripts y a que cada uno declare `Salida:`; la lección de la lámina de la DGA
-como regla 5.4 de `REGLAS.md`; y una restauración por estado en la auditoría e2e que antes se
-caía por un clic tapado.
+**Lo que la auditoría encontró y los verdes no ven:** el veredicto decide con cuatro de las siete
+capas que dibuja —los 163 polígonos derivados de láminas, el GORE y el JRC nunca entran—, así que
+dentro del AR-2a del PRC vigente de Angol el visor dice «no cae dentro de un área de riesgo»
+(F-01); los cuadros de la leyenda de dos láminas están publicados como área de riesgo, 6 ha de
+«Alto» en un potrero de Angol (F-03); la apertura con núcleo par corre toda mancha 1 px al
+sureste y el grosor mínimo se come franjas legítimas (F-04); el botón «Buscar» no hace nada desde
+el 25-ago (F-11); el texto de WhatsApp pierde el «no significa que no se inunde» (F-07); sin red
+el service worker entrega `index.html` como plano (F-06); Temuco sale siempre como Padre Las
+Casas (F-10).
 
-**Lo que NO se hizo, a propósito:** no se borraron los shards de `web/data/puntos-criticos/`
-(una auditoría los dio por muertos; `tests/auditoria_datos.py` los usa para comprobar que
-suman el total) y no se creó otro documento de reglas (ya existían `REGLAS.md` y
-`scripts/ORDEN.md`; el duplicado se borró).
+**¿Reconocemos bien los polígonos?** Forma y posición sí, dentro de 1 px, probado con una lámina
+sintética que pasa por el mismo `procesar()` (IoU 0,956 / 0,975, controles negativo y guardián
+OK) y con la coincidencia (0, 0) m entre las dos láminas de Angol georreferenciadas por métodos
+distintos. Lo que falla es borde, leyenda, etiqueta y que no llegan al veredicto. Detalle en
+`docs/auditorias/2026-09-06/INFORME.md` §1.
 
-**La próxima sesión es una auditoría profunda, no desarrollo.** El prompt completo, escrito
-según `GUIA_MAESTRA_AUDITORIAS.md` y la guía de prompting de Fable 5.1, está en
-[`docs/_prompts/AUDITORIA-2026-09.md`](_prompts/AUDITORIA-2026-09.md). Su pregunta central,
-que nadie ha medido sobre el artefacto: **¿estamos reconociendo bien los polígonos?** —
-IoU por clase de las tres láminas vectorizadas contra su lámina de origen, confusión
-río↔«Alto», control positivo con lámina sintética, control negativo, ray-casting adversarial,
-y por qué Collipulli concentra 36 de los 63 polígonos de la capa A.
+**La próxima sesión es el ciclo de arreglo, no otra auditoría.** El prompt está al final del
+INFORME (§6), con las decisiones ya tomadas (D-1…D-10) y el orden 1-13. Termina en el **paquete
+de Malleco para el practicante**, que Nicolás pidió el 6-sep: se regenera con
+`20_paquete_practicante.py` sólo después de los arreglos, con un LEEME por capa. Y queda pendiente
+revisar el visor juntos con el informe abierto.
+
+**Modelos:** Opus para decidir y verificar, Sonnet para lo mecánico, Fable sólo para censos
+semánticos grandes (pedido del dueño el 6-sep).
 
 Lo de abajo es el traspaso anterior (9-ago-2026); sigue vigente como contexto.
 

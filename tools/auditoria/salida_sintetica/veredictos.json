@@ -1,0 +1,56 @@
+{
+ "positivo": {
+  "n_poligonos": {
+   "Alto": 2,
+   "Medio": 2
+  },
+  "n_poligonos_en_leyenda": {
+   "Alto": 1,
+   "Medio": 1
+  },
+  "iou_Alto": 0.9558,
+  "iou_Alto_con_franja": 0.958,
+  "desplazamiento_Alto_m": 15.15,
+  "area_Alto_ha": 97.6,
+  "area_verdad_Alto_ha": 96.0,
+  "hausdorff_Alto_m": 410.0,
+  "iou_Medio": 0.9745,
+  "iou_Medio_con_franja": null,
+  "desplazamiento_Medio_m": 5.23,
+  "area_Medio_ha": 28.58,
+  "area_verdad_Medio_ha": 28.27,
+  "hausdorff_Medio_m": 9.9,
+  "franja_15m_recuperada_pct": 67.9,
+  "leyenda_vectorizada_m2": 32400.0,
+  "falso_positivo_fuera_de_verdad_m2": 4.0,
+  "anillos_interiores_Alto": 1
+ },
+ "positivo_jpeg80": {
+  "n_poligonos": {
+   "Alto": 2,
+   "Medio": 2
+  },
+  "n_poligonos_en_leyenda": {
+   "Alto": 1,
+   "Medio": 1
+  },
+  "iou_Alto": 0.9688,
+  "iou_Alto_con_franja": 0.9633,
+  "desplazamiento_Alto_m": 8.78,
+  "area_Alto_ha": 96.19,
+  "area_verdad_Alto_ha": 96.0,
+  "hausdorff_Alto_m": 15.0,
+  "iou_Medio": 0.9703,
+  "iou_Medio_con_franja": null,
+  "desplazamiento_Medio_m": 5.45,
+  "area_Medio_ha": 27.71,
+  "area_verdad_Medio_ha": 28.27,
+  "hausdorff_Medio_m": 11.8,
+  "franja_15m_recuperada_pct": 3.7,
+  "leyenda_vectorizada_m2": 29875.0,
+  "falso_positivo_fuera_de_verdad_m2": 0.0,
+  "anillos_interiores_Alto": 1
+ },
+ "negativo": "0 polígonos (procesar devolvió None)",
+ "guardian": "SystemExit OK: [sintetica-guardian] el resultado cae FUERA de la región: lon -70.456..-70.418, lat -37.755..-37.733. Casi siempre es un"
+}

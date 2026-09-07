@@ -1,0 +1,145 @@
+PUNTO 08_area_no_fluvial lon=-72.61653703396965 lat=-38.75884545123389
+NIVEL CSS: veredicto v-alto
+COMUNA (comunaDe): ['Padre Las Casas', 1.5]
+EVALUAR: {"nivel": "alto", "titulo": "Estás en un área de riesgo por inundación del plan regulador", "areas": 1, "sar": 0, "cerca": 1, "gore": 1, "enMancha": false, "lam": 0, "areasTipo": ["anegamiento"]}
+
+=== #respuesta ===
+⚠️
+Estás en un área de riesgo por inundación del plan regulador
+
+📍 Auditoría área no fluvial
+
+El plan regulador de tu comuna declaró esta zona área de riesgo por inundación. Es la única fuente con efecto legal.
+
+Ver todo el detalle y las fuentes
+Compartir
+
+=== #detalle-ficha ===
+
+    
+      ⚠️
+      Estás en un área de riesgo por inundación del plan regulador
+    
+    📍 Auditoría área no fluvial
+    Plan Regulador Comunal A · NORMATIVOEste punto cae dentro de 1
+             área de riesgo declarada
+             por el plan regulador:ANEGAMIENTO anegamiento, no desborde (zona ARRI)Usos prohibidos: Todos los no señalados como permitidosEsto sí tiene efecto legal: condiciona permisos
+             de edificación y usos de suelo en ese terreno.
+             Ojo con lo que esto significa: un área de riesgo
+             no prohíbe construir, condiciona. La Ordenanza General
+             (art. 2.1.17) permite autorizar proyectos si se acompaña un
+             estudio fundado de un profesional especialista, aprobado
+             por el organismo competente, que defina las obras de mitigación, y esas
+             obras se ejecutan. Distinto es una zona no edificable, que sí
+             prohíbe.Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) · Año: 2010 · datos obtenidos 2026-08-30El año del plan regulador no está declarado en la
+               capa publicada por MINVU. Lo que sí consta: el procedimiento
+               «PRC Temuco» ingresó a Evaluación Ambiental
+               Estratégica el 22/07/2025 y su estado es
+               «Inicio EAE». Eso indica actividad de actualización, no la
+               vigencia del polígono que estás viendo.Sólo existen dentro del límite urbano de comunas cuyo
+           plan regulador las haya zonificado: que no haya polígono no significa
+           que no se inunde, significa que el plan no lo declaró.
+    Huella de inundación observada por satélite
+        B · OBSERVADOEl satélite sí miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026
+             y no detectó agua
+             en esas pasadas.
+             Eso no quiere decir que no se haya inundado. El radar
+             tiene cuatro límites conocidos, y los cuatro empujan en la misma
+             dirección: hacia quedarse corto.
+             
+               No ve el agua bajo bosque cerrado. El dosel
+                   devuelve la señal antes de que llegue al suelo.
+               Subestima en zona urbana densa —justo donde vive
+                   más gente—: el rebote entre la pared y el suelo inundado mantiene
+                   la señal alta, así que el agua se lee como ciudad seca.
+               No ve el agua con viento. El oleaje rompe el
+                   espejo que hace que el agua se vea negra en el radar.
+               Es la foto de un instante, no el máximo del
+                   evento. El agua que subió y bajó entre dos pasadas no aparece en
+                   ninguna de las dos.
+             
+             Un caso real de este mismo evento, para que se
+             entienda cuánto pesa el último límite: en Angol el
+             estero Rehue se desbordó la madrugada del 2 de agosto
+             y el agua superó 1,5 m dentro de las casas. Las dos pasadas satelitales
+             sobre Angol fueron el 3, y no vieron nada: el agua ya
+             había bajado. Esta capa registra 7,7 ha en esa comuna, y la inundación
+             fue de las peores de la región.Fuente: Sentinel-1 SENTINEL-1D GRD · Año: 2026 · datos obtenidos 2026-08-12
+    Registro oficial de puntos críticos D · OPERACIONALHay 1 punto crítico registrado
+             a menos de 1500 m. Los más cercanos:1478 m — Inundación por desborde de cauce
+        Alto
+        URBANO
+        Registrado en 4 temporadas — problema crónico
+        1 de estos puntos aparece en 3 o más
+               temporadas del Programa Invierno: no es un evento aislado.Fuente: SENAPRED — Puntos Críticos, Programa Invierno · Año: 2026 · datos obtenidos 2026-08-12Son puntos, no polígonos, y reflejan lo que el
+           municipio reportó. La ausencia de registro no equivale a ausencia de
+           riesgo.
+    Modelo global de inundación C · MODELADOEste punto queda fuera de la mancha modelada de 100 años.Fuente: JRC (Comisión Europea) — Global River Flood Hazard Map, retorno 100 años · Año: 2016 · datos obtenidos 2026-08-07Resolución ~1 km: un píxel cubre varias manzanas y el
+             modelo no representa el drenaje urbano. Además es un modelo de 2016,
+             así que no incorpora obras fluviales ni cambios de uso de suelo
+             posteriores. Sirve como contexto regional, no para
+             decidir sobre una propiedad concreta.El modelo regional del Gobierno Regional clasifica este punto como
+         amenaza de inundación máxima.Fuente: Gobierno Regional de La Araucanía — Informe Componente Amenazas Naturales, Plan Regional de Ordenamiento Territorial · Año: 2016 · datos obtenidos 2026-08-12Resolución ~35 m, mucho más fina que el modelo
+             global, pero sus clases no significan un período de retorno:
+             «máxima» no equivale a ningún «cada tantos años». Más detalle espacial,
+             menos interpretable. Se contrastó contra los puntos críticos de
+             SENAPRED, que no participaron en su elaboración: el 39,5 % de los
+             desbordes reales cae en la clase máxima, que ocupa el 8,2 % del
+             territorio. El estudio que lo encargó nunca llegó a aprobarse.
+      Viviendas en el área de riesgo D · OPERACIONAL
+      Este punto está dentro del campamento Antu Mapu,
+         que el catastro nacional registra con 27
+         hogares en área de riesgo por
+         inundación.Fuente: MINVU — Catastro Nacional de Campamentos · Año: no declarado por la fuente · datos obtenidos 2026-08-12El catastro es de no declarado por la fuente: el campamento
+             puede haber crecido, cambiado o haber sido erradicado desde
+             entonces. El número de hogares es el del levantamiento, no un dato
+             de hoy.
+    Con qué cuenta Padre Las Casas INVENTARIO
+    Esto no dice si tu casa se inunda. Dice qué información
+       existe para saberlo, y es lo que hace falta para exigir que la haya.
+    
+      80.384 habitantes (Censo 2024)
+      30 puntos donde el municipio
+          reportó inundación, 21 de ellos
+          repetidos en 3 o más temporadas
+    
+    No encontramos nada consultable para esta comuna.
+    Qué falta:no tiene su área de riesgo por inundación en el vectorial público del MINVUno le encontramos ninguna lámina de cartografía de inundación en documentos públicosno publica ningún documento de planificación territorial que hayamos podido cosechar
+    
+      
+        Compartir el estado de Padre Las Casas
+      
+        Pedirle el mapa a la autoridad
+    
+    La solicitud usa la Ley 20.285: el
+       organismo está obligado a responderte por escrito en 20 días hábiles. Se
+       envía en
+       portaltransparencia.cl, es gratis y no necesitas
+       abogado.
+  Ninguno de estos mapas predice la
+           próxima inundación: cada uno es la conclusión de un estudio, con su
+           fecha y su método, y están hechos con métodos distintos. Mira
+           la mancha, no su borde — quedar justo afuera no es una buena
+           noticia. Cómo leer un mapa de inundación.
+    Compartir esta ficha
+    Ver en el mapa
+  
+
+=== textoFicha() (lo que se comparte) ===
+ESTÁS EN UN ÁREA DE RIESGO POR INUNDACIÓN DEL PLAN REGULADOR
+Ubicación: Auditoría área no fluvial
+
+El satélite miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026 y no detectó agua.
+  Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+  y es la foto del instante de la pasada, no el máximo del evento.
+
+Plan Regulador — área de riesgo declarada:
+• ANEGAMIENTO
+  Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) (año: 2010)
+
+Puntos críticos registrados cerca:
+• 1478 m — Inundación por desborde de cauce (riesgo Alto)
+  Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)
+
+Esto NO es información oficial ni un pronóstico.
+En emergencia: SENAPRED y tu municipio.

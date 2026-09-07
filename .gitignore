@@ -47,3 +47,12 @@ venv/
 # Los .docx se generan desde los .md con pandoc: versionar el binario ensucia
 # el historial en cada edición de texto. Se comparten directamente, no por git.
 docs/*.docx
+
+# Evidencia de auditoría (capturas, láminas extraídas, PDF sintéticos, GeoJSON
+# regenerables): se regenera con los instrumentos de tools/auditoria/. Los JSON
+# de resultados sí se versionan porque son la salida cruda que cita el informe.
+tools/auditoria/**/*.png
+tools/auditoria/**/*.pdf
+tools/auditoria/**/*.tif
+tools/auditoria/**/*.geojson
+tools/auditoria/**/*.jpg

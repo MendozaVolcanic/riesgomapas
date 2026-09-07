@@ -1,0 +1,73 @@
+{
+ "con_red": {
+  "puntos": true,
+  "areas": true,
+  "laminas": true,
+  "gore": true,
+  "jrc": true,
+  "sar": true,
+  "cob": true,
+  "sarIndice": true,
+  "camp": true,
+  "planos": 20,
+  "estadoComunas": 32
+ },
+ "cache": [
+  [
+   "riesgomapas-v21-app",
+   [
+    "",
+    "style.css",
+    "app.js",
+    "index.html",
+    "documentos.html",
+    "manifest.json",
+    "catalogo.js",
+    "vendor/maplibre-gl.css",
+    "data/catalogo-documentos.json",
+    "data/puntos-criticos-inundacion.geojson",
+    "data/areas-riesgo-inundacion.geojson",
+    "data/campamentos-inundacion.geojson",
+    "data/indice-comunas.json",
+    "data/estado-comunas.json",
+    "data/laminas/vectorizadas.geojson",
+    "vendor/maplibre-gl.js",
+    "data/jrc/rp100.geojson",
+    "data/gore/amenaza-inundacion.geojson",
+    "data/planos/indice.json",
+    "data/sar/huella-observada.geojson",
+    "data/sar/cobertura-sar.geojson",
+    "data/sar/indice.json"
+   ]
+  ],
+  [
+   "riesgomapas-v21-tiles",
+   [
+    "https://tile.openstreetmap.org/9/150/315.png",
+    "https://tile.openstreetmap.org/9/155/316.png",
+    "https://tile.openstreetmap.org/9/155/314.png",
+    "https://tile.openstreetmap.org/9/150/316.png"
+   ]
+  ]
+ ],
+ "sin_red": {
+  "puntos": true,
+  "areas": true,
+  "laminas": true,
+  "gore": true,
+  "jrc": true,
+  "sar": true,
+  "cob": true,
+  "sarIndice": true,
+  "camp": true,
+  "planos": 20,
+  "estadoComunas": 32
+ },
+ "sin_red_estado": "",
+ "ficha_plc": "\n    \n      ⚠️\n      Tu sector tiene registro de inundaciones\n    \n    📍 Auditoría offline PLC\n    Plan Regulador Comunal A · NORMATIVOEste punto no cae dentro de un área de riesgo por inundación\n             declarada en el plan regulador.\n             Que no aparezca no significa que no exista: esta capa\n             sólo trae instrumentos ya vigentes y publicados, y va por detrás de las\n             aprobaciones. Además, la mayoría de las comunas de la región no ha\n             declarado ningún área de riesgo. Consulta en la Dirección de Obras de tu\n             municipalidad.Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) · Año: 2010 · datos obtenidos 2026-08-30Sólo existen dentro del límite urbano de comunas cuyo\n           plan regulador las haya zonificado: que no haya polígono no significa\n           que no se inunde, significa que el plan no lo declaró.\n    Huella de inundación observada por satélite\n        B · OBSERVADOEl satélite sí miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026\n             y no detectó agua\n             en esas pasadas.\n             Eso no quiere decir que no se haya inundado. El radar\n             tiene cuatro límites conocidos, y los cuatro empujan en la misma\n             dirección: hacia quedarse corto.\n             \n               No ve el agua bajo bosque cerrado. El dosel\n                   devuelve la señal antes de que llegue al suelo.\n               Subestima en zona urbana densa —justo donde vive\n                   más gente—: el rebote entre la pared y el suelo inundado mantiene\n                   la señal alta, así que el agua se lee como ciudad seca.\n               No ve el agua con viento. El oleaje rompe el\n                   espejo que hace que el agua se vea negra en el radar.\n               Es la foto de un instante, no el máximo del\n                   evento. El agua que subió y bajó entre dos pasadas no aparece en\n                   ninguna de las dos.\n             \n             Un caso real de este mismo evento, para que se\n             entienda cuánto pesa el último límite: en Angol el\n             estero Rehue se desbordó la madrugada del 2 de agosto\n             y el agua superó 1,5 m dentro de las casas. Las dos pasadas satelitales\n             sobre Angol fueron el 3, y no vieron nada: el agua ya\n             había bajado. Esta capa registra 7,7 ha en esa comuna, y la inundación\n             fue de las peores de la región.Fuente: Sentinel-1 SENTINEL-1D GRD · Año: 2026 · datos obtenidos 2026-08-12\n    Registro oficial de puntos críticos D · OPERACIONALHay 4 puntos críticos registrados\n             a menos de 1500 m. Los más cercanos:272 m — Inundación por desborde de cauce\n        Alto\n        CANAL BARROSO\n        Registrado en 3 temporadas — problema crónico\n        407 m — Inundación por desborde de cauce\n        Medio\n        CANAL BARROSO\n        Registrado en 3 temporadas — problema crónico\n        1175 m — Inundación por desborde de cauce\n        Alto\n        URBANO\n        Registrado en 4 temporadas — problema crónico\n        1297 m — Inundación por desborde de cauce\n        Medio\n        URBANO\n        Registrado en 4 temporadas — problema crónico\n        4 de estos puntos aparece en 3 o más\n               temporadas del Programa Invierno: no es un evento aislado.Responsable declarado de la solución:\n               Serviu – MINVU, Dirección de Obras Hidráulicas - MOP.Fuente: SENAPRED — Puntos Críticos, Programa Invierno · Año: 2026 · datos obtenidos 2026-08-12Son puntos, no polígonos, y reflejan lo que el\n           municipio reportó. La ausencia de registro no equivale a ausencia de\n           riesgo.\n    Modelo global de inundación C · MODELADOEste punto queda fuera de la mancha modelada de 100 años.Fuente: JRC (Comisión Europea) — Global River Flood Hazard Map, retorno 100 años · Año: 2016 · datos obtenidos 2026-08-07Resolución ~1 km: un píxel cubre varias manzanas y el\n             modelo no representa el drenaje urbano. Además es un modelo de 2016,\n             así que no incorpora obras fluviales ni cambios de uso de suelo\n             posteriores. Sirve como contexto regional, no para\n             decidir sobre una propiedad concreta.El modelo regional del Gobierno Regional no clasifica\n         este punto en sus dos categorías más altas.Fuente: Gobierno Regional de La Araucanía — Informe Componente Amenazas Naturales, Plan Regional de Ordenamiento Territorial · Año: 2016 · datos obtenidos 2026-08-12Resolución ~35 m, mucho más fina que el modelo\n             global, pero sus clases no significan un período de retorno:\n             «máxima» no equivale a ningún «cada tantos años». Más detalle espacial,\n             menos interpretable. Se contrastó contra los puntos críticos de\n             SENAPRED, que no participaron en su elaboración: el 39,5 % de los\n             desbordes reales cae en la clase máxima, que ocupa el 8,2 % del\n             territorio. El estudio que lo encargó nunca llegó a aprobarse.\n    Con qué cuenta Padre Las Casas INVENTARIO\n    Esto no dice si tu casa se inunda. Dice qué información\n       existe para saberlo, y es lo que hace falta para exigir que la haya.\n    \n      80.384 habitantes (Censo 2024)\n      30 puntos donde el municipio\n          reportó inundación, 21 de ellos\n          repetidos en 3 o más temporadas\n    \n    No encontramos nada consultable para esta comuna.\n    Qué falta:no tiene su área de riesgo por inundación en el vectorial público del MINVUno le encontramos ninguna lámina de cartografía de inundación en documentos públicosno publica ningún documento de planificación territorial que hayamos podido cosechar\n    \n      \n        Compartir el estado de Padre Las Casas\n      \n        Pedirle el mapa a la autoridad\n    \n    La solicitud usa la Ley 20.285: el\n       organismo está obligado a responderte por escrito en 20 días hábiles. Se\n       envía en\n       portaltransparencia.cl, es gratis y no necesitas\n       abogado.\n  Ninguno de estos mapas predice la\n           próxima inundación: cada uno es la conclusión de un estudio, con su\n           fecha y su método, y están hechos con métodos distintos. Mira\n           la mancha, no su borde — quedar justo afuera no es una buena\n           noticia. Cómo leer un mapa de inundación.\n    Compartir esta ficha\n    Ver en el mapa\n  ",
+ "corto_collipulli": "⚠️\nEstás en un área de riesgo por inundación del plan regulador\n\n📍 Auditoría offline Collipulli área\n\nEl plan regulador de tu comuna declaró esta zona área de riesgo por inundación. Es la única fuente con efecto legal.\n\nVer todo el detalle y las fuentes\nCompartir",
+ "buscar": "No se pudo buscar (Failed to fetch). Prueba tocando el mapa.",
+ "sugerencias": "◧\nANGOL\n14 puntos críticos de inundación",
+ "teselas_fallidas_satelite": 14,
+ "catalogo": "25 comunas · 354 documentos · 224 láminas con contenido de inundación"
+}

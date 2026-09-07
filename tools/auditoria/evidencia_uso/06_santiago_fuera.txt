@@ -1,0 +1,22 @@
+PUNTO 06_santiago_fuera lon=-70.65 lat=-33.44
+NIVEL CSS: veredicto v-fuera
+COMUNA (comunaDe): ['Renaico', 499.6]
+EVALUAR: {"nivel": "sindato", "titulo": "Sin registros en las fuentes consultadas", "areas": 0, "sar": 0, "cerca": 0, "gore": 0, "enMancha": false, "lam": 0, "areasTipo": []}
+
+=== #respuesta ===
+🧭
+Fuera del alcance de este prototipo
+
+📍 Auditoría Santiago
+
+Este visor cubre sólo la Región de La Araucanía, y el punto que elegiste queda afuera.
+
+Eso no dice nada sobre el riesgo de ese lugar. No es que no se inunde: es que acá no hay dato para responder. El resto de Chile tampoco tiene un mapa nacional de inundaciones — esa es justamente la razón de este proyecto.
+
+Para ese sector, consulta la Dirección de Obras de su municipalidad y el plan regulador de su comuna. En emergencia, SENAPRED.
+
+=== #detalle-ficha ===
+El punto que elegiste queda fuera de La Araucanía, así que no hay evidencia que mostrar.
+
+=== textoFicha() (lo que se comparte) ===
+None
