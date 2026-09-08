@@ -309,6 +309,79 @@ def main() -> None:
         return (-int(sin_nada), -f["cronicos"], -f["hab"])
     filas.sort(key=prioridad)
 
+    # Todas las capas, también en shapefile. El GeoPackage sigue siendo la copia
+    # de referencia —conserva los nombres de campo completos y los textos de
+    # procedencia enteros—, pero el shapefile es lo que circula entre servicios
+    # públicos y lo que abre un ArcGIS antiguo, y pedirle a alguien que exporte
+    # doce capas a mano antes de empezar es una barrera tonta.
+    shp_todas = dest / "3_capas_en_shapefile"
+    shp_todas.mkdir(parents=True, exist_ok=True)
+    import fiona
+    recortes = []
+    for capa in fiona.listlayers(gpkg):
+        if capa.startswith("00_"):
+            continue
+        g = gpd.read_file(gpkg, layer=capa)
+        if g.empty:
+            continue
+        destino_shp = shp_todas / f"{capa[:40]}.shp"
+        g.to_file(destino_shp, driver="ESRI Shapefile", encoding="utf-8")
+        # Qué pasó de verdad, leyendo el shapefile recién escrito. Deducirlo de
+        # la regla «se corta a diez caracteres» no basta: cuando dos campos
+        # colisionan al acortarse, uno se PIERDE entero y en silencio. Pasó con
+        # `ordenanza_url` y `ordenanza_url_vigente`, que quedan en el mismo
+        # `ordenanza_`: se publicaba la URL de la ordenanza y desaparecía el
+        # campo que dice si sigue vigente.
+        # Se comparan las columnas POR POSICIÓN contra el shapefile recién
+        # escrito, que es la única forma de saber qué nombre quedó de verdad.
+        # Deducirlo de la regla «se corta a diez caracteres» da un resultado
+        # falso cuando dos campos chocan: `ordenanza_url` y
+        # `ordenanza_url_vigente` no se pierden —eso llegué a escribir— sino
+        # que el segundo queda como `ordenanz_1`, un nombre que nadie asocia
+        # con el original si no se le dice.
+        acortados, raros = [], []
+        try:
+            vuelta = gpd.read_file(destino_shp)
+            orig = [c for c in g.columns if c != "geometry"]
+            nuevo = [c for c in vuelta.columns if c != "geometry"]
+            for o, n in zip(orig, nuevo):
+                if o == n:
+                    continue
+                (raros if n.lower() != o[:10].lower() else acortados).append((o, n))
+        except Exception:               # noqa: BLE001
+            acortados = [(c, c[:10]) for c in g.columns
+                         if c != "geometry" and len(c) > 10]
+        recortes.append((capa, len(g), acortados, raros))
+    (shp_todas / "LEEME.md").write_text("\n".join(
+        ["# Las mismas capas, en shapefile", "",
+         "Están acá por comodidad: es lo que circula entre servicios públicos y lo",
+         "que abre un ArcGIS antiguo. **La copia de referencia sigue siendo**",
+         f"**`../{gpkg.name}`**, porque el shapefile corta los nombres de campo a",
+         "diez caracteres y el texto a 254, y la procedencia de este proyecto vive",
+         "en campos de texto largo.", "",
+         "⚠️ **Mira la última columna antes de usar una capa.** Cuando dos campos",
+         "quedan iguales al cortarse a diez caracteres, el segundo no se pierde:",
+         "queda con un nombre que nadie asocia con el original. Lo de abajo NO",
+         "está deducido de la regla — se midió leyendo cada shapefile después de",
+         "escribirlo y comparando columna por columna.", "",
+         "| Capa | Geometrías | Nombres acortados | RENOMBRADOS sin parecido |",
+         "|---|---:|---|---|"]
+        + [f"| {c} | {n} | "
+           f"{', '.join(f'`{o}` → `{d}`' for o, d in ac) if ac else '—'} | "
+           f"{'**' + ', '.join(f'`{o}` → `{d}`' for o, d in ra) + '**' if ra else '—'} |"
+           for c, n, ac, ra in recortes]
+        + ["", "Si una capa tiene campos renombrados sin parecido y necesitas ese",
+           f"dato, ábrela desde `../{gpkg.name}`, que conserva los nombres enteros.",
+           "",
+           "Cada capa son cinco archivos (`.shp`, `.dbf`, `.shx`, `.prj`, `.cpg`)",
+           "y **se copian juntos o no funciona**.", ""]),
+        encoding="utf-8")
+    log(f"  3_capas_en_shapefile: {len(recortes)} capas exportadas a .shp")
+
+    # La guía de trabajo, en QGIS y sin una línea de código: quien recibe esto
+    # no tiene el repositorio ni corre los scripts.
+    escribir_guia_qgis(dest, a.provincia.title())
+
     # Los documentos con lámina localizada que aún no se vectorizan: el trabajo
     # que se le encarga al practicante, con su PDF al lado.
     pendientes = carpeta_pendientes(
@@ -335,6 +408,198 @@ def main() -> None:
 # elección de entrega, no del dato: el PDF original va al lado y ahí está todo
 # el detalle.
 LADO_MAYOR_LAMINA_PX = 4000
+
+
+def escribir_guia_qgis(dest: Path, prov: str) -> None:
+    """El procedimiento completo en QGIS, sin una sola línea de código.
+
+    Existe porque quien recibe este paquete trabaja SÓLO en QGIS: no tiene el
+    repositorio, no corre los scripts y no tiene por qué. Las instrucciones que
+    había antes le mandaban a correr `18_vectorizar_laminas.py --inspeccionar`,
+    que para él es otro idioma.
+    """
+    (dest / "COMO_TRABAJAR_EN_QGIS.md").write_text("\n".join([
+        "# Cómo georreferenciar y digitalizar una lámina, en QGIS",
+        "",
+        "Todo esto se hace dentro de QGIS. No necesitas programar ni instalar",
+        "nada más. Se explica con una lámina que tenga **cuadrícula UTM impresa**",
+        "—las coordenadas rotuladas en los márgenes—, que es el caso fácil y el",
+        "de casi todas las de `2_laminas_por_georreferenciar`.",
+        "",
+        "---",
+        "",
+        "## 0. Antes de empezar: ¿esta lámina sirve?",
+        "",
+        "Cinco minutos acá ahorran una tarde.",
+        "",
+        "1. **Lee el texto de la página**, no sólo el título. Una lámina de",
+        "   «riesgo» puede ser multiamenaza y no distinguir niveles de",
+        "   inundación; ésa no sirve para esto.",
+        "2. **Mira dónde caen los colores de la leyenda.** El título de una lámina",
+        "   nombra su MARCO, no lo que mapea: descartamos una que decía «Mapa",
+        "   Inundación Subcuenca Ríos Malleco y Vergara» y tenía todos sus",
+        "   polígonos de riesgo fuera de esa subcuenca.",
+        "3. **Busca los rótulos de la cuadrícula.** Si la figura está recortada al",
+        "   marco y no se ve ninguna coordenada, no se puede georreferenciar por",
+        "   cuadrícula: pasa al método del punto 6.",
+        "",
+        "## 1. Sacar la lámina del PDF como imagen",
+        "",
+        "En tu lector de PDF, abre el documento en la página que dice el índice y",
+        "expórtala como imagen (**Archivo → Exportar → Imagen**, o una captura a",
+        "pantalla completa con el PDF al máximo zoom). Guárdala como PNG o JPG.",
+        "",
+        "Mientras más resolución, mejor: cada píxel de la imagen es la unidad más",
+        "fina que vas a poder dibujar después.",
+        "",
+        "## 2. Abrir el Georreferenciador",
+        "",
+        "En QGIS 3.x: **Capa → Georreferenciador…** (en versiones anteriores está",
+        "en *Ráster → Georreferenciador*; si no aparece, actívalo en",
+        "*Complementos → Administrar e instalar complementos → Georeferencer GDAL*).",
+        "",
+        "Se abre una ventana aparte. Ahí dentro: **Archivo → Abrir ráster** y",
+        "eliges la imagen del paso 1.",
+        "",
+        "## 3. Poner los puntos de control",
+        "",
+        "Un punto de control le dice a QGIS «este píxel de la imagen es esta",
+        "coordenada del mundo». Con la cuadrícula impresa los tienes regalados:",
+        "cada cruce de la retícula viene rotulado.",
+        "",
+        "Con la herramienta **Añadir punto**, haz clic exactamente en un cruce de",
+        "la cuadrícula. Se abre un cuadro pidiendo las coordenadas: escribe las",
+        "que dice el rótulo de ese cruce, **Este (X) primero, Norte (Y) después**.",
+        "",
+        "**El sistema de coordenadas.** Las láminas chilenas vienen casi siempre",
+        "en UTM WGS84. En La Araucanía hay dos husos y elegir mal manda la lámina",
+        "al Pacífico:",
+        "",
+        "| Si el Este ronda… | Es huso | Código a elegir |",
+        "|---|---|---|",
+        "| 600.000 – 780.000 (Angol, Purén, Traiguén, Collipulli) | 18 Sur | **EPSG:32718** |",
+        "| 200.000 – 350.000 (Lonquimay, Curacautín cordillera) | 19 Sur | **EPSG:32719** |",
+        "",
+        "⚠️ **No le creas al recuadro de información cartográfica de la lámina.**",
+        "La de Catripulli declara «Huso 18 Sur» y es 19: con 18 caería en el mar.",
+        "Si al terminar la lámina no aterriza sobre su pueblo, el huso es lo",
+        "primero que hay que revisar.",
+        "",
+        "**Cuántos puntos.** Cuatro o más, **repartidos por toda la hoja** —las",
+        "cuatro esquinas antes que cuatro juntos en un rincón—. Con tres el ajuste",
+        "todavía deja residuo que medir; con dos, el error sale 0 y esa cifra",
+        "miente: no es que esté perfecto, es que no hay nada contra qué comparar.",
+        "",
+        "## 4. Configurar y ejecutar",
+        "",
+        "Botón **Configuración de transformación** (el engranaje):",
+        "",
+        "| Campo | Qué poner | Por qué |",
+        "|---|---|---|",
+        "| Tipo de transformación | **Polinomial 1** (o Helmert) | Un mapa impreso tiene una sola escala y no está deformado: mover, girar y escalar basta. Los polinomios de grado 2 o 3 «arreglan» el error deformando la imagen, y el RMSE baja sin que la ubicación mejore. |",
+        "| Método de remuestreo | **Vecino más próximo** | No inventa colores nuevos entre píxeles, y acá los colores son la clase. |",
+        "| SRC de destino | El huso de la tabla de arriba | |",
+        "| Ráster de salida | Un `.tif` con nombre claro | |",
+        "| Cargar en QGIS al terminar | ✔ | |",
+        "",
+        "Antes de ejecutar, **mira la columna de residuos** en la tabla de puntos:",
+        "es cuánto se equivoca cada punto. Si uno tiene un residuo mucho mayor que",
+        "el resto, casi siempre es un rótulo mal tecleado o un clic corrido;",
+        "corrígelo antes de seguir.",
+        "",
+        "**Guarda los puntos de control** (Archivo → Guardar puntos GCP como…):",
+        "es un `.points` que va en la entrega y permite rehacer todo.",
+        "",
+        "Después, **Ejecutar**.",
+        "",
+        "## 5. Comprobar que quedó donde debe",
+        "",
+        "Esto no es opcional. Una lámina puede estar perfectamente ajustada y",
+        "aterrizar en el lugar equivocado.",
+        "",
+        "1. Carga encima **`puntos_criticos_SENAPRED`** del GeoPackage. Son sitios",
+        "   donde el municipio reportó inundación y no participaron en tu ajuste.",
+        "   Si tu lámina de inundación no tiene **ningún** punto crítico cerca,",
+        "   sospecha antes de creerle.",
+        "2. Enciende un mapa base (**Complementos → QuickMapServices**, o",
+        "   *XYZ Tiles → OpenStreetMap* en el panel Explorador) y comprueba que",
+        "   los ríos y calles de la lámina calzan con los del mapa.",
+        "",
+        "## 6. Si la lámina NO tiene cuadrícula rotulada",
+        "",
+        "Mismo procedimiento, pero los puntos de control los sacas comparando la",
+        "lámina con el mapa base: cruces de calle, puentes, esquinas de manzana,",
+        "confluencias de ríos. Elige puntos **nítidos en las dos imágenes** y",
+        "repartidos. Espera un error mayor, y **déjalo declarado**: un polígono",
+        "sin error declarado no se publica.",
+        "",
+        "## 7. Digitalizar los polígonos",
+        "",
+        "Con el ráster ya ubicado, se dibuja encima.",
+        "",
+        "1. **Capa → Crear capa → Nueva capa de GeoPackage** (o shapefile si",
+        "   prefieres). Tipo de geometría: **Polígono**. SRC: el mismo huso UTM.",
+        "2. Crea estos campos, con estos nombres, para que calce con lo que ya",
+        "   existe. Si usas shapefile los nombres se cortan a diez caracteres: el",
+        "   de la derecha es el que quedará.",
+        "",
+        "| Campo | En shapefile | Qué va |",
+        "|---|---|---|",
+        "| `clase` | `clase` | El nombre EXACTO que usa la leyenda: «Alto», «AR-2a», «Susceptibilidad media». No lo traduzcas ni lo uniformes. |",
+        "| `comuna` | `comuna` | En mayúsculas, como en las otras capas. |",
+        "| `amenaza` | `amenaza` | `inundación` |",
+        "| `fuente` | `fuente` | Nombre completo del documento, con su organismo y su fecha. |",
+        "| `anio` | `anio` | El año del ESTUDIO, no el del decreto que lo aprueba. Son distintos. |",
+        "| `escala_original` | `escala_ori` | La escala impresa de la lámina, si la declara. |",
+        "| `estado_tramite` | `estado_tra` | `derivado` |",
+        "| `incertidumbre_borde_m` | `incertidum` | El RMSE que te dio el georreferenciador, en metros. |",
+        "",
+        "3. Activa la edición (el lápiz), **Añadir polígono**, y dibuja siguiendo",
+        "   el borde del color. Un clic por vértice, clic derecho para cerrar.",
+        "4. Usa **Ajustar (snapping)** para que los polígonos vecinos compartan",
+        "   borde y no queden huecos ni solapes entre ellos.",
+        "5. Guarda la edición y apaga el lápiz.",
+        "",
+        "**Un polígono por mancha continua**, no uno gigante con todo. Y si una",
+        "mancha tiene un hueco adentro, dibújalo como anillo interior (herramienta",
+        "*Añadir anillo*), no como un polígono aparte.",
+        "",
+        "## 8. Antes de entregar, revísalo",
+        "",
+        "- **Vector → Herramientas de geometría → Comprobar validez**: no puede",
+        "  quedar ninguna geometría inválida.",
+        "- Abre la tabla de atributos y confirma que **ningún campo quedó vacío**.",
+        "- Compara de nuevo contra los puntos críticos de SENAPRED.",
+        "- Mira si algún polígono quedó **pegado al borde de la lámina**: eso",
+        "  significa que la mancha sigue fuera de la hoja y está cortada. Anótalo,",
+        "  no lo dibujes «hacia afuera» adivinando.",
+        "",
+        "---",
+        "",
+        "## Qué entregar de vuelta",
+        "",
+        f"Una carpeta por lámina, igual que las de `1_cartografia_ya_vectorizada`:",
+        "",
+        "- El **`.gpkg` o el `.shp`** con los polígonos y sus campos llenos.",
+        "- El **`.tif` georreferenciado** que produjo el paso 4.",
+        "- El **`.points`** con los puntos de control.",
+        "- Un **texto corto** que diga: qué lámina es, de qué documento y página,",
+        "  qué huso usaste, cuántos puntos de control y qué RMSE dio, y **qué no",
+        "  pudiste hacer y por qué**. Esa última parte vale tanto como el resto:",
+        "  es la que evita que la próxima persona repita el intento.",
+        "",
+        "## Lo que nunca hay que hacer",
+        "",
+        "- **No dibujar polígonos «aproximando»** dónde se inundaría. Si no sale",
+        "  de un documento con autor y fecha, no entra.",
+        "- **No inventar una coordenada** que no esté en la lámina, ni siquiera",
+        "  «redondeando» un rótulo que se ve borroso.",
+        "- **No mezclar capas de distinto origen** en un mismo archivo. Cada",
+        "  documento, su carpeta.",
+        "- **No rellenar un campo que no sabes.** Va vacío o «no declarado», nunca",
+        "  un valor plausible.",
+        "",
+    ]), encoding="utf-8")
 
 
 def a_word(md: Path) -> bool:
@@ -578,10 +843,8 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
          "Documentos donde ya localizamos una lámina con contenido de inundación y",
          "que **todavía no convertimos en geometría**. Cada uno trae su PDF si lo",
          "tenemos descargado; si no, va el enlace a la fuente.", "",
-         "Cómo se hace una: `python scripts/18_vectorizar_laminas.py --inspeccionar",
-         "<pdf> --pagina N` marca la retícula que detecta; se leen sus rótulos con el",
-         "ojo, se anotan en `config/laminas.yaml` y se corre el script. El detalle",
-         "está en el docstring de ese script.", "",
+         "**Cómo se hace una: el paso a paso está en `COMO_TRABAJAR_EN_QGIS`**, en",
+         "la carpeta de arriba. Todo se hace dentro de QGIS.", "",
          "La columna **«Lámina en la página»** es la que importa: estos son",
          "informes de decenas o cientos de páginas y el mapa está en dos o tres.",
          "",
@@ -651,24 +914,18 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
           "- **Ya derivados** — polígonos que el proyecto ya construyó desde una",
           "  lámina. No los rehagas; revísalos.", "",
           "---", "", "## Las tres tareas, en orden", "",
-          "### 1. Georreferenciar las láminas que ya tienen retícula detectada", "",
-          "Es lo más barato: la posición de la grilla ya está detectada, falta",
-          "**leer sus rótulos** —que están dentro de la imagen y no hay OCR en el",
-          "equipo— y anotarlos. Cada lámina toma unos minutos.", "",
-          "```bash",
-          "python scripts/18_vectorizar_laminas.py --censo",
-          "python scripts/18_vectorizar_laminas.py --inspeccionar <pdf> --pagina N",
-          "```", "",
-          "El segundo comando deja la imagen con las líneas de grilla marcadas y",
-          "sus posiciones en píxeles. Se leen los rótulos UTM con el ojo, se anotan",
-          "en `config/laminas.yaml`, y el script hace el resto y **verifica solo**",
-          "que la escala cuadre en ambos ejes y que el resultado aterrice en la",
-          "región.", "",
-          "⚠️ **Antes de declarar una lámina, lee el texto de su página.** Una",
-          "lámina marcada por vocabulario de inundación no siempre es de",
+          "### 1. Georreferenciar y digitalizar las láminas que ya tienen retícula", "",
+          "Son las más baratas: su cuadrícula UTM está impresa y rotulada, así que",
+          "los puntos de control te los da la propia lámina y no hay que",
+          "adivinarlos contra el mapa base. **El paso a paso completo está en",
+          "`COMO_TRABAJAR_EN_QGIS`**, en esta misma carpeta.", "",
+          "⚠️ **Antes de georreferenciar una lámina, lee el texto de su página.**",
+          "Una lámina marcada por vocabulario de inundación no siempre es de",
           "inundación: ya descartamos una de Teodoro Schmidt que resultó ser",
-          "riesgo multiamenaza «sin discriminar niveles de peligrosidad».", "",
-          "Retículas detectadas en esta provincia:", ""]
+          "riesgo multiamenaza «sin discriminar niveles de peligrosidad». Y una",
+          "de la DGA que estaba perfectamente ubicada y no mapeaba ni un polígono",
+          "de riesgo dentro de la zona que su título nombraba.", "",
+          "Láminas con cuadrícula ya detectada en esta provincia:", ""]
     if reticulas:
         for c, rs in sorted(reticulas.items()):
             L.append(f"**{c.title()}**")
@@ -677,17 +934,16 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
                          f"— {r['px']} px, {r['lineas']} líneas, paso {r['paso_px']} px")
             L.append("")
     else:
-        L.append("_Ninguna. Corre `18_vectorizar_laminas.py --censo` para actualizar._")
+        L.append("_Ninguna detectada por ahora en esta provincia._")
         L.append("")
-    L += ["### 2. Las láminas SIN retícula: puntos de control a mano en QGIS", "",
+    L += ["### 2. Las láminas SIN cuadrícula: puntos de control contra el mapa", "",
           "Cuando la figura viene recortada sin márgenes no hay rótulos que leer, y",
-          "no se puede inventar una coordenada. Ahí toca georreferenciar a mano",
-          "contra el mapa base, usando cruces de calles y puentes reconocibles.", "",
-          "El script `04_georreferenciar.py` ya lee el formato `.points` que exporta",
-          "el georreferenciador de QGIS, así que el flujo es: georreferenciar en",
-          "QGIS → guardar los puntos de control → pasarle el `.points` al script.", "",
-          "**Declara siempre cuántos puntos usaste y el RMSE que dio.** Un plano",
-          "sin error declarado no se publica.", "",
+          "**no se puede inventar una coordenada**. Ahí toca georreferenciar contra",
+          "el mapa base, usando cruces de calles, puentes y esquinas de manzana",
+          "reconocibles en las dos imágenes. Mismo procedimiento de",
+          "`COMO_TRABAJAR_EN_QGIS`, cambiando de dónde salen los puntos.", "",
+          "Es más lento y menos preciso: espera un RMSE mayor y déjalo declarado.",
+          "**Un polígono sin error declarado no se publica.**", "",
           "### 3. Las comunas sin ningún documento", "",
           "Para ésas no hay nada que georreferenciar todavía: falta conseguir el",
           "documento. Dos vías, en este orden:", "",
@@ -720,9 +976,8 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
     (dest / "LEEME.md").write_text(f"""# Paquete de trabajo — provincia de {prov}
 
 > Armado el **{date.today().isoformat()}**. Los datos son los que el proyecto
-> tenía ese día: si pasaron meses, vale la pena regenerarlo con
-> `python scripts/20_paquete_practicante.py --provincia {prov}` antes de apoyarse
-> en los conteos.
+> tenía ese día: si pasaron meses, pídenos una copia nueva antes de apoyarte en
+> los conteos.
 
 ## Qué hay acá
 
@@ -736,12 +991,17 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
   geometría**. Es el trabajo que sigue; su LEEME los lista con su página.
 - **`{gpkg}`** — todas las capas del proyecto que caen en esta provincia, en un
   solo archivo. Arrástralo a QGIS y aparecen todas.
+- **`COMO_TRABAJAR_EN_QGIS`** — el procedimiento completo, paso a paso, sin una
+  sola línea de código: georreferenciar una lámina, digitalizar los polígonos,
+  comprobar que quedaron donde deben y qué entregar de vuelta. **Empieza por
+  acá si vas a producir cartografía nueva.**
+- **`3_capas_en_shapefile/`** — todas las capas del GeoPackage exportadas a
+  `.shp`, por comodidad. La copia de referencia sigue siendo el `.gpkg`.
 - **`TAREAS`** — qué falta, por comuna, ordenado por lo que más importa.
-- **`ESTADO_DE_LOS_POLIGONOS`** — revisión automática de lo ya vectorizado:
-  geometrías inválidas, polígonos cortados en el borde de su lámina, duplicados
-  y los que están cerca del umbral de área. Se regenera con
-  `python tools/auditoria/revisar_poligonos_provincia.py --provincia {prov}
-  --salida ESTADO_DE_LOS_POLIGONOS.md`.
+- **`ESTADO_DE_LOS_POLIGONOS`** — la revisión que le hicimos a lo ya
+  vectorizado antes de entregártelo: geometrías inválidas, polígonos cortados
+  en el borde de su lámina, duplicados y los que están cerca del umbral de
+  área. Léelo: te dice qué mirar con desconfianza.
 
 ## Por qué el documento va junto al polígono
 
@@ -845,10 +1105,10 @@ que el proyecto entero existe para evitar.
 fusionan, se pierde lo único que hace confiable a este proyecto: poder decir de
 dónde salió cada borde.
 
-## Antes de tocar nada, lee las reglas
+## Antes de tocar nada, cuatro reglas
 
-`REGLAS.md`, en la raíz del repositorio. Son ocho capítulos y todas sus reglas
-nacieron de un error real que ya se cometió. Las cuatro que más te van a tocar:
+Son del proyecto y todas nacieron de un error real que ya se cometió. Éstas son
+las cuatro que más te van a tocar:
 
 - Las **cuatro capas de evidencia nunca se fusionan**.
 - **Nunca se inventa un valor**: si la fuente no lo dice, va «no declarado».

@@ -172,9 +172,11 @@ def main() -> int:
          "Revisión automática de lo que ya está vectorizado: si la geometría es",
          "válida, si algún polígono quedó cortado en el borde de su lámina, y",
          "cuáles están tan cerca del umbral de área que aparecen o desaparecen si",
-         "alguien lo toca. Se corre con:", "",
-         "```", "python tools/auditoria/revisar_poligonos_provincia.py "
-         f"--provincia {a.provincia.title()}", "```", ""]
+         "alguien toca ese número.", "",
+         "Se hizo antes de entregar el paquete. Léelo como una lista de qué mirar",
+         "con desconfianza, no como un veredicto: un polígono que toca el marco de",
+         "su lámina puede estar bien dibujado y aun así estar contando sólo la",
+         "parte de la mancha que cabía en la hoja.", ""]
     problemas = 0
     detectado = {"truncado": False, "invalido": False, "duplicado": False}
 
