@@ -272,6 +272,19 @@ def main() -> int:
     if a.salida:
         Path(a.salida).write_text(salida, encoding="utf-8")
         print(f"\nescrito: {a.salida}")
+        # Y en Word: este informe termina dentro del paquete que abre alguien en
+        # Windows, donde un .md se ve como marcado crudo y no se lee.
+        import subprocess
+        docx = Path(a.salida).with_suffix(".docx")
+        try:
+            subprocess.run(["pandoc", a.salida, "-o", str(docx),
+                            "--from", "gfm", "--to", "docx"],
+                           check=True, capture_output=True, timeout=120)
+            print(f"escrito: {docx}")
+        except FileNotFoundError:
+            print("(pandoc no está instalado: queda sólo el .md)")
+        except Exception as exc:        # noqa: BLE001
+            print(f"(no se pudo convertir a Word: {exc})")
 
     if a.control:
         ok = all(detectado.values())

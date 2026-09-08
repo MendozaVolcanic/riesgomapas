@@ -32,8 +32,13 @@ Salida: data/processed/paquete_<provincia>/
                                    los documentos con lámina localizada que
                                    todavía no se convierten, con su PDF e índice
           capas_<provincia>.gpkg   todas las capas recortadas a la provincia
-          TAREAS.md                qué falta, por comuna, ordenado por prioridad
-          LEEME.md                 cómo trabajar y qué devolver
+          TAREAS.md / .docx        qué falta, por comuna, ordenado por prioridad
+          LEEME.md / .docx         cómo trabajar y qué devolver
+
+        Todo texto sale en Markdown y en Word. El `.md` es la copia de
+        referencia —se versiona, se compara, se abre en cualquier sistema—; el
+        `.docx` es el que abre quien recibe el paquete, que trabaja en Windows
+        con Word y para quien un `.md` es marcado crudo en el Bloc de notas.
 """
 from __future__ import annotations
 
@@ -314,6 +319,12 @@ def main() -> None:
 
     escribir_tareas(dest, a.provincia.title(), filas, ret_por_comuna)
     escribir_leeme(dest, a.provincia.title(), gpkg.name, fichas, pendientes)
+
+    # Todo lo que se escribió en Markdown, también en Word: el paquete lo abre
+    # alguien en Windows, donde un .md se ve como marcado crudo.
+    convertidos = sum(a_word(m) for m in sorted(dest.rglob("*.md")))
+    if convertidos:
+        log(f"  {convertidos} documento(s) convertidos a Word (.docx)")
     log("")
     log(f"PAQUETE LISTO → {dest}")
     log(f"  {gpkg.name} · TAREAS.md · LEEME.md · "
@@ -324,6 +335,38 @@ def main() -> None:
 # elección de entrega, no del dato: el PDF original va al lado y ahí está todo
 # el detalle.
 LADO_MAYOR_LAMINA_PX = 4000
+
+
+def a_word(md: Path) -> bool:
+    """Deja al lado del `.md` un `.docx` con el mismo contenido.
+
+    Por qué. Este paquete lo abre alguien en un computador con Windows y Word,
+    donde un `.md` se abre con el Bloc de notas y se ve el marcado crudo:
+    almohadillas, asteriscos y tablas hechas de barras verticales. El texto que
+    explica de dónde salió cada polígono no se lee, y lo que no se lee da lo
+    mismo que no esté.
+
+    El `.md` se conserva porque es la fuente —se versiona, se compara, se abre
+    en cualquier sistema— y porque pesa nada. El `.docx` es la copia para leer.
+
+    Si pandoc no está instalado se avisa y se sigue: el paquete queda completo
+    con los `.md`, que es una degradación honesta y no una falla silenciosa
+    (REGLAS §2).
+    """
+    import subprocess
+    try:
+        subprocess.run(
+            ["pandoc", str(md), "-o", str(md.with_suffix(".docx")),
+             "--from", "gfm", "--to", "docx"],
+            check=True, capture_output=True, timeout=120)
+        return True
+    except FileNotFoundError:
+        log("  pandoc no está instalado: el paquete queda sólo con los .md "
+            "(instalar desde pandoc.org y volver a correr este script)")
+        return False
+    except Exception as exc:            # noqa: BLE001
+        log(f"  no se pudo convertir {md.name} a Word: {exc}")
+        return False
 
 
 def _slug(t: str) -> str:
@@ -685,16 +728,16 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
 
 - **`1_cartografia_ya_vectorizada/`** — una carpeta **por documento**. Adentro va
   el PDF original, la página con la lámina en imagen, los polígonos que sacamos de
-  ella y un `LEEME.md` que explica qué es, de dónde salió y cuánto se equivoca.
+  ella y un LEEME que explica qué es, de dónde salió y cuánto se equivoca.
   Ésta es la parte que hay que revisar primero:
 {listado}
 - **`2_laminas_por_georreferenciar/`** — {pendientes} documento(s) donde ya
   localizamos una lámina de inundación y que **todavía no convertimos en
-  geometría**. Es el trabajo que sigue; su `LEEME.md` los lista con su página.
+  geometría**. Es el trabajo que sigue; su LEEME los lista con su página.
 - **`{gpkg}`** — todas las capas del proyecto que caen en esta provincia, en un
   solo archivo. Arrástralo a QGIS y aparecen todas.
-- **`TAREAS.md`** — qué falta, por comuna, ordenado por lo que más importa.
-- **`ESTADO_DE_LOS_POLIGONOS.md`** — revisión automática de lo ya vectorizado:
+- **`TAREAS`** — qué falta, por comuna, ordenado por lo que más importa.
+- **`ESTADO_DE_LOS_POLIGONOS`** — revisión automática de lo ya vectorizado:
   geometrías inválidas, polígonos cortados en el borde de su lámina, duplicados
   y los que están cerca del umbral de área. Se regenera con
   `python tools/auditoria/revisar_poligonos_provincia.py --provincia {prov}
