@@ -135,7 +135,15 @@ def revisar_validez(feats: list[dict]) -> dict:
                 cambian_area.append((i, round(100 * (v.area - g.area) / max(g.area, 1e-12), 3)))
     # Duplicados: sólo entre los que comparten caja envolvente, para no cruzar
     # todos contra todos.
-    dup = []
+    #
+    # Repetir la geometría NO alcanza para ser un duplicado. La cobertura del
+    # satélite vuelve a mirar exactamente el mismo rectángulo cada vez que
+    # repite su órbita relativa: son observaciones distintas, con su fecha, y
+    # borrarlas perdería el registro de cuándo se miró. Duplicado es la misma
+    # geometría con los MISMOS atributos —la fila que sobra—; la misma
+    # geometría con atributos distintos se cuenta aparte y se informa como lo
+    # que es.
+    dup, repetidas = [], []
     for i in range(len(gs)):
         for j in range(i + 1, len(gs)):
             if gs[i].bounds != gs[j].bounds:
@@ -146,10 +154,14 @@ def revisar_validez(feats: list[dict]) -> dict:
             if not b.is_valid:
                 b = make_valid(b)
             u = a.union(b).area
-            if u and a.intersection(b).area / u > 0.98:
-                dup.append((i, j))
+            if not u or a.intersection(b).area / u <= 0.98:
+                continue
+            pa = feats[i].get("properties") or {}
+            pb = feats[j].get("properties") or {}
+            (dup if pa == pb else repetidas).append((i, j))
     return {"n": len(feats), "invalidos": invalidos,
-            "invalidos_que_cambian_area": cambian_area, "duplicados": dup}
+            "invalidos_que_cambian_area": cambian_area, "duplicados": dup,
+            "geometria_repetida": repetidas}
 
 
 def main() -> int:
@@ -178,7 +190,8 @@ def main() -> int:
          "su lámina puede estar bien dibujado y aun así estar contando sólo la",
          "parte de la mancha que cabía en la hoja.", ""]
     problemas = 0
-    detectado = {"truncado": False, "invalido": False, "duplicado": False}
+    detectado = {"truncado": False, "invalido": False, "duplicado": False,
+                 "repetida_no_es_duplicado": False}
 
     for lid, cfg in laminas.items():
         if nz(cfg["comuna"]) not in comunas:
@@ -209,7 +222,12 @@ def main() -> int:
             feats.append({"type": "Feature", "properties": {"clase": "CONTROL-invalido"},
                           "geometry": json.loads(json.dumps(
                               translate(mono, c.x, c.y).__geo_interface__))})
-            feats.append({"type": "Feature", "properties": {"clase": "CONTROL-duplicado"},
+            feats.append({"type": "Feature",
+                          "properties": dict(feats[0]["properties"]),
+                          "geometry": feats[0]["geometry"]})
+            feats.append({"type": "Feature",
+                          "properties": dict(feats[0]["properties"],
+                                             fecha_observacion="1999-01-01"),
                           "geometry": feats[0]["geometry"]})
 
         val = revisar_validez(feats)
@@ -237,6 +255,11 @@ def main() -> int:
             detectado["invalido"] = True
         if val["duplicados"]:
             detectado["duplicado"] = True
+        # La fila con otra fecha tiene que quedar FUERA de los duplicados y
+        # dentro de las repeticiones: si cayera en duplicados, el instrumento
+        # estaría pidiendo que se borre una observación.
+        if val["geometria_repetida"] and len(val["duplicados"]) == 1:
+            detectado["repetida_no_es_duplicado"] = True
 
     # TODAS las capas del paquete, no sólo las láminas: quien las va a usar
     # necesita saber de cuáles puede fiarse. Se revisa lo mismo que arriba —
@@ -269,8 +292,14 @@ def main() -> int:
         L += ["Cada capa lleva su fuente en cada polígono, y el enlace en",
               "`FUENTE_DE_CADA_POLIGONO`; las que no, se avisan bajo la tabla.",
               "",
-              "| Capa | Geom. | Inváls. | Dupls. | Corta |",
-              "|---|---:|---:|---:|---:|"]
+              "**Dupls.** son filas que sobran: misma geometría y mismos datos.",
+              "**Repet.** es la misma geometría con datos distintos, y en la",
+              "cobertura del satélite es lo esperado —cada órbita relativa vuelve",
+              "a mirar el mismo rectángulo en otra fecha—. Ésas no se borran: son",
+              "el registro de cuándo se miró.",
+              "",
+              "| Capa | Geom. | Inváls. | Dupls. | Repet. | Corta |",
+              "|---|---:|---:|---:|---:|---:|"]
         sin_fuente = []
         for capa in fiona.listlayers(gpkg):
             if capa.startswith("00_"):
@@ -278,8 +307,11 @@ def main() -> int:
             g = gpd.read_file(gpkg, layer=capa)
             if g.empty or g.geometry.isna().all():
                 continue
-            feats = [{"geometry": x.__geo_interface__, "properties": {}}
-                     for x in g.geometry if x is not None]
+            atributos = g.drop(columns=g.geometry.name).to_dict("records")
+            feats = [{"geometry": x.__geo_interface__,
+                      "properties": {k: v for k, v in at.items()
+                                     if v is not None and v == v}}
+                     for x, at in zip(g.geometry, atributos) if x is not None]
             val = revisar_validez(feats)
             tocan = int(sum(1 for x in g.geometry if x is not None
                             and x.distance(borde) < 1e-9))
@@ -297,7 +329,8 @@ def main() -> int:
             if not tiene_fuente:
                 sin_fuente.append(capa)
             L.append(f"| {capa} | {len(g)} | {len(val['invalidos'])} | "
-                     f"{len(val['duplicados'])} | {tocan} |")
+                     f"{len(val['duplicados'])} | "
+                     f"{len(val['geometria_repetida'])} | {tocan} |")
         if sin_fuente:
             L += ["", "⚠️ Sin fuente por polígono (está en la tabla de "
                   "procedencia del GeoPackage): " + ", ".join(sin_fuente)]
@@ -323,7 +356,10 @@ def main() -> int:
         pr = d.get("procedencia") or {}
         url = pr.get("url", "")
         enlace = f"[abrir]({url})" if url.startswith("http") else (url or "—")
-        L.append(f"| {nombre} | {pr.get('fuente', '')[:90]} | {enlace} |")
+        # Sin recortar: el corte a 90 dejaba nombres de fuente terminados a
+        # media palabra —«Plan Regional d»—, y una celda larga en Word
+        # simplemente envuelve en varias líneas.
+        L.append(f"| {nombre} | {pr.get('fuente', '')} | {enlace} |")
     L.append("")
 
     salida = "\n".join(L)
