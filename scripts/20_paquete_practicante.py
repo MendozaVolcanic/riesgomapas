@@ -391,6 +391,55 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     gdf.to_file(destino / "poligonos.geojson", driver="GeoJSON")
     gdf.to_file(destino / "poligonos.gpkg", layer=_slug(cfg["id"]), driver="GPKG")
 
+    # 3-bis. Y en shapefile, porque es lo que circula en los servicios públicos
+    # chilenos y lo que abre un ArcGIS antiguo. Va en su propia subcarpeta —son
+    # cinco o seis archivos por capa— y con el aviso de lo que el formato le
+    # hace al dato: nombres de campo cortados a diez caracteres y texto cortado
+    # a 254. Ese aviso NO está escrito a mano: se genera comparando el
+    # shapefile recién escrito contra el original, así que dice lo que pasó de
+    # verdad en esta corrida y no lo que pasaba la última vez que alguien miró.
+    shp_dir = destino / "shapefile"
+    shp_dir.mkdir(exist_ok=True)
+    gdf.to_file(shp_dir / "poligonos.shp", driver="ESRI Shapefile", encoding="utf-8")
+    perdidas = []
+    try:
+        vuelta = gpd.read_file(shp_dir / "poligonos.shp")
+        for col in gdf.columns:
+            if col == "geometry":
+                continue
+            corto = col[:10]
+            if corto not in vuelta.columns:
+                perdidas.append(f"- `{col}`: **se perdió** al exportar.")
+                continue
+            a0, b0 = str(gdf[col].iloc[0]), str(vuelta[corto].iloc[0])
+            if a0 != b0:
+                perdidas.append(
+                    f"- `{col}` → `{corto}`: **truncado** de {len(a0)} a "
+                    f"{len(b0)} caracteres. El texto completo está en "
+                    "`../poligonos.geojson` y en `../LEEME.md`.")
+            elif col != corto:
+                perdidas.append(f"- `{col}` → `{corto}`: sólo se acortó el "
+                                "nombre; el contenido está entero.")
+    except Exception as exc:            # noqa: BLE001
+        perdidas.append(f"- (no se pudo verificar qué se perdió: {exc})")
+    (shp_dir / "LEEME_shapefile.md").write_text("\n".join(
+        ["# Los mismos polígonos, en shapefile", "",
+         "Están acá porque es el formato que circula entre servicios públicos y",
+         "el que abre un ArcGIS antiguo. **No son la copia de referencia**: el",
+         "formato pierde cosas, y acá está exactamente qué perdió esta vez.", "",
+         "## Qué le hizo el formato a este dato", ""]
+        + (perdidas or ["- Nada: ningún campo se acortó ni se truncó."])
+        + ["", "## Si vas a citar o revisar la procedencia", "",
+           "Usa `../poligonos.geojson` o `../poligonos.gpkg`. El shapefile corta",
+           "los nombres de campo a diez caracteres y el texto a 254, y la",
+           "procedencia de este proyecto vive justamente en campos de texto",
+           "largo. Para dibujar y medir, el shapefile sirve igual.", "",
+           "## Los archivos", "",
+           "`.shp` la geometría · `.dbf` la tabla · `.shx` el índice · `.prj` el",
+           "sistema de coordenadas (EPSG:4326) · `.cpg` la codificación.",
+           "**Se copian los cinco juntos o no funciona.**", ""]),
+        encoding="utf-8")
+
     # 4. El resumen. Todo sale de la procedencia que el propio dato lleva
     #    adentro, así que si mañana cambia el método, este texto cambia solo.
     clases = proc.get("resumen_por_clase") or []
@@ -421,7 +470,8 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
          "| `documento_original.pdf` | El documento tal como lo publica la fuente. No se modifica. |",
          f"| `lamina_pagina-{cfg['pagina']}.jpg` | La página con la lámina, para mirarla sin abrir el PDF. El detalle fino está en el PDF. |",
          "| `poligonos.geojson` | Los polígonos que derivamos de esa lámina, en EPSG:4326. |",
-         "| `poligonos.gpkg` | Lo mismo, para arrastrar a QGIS. |", "",
+         "| `poligonos.gpkg` | Lo mismo, para arrastrar a QGIS. |",
+         "| `shapefile/` | Los mismos polígonos en `.shp`, para ArcGIS o para intercambiar. Lee su LEEME: el formato corta nombres y textos. |", "",
          "## Qué contiene la geometría", "",
          "| Clase | Polígonos | Hectáreas |",
          "|---|---:|---:|"]
@@ -644,6 +694,11 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
 - **`{gpkg}`** — todas las capas del proyecto que caen en esta provincia, en un
   solo archivo. Arrástralo a QGIS y aparecen todas.
 - **`TAREAS.md`** — qué falta, por comuna, ordenado por lo que más importa.
+- **`ESTADO_DE_LOS_POLIGONOS.md`** — revisión automática de lo ya vectorizado:
+  geometrías inválidas, polígonos cortados en el borde de su lámina, duplicados
+  y los que están cerca del umbral de área. Se regenera con
+  `python tools/auditoria/revisar_poligonos_provincia.py --provincia {prov}
+  --salida ESTADO_DE_LOS_POLIGONOS.md`.
 
 ## Por qué el documento va junto al polígono
 
@@ -669,11 +724,18 @@ herramienta sin configurar nada. Si vas a medir distancias o áreas, reproyecta
 antes a UTM 18S (EPSG:32718) o 19S (EPSG:32719) según la zona: en grados, un
 área en «metros cuadrados» no significa nada.
 
-**Por qué no hay shapefiles.** El `.shp` son seis archivos sueltos por capa que
-se separan al copiar, corta los nombres de campo a diez caracteres —`estado_tramite`
-quedaría en `estado_tra`— y se pelea con las tildes. Si tu flujo de trabajo los
-exige, expórtalos tú desde QGIS: clic derecho en la capa → Exportar → Guardar
-como. Pero trabaja con el GeoPackage.
+**Sobre los shapefiles.** Cada carpeta de documento trae además una subcarpeta
+`shapefile/` con los mismos polígonos en `.shp`, porque es lo que circula entre
+servicios públicos y lo que abre un ArcGIS antiguo. Pero **no es la copia de
+referencia**: el formato corta los nombres de campo a diez caracteres
+—`estado_tramite` queda en `estado_tra`— y el texto a 254, que es justo donde
+vive la procedencia de este proyecto. En cada subcarpeta hay un LEEME que dice,
+medido en esa misma corrida, qué campo se acortó y cuál se truncó. Para dibujar y
+medir, el shapefile sirve igual; para citar de dónde salió un polígono, usa el
+GeoJSON o el GeoPackage.
+
+Las capas regionales del `.gpkg` no vienen en shapefile: si las necesitas,
+expórtalas desde QGIS con clic derecho en la capa → Exportar → Guardar como.
 
 ## Cómo saber si tu trabajo quedó bien
 
