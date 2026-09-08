@@ -306,7 +306,10 @@ def main() -> None:
 
     # Los documentos con lámina localizada que aún no se vectorizan: el trabajo
     # que se le encarga al practicante, con su PDF al lado.
-    pendientes = carpeta_pendientes(dest / "2_laminas_por_georreferenciar", comunas)
+    pendientes = carpeta_pendientes(
+        dest / "2_laminas_por_georreferenciar", comunas,
+        {(DATA_RAW / declaradas[f["id"]]["pdf"]).name: f["carpeta"]
+         for f in fichas if f.get("id") in declaradas})
     log(f"  2_laminas_por_georreferenciar: {pendientes} PDF copiados + índice")
 
     escribir_tareas(dest, a.provincia.title(), filas, ret_por_comuna)
@@ -458,10 +461,12 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
           "lámina, avísanos con la coordenada: el trazado es lo nuestro, y es "
           "exactamente lo que se puede corregir.", ""]
     (destino / "LEEME.md").write_text("\n".join(L), encoding="utf-8")
-    return {"carpeta": destino.name, "poligonos": len(feats), "hectareas": round(ha)}
+    return {"carpeta": destino.name, "id": cfg["id"],
+            "poligonos": len(feats), "hectareas": round(ha)}
 
 
-def carpeta_pendientes(dest: Path, comunas: set[str]) -> int:
+def carpeta_pendientes(dest: Path, comunas: set[str],
+                       ya_hechos: dict[str, str] | None = None) -> int:
     """Los documentos con lámina localizada que TODAVÍA no se vectorizaron.
 
     Es el trabajo que se le encarga al practicante, y va con el PDF al lado por
@@ -470,6 +475,11 @@ def carpeta_pendientes(dest: Path, comunas: set[str]) -> int:
     cat = cargar(WEB_DATA / "catalogo-documentos.json")
     if not cat:
         return 0
+    # Un documento que YA tiene su carpeta en 1_cartografia_ya_vectorizada no se
+    # copia otra vez acá: verlo en «ya hecho» y en «por hacer» a la vez es la
+    # clase de contradicción que hace desconfiar del paquete entero. Se lista
+    # igual, marcado, para que se vea que no se olvidó.
+    ya_hechos = ya_hechos or {}
     dest.mkdir(parents=True, exist_ok=True)
     L = ["# Láminas por georreferenciar", "",
          "Documentos donde ya localizamos una lámina con contenido de inundación y",
@@ -493,6 +503,11 @@ def carpeta_pendientes(dest: Path, comunas: set[str]) -> int:
             if not d.get("laminas"):
                 continue
             pags = ", ".join(str(l["pagina"]) for l in d["laminas"][:8])
+            if d["archivo"] in ya_hechos:
+                L.append(f"| {com.title()} | {d['archivo'][:52]} | **{pags}** | — | "
+                         f"✅ ya vectorizado → `1_cartografia_ya_vectorizada/"
+                         f"{ya_hechos[d['archivo']]}/` | — |")
+                continue
             hallado = next(iter(DATA_RAW.glob(f"documentos/**/{d['archivo']}")), None)
             local, total = "—", "—"
             if hallado and hallado.exists():

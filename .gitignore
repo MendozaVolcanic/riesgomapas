@@ -56,3 +56,4 @@ tools/auditoria/**/*.pdf
 tools/auditoria/**/*.tif
 tools/auditoria/**/*.geojson
 tools/auditoria/**/*.jpg
+data/processed/paquete_*.zip
