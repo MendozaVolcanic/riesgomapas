@@ -24,6 +24,13 @@ Requiere: 19_estado_comunas.py (web/data/estado-comunas.json — obligatorio,
         13, 14, 15 y 17 (las ocho capas de web/data/ y data/processed/arclim/
         listadas en CAPAS) y 18 (láminas vectorizadas y censo de retículas).
 Salida: data/processed/paquete_<provincia>/
+          1_cartografia_ya_vectorizada/<lamina>/
+                                   una carpeta POR DOCUMENTO: el PDF original, la
+                                   página con la lámina en JPG, los polígonos que
+                                   salieron de ella y un LEEME que dice qué es
+          2_laminas_por_georreferenciar/
+                                   los documentos con lámina localizada que
+                                   todavía no se convierten, con su PDF e índice
           capas_<provincia>.gpkg   todas las capas recortadas a la provincia
           TAREAS.md                qué falta, por comuna, ordenado por prioridad
           LEEME.md                 cómo trabajar y qué devolver
@@ -40,7 +47,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comun import DATA_PROC, DATA_RAW, WEB_DATA, cargar_config, log  # noqa: E402
+from comun import CONFIG, DATA_PROC, DATA_RAW, WEB_DATA, cargar_config, log  # noqa: E402
 
 
 def nz(t: str) -> str:
@@ -161,7 +168,7 @@ def main() -> None:
     dest = base / f"paquete_{clave.lower()}"
     if dest.exists():
         shutil.rmtree(dest)
-    (dest / "laminas_por_georreferenciar").mkdir(parents=True, exist_ok=True)
+    dest.mkdir(parents=True, exist_ok=True)
 
     # ------------------------------------------------------------ GeoPackage
     import geopandas as gpd
@@ -199,12 +206,31 @@ def main() -> None:
         log(f"  {nombre:32s} {len(feats):>5} geometrías")
 
     # Las láminas que ya convertimos: van aparte y MARCADAS como derivadas, para
-    # que nadie las confunda con el vectorial oficial.
+    # que nadie las confunda con el vectorial oficial. Y además de entrar al
+    # GeoPackage, cada una arma su propia carpeta con el documento del que salió
+    # (ver `carpeta_por_documento`).
+    import yaml
+    declaradas = {c["id"]: c for c in (yaml.safe_load(
+        (CONFIG / "laminas.yaml").read_text(encoding="utf-8")) or {}).get("laminas", [])}
+    docs_dir = dest / "1_cartografia_ya_vectorizada"
+    fichas = []
     for f in sorted((DATA_PROC / "laminas").glob("*.geojson")):
         fc = cargar(f)
         feats = recortar(fc, comunas, caja)
         if not feats:
             continue
+        cfg_lam = declaradas.get(f.stem)
+        if cfg_lam:
+            # El id ya empieza por la comuna («angol-prc-ar2a-lamina1»), así que
+            # anteponerla otra vez sólo alargaba el nombre.
+            nombre_carpeta = _slug(cfg_lam["id"])
+            fichas.append(carpeta_por_documento(
+                cfg_lam, fc, feats, docs_dir / nombre_carpeta))
+            log(f"    carpeta {nombre_carpeta}: documento + lámina + "
+                f"{len(feats)} polígonos + resumen")
+        else:
+            log(f"    [{f.stem}] no está declarada en config/laminas.yaml: "
+                "va al GeoPackage pero sin carpeta propia")
         gdf = gpd.GeoDataFrame(
             [f2["properties"] for f2 in feats],
             geometry=[shape(f2["geometry"]) for f2 in feats], crs="EPSG:4326")
@@ -278,11 +304,192 @@ def main() -> None:
         return (-int(sin_nada), -f["cronicos"], -f["hab"])
     filas.sort(key=prioridad)
 
+    # Los documentos con lámina localizada que aún no se vectorizan: el trabajo
+    # que se le encarga al practicante, con su PDF al lado.
+    pendientes = carpeta_pendientes(dest / "2_laminas_por_georreferenciar", comunas)
+    log(f"  2_laminas_por_georreferenciar: {pendientes} PDF copiados + índice")
+
     escribir_tareas(dest, a.provincia.title(), filas, ret_por_comuna)
-    escribir_leeme(dest, a.provincia.title(), gpkg.name)
+    escribir_leeme(dest, a.provincia.title(), gpkg.name, fichas, pendientes)
     log("")
     log(f"PAQUETE LISTO → {dest}")
-    log(f"  {gpkg.name} · TAREAS.md · LEEME.md")
+    log(f"  {gpkg.name} · TAREAS.md · LEEME.md · "
+        f"{len(fichas)} carpeta(s) por documento")
+
+
+# Lado mayor de la imagen de la lámina que se copia a cada carpeta. Es una
+# elección de entrega, no del dato: el PDF original va al lado y ahí está todo
+# el detalle.
+LADO_MAYOR_LAMINA_PX = 4000
+
+
+def _slug(t: str) -> str:
+    t = unicodedata.normalize("NFKD", str(t or "")).encode("ascii", "ignore").decode()
+    return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", t.lower())).strip("-")
+
+
+def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path) -> dict:
+    """Una carpeta por documento fuente: el PDF, su lámina, los polígonos y un
+    resumen de qué es cada cosa.
+
+    Por qué así y no todo junto en el GeoPackage: quien recibe esto tiene que
+    poder abrir el documento del que salió cada polígono SIN volver a
+    preguntarnos. Un polígono derivado sin su lámina al lado es una afirmación
+    sin respaldo — y estos polígonos los dibujamos nosotros, así que tener el
+    respaldo al lado es lo que permite discutirlos. El GeoPackage único sigue
+    existiendo para trabajar cómodo en QGIS; esto es para entender y verificar.
+    """
+    import geopandas as gpd
+    import pypdfium2 as pdfium
+    from shapely.geometry import shape
+
+    destino.mkdir(parents=True, exist_ok=True)
+    proc = fc.get("procedencia") or {}
+    pdf = DATA_RAW / cfg["pdf"]
+
+    # 1. El documento original, tal como se descargó. `data/raw` es de sólo
+    #    lectura (REGLAS §1.6): se copia, nunca se toca.
+    if pdf.exists():
+        shutil.copy2(pdf, destino / f"documento_original{pdf.suffix}")
+
+        # 2. La página con la lámina, rasterizada, para verla sin abrir el PDF
+        #    ni buscar la página entre cientos.
+        try:
+            doc = pdfium.PdfDocument(str(pdf))
+            try:
+                img = doc[cfg["pagina"] - 1].render(scale=2).to_pil()
+                if cfg.get("rotar"):
+                    img = img.rotate(cfg["rotar"], expand=True)
+                # Un pliego de plóter a escala 2 son 17.500 px de largo y 24 MB
+                # de PNG: no cabe en un correo ni se abre en un computador
+                # cualquiera. Esta imagen existe para MIRAR la lámina sin abrir
+                # el PDF; el detalle fino está en el PDF, que va al lado. Se
+                # acota el lado mayor y se guarda como JPEG, que para una hoja
+                # completa pesa una fracción y se ve igual de bien.
+                if max(img.size) > LADO_MAYOR_LAMINA_PX:
+                    k = LADO_MAYOR_LAMINA_PX / max(img.size)
+                    img = img.resize((max(1, int(img.width * k)),
+                                      max(1, int(img.height * k))))
+                img.convert("RGB").save(
+                    destino / f"lamina_pagina-{cfg['pagina']}.jpg",
+                    quality=88, optimize=True)
+            finally:
+                doc.close()
+        except Exception as exc:            # noqa: BLE001
+            log(f"    (no se pudo rasterizar la página: {exc})")
+
+    # 3. Los polígonos, en los dos formatos que sirven: GeoJSON para leer y
+    #    versionar, GeoPackage para arrastrar a QGIS.
+    gdf = gpd.GeoDataFrame([f["properties"] for f in feats],
+                           geometry=[shape(f["geometry"]) for f in feats],
+                           crs="EPSG:4326")
+    gdf.to_file(destino / "poligonos.geojson", driver="GeoJSON")
+    gdf.to_file(destino / "poligonos.gpkg", layer=_slug(cfg["id"]), driver="GPKG")
+
+    # 4. El resumen. Todo sale de la procedencia que el propio dato lleva
+    #    adentro, así que si mañana cambia el método, este texto cambia solo.
+    clases = proc.get("resumen_por_clase") or []
+    ha = sum(c.get("hectareas", 0) for c in clases)
+    incert = {f["properties"].get("incertidumbre_borde_m") for f in feats}
+    efecto = next((f["properties"].get("efecto_legal") for f in feats
+                   if f["properties"].get("efecto_legal")), "")
+    L = [f"# {cfg['titulo']}", "",
+         f"**Comuna:** {cfg['comuna'].title()}  ",
+         f"**Documento:** {pdf.name}  ",
+         f"**Página de la lámina:** {cfg['pagina']}  ",
+         f"**Año del contenido:** {proc.get('fecha_dato', 'no declarado')}  ",
+         f"**Escala impresa:** {cfg.get('escala_impresa', 'no declarada')}", "",
+         "## Qué hay en esta carpeta", "",
+         "| Archivo | Qué es |",
+         "|---|---|",
+         "| `documento_original.pdf` | El documento tal como lo publica la fuente. No se modifica. |",
+         f"| `lamina_pagina-{cfg['pagina']}.jpg` | La página con la lámina, para mirarla sin abrir el PDF. El detalle fino está en el PDF. |",
+         "| `poligonos.geojson` | Los polígonos que derivamos de esa lámina, en EPSG:4326. |",
+         "| `poligonos.gpkg` | Lo mismo, para arrastrar a QGIS. |", "",
+         "## Qué contiene la geometría", "",
+         "| Clase | Polígonos | Hectáreas |",
+         "|---|---:|---:|"]
+    # Coma decimal: esto lo lee una persona en Chile.
+    coma = lambda x: str(x).replace(".", ",")
+    for c in clases:
+        L.append(f"| {c.get('clase')} | {c.get('poligonos')} | {coma(c.get('hectareas'))} |")
+    L += ["", f"**Total: {len(feats)} polígonos · {ha:.0f} ha.**", "",
+          "## De dónde salió, y qué es nuestro", "",
+          f"**Fuente:** {proc.get('fuente', '')}", ""]
+    if cfg.get("url"):
+        L += [f"**Enlace:** {cfg['url']}", ""]
+    L += [f"**Cómo se hizo:** {proc.get('metodo', '')}", "",
+          f"**Precisión del borde:** ±{coma(incert.pop()) if len(incert) == 1 else '—'} m.", "",
+          f"**Lo que la fuente advierte:** {proc.get('incertidumbre', '')}", ""]
+    if efecto:
+        L += ["## Efecto legal del contenido", "", efecto, "",
+              "Ojo: el efecto legal es **del instrumento**, no de nuestro trazado. "
+              "El plano rige; dónde exactamente cae su borde en el mapa es una "
+              "reconstrucción nuestra, con la precisión de más arriba.", ""]
+    else:
+        L += ["## Peso legal", "",
+              "Este documento es un **levantamiento de riesgo**, no una norma: "
+              "describe dónde hay peligro, no impone condiciones a los permisos de "
+              "edificación. Distinto es el plano de un plan regulador, que sí las "
+              "impone.", ""]
+    L += ["## Qué NO es", "",
+          "- **No es el vectorial oficial.** El organismo publica esta cartografía "
+          "sólo en papel; la geometría la construimos nosotros.",
+          "- **No es una modelación hidráulica**, salvo que el método de arriba lo "
+          "diga: no lleva caudales ni período de retorno.",
+          "- **El borde no es un deslinde.** Con la precisión declarada, a esa "
+          "distancia del borde adentro y afuera no se distinguen.",
+          "", "## Si encuentras un error", "",
+          f"Abre `lamina_pagina-{cfg['pagina']}.jpg` al lado de los polígonos en "
+          "QGIS y compáralos. Si el trazado no calza con la "
+          "lámina, avísanos con la coordenada: el trazado es lo nuestro, y es "
+          "exactamente lo que se puede corregir.", ""]
+    (destino / "LEEME.md").write_text("\n".join(L), encoding="utf-8")
+    return {"carpeta": destino.name, "poligonos": len(feats), "hectareas": round(ha)}
+
+
+def carpeta_pendientes(dest: Path, comunas: set[str]) -> int:
+    """Los documentos con lámina localizada que TODAVÍA no se vectorizaron.
+
+    Es el trabajo que se le encarga al practicante, y va con el PDF al lado por
+    la misma razón que el resto: para empezar no hace falta pedirnos nada.
+    """
+    cat = cargar(WEB_DATA / "catalogo-documentos.json")
+    if not cat:
+        return 0
+    dest.mkdir(parents=True, exist_ok=True)
+    L = ["# Láminas por georreferenciar", "",
+         "Documentos donde ya localizamos una lámina con contenido de inundación y",
+         "que **todavía no convertimos en geometría**. Cada uno trae su PDF si lo",
+         "tenemos descargado; si no, va el enlace a la fuente.", "",
+         "Cómo se hace una: `python scripts/18_vectorizar_laminas.py --inspeccionar",
+         "<pdf> --pagina N` marca la retícula que detecta; se leen sus rótulos con el",
+         "ojo, se anotan en `config/laminas.yaml` y se corre el script. El detalle",
+         "está en el docstring de ese script.", "",
+         "| Comuna | Documento | Páginas | PDF en esta carpeta | Enlace |",
+         "|---|---|---|---|---|"]
+    copiados = 0
+    for c in cat["comunas"]:
+        com = nz(c.get("comuna") or c.get("nombre"))
+        if com not in comunas:
+            continue
+        for d in c.get("documentos", []):
+            if not d.get("laminas"):
+                continue
+            pags = ", ".join(str(l["pagina"]) for l in d["laminas"][:8])
+            hallado = next(iter(DATA_RAW.glob(f"documentos/**/{d['archivo']}")), None)
+            local = "—"
+            if hallado and hallado.exists():
+                sub = dest / _slug(com)
+                sub.mkdir(exist_ok=True)
+                shutil.copy2(hallado, sub / hallado.name)
+                local = f"`{_slug(com)}/{hallado.name}`"
+                copiados += 1
+            url = d.get("url") or ""
+            L.append(f"| {com.title()} | {d['archivo'][:52]} | {pags} | {local} | "
+                     f"{'[ver](' + url + ')' if url else '—'} |")
+    (dest / "LEEME.md").write_text("\n".join(L) + "\n", encoding="utf-8")
+    return copiados
 
 
 def escribir_tareas(dest: Path, prov: str, filas: list[dict],
@@ -372,16 +579,35 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
     (dest / "TAREAS.md").write_text("\n".join(L), encoding="utf-8")
 
 
-def escribir_leeme(dest: Path, prov: str, gpkg: str) -> None:
+def escribir_leeme(dest: Path, prov: str, gpkg: str,
+                   fichas: list[dict] | None = None, pendientes: int = 0) -> None:
+    fichas = fichas or []
+    listado = "\n".join(
+        f"  - `{f['carpeta']}/` — {f['poligonos']} polígonos, {f['hectareas']} ha"
+        for f in fichas) or "  (ninguna todavía en esta provincia)"
     (dest / "LEEME.md").write_text(f"""# Paquete de trabajo — provincia de {prov}
 
 ## Qué hay acá
 
+- **`1_cartografia_ya_vectorizada/`** — una carpeta **por documento**. Adentro va
+  el PDF original, la página con la lámina en imagen, los polígonos que sacamos de
+  ella y un `LEEME.md` que explica qué es, de dónde salió y cuánto se equivoca.
+  Ésta es la parte que hay que revisar primero:
+{listado}
+- **`2_laminas_por_georreferenciar/`** — {pendientes} documento(s) donde ya
+  localizamos una lámina de inundación y que **todavía no convertimos en
+  geometría**. Es el trabajo que sigue; su `LEEME.md` los lista con su página.
 - **`{gpkg}`** — todas las capas del proyecto que caen en esta provincia, en un
   solo archivo. Arrástralo a QGIS y aparecen todas.
 - **`TAREAS.md`** — qué falta, por comuna, ordenado por lo que más importa.
-- **`laminas_por_georreferenciar/`** — vacía a propósito: los PDF originales
-  pesan 2,6 GB y no se copian. `TAREAS.md` dice dónde está cada uno.
+
+## Por qué el documento va junto al polígono
+
+Los polígonos de `1_cartografia_ya_vectorizada/` **los dibujamos nosotros** a
+partir de una figura impresa: el contenido es del municipio, el trazado es
+nuestro. Un polígono así, suelto, es una afirmación sin respaldo. Con la lámina
+al lado se puede comparar, discutir y corregir — que es exactamente lo que
+queremos que pase.
 
 ## Lo primero que hay que abrir
 
