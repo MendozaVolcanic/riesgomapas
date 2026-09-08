@@ -346,6 +346,7 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     destino.mkdir(parents=True, exist_ok=True)
     proc = fc.get("procedencia") or {}
     pdf = DATA_RAW / cfg["pdf"]
+    n_paginas = 0
 
     # 1. El documento original, tal como se descargó. `data/raw` es de sólo
     #    lectura (REGLAS §1.6): se copia, nunca se toca.
@@ -357,6 +358,7 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
         try:
             doc = pdfium.PdfDocument(str(pdf))
             try:
+                n_paginas = len(doc)
                 img = doc[cfg["pagina"] - 1].render(scale=2).to_pil()
                 if cfg.get("rotar"):
                     img = img.rotate(cfg["rotar"], expand=True)
@@ -394,9 +396,20 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     efecto = next((f["properties"].get("efecto_legal") for f in feats
                    if f["properties"].get("efecto_legal")), "")
     L = [f"# {cfg['titulo']}", "",
+         # Lo primero, y en grande: de qué página del documento salió esto. Un
+         # estudio de riesgo son doscientas páginas de texto con dos mapas
+         # adentro; sin este dato, encontrar la lámina de la que salieron los
+         # polígonos es media hora de buscar.
+         f"> ## 📄 La lámina está en la **página {cfg['pagina']}"
+         + (f" de {n_paginas}" if n_paginas else "") + "** del documento.",
+         ">",
+         f"> Ábrela directo: `documento_original.pdf#page={cfg['pagina']}` "
+         "(pega esa ruta en el navegador, o usa el buscador de páginas de tu "
+         "lector de PDF). La misma página está copiada como imagen en esta "
+         "carpeta.", "",
          f"**Comuna:** {cfg['comuna'].title()}  ",
-         f"**Documento:** {pdf.name}  ",
-         f"**Página de la lámina:** {cfg['pagina']}  ",
+         f"**Documento:** {pdf.name}"
+         + (f" ({n_paginas} páginas)" if n_paginas else "") + "  ",
          f"**Año del contenido:** {proc.get('fecha_dato', 'no declarado')}  ",
          f"**Escala impresa:** {cfg.get('escala_impresa', 'no declarada')}", "",
          "## Qué hay en esta carpeta", "",
@@ -466,8 +479,11 @@ def carpeta_pendientes(dest: Path, comunas: set[str]) -> int:
          "<pdf> --pagina N` marca la retícula que detecta; se leen sus rótulos con el",
          "ojo, se anotan en `config/laminas.yaml` y se corre el script. El detalle",
          "está en el docstring de ese script.", "",
-         "| Comuna | Documento | Páginas | PDF en esta carpeta | Enlace |",
-         "|---|---|---|---|---|"]
+         "La columna **«Lámina en la página»** es la que importa: estos son",
+         "informes de decenas o cientos de páginas y el mapa está en dos o tres.",
+         "",
+         "| Comuna | Documento | Lámina en la página | De un total de | PDF en esta carpeta | Enlace |",
+         "|---|---|---|---:|---|---|"]
     copiados = 0
     for c in cat["comunas"]:
         com = nz(c.get("comuna") or c.get("nombre"))
@@ -478,16 +494,23 @@ def carpeta_pendientes(dest: Path, comunas: set[str]) -> int:
                 continue
             pags = ", ".join(str(l["pagina"]) for l in d["laminas"][:8])
             hallado = next(iter(DATA_RAW.glob(f"documentos/**/{d['archivo']}")), None)
-            local = "—"
+            local, total = "—", "—"
             if hallado and hallado.exists():
                 sub = dest / _slug(com)
                 sub.mkdir(exist_ok=True)
                 shutil.copy2(hallado, sub / hallado.name)
                 local = f"`{_slug(com)}/{hallado.name}`"
                 copiados += 1
+                try:
+                    import pypdfium2 as pdfium
+                    doc = pdfium.PdfDocument(str(hallado))
+                    total = str(len(doc))
+                    doc.close()
+                except Exception:       # noqa: BLE001 — un PDF ilegible no frena el índice
+                    pass
             url = d.get("url") or ""
-            L.append(f"| {com.title()} | {d['archivo'][:52]} | {pags} | {local} | "
-                     f"{'[ver](' + url + ')' if url else '—'} |")
+            L.append(f"| {com.title()} | {d['archivo'][:52]} | **{pags}** | {total} | "
+                     f"{local} | {'[ver](' + url + ')' if url else '—'} |")
     (dest / "LEEME.md").write_text("\n".join(L) + "\n", encoding="utf-8")
     return copiados
 
