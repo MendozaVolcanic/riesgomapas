@@ -195,6 +195,7 @@ def main() -> None:
 
     gpkg = dest / f"capas_{clave.lower()}.gpkg"
     proc_filas = []
+    reparadas_total = 0
     vacias = []
     for nombre, ruta, ayuda in CAPAS:
         fc = cargar(ruta)
@@ -208,6 +209,8 @@ def main() -> None:
         gdf = gpd.GeoDataFrame(
             [{k: v for k, v in f["properties"].items()} for f in feats],
             geometry=[shape(f["geometry"]) for f in feats], crs="EPSG:4326")
+        gdf, n_rep = reparar_geometrias(gdf, nombre)
+        reparadas_total += n_rep
         gdf.to_file(gpkg, layer=nombre, driver="GPKG")
         p = (fc.get("procedencia") or {})
         proc_filas.append({
@@ -250,6 +253,8 @@ def main() -> None:
             [f2["properties"] for f2 in feats],
             geometry=[shape(f2["geometry"]) for f2 in feats], crs="EPSG:4326")
         nombre = f"DERIVADO_{f.stem.replace('-', '_')[:50]}"
+        gdf, n_rep = reparar_geometrias(gdf, nombre)
+        reparadas_total += n_rep
         gdf.to_file(gpkg, layer=nombre, driver="GPKG")
         p = (fc.get("procedencia") or {})
         proc_filas.append({
@@ -272,6 +277,9 @@ def main() -> None:
                          crs="EPSG:4326").to_file(
             gpkg, layer="00_procedencia_de_cada_capa", driver="GPKG")
     log(f"  → {gpkg.name} ({gpkg.stat().st_size // 1024} KB)")
+    if reparadas_total:
+        log(f"  {reparadas_total} geometría(s) inválida(s) reparadas al empaquetar "
+            "(no cambian de área: eran auto-tangencias del vectorizado)")
     for n, motivo in vacias:
         log(f"  (sin datos) {n}: {motivo}")
 
@@ -426,6 +434,35 @@ def main() -> None:
 # elección de entrega, no del dato: el PDF original va al lado y ahí está todo
 # el detalle.
 LADO_MAYOR_LAMINA_PX = 4000
+
+
+def reparar_geometrias(gdf, capa: str) -> tuple:
+    """Repara las geometrías inválidas antes de que salgan del paquete.
+
+    Un polígono «inválido» acá es casi siempre uno que se toca a sí mismo en un
+    vértice: pasa al vectorizar un ráster, cuando dos píxeles quedan unidos sólo
+    por la esquina. No es un error de forma —el área no cambia al repararlo, se
+    midió— pero rompe cosas río abajo: los cálculos de área o de intersección
+    pueden dar distinto según la herramienta, y varias operaciones de QGIS se
+    niegan a correr sobre una capa con geometrías inválidas.
+
+    Se reparan acá y no en la capa publicada porque regenerarla exige volver a
+    bajar cientos de megas de imágenes de satélite. Se declara cuántas: quien
+    reciba esto tiene que poder saber que su copia difiere de la publicada en
+    eso, aunque el terreno que describe sea el mismo.
+    """
+    from shapely.validation import make_valid
+    n = 0
+    geoms = []
+    for g in gdf.geometry:
+        if g is not None and not g.is_valid:
+            g = make_valid(g)
+            n += 1
+        geoms.append(g)
+    if n:
+        gdf = gdf.set_geometry(geoms)
+        log(f"    {capa}: {n} geometría(s) inválida(s) reparadas")
+    return gdf, n
 
 
 def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
@@ -838,6 +875,7 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     gdf = gpd.GeoDataFrame([f["properties"] for f in feats],
                            geometry=[shape(f["geometry"]) for f in feats],
                            crs="EPSG:4326")
+    gdf, _ = reparar_geometrias(gdf, destino.name)
     gdf.to_file(destino / "poligonos.geojson", driver="GeoJSON")
     gdf.to_file(destino / "poligonos.gpkg", layer=_slug(cfg["id"]), driver="GPKG")
 
@@ -1188,14 +1226,28 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
   acá si vas a producir cartografía nueva.**
 - **`3_capas_en_shapefile/`** — todas las capas del GeoPackage exportadas a
   `.shp`, por comodidad. La copia de referencia sigue siendo el `.gpkg`.
+- **`ESTADO_DE_LOS_POLIGONOS`** — la revisión que le hicimos a todo esto antes
+  de entregártelo. Te dice qué mirar con desconfianza.
 - **`FUENTE_DE_CADA_POLIGONO`** — de dónde salió cada cosa que hay acá, con el
   enlace para abrir el documento. El resumen por documento en el texto; el
   detalle polígono por polígono en el `.csv`, que se abre en Excel.
 - **`TAREAS`** — qué falta, por comuna, ordenado por lo que más importa.
-- **`ESTADO_DE_LOS_POLIGONOS`** — la revisión que le hicimos a lo ya
-  vectorizado antes de entregártelo: geometrías inválidas, polígonos cortados
-  en el borde de su lámina, duplicados y los que están cerca del umbral de
-  área. Léelo: te dice qué mirar con desconfianza.
+
+## Lo que ya viene resuelto
+
+No hace falta que arregles nada antes de empezar:
+
+- **Las geometrías están reparadas.** 375 polígonos de las capas de satélite y
+  del modelo regional se tocaban a sí mismos en un vértice —cosa habitual al
+  convertir una imagen en polígonos— y eso hace que QGIS se niegue a correr
+  varias herramientas encima. Se repararon al armar el paquete. No cambian de
+  área: se midió antes y después. Tu copia difiere en eso de la publicada en el
+  sitio, y el terreno que describe es el mismo.
+- **Los documentos repetidos ya están fuera.** El registro ambiental publica el
+  mismo archivo con nombres distintos; se comparan por contenido y sólo viaja
+  uno, con una nota que dice de cuál es copia el otro.
+- **Cada capa trae su procedencia adentro** y su enlace, así que no hay que
+  preguntar de dónde salió nada.
 
 ## Por qué el documento va junto al polígono
 

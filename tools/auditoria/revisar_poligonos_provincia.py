@@ -248,8 +248,10 @@ def main() -> int:
           "en la capa regional: no es un defecto del dato sino del recorte, y se",
           "señala para que nadie mida un área creyendo que es la completa.", "",
           "«Inválidas» son geometrías que se cruzan a sí mismas: el área y el",
-          "«¿cae dentro?» pueden dar distinto según la herramienta. QGIS las",
-          "repara con *Vector → Herramientas de geometría → Reparar geometrías*.", ""]
+          "«¿cae dentro?» pueden dar distinto según la herramienta, y QGIS se niega",
+          "a correr varias operaciones encima. **Las del paquete ya vienen",
+          "reparadas** —se reparan al armarlo—, así que esta columna debería estar",
+          "en cero; si no lo está, algo se agregó después y hay que mirarlo.", ""]
     pq = RAIZ / "data" / "processed" / f"paquete_{nz(a.provincia).lower()}"
     gpkg = pq / f"capas_{nz(a.provincia).lower()}.gpkg"
     if gpkg.exists():
@@ -279,9 +281,13 @@ def main() -> int:
             # geometría, se puede rastrear sin abrir otra cosa.
             tiene_url = "url" in g.columns and g["url"].notna().any() and (g["url"] != "").any()
             tiene_fuente = "fuente" in g.columns and g["fuente"].notna().any()
-            fuente = ("fuente y enlace" if tiene_fuente and tiene_url
-                      else "sólo el nombre" if tiene_fuente
-                      else "**no** — mira la tabla de procedencia del GeoPackage")
+            # Una capa que se baja de un servicio no tiene una URL por polígono
+            # —su dirección es de la capa entera— y eso no es un defecto: el
+            # enlace está en la tabla de fuentes y en la de procedencia.
+            fuente = ("en cada polígono, con enlace" if tiene_fuente and tiene_url
+                      else "en cada polígono; el enlace, en FUENTE_DE_CADA_POLIGONO"
+                      if tiene_fuente
+                      else "en la tabla de procedencia del GeoPackage")
             L.append(f"| {capa} | {len(g)} | {len(val['invalidos'])} | "
                      f"{len(val['duplicados'])} | {tocan} | {fuente} |")
         L.append("")
