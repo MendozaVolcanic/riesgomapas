@@ -158,6 +158,10 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--provincia", default="Malleco")
     ap.add_argument("--salida", help="carpeta destino (por omisión, data/processed/)")
+    ap.add_argument("--solo-zip", action="store_true",
+                    help="no rehace el paquete: sólo vuelve a comprimirlo. Sirve "
+                         "para incluir algo que se agregó después, como el "
+                         "informe de revisión de los polígonos.")
     a = ap.parse_args()
 
     cfg = cargar_config()
@@ -171,6 +175,12 @@ def main() -> None:
 
     base = Path(a.salida) if a.salida else DATA_PROC
     dest = base / f"paquete_{clave.lower()}"
+    if a.solo_zip:
+        if not dest.exists():
+            raise SystemExit(f"no existe {dest}: no hay nada que comprimir. "
+                             "Corre este script sin --solo-zip.")
+        empaquetar(dest)
+        return
     if dest.exists():
         shutil.rmtree(dest)
     dest.mkdir(parents=True, exist_ok=True)
@@ -398,6 +408,8 @@ def main() -> None:
     convertidos = sum(a_word(m) for m in sorted(dest.rglob("*.md")))
     if convertidos:
         log(f"  {convertidos} documento(s) convertidos a Word (.docx)")
+
+    empaquetar(dest)
     log("")
     log(f"PAQUETE LISTO → {dest}")
     log(f"  {gpkg.name} · TAREAS.md · LEEME.md · "
@@ -408,6 +420,29 @@ def main() -> None:
 # elección de entrega, no del dato: el PDF original va al lado y ahí está todo
 # el detalle.
 LADO_MAYOR_LAMINA_PX = 4000
+
+
+def empaquetar(dest: Path) -> Path:
+    """El .zip que se entrega, SIN los `.md`.
+
+    Quien lo recibe abre los `.docx`; tener el mismo texto dos veces en formatos
+    distintos sólo invita a preguntar cuál es el bueno. Los `.md` se quedan en la
+    carpeta de trabajo, que es donde sirven para comparar entre versiones.
+    """
+    import zipfile
+    zip_path = dest.parent / f"{dest.name}.zip"
+    if zip_path.exists():
+        zip_path.unlink()
+    n = 0
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+        for f in sorted(dest.rglob("*")):
+            if f.is_dir() or f.suffix.lower() == ".md":
+                continue
+            z.write(f, Path(dest.name) / f.relative_to(dest))
+            n += 1
+    log(f"  {zip_path.name}: {n} archivos, "
+        f"{zip_path.stat().st_size / 1e6:.0f} MB (sin los .md)")
+    return zip_path
 
 
 def escribir_guia_qgis(dest: Path, prov: str) -> None:
@@ -851,6 +886,7 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
          "| Comuna | Documento | Lámina en la página | De un total de | PDF en esta carpeta | Enlace |",
          "|---|---|---|---:|---|---|"]
     copiados = 0
+    vistos: dict[str, str] = {}          # hash del archivo → dónde quedó la copia
     for c in cat["comunas"]:
         com = nz(c.get("comuna") or c.get("nombre"))
         if com not in comunas:
@@ -867,11 +903,23 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
             hallado = next(iter(DATA_RAW.glob(f"documentos/**/{d['archivo']}")), None)
             local, total = "—", "—"
             if hallado and hallado.exists():
-                sub = dest / _slug(com)
-                sub.mkdir(exist_ok=True)
-                shutil.copy2(hallado, sub / hallado.name)
-                local = f"`{_slug(com)}/{hallado.name}`"
-                copiados += 1
+                # El registro EAE publica el mismo documento con nombres
+                # distintos —«IA-Completo» e «IA-Incompleto», «Anteproyecto-Plano»
+                # y «Anteproyecto_Planos» son byte por byte el mismo archivo—, y
+                # copiarlos todos infla el paquete y hace que alguien
+                # georreferencie dos veces la misma lámina. Se compara el
+                # contenido, no el nombre.
+                import hashlib
+                h = hashlib.sha256(hallado.read_bytes()).hexdigest()
+                if h in vistos:
+                    local = f"↩ mismo archivo que `{vistos[h]}`"
+                else:
+                    sub = dest / _slug(com)
+                    sub.mkdir(exist_ok=True)
+                    shutil.copy2(hallado, sub / hallado.name)
+                    local = f"`{_slug(com)}/{hallado.name}`"
+                    vistos[h] = f"{_slug(com)}/{hallado.name}"
+                    copiados += 1
                 try:
                     import pypdfium2 as pdfium
                     doc = pdfium.PdfDocument(str(hallado))
