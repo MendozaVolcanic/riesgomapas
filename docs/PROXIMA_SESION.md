@@ -46,11 +46,15 @@ es la que usan los mensajes de commit.
    máscara ráster.
 2. **Cuatro polígonos sin año** en la capa A: Loncoche (dos sectores), Nueva Imperial y Pucón
    no están en el Atlas de CIGIDEN. El año hay que sacarlo del decreto.
-3. **El «Medio» de Angol se reconoce mal**: el centro real de su color en el mapa está a 54
-   unidades RGB del cuadro de leyenda, fuera de la tolerancia declarada, y el IoU contra un
-   clasificador independiente es 0,20. Está en la cola de campo como C-10: hay que mirar la
-   lámina y decidir si el color declarado o la tolerancia. **No se tocó a propósito**: ajustar
-   un umbral hasta que el número quede bonito es el error que esta auditoría vino a evitar.
+3. ~~**El «Medio» de Angol se reconoce mal**~~ — **medido el 8-sep, no era un defecto.** El
+   color declarado `(0,114,255)` está a **3,6 unidades RGB** del que la lámina usa de verdad
+   `(0,112,252)`; el «Alto», a 4,6. Los 54 de la sospecha original venían de un muestreo que
+   confundía la nube de «Alto» con la de «Medio»: son las dos únicas manchas azules de la
+   lámina y están a 99 unidades una de otra, así que un radio de búsqueda generoso alrededor
+   de «Medio» devuelve el dominante de «Alto», que es siete veces más numeroso.
+   `tools/auditoria/color_declarado_vs_lamina.py` asigna cada píxel a la clase declarada más
+   cercana ANTES de muestrear, y así ninguna clase puede contestar por otra. El IoU de 0,20
+   contra el clasificador independiente sigue abierto, pero ya no se explica por el color.
 4. **La cola de validación en campo** (C-01 a C-13 del informe) sigue abierta: son las
    preguntas que sólo se responden mirando el terreno, la ortofoto o el documento.
 

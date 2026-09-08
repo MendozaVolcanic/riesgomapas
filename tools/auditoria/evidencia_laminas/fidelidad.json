@@ -140,5 +140,35 @@
   "densidad_dentro_marcas_por_ha": 154.9,
   "densidad_fuera_marcas_por_ha": 3.0,
   "grados_de_libertad_del_ajuste": 2
+ },
+ {
+  "lamina": "angol-prc-ar2a-lamina2",
+  "rmse_m_recalculado": 1.22,
+  "residuos_m": [
+   [
+    "8",
+    1.23
+   ],
+   [
+    "5",
+    1.97
+   ],
+   [
+    "3",
+    0.25
+   ],
+   [
+    "2",
+    0.74
+   ]
+  ],
+  "m_por_px": 0.8471,
+  "rotacion_deg": -0.182,
+  "marcas_del_tamaño_buscado": 22279,
+  "marcas_dentro_de_lo_publicado": 15200,
+  "recall_marcas_pct": 68.2,
+  "densidad_dentro_marcas_por_ha": 129.9,
+  "densidad_fuera_marcas_por_ha": 3.13,
+  "grados_de_libertad_del_ajuste": 4
  }
 ]
