@@ -271,7 +271,7 @@ Comprobadas leyendo el servicio, no el catálogo.
 | Censo 2024, polígonos | ✅ | 17.107 unidades en R09 repartidas en **3 capas**, 1.021.433 personas, 216 campos |
 | Censo 2017 por manzana (INE) | ✅ | 9.224 manzanas + 4.166 entidades, ojo con `REGION` texto |
 | DEM Copernicus GLO-30 | ✅ | anónimo, ya integrado al pipeline |
-| Huella Sentinel-1 (capa B) | ✅ | 5.776 ha, evento ago-2026, 3 órbitas |
+| Huella Sentinel-1 (capa B) | ✅ | 5.082 ha (unión), evento ago-2026, 3 órbitas |
 | Puntos críticos SENAPRED | ✅ | 440 fluviales en la región (1.374 en total) |
 | Catálogo EAE + municipios | ✅ | 354 documentos, 224 láminas localizadas |
 | **Riesgo de inundación GORE Araucanía 2016** | ✅ | **7.203 polígonos, ~35 m** — ver «El modelo regional del Gobierno Regional» |

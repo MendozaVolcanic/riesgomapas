@@ -16,7 +16,7 @@ su fuente, su año y su error declarado.
 | Capa | Qué responde | Estado |
 |---|---|---|
 | **A · Normativo** | Qué declaró el plan regulador. Única con efecto legal | 124 polígonos, 13 comunas |
-| **B · Observado** | Hasta dónde llegó el agua, con fecha de pasada satelital | 5.776 ha, agosto 2026 |
+| **B · Observado** | Hasta dónde llegó el agua, con fecha de pasada satelital | 5.082 ha, agosto 2026 |
 | **C · Modelado** | Qué dice un modelo que *podría* pasar, y cada cuánto | global ~1 km + regional ~35 m |
 | **D · Operacional** | Dónde reportó problemas el municipio | 440 puntos fluviales |
 
@@ -168,7 +168,7 @@ radar ve agua libre sobre terreno abierto, no un colector bajo una calle.
 | **Estudio de Riesgo del PRC de Angol** | `data/raw/documentos/angol/Estudio_Riesgo.pdf` | **64 páginas, septiembre 2013** |
 | Documentos del PRC de Angol | `data/raw/documentos/angol/` | 24 archivos: planos, ordenanza, memoria |
 | Puntos críticos fluviales (SENAPRED) | `web/data/puntos-criticos-inundacion.geojson` | 440, de ellos 211 crónicos · Angol: 50 |
-| Huella de inundación por satélite | `web/data/sar/huella-observada.geojson` | 5.776 ha, agosto 2026 |
+| Huella de inundación por satélite | `web/data/sar/huella-observada.geojson` | 5.082 ha, agosto 2026 |
 | Amenaza modelada global (JRC, Comisión Europea) | `data/processed/jrc/` | 6 escenarios, ~1 km |
 | Amenaza modelada regional (Gobierno Regional, 2016) | `data/processed/gore/` | 2.539 polígonos, ~35 m |
 | Unidades geomorfológicas | `data/processed/gore/` | 586 polígonos, mismo estudio |

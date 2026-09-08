@@ -635,9 +635,13 @@ sola imagen, que es lo que evita confundir suelo mojado con inundación, y una
 
 ### Resultado y los dos falsos positivos que hay que conocer
 
-**5.776 ha** de huella observada sobre 17.382 km² mirados: 16,2 km² (órbita 83
-desc.), 15,4 (156 desc.) y 26,2 (164 asc.). Tres geometrías, dos plataformas y dos
-fechas convergiendo en el mismo orden de magnitud.
+**5.082 ha** de huella observada sobre 17.382 km² mirados. Por órbita: 16,2 km²
+(83 desc.), 15,4 (156 desc.) y 26,2 (164 asc.). Tres geometrías, dos plataformas y
+dos fechas convergiendo en el mismo orden de magnitud.
+
+Las tres órbitas **se solapan**, así que el total no es su suma —57,8 km²— sino su
+unión: 50,8. Las 6,9 km² de diferencia son territorio que la misma agua ocupa en
+dos y hasta tres pasadas.
 
 ⚠️ **Nieve húmeda.** En banda C la nieve mojada absorbe casi toda la señal y es
 **radiométricamente indistinguible del agua**. Sin filtro geomorfológico aportaba

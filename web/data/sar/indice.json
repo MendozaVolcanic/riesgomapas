@@ -75,9 +75,10 @@
  "resumen": {
   "tracks": 3,
   "poligonos": 1075,
-  "km2": 57.76,
-  "hectareas": 5776.0,
-  "km2_observados": 17381.5
+  "km2": 50.82,
+  "hectareas": 5082.0,
+  "km2_observados": 17381.5,
+  "total_es": "unión de la huella; la suma por track cuenta dos y tres veces el territorio donde se solapan las órbitas"
  },
  "procedencia": {
   "fuente": "Sentinel-1 GRD (Copernicus / ESA), distribuido por Microsoft Planetary Computer",

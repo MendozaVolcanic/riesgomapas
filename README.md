@@ -31,7 +31,7 @@ declara su error. Nunca las fusiona en un número único.
 | Capa | Qué es | Estado |
 |---|---|---|
 | **A · Normativo** | Área de riesgo del Plan Regulador. Tiene efecto legal. | ✅ 63 polígonos de inundación, 12 comunas |
-| **B · Observado** | Huella real de inundación por satélite, con fecha. | ✅ 5.776 ha, 3 órbitas, ago-2026 |
+| **B · Observado** | Huella real de inundación por satélite, con fecha. | ✅ 5.082 ha, 3 órbitas, ago-2026 |
 | **C · Modelado** | Qué dice un modelo que podría pasar, y cada cuánto. | ✅ 6 escenarios globales (JRC) + amenaza regional a 35 m |
 | **D · Operacional** | Puntos críticos municipales, nivel de río, pronóstico. | ✅ 440 puntos fluviales, 4 temporadas |
 
@@ -131,8 +131,10 @@ respecto de cómo se veía ese mismo píxel antes**, comparando sólo pasadas de
 de radar y el relieve son estáticos y se cancelan, y el agua permanente es oscura
 en las dos fechas, así que el río no se marca como inundación.
 
-**Resultado sobre el sistema frontal del 30-jul al 4-ago-2026: 5.776 ha** de agua
-observada, sobre 17.382 km² efectivamente mirados.
+**Resultado sobre el sistema frontal del 30-jul al 4-ago-2026: 5.082 ha** de agua
+observada, sobre 17.382 km² efectivamente mirados. Las tres órbitas se solapan, así
+que el total es la **unión** de sus huellas y no su suma: sumarlas daría 5.776 ha,
+contando dos y hasta tres veces la misma agua.
 
 | Órbita | Plataforma | Pasada | Referencia | Huella |
 |---|---|---|---|---:|

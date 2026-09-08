@@ -38,12 +38,12 @@ es la que usan los mensajes de commit.
 
 **Lo que queda pendiente y por qué:**
 
-1. **Regenerar la capa B.** El script ya calcula el total por unión, pero el dato publicado es
-   anterior y declara 5.776 ha donde la unión da 5.082 (+14 %). Exige volver a bajar los
-   rásters. La auditoría de datos lo mide en cada corrida y lo reporta como hallazgo medio: se
-   apaga solo cuando se regenere. También quedan por aplicar `make_valid` al vectorizar (585 de
-   1.075 polígonos son inválidos, sin efecto medido en el visor) y medir el enriquecimiento
-   sobre lo publicado y no sobre la máscara ráster.
+1. **Regenerar la capa B.** El total ya no está mal: se recalculó la unión sobre la huella
+   que está en disco —`tools/auditoria/indice_sar_es_la_union.py`, con su control positivo— y
+   el índice publicado declara 5.082 ha en vez de 5.776. Lo que sigue pendiente exige volver a
+   bajar los rásters: aplicar `make_valid` al vectorizar (585 de 1.075 polígonos son inválidos,
+   sin efecto medido en el visor) y medir el enriquecimiento sobre lo publicado y no sobre la
+   máscara ráster.
 2. **Cuatro polígonos sin año** en la capa A: Loncoche (dos sectores), Nueva Imperial y Pucón
    no están en el Atlas de CIGIDEN. El año hay que sacarlo del decreto.
 3. **El «Medio» de Angol se reconoce mal**: el centro real de su color en el mapa está a 54
@@ -86,7 +86,7 @@ B observado / C modelado / D operacional), **nunca fusionadas en un índice úni
 | Capa | Estado | Cifras |
 |---|---|---|
 | **A · Normativo** | ✅ | 63 polígonos de área de riesgo por inundación (MINVU, vectorial abierto) + **24 planos de PRC georreferenciados** desde su grilla UTM impresa, error < 2 m |
-| **B · Observado** | ✅ | **5.776 ha** de huella observada en 3 órbitas (16,2 / 15,4 / 26,2 km²) sobre 17.382 km² mirados, **sin ninguna cuenta** |
+| **B · Observado** | ✅ | **5.082 ha** de huella observada —la unión de 3 órbitas que se solapan; su suma daría 5.776— sobre 17.382 km² mirados, **sin ninguna cuenta** |
 | **C · Modelado** | ✅ | 6 períodos de retorno del JRC (2016, ~1 km) |
 | **D · Operacional** | ✅ | 1.374 puntos críticos SENAPRED, **440 de inundación fluvial** (211 crónicos) + 15 campamentos con 537 hogares en área de riesgo |
 
