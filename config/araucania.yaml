@@ -136,6 +136,11 @@ eventos_validacion:
 # docs/PROXIMA_SESION.md §«La capa B no estaba bloqueada».
 sar:
   stac: "https://planetarycomputer.microsoft.com/api/stac/v1/search"
+  # A dónde mandar a una persona. El `stac` de arriba es el endpoint de
+  # búsqueda: sólo responde a un POST con un cuerpo de consulta, y abierto en un
+  # navegador devuelve 422. Como enlace de procedencia no sirve —quien hace clic
+  # ve un error, no la fuente—, así que la procedencia cita esta página.
+  pagina: "https://planetarycomputer.microsoft.com/dataset/sentinel-1-grd"
   firma_sas: "https://planetarycomputer.microsoft.com/api/sas/v1/token/sentinel1euwest/s1-grd"
   coleccion: "sentinel-1-grd"
   # VV separa agua de tierra mejor que VH: el agua tranquila refleja casi todo

@@ -839,7 +839,9 @@ def main() -> None:
     meta = procedencia(
         fuente="Sentinel-1 GRD (Copernicus / ESA), distribuido por Microsoft "
                "Planetary Computer",
-        url=cfg_sar["stac"],
+        # La página del dataset, no el endpoint de búsqueda: este enlace lo
+        # abre una persona, y el endpoint sólo contesta a un POST.
+        url=cfg_sar.get("pagina", cfg_sar["stac"]),
         metodo=(
             "Detección de cambio en σ⁰ VV entre la pasada posterior al evento y la "
             f"mediana de hasta {cfg_sar['max_pre']} pasadas previas de la MISMA órbita "
