@@ -34,6 +34,8 @@ laminas:
       I. Municipalidad de Angol, septiembre de 2013
     url: https://angol.cl/images/planregulador/Estudio_Riesgo.pdf
     anio_estudio: 2013
+    # De qué es ese año: del estudio técnico que levantó las manchas.
+    tipo_de_anio: estudio
     # Va literal en la procedencia de cada polígono. Es lo que impide que el
     # resultado se lea como si fuera modelación hidráulica.
     metodo_original: >-
@@ -140,6 +142,11 @@ laminas:
       Araucanía; ordenanza local actualizada a marzo de 2026
     url: https://angol.cl/index.php/plan-regulador
     anio_estudio: 2026
+    # 2026 es el año de la ORDENANZA vigente, no el del estudio que fundamenta
+    # estas áreas: el plano no lo declara, y medirlo contra el estudio de
+    # peligro de 2013 da un IoU de 0,20, así que tampoco se deduce. Se dice como
+    # es, en vez de dejar que se lea como evidencia de 2026.
+    tipo_de_anio: norma
     escala_impresa: "1:5.000"
     epsg: 32718
     # Lo que la ordenanza establece, literal en cada polígono: el área de riesgo
@@ -195,6 +202,11 @@ laminas:
       Araucanía; ordenanza local actualizada a marzo de 2026
     url: https://angol.cl/index.php/plan-regulador
     anio_estudio: 2026
+    # 2026 es el año de la ORDENANZA vigente, no el del estudio que fundamenta
+    # estas áreas: el plano no lo declara, y medirlo contra el estudio de
+    # peligro de 2013 da un IoU de 0,20, así que tampoco se deduce. Se dice como
+    # es, en vez de dejar que se lea como evidencia de 2026.
+    tipo_de_anio: norma
     escala_impresa: "1:5.000"
     epsg: 32718
     efecto_legal: >-

@@ -1118,7 +1118,12 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
          f"**Comuna:** {cfg['comuna'].title()}  ",
          f"**Documento:** {pdf.name}"
          + (f" ({n_paginas} páginas)" if n_paginas else "") + "  ",
-         f"**Año del contenido:** {proc.get('fecha_dato', 'no declarado')}  ",
+         (f"**Año de la ordenanza vigente:** {proc.get('fecha_dato', 'no declarado')}"
+          "  \n*El año del estudio técnico que fundamenta estas áreas no lo "
+          "declara el plano. No es el mismo: la norma se actualiza sin rehacer "
+          "el estudio.*  "
+          if cfg.get("tipo_de_anio") == "norma" else
+          f"**Año del estudio:** {proc.get('fecha_dato', 'no declarado')}  "),
          f"**Escala impresa:** {cfg.get('escala_impresa', 'no declarada')}", "",
          "## Qué hay en esta carpeta", "",
          "- **`documento_original.pdf`** — el documento tal como lo publica la",
