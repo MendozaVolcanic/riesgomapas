@@ -264,8 +264,14 @@ def main() -> int:
               if nz(f["properties"].get("comuna")) in comunas]
         m = 0.15
         borde = box(min(xs) - m, min(ys) - m, max(xs) + m, max(ys) + m).exterior
-        L += ["| Capa | Geometrías | Inválidas | Duplicadas | Parte el recorte | Declara su fuente |",
-              "|---|---:|---:|---:|---:|---|"]
+        # Encabezados cortos: en Word estas seis columnas quedan de poco más de
+        # un centímetro y «Duplicadas» se parte por la mitad.
+        L += ["Cada capa lleva su fuente en cada polígono, y el enlace en",
+              "`FUENTE_DE_CADA_POLIGONO`; las que no, se avisan bajo la tabla.",
+              "",
+              "| Capa | Geom. | Inváls. | Dupls. | Corta |",
+              "|---|---:|---:|---:|---:|"]
+        sin_fuente = []
         for capa in fiona.listlayers(gpkg):
             if capa.startswith("00_"):
                 continue
@@ -288,8 +294,13 @@ def main() -> int:
                       else "en cada polígono; el enlace, en FUENTE_DE_CADA_POLIGONO"
                       if tiene_fuente
                       else "en la tabla de procedencia del GeoPackage")
+            if not tiene_fuente:
+                sin_fuente.append(capa)
             L.append(f"| {capa} | {len(g)} | {len(val['invalidos'])} | "
-                     f"{len(val['duplicados'])} | {tocan} | {fuente} |")
+                     f"{len(val['duplicados'])} | {tocan} |")
+        if sin_fuente:
+            L += ["", "⚠️ Sin fuente por polígono (está en la tabla de "
+                  "procedencia del GeoPackage): " + ", ".join(sin_fuente)]
         L.append("")
     else:
         L += [f"(no existe {gpkg.name}: hay que armar el paquete primero)", ""]

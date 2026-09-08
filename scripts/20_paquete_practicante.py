@@ -382,12 +382,14 @@ def main() -> None:
          "queda con un nombre que nadie asocia con el original. Lo de abajo NO",
          "está deducido de la regla — se midió leyendo cada shapefile después de",
          "escribirlo y comparando columna por columna.", "",
-         "| Capa | Geometrías | Nombres acortados | RENOMBRADOS sin parecido |",
-         "|---|---:|---|---|"]
-        + [f"| {c} | {n} | "
-           f"{', '.join(f'`{o}` → `{d}`' for o, d in ac) if ac else '—'} | "
-           f"{'**' + ', '.join(f'`{o}` → `{d}`' for o, d in ra) + '**' if ra else '—'} |"
-           for c, n, ac, ra in recortes]
+         ""]
+        + [ln for c, n, ac, ra in recortes for ln in
+           [f"**{c}** — {n} geometrías  ",
+            ("Acortados: " + ", ".join(f"`{o}` → `{d}`" for o, d in ac)
+             if ac else "Ningún campo cambió de nombre.") + "  ",
+            ("⚠️ Renombrados sin parecido: **"
+             + ", ".join(f"`{o}` → `{d}`" for o, d in ra) + "**"
+             if ra else ""), ""]]
         + ["", "Si una capa tiene campos renombrados sin parecido y necesitas ese",
            f"dato, ábrela desde `../{gpkg.name}`, que conserva los nombres enteros.",
            "",
@@ -409,13 +411,20 @@ def main() -> None:
     # que se le encarga al practicante, con su PDF al lado.
     pendientes = carpeta_pendientes(
         dest / "2_laminas_por_georreferenciar", comunas,
-        {(DATA_RAW / declaradas[f["id"]]["pdf"]).name: f["carpeta"]
+        {((DATA_RAW / declaradas[f["id"]]["pdf"]).name,
+          declaradas[f["id"]]["pagina"]): f["carpeta"]
          for f in fichas if f.get("id") in declaradas},
         ret_por_comuna)
     log(f"  2_laminas_por_georreferenciar: {pendientes} PDF copiados + índice")
 
-    escribir_tareas(dest, a.provincia.title(), filas, ret_por_comuna)
-    escribir_leeme(dest, a.provincia.title(), gpkg.name, fichas, pendientes)
+    hechas_pag = {((DATA_RAW / declaradas[f["id"]]["pdf"]).name,
+                   declaradas[f["id"]]["pagina"])
+                  for f in fichas if f.get("id") in declaradas}
+    revisar_geometrias(dest, a.provincia)
+
+    escribir_tareas(dest, a.provincia.title(), filas, ret_por_comuna, hechas_pag)
+    escribir_leeme(dest, a.provincia.title(), gpkg.name, fichas, pendientes,
+                   reparadas_total)
 
     # Todo lo que se escribió en Markdown, también en Word: el paquete lo abre
     # alguien en Windows, donde un .md se ve como marcado crudo.
@@ -501,6 +510,19 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
         g = gpd.read_file(gpkg, layer=capa)
         if g.empty:
             continue
+        # El área se mide REPROYECTANDO a UTM, no multiplicando los grados² por
+        # una constante: esa constante ignora el coseno de la latitud y a −38°
+        # infla la superficie un 13,5 %. Ésta es la única tabla que se abre en
+        # Excel, así que es de donde alguien va a copiar una cifra de hectáreas.
+        try:
+            lon = float(g.geometry.union_all().centroid.x)
+        except Exception:               # noqa: BLE001 — shapely antiguo
+            lon = float(g.geometry.unary_union.centroid.x)
+        utm = 32718 if lon < -72 else 32719
+        try:
+            areas_ha = g.to_crs(epsg=utm).geometry.area / 10_000.0
+        except Exception:               # noqa: BLE001
+            areas_ha = None
         cols = set(g.columns)
         for i, r in g.iterrows():
             geom = r.geometry
@@ -511,9 +533,10 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
                                                     "nombre", "sector", "causa")
                                 if c in cols and r.get(c) not in (None, "")), ""),
                 "comuna": str(r.get("comuna", "")) if "comuna" in cols else "",
-                "hectareas": (round(geom.area * 1.11e10 / 1e4, 2)
-                              if geom is not None and geom.geom_type in
-                              ("Polygon", "MultiPolygon") else ""),
+                "hectareas": (round(float(areas_ha.iloc[i]), 2)
+                              if areas_ha is not None and geom is not None
+                              and geom.geom_type in ("Polygon", "MultiPolygon")
+                              else ""),
                 "anio": str(r.get("anio", "")) if "anio" in cols else "",
                 "fuente": str(r.get("fuente", "")) if "fuente" in cols else "",
                 "enlace": (str(r.get("url", "")) if "url" in cols and r.get("url")
@@ -548,14 +571,16 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
          "por polígono está en **`FUENTE_DE_CADA_POLIGONO.csv`**, que se abre en",
          "Excel y se puede ordenar y filtrar.",
          "",
-         "| Capa | Qué contiene | Polígonos | Año | Fuente | Enlace |",
-         "|---|---|---:|---|---|---|"]
+         ""]
     for (capa, fuente, enlace, anio), fs in sorted(grupos.items()):
         clases = sorted({f["que_es"] for f in fs if f["que_es"]})
         que = ", ".join(clases[:4]) + ("…" if len(clases) > 4 else "")
         link = f"[abrir]({enlace})" if str(enlace).startswith("http") else "—"
-        L.append(f"| {capa} | {que[:60]} | {len(fs)} | {anio or '—'} | "
-                 f"{(fuente or '—')[:110]} | {link} |")
+        L += [f"### {capa}", "",
+              f"{len(fs)} polígonos · {anio or 'sin año declarado'}  ",
+              f"Contiene: {que}  ",
+              f"Fuente: {fuente or 'no declarada'}  ",
+              f"Enlace: {link}", ""]
     L += ["",
           "Ojo con qué abre cada enlace. Los de las láminas llevan al documento",
           "del municipio; los de las capas oficiales, al **servicio de datos** del",
@@ -564,6 +589,25 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
           "`00_procedencia_de_cada_capa` del GeoPackage.", ""]
     (dest / "FUENTE_DE_CADA_POLIGONO.md").write_text("\n".join(L), encoding="utf-8")
     return len(filas)
+
+
+def revisar_geometrias(dest: Path, provincia: str) -> None:
+    """Corre el revisor de polígonos y deja su informe dentro del paquete.
+
+    El LEEME lo nombra, así que tiene que viajar. Y tiene que rehacerse en cada
+    corrida: un informe de una versión anterior describiría geometrías que ya no
+    son las que se están entregando.
+    """
+    import subprocess
+    salida = dest / "ESTADO_DE_LOS_POLIGONOS.md"
+    r = subprocess.run(
+        [sys.executable, str(Path(__file__).resolve().parents[1] / "tools" / "auditoria" / "revisar_poligonos_provincia.py"),
+         "--provincia", provincia, "--salida", str(salida)],
+        capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if salida.exists():
+        log(f"  ESTADO_DE_LOS_POLIGONOS: revisión rehecha sobre lo que se entrega")
+    else:
+        log(f"  ⚠️ no se pudo rehacer la revisión: {(r.stderr or '').strip()[:150]}")
 
 
 def empaquetar(dest: Path) -> Path:
@@ -608,8 +652,6 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "---",
         "",
         "## 0. Antes de empezar: ¿esta lámina sirve?",
-        "",
-        "Cinco minutos acá ahorran una tarde.",
         "",
         "1. **Lee el texto de la página**, no sólo el título. Una lámina de",
         "   «riesgo» puede ser multiamenaza y no distinguir niveles de",
@@ -673,13 +715,15 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "",
         "Botón **Configuración de transformación** (el engranaje):",
         "",
-        "| Campo | Qué poner | Por qué |",
-        "|---|---|---|",
-        "| Tipo de transformación | **Polinomial 1** (o Helmert) | Un mapa impreso tiene una sola escala y no está deformado: mover, girar y escalar basta. Los polinomios de grado 2 o 3 «arreglan» el error deformando la imagen, y el RMSE baja sin que la ubicación mejore. |",
-        "| Método de remuestreo | **Vecino más próximo** | No inventa colores nuevos entre píxeles, y acá los colores son la clase. |",
-        "| SRC de destino | El huso de la tabla de arriba | |",
-        "| Ráster de salida | Un `.tif` con nombre claro | |",
-        "| Cargar en QGIS al terminar | ✔ | |",
+        "- **Tipo de transformación: Polinomial 1** (o Helmert). Un mapa impreso",
+        "  tiene una sola escala y no está deformado: mover, girar y escalar",
+        "  basta. Los polinomios de grado 2 o 3 «arreglan» el error deformando la",
+        "  imagen, y el RMSE baja sin que la ubicación mejore.",
+        "- **Método de remuestreo: Vecino más próximo.** No inventa colores nuevos",
+        "  entre píxeles, y acá los colores son la clase.",
+        "- **SRC de destino:** el huso de la tabla de arriba.",
+        "- **Ráster de salida:** un `.tif` con nombre claro.",
+        "- **Cargar en QGIS al terminar:** ✔",
         "",
         "Antes de ejecutar, **mira la columna de residuos** en la tabla de puntos:",
         "es cuánto se equivoca cada punto. Si uno tiene un residuo mucho mayor que",
@@ -693,8 +737,8 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "",
         "## 5. Comprobar que quedó donde debe",
         "",
-        "Esto no es opcional. Una lámina puede estar perfectamente ajustada y",
-        "aterrizar en el lugar equivocado.",
+        "Una lámina puede estar perfectamente ajustada y aterrizar en el lugar",
+        "equivocado.",
         "",
         "1. Carga encima **`puntos_criticos_SENAPRED`** del GeoPackage. Son sitios",
         "   donde el municipio reportó inundación y no participaron en tu ajuste.",
@@ -722,16 +766,19 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "   existe. Si usas shapefile los nombres se cortan a diez caracteres: el",
         "   de la derecha es el que quedará.",
         "",
-        "| Campo | En shapefile | Qué va |",
-        "|---|---|---|",
-        "| `clase` | `clase` | El nombre EXACTO que usa la leyenda: «Alto», «AR-2a», «Susceptibilidad media». No lo traduzcas ni lo uniformes. |",
-        "| `comuna` | `comuna` | En mayúsculas, como en las otras capas. |",
-        "| `amenaza` | `amenaza` | `inundación` |",
-        "| `fuente` | `fuente` | Nombre completo del documento, con su organismo y su fecha. |",
-        "| `anio` | `anio` | El año del ESTUDIO, no el del decreto que lo aprueba. Son distintos. |",
-        "| `escala_original` | `escala_ori` | La escala impresa de la lámina, si la declara. |",
-        "| `estado_tramite` | `estado_tra` | `derivado` |",
-        "| `incertidumbre_borde_m` | `incertidum` | El RMSE que te dio el georreferenciador, en metros. |",
+        "- **`clase`** — el nombre EXACTO que usa la leyenda: «Alto», «AR-2a»,",
+        "  «Susceptibilidad media». No lo traduzcas ni lo uniformes.",
+        "- **`comuna`** — en mayúsculas, como en las otras capas.",
+        "- **`amenaza`** — `inundación`",
+        "- **`fuente`** — nombre completo del documento, con su organismo y fecha.",
+        "- **`url`** — el enlace de donde se descarga ese documento.",
+        "- **`anio`** — el año del ESTUDIO, no el del decreto que lo aprueba. Son",
+        "  distintos.",
+        "- **`escala_original`** (`escala_ori` en shapefile) — la escala impresa de",
+        "  la lámina, si la declara.",
+        "- **`estado_tramite`** (`estado_tra`) — `derivado`",
+        "- **`incertidumbre_borde_m`** (`incertidum`) — el RMSE que te dio el",
+        "  georreferenciador, en metros.",
         "",
         "3. Activa la edición (el lápiz), **Añadir polígono**, y dibuja siguiendo",
         "   el borde del color. Un clic por vértice, clic derecho para cerrar.",
@@ -764,8 +811,8 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "- El **`.points`** con los puntos de control.",
         "- Un **texto corto** que diga: qué lámina es, de qué documento y página,",
         "  qué huso usaste, cuántos puntos de control y qué RMSE dio, y **qué no",
-        "  pudiste hacer y por qué**. Esa última parte vale tanto como el resto:",
-        "  es la que evita que la próxima persona repita el intento.",
+        "  pudiste hacer y por qué**. Lo último evita que la próxima persona",
+        "  repita el intento.",
         "",
         "## Lo que nunca hay que hacer",
         "",
@@ -773,12 +820,75 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "  de un documento con autor y fecha, no entra.",
         "- **No inventar una coordenada** que no esté en la lámina, ni siquiera",
         "  «redondeando» un rótulo que se ve borroso.",
+        "- **No rellenar un campo que no sabes.** Va vacío o «no declarado», nunca",
+        "  un valor plausible. Ojo con el año: el del plan y el de su estudio de",
+        "  riesgo son distintos —el PRC de Angol es de 2022 y su estudio, de 2013—",
+        "  y poner uno por otro hace parecer moderna una cartografía de hace trece",
+        "  años.",
+        "- **No mezclar el achurado de inundación con el de remoción en masa.** En",
+        "  Angol son AR-2a y AR-1a/b/c, y se parecen bastante en el plano.",
+        "- **No confundir anteproyecto con instrumento vigente.** Un anteproyecto",
+        "  es una propuesta en tramitación y no rige sobre nadie.",
         "- **No mezclar capas de distinto origen** en un mismo archivo. Cada",
         "  documento, su carpeta.",
-        "- **No rellenar un campo que no sabes.** Va vacío o «no declarado», nunca",
-        "  un valor plausible.",
         "",
     ]), encoding="utf-8")
+
+
+def anchos_de_tabla(texto: str) -> str:
+    """Reparte el ancho de cada tabla en proporción a lo que lleva adentro.
+
+    Por qué. Pandoc no mide el contenido de las celdas: reparte el ancho de la
+    página según lo que mide la fila de guiones. Escritas todas iguales
+    —`|---|---|---|`—, una tabla de nueve columnas sale con nueve columnas de
+    1,6 cm, y en 1,6 cm una palabra de nueve letras se parte por la mitad y cae
+    a la línea siguiente. Eso es lo que se veía en Word.
+
+    Así que la fila de guiones se reescribe con el ancho del texto más largo de
+    su columna. La tabla no cambia de contenido; cambia cómo Word la reparte.
+    Se respeta la alineación a la derecha (`---:`) de las columnas de números.
+    """
+    salida, bloque = [], []
+
+    def volcar() -> None:
+        if len(bloque) < 2:
+            salida.extend(bloque)
+            return
+        filas = [[c.strip() for c in ln.strip().strip("|").split("|")]
+                 for ln in bloque]
+        n = max(len(f) for f in filas)
+        sep = filas[1]
+        # El peso de una columna NO es el largo de su celda más larga: una celda
+        # de sesenta caracteres puede envolverse en tres líneas sin problema.
+        # Lo que no puede pasar es que se parta una palabra —«SENAPRED» cortado
+        # a la mitad—, así que el piso de cada columna es su palabra más larga y
+        # el sobrante se reparte por volumen, amortiguado.
+        anchos = []
+        for i in range(n):
+            celdas = [f[i] for f in filas[:1] + filas[2:] if len(f) > i]
+            palabra = max((len(w) for c in celdas for w in c.split()), default=3)
+            largo = max((len(c) for c in celdas), default=3)
+            anchos.append(int(8 + min(palabra, 20)
+                               + 0.25 * max(0, largo - palabra)))
+        nueva = "| " + " | ".join(
+            ("-" * max(anchos[i], 3))[:-1] + ":"
+            if i < len(sep) and sep[i].endswith(":")
+            else "-" * max(anchos[i], 3)
+            for i in range(n)) + " |"
+        salida.extend([bloque[0], nueva, *bloque[2:]])
+
+    for ln in texto.splitlines():
+        es_tabla = ln.lstrip().startswith("|")
+        if es_tabla:
+            bloque.append(ln)
+            continue
+        if bloque:
+            volcar()
+            bloque = []
+        salida.append(ln)
+    if bloque:
+        volcar()
+    return "\n".join(salida) + ("\n" if texto.endswith("\n") else "")
 
 
 def a_word(md: Path) -> bool:
@@ -798,10 +908,15 @@ def a_word(md: Path) -> bool:
     (REGLAS §2).
     """
     import subprocess
+    md.write_text(anchos_de_tabla(md.read_text(encoding="utf-8")),
+                  encoding="utf-8")
     try:
         subprocess.run(
             ["pandoc", str(md), "-o", str(md.with_suffix(".docx")),
-             "--from", "gfm", "--to", "docx"],
+             # markdown y no gfm: el lector gfm descarta el ancho de la fila de
+             # guiones y reparte las columnas por igual, que es justo lo que
+             # anchos_de_tabla() acaba de arreglar.
+             "--from", "markdown", "--to", "docx"],
             check=True, capture_output=True, timeout=120)
         return True
     except FileNotFoundError:
@@ -842,6 +957,45 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     #    lectura (REGLAS §1.6): se copia, nunca se toca.
     if pdf.exists():
         shutil.copy2(pdf, destino / f"documento_original{pdf.suffix}")
+
+        # 2-bis. La MISMA imagen que se vectorizó, con su world file: se puede
+        #    arrastrar a QGIS y cae exactamente sobre los polígonos. Sin esto, el
+        #    LEEME pedía «compara la lámina con los polígonos» y la única imagen
+        #    que iba era el render de la página, que no está georreferenciado y
+        #    cae en coordenadas de píxel: el control de calidad que ofrecíamos no
+        #    se podía ejecutar.
+        try:
+            import importlib.util
+            _sp = importlib.util.spec_from_file_location(
+                "vec18", Path(__file__).resolve().parent / "18_vectorizar_laminas.py")
+            vec = importlib.util.module_from_spec(_sp)
+            _sp.loader.exec_module(vec)
+            im = vec.imagenes_de(pdf, cfg["pagina"])[cfg.get("imagen", 0)]
+            if cfg.get("rotar"):
+                im = im.rotate(cfg["rotar"], expand=True)
+            im.convert("RGB").save(destino / "lamina_georreferenciada.jpg",
+                                   quality=92, optimize=True)
+            # El world file son seis números: tamaño de píxel en X, rotación,
+            # rotación, tamaño en Y (negativo, porque la fila 0 es el norte), y
+            # las coordenadas del CENTRO del píxel superior izquierdo.
+            if cfg.get("vertices"):
+                sol, esc, _, _, _ = vec.afin_por_vertices(cfg)
+                a_, b_, tx, ty = sol
+                wf = [a_, b_, b_, -a_,
+                      tx + a_ * 0.5 + b_ * 0.5, ty + b_ * 0.5 - a_ * 0.5]
+            else:
+                pix, x_ref, e_ref, y_ref, n_ref, _ = vec.afin(cfg)
+                wf = [pix, 0.0, 0.0, -pix,
+                      e_ref - x_ref * pix + pix / 2, n_ref + y_ref * pix - pix / 2]
+            (destino / "lamina_georreferenciada.jgw").write_text(
+                "\n".join(f"{v:.10f}" for v in wf) + "\n", encoding="ascii")
+            from pyproj import CRS
+            # utf-8 y no ascii: el WKT trae el símbolo de grado en el meridiano
+            # central, y con ascii la escritura falla entera.
+            (destino / "lamina_georreferenciada.prj").write_text(
+                CRS.from_epsg(cfg["epsg"]).to_wkt(), encoding="utf-8")
+        except Exception as exc:        # noqa: BLE001
+            log(f"    (no se pudo georreferenciar la lámina: {exc})")
 
         # 2. La página con la lámina, rasterizada, para verla sin abrir el PDF
         #    ni buscar la página entre cientos.
@@ -953,13 +1107,19 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
          f"**Año del contenido:** {proc.get('fecha_dato', 'no declarado')}  ",
          f"**Escala impresa:** {cfg.get('escala_impresa', 'no declarada')}", "",
          "## Qué hay en esta carpeta", "",
-         "| Archivo | Qué es |",
-         "|---|---|",
-         "| `documento_original.pdf` | El documento tal como lo publica la fuente. No se modifica. |",
-         f"| `lamina_pagina-{cfg['pagina']}.jpg` | La página con la lámina, para mirarla sin abrir el PDF. El detalle fino está en el PDF. |",
-         "| `poligonos.geojson` | Los polígonos que derivamos de esa lámina, en EPSG:4326. |",
-         "| `poligonos.gpkg` | Lo mismo, para arrastrar a QGIS. |",
-         "| `shapefile/` | Los mismos polígonos en `.shp`, para ArcGIS o para intercambiar. Lee su LEEME: el formato corta nombres y textos. |", "",
+         "- **`documento_original.pdf`** — el documento tal como lo publica la",
+         "  fuente. No se modifica.",
+         f"- **`lamina_pagina-{cfg['pagina']}.jpg`** — la página completa, para",
+         "  mirarla sin abrir el PDF.",
+         "- **`lamina_georreferenciada.jpg`** — la misma lámina, **ubicada en el",
+         "  mapa**. Arrástrala a QGIS y cae encima de los polígonos: es con lo que",
+         "  se comprueba el trazado. Van con ella el `.jgw` y el `.prj`, que son",
+         "  los que la ubican — **se copian los tres juntos**.",
+         "- **`poligonos.geojson`** — los polígonos que derivamos de esa lámina,",
+         "  en EPSG:4326.",
+         "- **`poligonos.gpkg`** — lo mismo, para arrastrar a QGIS.",
+         "- **`shapefile/`** — los mismos polígonos en `.shp`, para ArcGIS o para",
+         "  intercambiar. Lee su LEEME: el formato corta nombres y textos.", "",
          "## Qué contiene la geometría", "",
          "| Clase | Polígonos | Hectáreas |",
          "|---|---:|---:|"]
@@ -994,8 +1154,8 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
           "- **El borde no es un deslinde.** Con la precisión declarada, a esa "
           "distancia del borde adentro y afuera no se distinguen.",
           "", "## Si encuentras un error", "",
-          f"Abre `lamina_pagina-{cfg['pagina']}.jpg` al lado de los polígonos en "
-          "QGIS y compáralos. Si el trazado no calza con la "
+          "Arrastra `lamina_georreferenciada.jpg` a QGIS: cae sobre los "
+          "polígonos y se ve al tiro si el trazado calza. Si no calza con la "
           "lámina, avísanos con la coordenada: el trazado es lo nuestro, y es "
           "exactamente lo que se puede corregir.", ""]
     (destino / "LEEME.md").write_text("\n".join(L), encoding="utf-8")
@@ -1026,11 +1186,8 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
          "tenemos descargado; si no, va el enlace a la fuente.", "",
          "**Cómo se hace una: el paso a paso está en `COMO_TRABAJAR_EN_QGIS`**, en",
          "la carpeta de arriba. Todo se hace dentro de QGIS.", "",
-         "La columna **«Lámina en la página»** es la que importa: estos son",
-         "informes de decenas o cientos de páginas y el mapa está en dos o tres.",
-         "",
-         "| Comuna | Documento | Lámina en la página | De un total de | PDF en esta carpeta | Enlace |",
-         "|---|---|---|---:|---|---|"]
+         "**El número de página es el dato que importa**: estos son informes de",
+         "decenas o cientos de páginas y el mapa está en dos o tres.", ""]
     copiados = 0
     vistos: dict[str, str] = {}          # hash del archivo → dónde quedó la copia
     for c in cat["comunas"]:
@@ -1040,11 +1197,26 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
         for d in c.get("documentos", []):
             if not d.get("laminas"):
                 continue
-            pags = ", ".join(str(l["pagina"]) for l in d["laminas"][:8])
-            if d["archivo"] in ya_hechos:
-                L.append(f"| {com.title()} | {d['archivo'][:52]} | **{pags}** | — | "
-                         f"✅ ya vectorizado → `1_cartografia_ya_vectorizada/"
-                         f"{ya_hechos[d['archivo']]}/` | — |")
+            # Se marca POR PÁGINA, no por documento: un mismo informe puede
+            # tener cinco láminas y sólo una vectorizada. Marcarlo entero como
+            # hecho hacía desaparecer las otras cuatro —las más baratas del
+            # paquete, porque ya tienen cuadrícula— sin que nadie las reclamara.
+            hechas = {pag for (arch, pag), _ in ya_hechos.items()
+                      if arch == d["archivo"]}
+            pendientes_pag = [l["pagina"] for l in d["laminas"]
+                              if l["pagina"] not in hechas]
+            pags = ", ".join(str(x) for x in pendientes_pag[:8]) or "—"
+            if hechas:
+                donde = next(v for (arch, pag), v in ya_hechos.items()
+                             if arch == d["archivo"])
+                nota = (f"✅ pág. {', '.join(str(x) for x in sorted(hechas))} ya "
+                        f"vectorizada → `1_cartografia_ya_vectorizada/{donde}/`")
+                L += [f"### {com.title()} — {d['archivo']}", ""]
+                if not pendientes_pag:
+                    L += [nota, ""]
+                    continue
+                L += [f"Láminas pendientes en las páginas **{pags}**  ",
+                      f"{nota}; el PDF está ahí.", ""]
                 continue
             hallado = next(iter(DATA_RAW.glob(f"documentos/**/{d['archivo']}")), None)
             local, total = "—", "—"
@@ -1074,8 +1246,11 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
                 except Exception:       # noqa: BLE001 — un PDF ilegible no frena el índice
                     pass
             url = d.get("url") or ""
-            L.append(f"| {com.title()} | {d['archivo'][:52]} | **{pags}** | {total} | "
-                     f"{local} | {'[ver](' + url + ')' if url else '—'} |")
+            L += [f"### {com.title()} — {d['archivo']}", "",
+                  f"Láminas en las páginas **{pags}**"
+                  + (f" (de {total})" if total != "—" else "") + "  ",
+                  f"PDF: {local}  ",
+                  f"Enlace: {'[ver](' + url + ')' if url else 'no lo tenemos'}", ""]
     # Y los documentos donde se DETECTÓ una cuadrícula, que es otra vía y no
     # coincide con la anterior: TAREAS los nombra uno por uno y hasta ahora
     # podía nombrar un PDF que no viajaba en el paquete —el PLADECO de Renaico,
@@ -1086,6 +1261,8 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
     for com, rs in sorted((reticulas or {}).items()):
         for r in rs:
             nombre = Path(r["pdf"]).name
+            if (nombre, r["pagina"]) in ya_hechos:
+                continue                 # esa página ya está vectorizada
             hallado = next(iter(DATA_RAW.glob(f"documentos/**/{nombre}")), None)
             if not hallado or not hallado.exists():
                 extra.append((com, nombre, r["pagina"], "no lo tenemos descargado"))
@@ -1116,7 +1293,11 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
 
 
 def escribir_tareas(dest: Path, prov: str, filas: list[dict],
-                    reticulas: dict[str, list]) -> None:
+                    reticulas: dict[str, list],
+                    hechas_pag: set | None = None) -> None:
+    """`hechas_pag` son los (archivo, página) ya vectorizados: no se listan como
+    tarea. Sin esto, el primer ítem mandaba a georreferenciar exactamente la
+    lámina que ya está hecha y publicada en la carpeta de al lado."""
     L = [f"# Tareas de georreferenciación — provincia de {prov}", "",
          "Ordenadas por lo que más importa: **comunas con gente y con registro de",
          "inundación, pero sin ninguna cartografía consultable**. Una comuna con",
@@ -1125,22 +1306,27 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
          "> inunde**. Significa que nadie la levantó, o que no la encontramos en",
          "> fuentes públicas. Esa distinción es el corazón del proyecto: no la",
          "> pierdas al redactar nada.", "",
-         "| Comuna | Hab. | Puntos | Crónicos | Área PRC | Docs | Láminas | Retículas | Ya derivados |",
+         # Encabezados cortos a propósito: son nueve columnas en una hoja
+         # vertical, y «Retículas» completo no cabe en el ancho que le toca —se
+         # parte por la mitad en Word—. La leyenda de abajo dice qué es cada una.
+         "| Comuna | Hab. | Pts. | Crón. | PRC | Docs | Lám. | Retíc. | Hechos |",
          "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for f in filas:
         L.append(f"| **{f['comuna']}** | {f['hab']:,} | {f['puntos']} | "
                  f"{f['cronicos']} | {f['area']} | {f['docs']} | {f['laminas']} | "
                  f"{f['reticulas']} | {f['derivados']} |")
     L += ["", "**Cómo leer las columnas:**", "",
-          "- **Área PRC** — polígonos en el vectorial público del MINVU. Un 0 con",
+          "- **Pts.** — puntos críticos de SENAPRED. **Crón.**, los crónicos",
+          "  entre ellos.",
+          "- **PRC** — polígonos en el vectorial público del MINVU. Un 0 con",
           "  documentos significa que la cartografía existe pero no está publicada",
           "  en formato consultable: ése es el caso que más rinde georreferenciar.",
-          "- **Láminas** — figuras de cartografía de inundación ya localizadas",
+          "- **Lám.** — figuras de cartografía de inundación ya localizadas",
           "  dentro de los PDF, con su número de página. No hay que buscarlas.",
-          "- **Retículas** — de esas láminas, cuántas traen una grilla de",
+          "- **Retíc.** — de esas láminas, cuántas traen una grilla de",
           "  coordenadas regular detectada automáticamente. Son las que se pueden",
           "  georreferenciar sin puntos de control a mano.",
-          "- **Ya derivados** — polígonos que el proyecto ya construyó desde una",
+          "- **Hechos** — polígonos que el proyecto ya construyó desde una",
           "  lámina. No los rehagas; revísalos.", "",
           "---", "", "## Las tres tareas, en orden", "",
           "### 1. Georreferenciar y digitalizar las láminas que ya tienen retícula", "",
@@ -1150,15 +1336,19 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
           "`COMO_TRABAJAR_EN_QGIS`**, en esta misma carpeta.", "",
           "⚠️ **Antes de georreferenciar una lámina, lee el texto de su página.**",
           "Una lámina marcada por vocabulario de inundación no siempre es de",
-          "inundación: ya descartamos una de Teodoro Schmidt que resultó ser",
-          "riesgo multiamenaza «sin discriminar niveles de peligrosidad». Y una",
-          "de la DGA que estaba perfectamente ubicada y no mapeaba ni un polígono",
-          "de riesgo dentro de la zona que su título nombraba.", "",
+          "inundación: ya descartamos una que resultó ser riesgo multiamenaza «sin",
+          "discriminar niveles de peligrosidad», y otra que estaba perfectamente",
+          "ubicada y no mapeaba ni un polígono de riesgo dentro de la zona que su",
+          "título nombraba.", "",
           "Láminas con cuadrícula ya detectada en esta provincia:", ""]
     if reticulas:
         for c, rs in sorted(reticulas.items()):
+            filas_r = [r for r in rs
+                       if (Path(r["pdf"]).name, r["pagina"]) not in (hechas_pag or set())]
+            if not filas_r:
+                continue
             L.append(f"**{c.title()}**")
-            for r in rs:
+            for r in filas_r:
                 L.append(f"- `{r['pdf']}` página {r['pagina']}, imagen {r['imagen']} "
                          f"— {r['px']} px, {r['lineas']} líneas, paso {r['paso_px']} px")
             L.append("")
@@ -1181,22 +1371,20 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
           "   Responden obligatoriamente en 20 días hábiles.",
           "2. Revisar a mano el sitio municipal, que el cosechador automático puede",
           "   no haber alcanzado (algunos no exponen la API de WordPress).", "",
-          "---", "", "## Qué NO hacer", "",
-          "- **No dibujar polígonos a mano** «aproximando» dónde se inundaría. Si",
-          "  no sale de un documento con autor y fecha, no entra.",
-          "- **No rellenar un año que la fuente no declara.** Va «no declarado por",
-          "  la fuente». El año del plan y el año de su estudio de riesgo son cosas",
-          "  distintas: el PRC de Angol es de 2022 y su estudio, de 2013.",
-          "- **No mezclar** el achurado de área de riesgo por inundación con el de",
-          "  remoción en masa. En Angol son AR-2a y AR-1a/b/c, y se parecen.",
-          "- **No confundir anteproyecto con instrumento vigente.** El anteproyecto",
-          "  es una propuesta en tramitación y no rige sobre nadie.",
+          "---", "",
+          "## Antes de empezar la primera lámina", "",
+          "Muestra esa primera a Nicolás Mendoza (SERNAGEOMIN), que es quien te",
+          "pasó este paquete, antes de seguir con el resto: si el huso o los",
+          "campos salen mal, se corrigen en una y no en quince.", "",
+          "Qué se devuelve de cada una está en `COMO_TRABAJAR_EN_QGIS`, sección",
+          "**«Qué entregar de vuelta»**.", "",
           ]
     (dest / "TAREAS.md").write_text("\n".join(L), encoding="utf-8")
 
 
 def escribir_leeme(dest: Path, prov: str, gpkg: str,
-                   fichas: list[dict] | None = None, pendientes: int = 0) -> None:
+                   fichas: list[dict] | None = None, pendientes: int = 0,
+                   reparadas: int = 0) -> None:
     fichas = fichas or []
     listado = "\n".join(
         f"  - `{f['carpeta']}/` — {f['poligonos']} polígonos, {f['hectareas']} ha"
@@ -1210,198 +1398,122 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
 
 ## Qué hay acá
 
-- **`1_cartografia_ya_vectorizada/`** — una carpeta **por documento**. Adentro va
-  el PDF original, la página con la lámina en imagen, los polígonos que sacamos de
-  ella y un LEEME que explica qué es, de dónde salió y cuánto se equivoca.
-  Ésta es la parte que hay que revisar primero:
+- **`COMO_TRABAJAR_EN_QGIS`** — el procedimiento completo, paso a paso. Empieza
+  por acá si vas a producir cartografía nueva: también dice qué entregar de
+  vuelta y qué no hay que hacer nunca.
+- **`TAREAS`** — qué falta, por comuna, ordenado por lo que más importa.
+- **`1_cartografia_ya_vectorizada/`** — una carpeta **por documento**: el PDF
+  original, la página con la lámina en imagen, los polígonos que sacamos de ella
+  y un LEEME con su fuente, su método y cuánto se equivoca su borde. El
+  documento va junto al polígono a propósito: esa geometría la dibujamos
+  nosotros, y sin la lámina al lado no hay cómo discutirla.
 {listado}
-- **`2_laminas_por_georreferenciar/`** — {pendientes} documento(s) donde ya
-  localizamos una lámina de inundación y que **todavía no convertimos en
-  geometría**. Es el trabajo que sigue; su LEEME los lista con su página.
-- **`{gpkg}`** — todas las capas del proyecto que caen en esta provincia, en un
-  solo archivo. Arrástralo a QGIS y aparecen todas.
-- **`COMO_TRABAJAR_EN_QGIS`** — el procedimiento completo, paso a paso, sin una
-  sola línea de código: georreferenciar una lámina, digitalizar los polígonos,
-  comprobar que quedaron donde deben y qué entregar de vuelta. **Empieza por
-  acá si vas a producir cartografía nueva.**
-- **`3_capas_en_shapefile/`** — todas las capas del GeoPackage exportadas a
-  `.shp`, por comodidad. La copia de referencia sigue siendo el `.gpkg`.
+- **`2_laminas_por_georreferenciar/`** — {pendientes} PDF de documentos con
+  cartografía de inundación que todavía no convertimos. Es el trabajo que sigue;
+  su LEEME los lista con la página exacta de cada lámina.
+- **`{gpkg}`** — todas las capas de esta provincia en un archivo. Arrástralo a
+  QGIS y aparecen todas.
+- **`3_capas_en_shapefile/`** — las mismas capas en `.shp`, por comodidad.
+- **`FUENTE_DE_CADA_POLIGONO`** — de dónde salió cada cosa, con el enlace. El
+  resumen por documento en el texto; el detalle en el `.csv`, que abre en Excel.
 - **`ESTADO_DE_LOS_POLIGONOS`** — la revisión que le hicimos a todo esto antes
   de entregártelo. Te dice qué mirar con desconfianza.
-- **`FUENTE_DE_CADA_POLIGONO`** — de dónde salió cada cosa que hay acá, con el
-  enlace para abrir el documento. El resumen por documento en el texto; el
-  detalle polígono por polígono en el `.csv`, que se abre en Excel.
-- **`TAREAS`** — qué falta, por comuna, ordenado por lo que más importa.
 
 ## Lo que ya viene resuelto
 
 No hace falta que arregles nada antes de empezar:
 
-- **Las geometrías están reparadas.** 375 polígonos de las capas de satélite y
-  del modelo regional se tocaban a sí mismos en un vértice —cosa habitual al
-  convertir una imagen en polígonos— y eso hace que QGIS se niegue a correr
-  varias herramientas encima. Se repararon al armar el paquete. No cambian de
-  área: se midió antes y después. Tu copia difiere en eso de la publicada en el
-  sitio, y el terreno que describe es el mismo.
+- **Las geometrías están reparadas.** {reparadas} polígonos de las capas de
+  satélite y del modelo regional se tocaban a sí mismos en un vértice —cosa
+  habitual al convertir una imagen en polígonos— y eso hace que QGIS se niegue a
+  correr varias herramientas encima. Se repararon al armar el paquete y no
+  cambian de área: se midió antes y después.
 - **Los documentos repetidos ya están fuera.** El registro ambiental publica el
-  mismo archivo con nombres distintos; se comparan por contenido y sólo viaja
-  uno, con una nota que dice de cuál es copia el otro.
-- **Cada capa trae su procedencia adentro** y su enlace, así que no hay que
-  preguntar de dónde salió nada.
+  mismo archivo con nombres distintos; se comparan por contenido y viaja uno.
+- **Cada capa trae su procedencia adentro**, con su enlace.
 
-## Por qué el documento va junto al polígono
+## En qué formato está todo
 
-Los polígonos de `1_cartografia_ya_vectorizada/` **los dibujamos nosotros** a
-partir de una figura impresa: el contenido es del municipio, el trazado es
-nuestro. Un polígono así, suelto, es una afirmación sin respaldo. Con la lámina
-al lado se puede comparar, discutir y corregir — que es exactamente lo que
-queremos que pase.
+- **`.gpkg`** — GeoPackage: un archivo con varias capas adentro. Se abre en
+  QGIS, ArcGIS, R o Python.
+- **`.shp`** — shapefile. Son cinco archivos por capa y **se copian juntos o no
+  funciona**. Se abre en lo mismo.
+- **`.geojson`** — texto plano con la geometría y sus atributos.
+- **`.csv`** — tabla, para Excel.
+- **`.docx`** — los textos de este paquete, para Word.
 
-## En qué formato está todo, y con qué se abre
+**Todo viene en EPSG:4326** (WGS84, grados). Si vas a medir distancias o áreas,
+reproyecta antes a UTM 18S (EPSG:32718) o 19S (EPSG:32719) según la zona: en
+grados, un área en «metros cuadrados» no significa nada.
 
-| Extensión | Qué es | Con qué se abre |
-|---|---|---|
-| `.gpkg` | **GeoPackage**: un solo archivo con varias capas adentro, tabla de atributos incluida. | QGIS (arrástralo al lienzo), ArcGIS, R, Python. |
-| `.geojson` | Texto plano con la geometría y sus atributos. Se puede abrir con el Bloc de notas y leer. | QGIS, cualquier editor, cualquier lenguaje. |
-| `.jpg` | La página del documento donde está la lámina. | Cualquier visor de imágenes. |
-| `.pdf` | El documento original de la fuente. | Cualquier lector de PDF. |
-| `.md` | Texto con formato (esto que estás leyendo). | Bloc de notas, o cualquier editor que muestre Markdown. |
-
-**Todas las geometrías vienen en EPSG:4326** (WGS84, latitud y longitud en
-grados). Es el sistema en que se publican y el que entiende cualquier
-herramienta sin configurar nada. Si vas a medir distancias o áreas, reproyecta
-antes a UTM 18S (EPSG:32718) o 19S (EPSG:32719) según la zona: en grados, un
-área en «metros cuadrados» no significa nada.
-
-**Sobre los shapefiles.** Cada carpeta de documento trae además una subcarpeta
-`shapefile/` con los mismos polígonos en `.shp`, porque es lo que circula entre
-servicios públicos y lo que abre un ArcGIS antiguo. Pero **no es la copia de
-referencia**: el formato corta los nombres de campo a diez caracteres
-—`estado_tramite` queda en `estado_tra`— y el texto a 254, que es justo donde
-vive la procedencia de este proyecto. En cada subcarpeta hay un LEEME que dice,
-medido en esa misma corrida, qué campo se acortó y cuál se truncó. Para dibujar y
-medir, el shapefile sirve igual; para citar de dónde salió un polígono, usa el
-GeoJSON o el GeoPackage.
-
-Las capas regionales del `.gpkg` no vienen en shapefile: si las necesitas,
-expórtalas desde QGIS con clic derecho en la capa → Exportar → Guardar como.
-
-## Cómo saber si tu trabajo quedó bien
-
-Ésta es la parte que más importa y la más fácil de saltarse. Una lámina puede
-estar **perfectamente** georreferenciada y aun así no servir; y puede verse bien
-en pantalla y estar corrida cientos de metros.
-
-Compara siempre contra algo que **no haya participado** en tu trabajo:
-
-1. **Los puntos críticos de SENAPRED** (`puntos_criticos_SENAPRED` en el
-   GeoPackage). Son sitios donde el municipio reportó inundación, y nadie los
-   usó para georreferenciar nada. Si vectorizaste un área de inundación y
-   **ningún** punto crítico cae cerca, sospecha de tu georreferenciación antes
-   de creerle al resultado.
-2. **El modelo del GORE** (`amenaza_modelada_GORE_2016`). Es grueso —35 m— pero
-   independiente: si tu mancha no solapa nada de la clase máxima, algo pasa.
-
-Así se descartó una lámina de la DGA que parecía perfecta: la escala calzaba al
-0,09 % en ambos ejes y los pueblos caían exactos, pero **0 de 77** puntos
-críticos quedaban a menos de 300 m de sus polígonos de riesgo. El mapa estaba
-bien ubicado; lo que dibujaba no era el área que su título prometía.
-
-En cambio, cuando la lámina 2 del plano de Angol se vectorizó, cuatro de seis
-puntos críticos cayeron **dentro** del área de riesgo. Ése es el resultado que
-se busca.
-
-## Glosario de las siglas que vas a encontrar
-
-| Sigla | Qué significa |
-|---|---|
-| **PRC** | Plan Regulador Comunal: el instrumento que zonifica el suelo urbano de una comuna. Lo aprueba el municipio y lo visa la SEREMI. |
-| **IPT** | Instrumento de Planificación Territorial. El PRC es uno. |
-| **AR-1, AR-2a…** | Códigos de «Área de Riesgo» dentro de un PRC. El número y la letra los define cada plan: **AR-2a** en Angol son las áreas inundables o potencialmente inundables. Otro plan puede usar otro código para lo mismo. |
-| **ZR-3, ZR-5…** | Lo mismo, en los planes que numeran sus zonas de riesgo con «ZR». |
-| **OGUC** | Ordenanza General de Urbanismo y Construcciones. Su **artículo 2.1.17** es el que rige las áreas de riesgo: no prohíben construir, **condicionan** — exigen un estudio fundado de un especialista y obras de mitigación. |
-| **EAE** | Evaluación Ambiental Estratégica: el trámite por el que pasan los planes reguladores. Su registro público es de donde salen muchos de estos documentos. |
-| **RRD** | Reducción del Riesgo de Desastres. Los Planes Comunales de RRD (Ley 21.364) suelen traer cartografía que no está en ninguna otra parte. |
-| **PACCC** | Plan de Acción Comunal de Cambio Climático (Ley 21.455). Otra vía por la que aparecen mapas de inundación. |
-| **RMSE** | El error del ajuste al georreferenciar, en metros. Con menos de tres puntos de control no significa nada: no hay residuo que medir. |
-| **SENAPRED** | Servicio Nacional de Prevención y Respuesta ante Desastres, ex ONEMI. |
-| **Derivado** | Geometría que construimos **nosotros** desde una figura impresa. El contenido es de la fuente; el trazado es nuestro. |
+El shapefile **no es la copia de referencia**: corta los nombres de campo a diez
+caracteres y el texto a 254, que es donde vive la procedencia. Cada carpeta con
+shapefiles trae un LEEME que dice, medido, qué campo se acortó y cuál se
+renombró. Para dibujar y medir sirve igual; para citar de dónde salió un
+polígono, usa el GeoPackage.
 
 ## Lo primero que hay que abrir
 
 La capa **`00_procedencia_de_cada_capa`** del GeoPackage. No tiene geometría: es
-una tabla que dice, para cada capa, de dónde salió, con qué método, y **cuánto se
-equivoca**. Ábrela antes de usar cualquier capa.
+una tabla que dice, para cada capa, de dónde salió, con qué método y **cuánto se
+equivoca**.
 
-Esto no es burocracia. Las capas de este proyecto **no son comparables entre
-sí**: una es un instrumento legal, otra es agua medida por satélite en una fecha,
-otra es un modelo global de 1 km. Usarlas como si dijeran lo mismo es el error
-que el proyecto entero existe para evitar.
+Las capas de este proyecto **no son comparables entre sí**: una
+es un instrumento legal, otra es agua medida por satélite en una fecha, otra es
+un modelo global de 1 km. Usarlas como si dijeran lo mismo es el error que el
+proyecto entero existe para evitar.
 
-## Las cuatro capas de evidencia, y por qué nunca se fusionan
+**A · Normativo** — lo que el plan regulador declaró área de riesgo. Tiene
+efecto legal. No es una modelación: puede venir de un estudio cualitativo de
+hace trece años.
 
-| Capa | Qué es | Qué NO es |
-|---|---|---|
-| **A · Normativo** | Lo que el plan regulador declaró área de riesgo. Tiene efecto legal. | No es una modelación: puede venir de un estudio cualitativo de hace 13 años. |
-| **B · Observado** | Agua que el radar midió, con fecha. | No es «hasta dónde puede llegar»: es hasta dónde llegó ese día, si el satélite pasó a tiempo. |
-| **C · Modelado** | Lo que un estudio calculó bajo un escenario. | No es un pronóstico. |
-| **D · Operacional** | Dónde el municipio reportó problemas. | No es una delimitación: son puntos, no áreas. |
+**A · Derivado** — cartografía de un documento comunal que sólo existía en papel
+y que nosotros convertimos en geometría. El contenido es del municipio; el
+trazado es nuestro.
+
+**B · Observado** — agua que el radar midió, con fecha. No es «hasta dónde puede
+llegar»: es hasta dónde llegó ese día.
+
+**C · Modelado** — lo que un estudio calculó bajo un escenario. No es un
+pronóstico.
+
+**D · Operacional** — dónde el municipio reportó problemas. No es una
+delimitación: son puntos, no áreas.
 
 **Nunca las promedies, ni las unas, ni saques una capa «síntesis».** Si se
-fusionan, se pierde lo único que hace confiable a este proyecto: poder decir de
-dónde salió cada borde.
+fusionan se pierde lo único que hace confiable a esto: poder decir de dónde
+salió cada borde.
 
-## Antes de tocar nada, cuatro reglas
+## Las siglas
 
-Son del proyecto y todas nacieron de un error real que ya se cometió. Éstas son
-las cuatro que más te van a tocar:
+**PRC** — Plan Regulador Comunal: el instrumento que zonifica el suelo urbano.
+**IPT** es Instrumento de Planificación Territorial, y el PRC es uno.
 
-- Las **cuatro capas de evidencia nunca se fusionan**.
-- **Nunca se inventa un valor**: si la fuente no lo dice, va «no declarado».
-- Los **índices agregados se fusionan**, jamás se sobrescriben. Este error mordió
-  cuatro veces y su síntoma es mudo.
-- **El título de una lámina nombra su marco, no lo que mapea.** Mira dónde caen
-  las clases de la leyenda antes de invertir horas en georreferenciarla.
+**AR-2a, ZR-5…** — códigos de área de riesgo dentro de un plan. Los define cada
+plan por su cuenta: el AR-2a de Angol son las áreas inundables, y otro plan
+puede usar otro código para lo mismo.
 
-⚠️ Y ojo: **la numeración de los scripts NO es el orden de ejecución.** El orden
-real está en `scripts/ORDEN.md`.
+**OGUC** — Ordenanza General de Urbanismo y Construcciones. Su artículo 2.1.17
+rige las áreas de riesgo: no prohíben construir, **condicionan** — exigen un
+estudio de un especialista y obras de mitigación.
 
-## Reglas que hay que respetar al entregar
+**EAE** — Evaluación Ambiental Estratégica, el trámite por el que pasan los
+planes reguladores. De su registro público salen muchos de estos documentos.
 
-1. **Todo lo que produzcas lleva su procedencia**: fuente, año, método y error.
-   Si no puede declararlos, no se publica.
-2. **Nunca inventes un valor.** Ni una coordenada, ni un año, ni una clase. Si la
-   fuente no lo dice, va «no declarado por la fuente».
-3. **Declara el RMSE** de cada georreferenciación, y con cuántos puntos de
-   control se obtuvo.
-4. **Los archivos originales no se tocan.** `data/raw/` es de sólo lectura;
-   todo lo derivado va a `data/processed/`.
-5. **Si algo te parece dudoso, márcalo en vez de resolverlo por tu cuenta.** Un
-   polígono mal ubicado que nadie cuestiona es peor que uno pendiente.
+**RRD** y **PACCC** — planes comunales de reducción de riesgo de desastres
+(Ley 21.364) y de cambio climático (Ley 21.455). Suelen traer cartografía que no
+está en ninguna otra parte.
 
-## Qué devolver
+**RMSE** — el error del ajuste al georreferenciar, en metros. Con menos de tres
+puntos de control no significa nada.
 
-- El `config/laminas.yaml` con las láminas nuevas declaradas.
-- Los `.points` de QGIS de lo que georreferenciaste a mano.
-- Un archivo de notas con lo que **no** pudiste hacer y por qué. Esa lista vale
-  tanto como lo que sí salió: es la que evita que la próxima persona repita el
-  intento.
+**SENAPRED** — Servicio Nacional de Prevención y Respuesta ante Desastres, ex
+ONEMI.
 
-## Dudas frecuentes
+## Si algo no calza
 
-**¿Y si la lámina no dice su huso UTM, o lo dice mal?**
-Pasa. La lámina de Catripulli declara «Huso 18 Sur» y es 19 Sur — con 18 caería
-en el Pacífico. El script lo detecta porque verifica que el resultado aterrice
-dentro de la región. No le creas al recuadro de información cartográfica: creele
-a dónde aterriza.
-
-**¿Cuántos puntos de control necesito?**
-Tres como mínimo, y repartidos. Con dos el ajuste es exacto y el RMSE miente: no
-hay residuo que medir. Mientras más repartidos por la hoja, mejor.
-
-**¿Qué hago si un polígono queda a medias entre dos comunas?**
-Déjalo con la comuna que declara el documento de origen, no con la que te parece.
-El campo `comuna` es la llave con que se cruza todo lo demás.
+Anótalo y sigue. Un polígono dudoso marcado vale más que uno resuelto por tu
+cuenta: lo que no puedas verificar contra el documento no lo inventes.
 """, encoding="utf-8")
 
 
