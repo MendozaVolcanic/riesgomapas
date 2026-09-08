@@ -459,6 +459,11 @@ def procesar(cfg: dict, region: dict) -> dict | None:
                     "comuna": cfg["comuna"],
                     "amenaza": "inundación",
                     "fuente": cfg["fuente"],
+                    # El enlace al documento del que salió, pegado al polígono.
+                    # Vivía sólo en config/laminas.yaml, que no se publica: quien
+                    # recibía el dato tenía el nombre de la fuente y ninguna
+                    # forma de llegar a ella.
+                    "url": cfg.get("url", ""),
                     "anio": str(cfg["anio_estudio"]),
                     "metodo_original": cfg["metodo_original"],
                     "escala_original": cfg["escala_impresa"],
@@ -595,7 +600,8 @@ def procesar_plano(cfg: dict, region: dict) -> dict | None:
                     "clase": clase["nombre"],
                     "descripcion": clase.get("descripcion", ""),
                     "comuna": cfg["comuna"], "amenaza": "inundación",
-                    "fuente": cfg["fuente"], "anio": str(cfg["anio_estudio"]),
+                    "fuente": cfg["fuente"], "url": cfg.get("url", ""),
+                    "anio": str(cfg["anio_estudio"]),
                     "efecto_legal": cfg.get("efecto_legal", ""),
                     "escala_original": cfg["escala_impresa"],
                     "hectareas": round(g.area / 10_000, 2),

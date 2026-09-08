@@ -388,6 +388,11 @@ def main() -> None:
         encoding="utf-8")
     log(f"  3_capas_en_shapefile: {len(recortes)} capas exportadas a .shp")
 
+    # De dónde salió cada polígono, con su enlace: la primera pregunta de
+    # cualquiera que recibe geometría ajena.
+    n_filas = tabla_de_fuentes(dest, gpkg)
+    log(f"  FUENTE_DE_CADA_POLIGONO: {n_filas} geometrías con su fuente y enlace")
+
     # La guía de trabajo, en QGIS y sin una línea de código: quien recibe esto
     # no tiene el repositorio ni corre los scripts.
     escribir_guia_qgis(dest, a.provincia.title())
@@ -397,7 +402,8 @@ def main() -> None:
     pendientes = carpeta_pendientes(
         dest / "2_laminas_por_georreferenciar", comunas,
         {(DATA_RAW / declaradas[f["id"]]["pdf"]).name: f["carpeta"]
-         for f in fichas if f.get("id") in declaradas})
+         for f in fichas if f.get("id") in declaradas},
+        ret_por_comuna)
     log(f"  2_laminas_por_georreferenciar: {pendientes} PDF copiados + índice")
 
     escribir_tareas(dest, a.provincia.title(), filas, ret_por_comuna)
@@ -420,6 +426,107 @@ def main() -> None:
 # elección de entrega, no del dato: el PDF original va al lado y ahí está todo
 # el detalle.
 LADO_MAYOR_LAMINA_PX = 4000
+
+
+def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
+    """Un polígono por fila, con su fuente y el enlace para abrirla.
+
+    Por qué hace falta si cada polígono ya lleva su fuente pegada: porque para
+    verla hay que abrir QGIS, cargar la capa y hacer clic uno por uno. Esta
+    tabla contesta de una mirada «¿de dónde salió cada cosa que hay acá?», que
+    es la primera pregunta de cualquiera que reciba geometría ajena.
+
+    Sale en dos formas por el mismo motivo por el que existe: el `.csv` se abre
+    en Excel y se ordena y filtra —son cientos de filas—; el resumen agrupado
+    por documento cabe en una página y es el que se lee.
+    """
+    import csv
+    import fiona
+    import geopandas as gpd
+
+    # Las capas que bajamos de un servicio no traen `url` por geometría —su
+    # dirección es de la capa entera, no de cada polígono— así que se toma de la
+    # tabla de procedencia que el propio paquete lleva adentro. Sin esto la
+    # columna «Enlace» quedaba vacía justo en las capas oficiales, que son las
+    # que más falta hace poder ir a mirar.
+    url_de_capa: dict[str, str] = {}
+    try:
+        proc = gpd.read_file(gpkg, layer="00_procedencia_de_cada_capa")
+        url_de_capa = {str(r["capa"]): str(r.get("url") or "")
+                       for _, r in proc.iterrows()}
+    except Exception:                   # noqa: BLE001
+        pass
+
+    filas = []
+    for capa in fiona.listlayers(gpkg):
+        if capa.startswith("00_"):
+            continue
+        g = gpd.read_file(gpkg, layer=capa)
+        if g.empty:
+            continue
+        cols = set(g.columns)
+        for i, r in g.iterrows():
+            geom = r.geometry
+            filas.append({
+                "capa": capa,
+                "id_en_la_capa": i,
+                "que_es": next((str(r[c]) for c in ("clase", "clasificacion",
+                                                    "nombre", "sector", "causa")
+                                if c in cols and r.get(c) not in (None, "")), ""),
+                "comuna": str(r.get("comuna", "")) if "comuna" in cols else "",
+                "hectareas": (round(geom.area * 1.11e10 / 1e4, 2)
+                              if geom is not None and geom.geom_type in
+                              ("Polygon", "MultiPolygon") else ""),
+                "anio": str(r.get("anio", "")) if "anio" in cols else "",
+                "fuente": str(r.get("fuente", "")) if "fuente" in cols else "",
+                "enlace": (str(r.get("url", "")) if "url" in cols and r.get("url")
+                           else url_de_capa.get(capa, "")),
+                "estado_tramite": (str(r.get("estado_tramite", ""))
+                                   if "estado_tramite" in cols else ""),
+                "incertidumbre_borde_m": (str(r.get("incertidumbre_borde_m", ""))
+                                          if "incertidumbre_borde_m" in cols else ""),
+            })
+    if not filas:
+        return 0
+
+    with open(dest / "FUENTE_DE_CADA_POLIGONO.csv", "w", newline="",
+              encoding="utf-8-sig") as fh:      # BOM: Excel abre las tildes bien
+        w = csv.DictWriter(fh, fieldnames=list(filas[0]), delimiter=";")
+        w.writeheader()
+        w.writerows(filas)
+
+    # El resumen: una fila por documento, no por polígono.
+    from collections import defaultdict
+    grupos: dict[tuple, list] = defaultdict(list)
+    for f in filas:
+        grupos[(f["capa"], f["fuente"], f["enlace"], f["anio"])].append(f)
+    L = ["# De dónde salió cada polígono", "",
+         "Cada polígono lleva su fuente y su enlace **pegados en la tabla de**",
+         "**atributos**: en QGIS, clic derecho en la capa → *Abrir tabla de",
+         "atributos*, o la herramienta *Identificar objetos espaciales* y un clic",
+         "sobre el polígono. Ahí están las columnas `fuente`, `url`, `anio` y",
+         "—en lo que trazamos nosotros— `incertidumbre_borde_m`.",
+         "",
+         "Esta tabla es el resumen: una fila por documento. El detalle polígono",
+         "por polígono está en **`FUENTE_DE_CADA_POLIGONO.csv`**, que se abre en",
+         "Excel y se puede ordenar y filtrar.",
+         "",
+         "| Capa | Qué contiene | Polígonos | Año | Fuente | Enlace |",
+         "|---|---|---:|---|---|---|"]
+    for (capa, fuente, enlace, anio), fs in sorted(grupos.items()):
+        clases = sorted({f["que_es"] for f in fs if f["que_es"]})
+        que = ", ".join(clases[:4]) + ("…" if len(clases) > 4 else "")
+        link = f"[abrir]({enlace})" if str(enlace).startswith("http") else "—"
+        L.append(f"| {capa} | {que[:60]} | {len(fs)} | {anio or '—'} | "
+                 f"{(fuente or '—')[:110]} | {link} |")
+    L += ["",
+          "Ojo con qué abre cada enlace. Los de las láminas llevan al documento",
+          "del municipio; los de las capas oficiales, al **servicio de datos** del",
+          "que se descargan —un servidor ArcGIS o un catálogo—, no a un informe.",
+          "El detalle de cómo se procesó cada una está en la tabla",
+          "`00_procedencia_de_cada_capa` del GeoPackage.", ""]
+    (dest / "FUENTE_DE_CADA_POLIGONO.md").write_text("\n".join(L), encoding="utf-8")
+    return len(filas)
 
 
 def empaquetar(dest: Path) -> Path:
@@ -859,7 +966,8 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
 
 
 def carpeta_pendientes(dest: Path, comunas: set[str],
-                       ya_hechos: dict[str, str] | None = None) -> int:
+                       ya_hechos: dict[str, str] | None = None,
+                       reticulas: dict[str, list] | None = None) -> int:
     """Los documentos con lámina localizada que TODAVÍA no se vectorizaron.
 
     Es el trabajo que se le encarga al practicante, y va con el PDF al lado por
@@ -930,6 +1038,41 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
             url = d.get("url") or ""
             L.append(f"| {com.title()} | {d['archivo'][:52]} | **{pags}** | {total} | "
                      f"{local} | {'[ver](' + url + ')' if url else '—'} |")
+    # Y los documentos donde se DETECTÓ una cuadrícula, que es otra vía y no
+    # coincide con la anterior: TAREAS los nombra uno por uno y hasta ahora
+    # podía nombrar un PDF que no viajaba en el paquete —el PLADECO de Renaico,
+    # por ejemplo—. Prometer evidencia que no se puede abrir es el defecto que
+    # este proyecto persigue en todas partes; también acá.
+    import hashlib
+    extra = []
+    for com, rs in sorted((reticulas or {}).items()):
+        for r in rs:
+            nombre = Path(r["pdf"]).name
+            hallado = next(iter(DATA_RAW.glob(f"documentos/**/{nombre}")), None)
+            if not hallado or not hallado.exists():
+                extra.append((com, nombre, r["pagina"], "no lo tenemos descargado"))
+                continue
+            h = hashlib.sha256(hallado.read_bytes()).hexdigest()
+            if h in vistos:
+                extra.append((com, nombre, r["pagina"], f"ya está en `{vistos[h]}`"))
+                continue
+            sub = dest / _slug(com)
+            sub.mkdir(exist_ok=True)
+            shutil.copy2(hallado, sub / nombre)
+            vistos[h] = f"{_slug(com)}/{nombre}"
+            copiados += 1
+            extra.append((com, nombre, r["pagina"], f"`{_slug(com)}/{nombre}`"))
+    if extra:
+        L += ["", "## Documentos con cuadrícula detectada", "",
+              "Acá el programa vio una retícula regular en la página, que es la",
+              "señal de que la lámina se puede georreferenciar por sus rótulos y",
+              "no contra el mapa base. **No garantiza que sea de inundación: lee",
+              "la página antes de invertir tiempo.**", "",
+              "| Comuna | Documento | Página | PDF |", "|---|---|---:|---|"]
+        for com, nombre, pag, donde in extra:
+            L.append(f"| {com.title()} | {nombre[:52]} | {pag} | {donde} |")
+        L.append("")
+
     (dest / "LEEME.md").write_text("\n".join(L) + "\n", encoding="utf-8")
     return copiados
 
@@ -1045,6 +1188,9 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
   acá si vas a producir cartografía nueva.**
 - **`3_capas_en_shapefile/`** — todas las capas del GeoPackage exportadas a
   `.shp`, por comodidad. La copia de referencia sigue siendo el `.gpkg`.
+- **`FUENTE_DE_CADA_POLIGONO`** — de dónde salió cada cosa que hay acá, con el
+  enlace para abrir el documento. El resumen por documento en el texto; el
+  detalle polígono por polígono en el `.csv`, que se abre en Excel.
 - **`TAREAS`** — qué falta, por comuna, ordenado por lo que más importa.
 - **`ESTADO_DE_LOS_POLIGONOS`** — la revisión que le hicimos a lo ya
   vectorizado antes de entregártelo: geometrías inválidas, polígonos cortados

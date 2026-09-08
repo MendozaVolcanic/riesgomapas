@@ -182,7 +182,10 @@ def main() -> None:
             "procedencia": procedencia(
                 fuente="Láminas de peligro publicadas en documentos oficiales, "
                        "vectorizadas por el proyecto",
-                url="",
+                # No hay una URL única para la capa: cada lámina viene de un
+                # documento distinto. La de cada polígono va en su propio campo
+                # `url`, que es donde sirve.
+                url="cada polígono trae la URL de su documento en el campo `url`",
                 metodo="Georreferenciación desde la retícula UTM impresa o desde "
                        "los vértices rotulados del plano, y clasificación de las "
                        "clases de la leyenda por color o por trama. Cada polígono "

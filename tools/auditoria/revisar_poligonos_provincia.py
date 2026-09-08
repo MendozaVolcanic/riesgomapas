@@ -238,11 +238,18 @@ def main() -> int:
         if val["duplicados"]:
             detectado["duplicado"] = True
 
-    # Capas del paquete: lo que el recorte a la provincia pudo partir.
-    L += ["## Recorte a la provincia", "",
+    # TODAS las capas del paquete, no sólo las láminas: quien las va a usar
+    # necesita saber de cuáles puede fiarse. Se revisa lo mismo que arriba —
+    # validez, duplicados— más lo que sólo tiene sentido acá: qué polígonos
+    # parte el recorte a la provincia, y si a la capa le falta declarar de dónde
+    # salió.
+    L += ["## Todas las capas del paquete", "",
           "Un polígono que toca el borde del recorte está partido acá pero entero",
-          "en la capa regional: no es un defecto del dato, es del recorte. Se",
-          "revisa para que nadie mida un área creyendo que es la completa.", ""]
+          "en la capa regional: no es un defecto del dato sino del recorte, y se",
+          "señala para que nadie mida un área creyendo que es la completa.", "",
+          "«Inválidas» son geometrías que se cruzan a sí mismas: el área y el",
+          "«¿cae dentro?» pueden dar distinto según la herramienta. QGIS las",
+          "repara con *Vector → Herramientas de geometría → Reparar geometrías*.", ""]
     pq = RAIZ / "data" / "processed" / f"paquete_{nz(a.provincia).lower()}"
     gpkg = pq / f"capas_{nz(a.provincia).lower()}.gpkg"
     if gpkg.exists():
@@ -255,19 +262,52 @@ def main() -> int:
               if nz(f["properties"].get("comuna")) in comunas]
         m = 0.15
         borde = box(min(xs) - m, min(ys) - m, max(xs) + m, max(ys) + m).exterior
-        L += ["| Capa | Geometrías | Tocan el borde del recorte |", "|---|---:|---:|"]
+        L += ["| Capa | Geometrías | Inválidas | Duplicadas | Parte el recorte | Declara su fuente |",
+              "|---|---:|---:|---:|---:|---|"]
         for capa in fiona.listlayers(gpkg):
             if capa.startswith("00_"):
                 continue
             g = gpd.read_file(gpkg, layer=capa)
             if g.empty or g.geometry.isna().all():
                 continue
+            feats = [{"geometry": x.__geo_interface__, "properties": {}}
+                     for x in g.geometry if x is not None]
+            val = revisar_validez(feats)
             tocan = int(sum(1 for x in g.geometry if x is not None
                             and x.distance(borde) < 1e-9))
-            L.append(f"| {capa} | {len(g)} | {tocan} |")
+            # ¿La capa dice de dónde salió? Si trae `fuente` o `url` por
+            # geometría, se puede rastrear sin abrir otra cosa.
+            tiene_url = "url" in g.columns and g["url"].notna().any() and (g["url"] != "").any()
+            tiene_fuente = "fuente" in g.columns and g["fuente"].notna().any()
+            fuente = ("fuente y enlace" if tiene_fuente and tiene_url
+                      else "sólo el nombre" if tiene_fuente
+                      else "**no** — mira la tabla de procedencia del GeoPackage")
+            L.append(f"| {capa} | {len(g)} | {len(val['invalidos'])} | "
+                     f"{len(val['duplicados'])} | {tocan} | {fuente} |")
         L.append("")
     else:
-        L += [f"(no existe {gpkg.name}: corre antes el script 20)", ""]
+        L += [f"(no existe {gpkg.name}: hay que armar el paquete primero)", ""]
+
+    # De dónde sale cada capa, con su enlace: para poder ir a la fuente sin
+    # tener que abrir el GeoPackage ni preguntarle a nadie.
+    L += ["## De dónde sale cada capa", "", "| Capa | Fuente | Enlace |", "|---|---|---|"]
+    for ruta, nombre in [
+            ("web/data/areas-riesgo-inundacion.geojson", "areas_riesgo_PRC_MINVU"),
+            ("web/data/puntos-criticos-inundacion.geojson", "puntos_criticos_SENAPRED"),
+            ("web/data/sar/huella-observada.geojson", "huella_observada_satelite"),
+            ("web/data/gore/amenaza-inundacion.geojson", "amenaza_modelada_GORE_2016"),
+            ("web/data/jrc/rp100.geojson", "amenaza_modelada_JRC_100a"),
+            ("web/data/campamentos-inundacion.geojson", "campamentos"),
+            ("data/processed/arclim/desbordes-araucania.geojson", "desbordes_ARClim"),
+            ("web/data/laminas/vectorizadas.geojson", "DERIVADO_* (las láminas)")]:
+        d = cargar(RAIZ / ruta)
+        if not d:
+            continue
+        pr = d.get("procedencia") or {}
+        url = pr.get("url", "")
+        enlace = f"[abrir]({url})" if url.startswith("http") else (url or "—")
+        L.append(f"| {nombre} | {pr.get('fuente', '')[:90]} | {enlace} |")
+    L.append("")
 
     salida = "\n".join(L)
     print(salida)
