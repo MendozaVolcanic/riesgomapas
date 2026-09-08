@@ -8,7 +8,15 @@ Chile como servicio ArcGIS abierto, en vectorial y sin autenticación.
 
     services3.arcgis.com/cTnMkBRk4HWkUCRo
       · prc_riesgo_nacional_visor_P/0   "Área Riesgo PRC"  — 3.765 polígonos país
+      · prc_riesgo_nacional_visor_P/1   "Área Riesgo PRI"  — 21.392 polígonos país
       · 09_PRC_La_Araucania             — 42 capas, PRC comuna por comuna
+
+Se usa la capa 0. La 1 —las áreas de riesgo de los planes reguladores
+INTERcomunales— se consultó el 8-sep-2026 y en toda La Araucanía tiene **dos**
+polígonos, los dos de REMOCION EN MASA y los dos en Cautín (Villarrica-Pucón).
+Para inundación en esta región no aporta nada. Queda anotado para que no haya
+que volver a preguntárselo: 21.392 registros a escala país invitan a suponer
+que falta media capa.
 
 Ojo con lo que esto es y lo que no es: son las **áreas de riesgo del instrumento
 normativo** (Art. 2.1.17 OGUC), es decir, dónde el plan regulador restringe o
