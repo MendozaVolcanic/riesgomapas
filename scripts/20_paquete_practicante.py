@@ -623,7 +623,13 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
     listado = "\n".join(
         f"  - `{f['carpeta']}/` — {f['poligonos']} polígonos, {f['hectareas']} ha"
         for f in fichas) or "  (ninguna todavía en esta provincia)"
+    from datetime import date
     (dest / "LEEME.md").write_text(f"""# Paquete de trabajo — provincia de {prov}
+
+> Armado el **{date.today().isoformat()}**. Los datos son los que el proyecto
+> tenía ese día: si pasaron meses, vale la pena regenerarlo con
+> `python scripts/20_paquete_practicante.py --provincia {prov}` antes de apoyarse
+> en los conteos.
 
 ## Qué hay acá
 
@@ -646,6 +652,69 @@ partir de una figura impresa: el contenido es del municipio, el trazado es
 nuestro. Un polígono así, suelto, es una afirmación sin respaldo. Con la lámina
 al lado se puede comparar, discutir y corregir — que es exactamente lo que
 queremos que pase.
+
+## En qué formato está todo, y con qué se abre
+
+| Extensión | Qué es | Con qué se abre |
+|---|---|---|
+| `.gpkg` | **GeoPackage**: un solo archivo con varias capas adentro, tabla de atributos incluida. | QGIS (arrástralo al lienzo), ArcGIS, R, Python. |
+| `.geojson` | Texto plano con la geometría y sus atributos. Se puede abrir con el Bloc de notas y leer. | QGIS, cualquier editor, cualquier lenguaje. |
+| `.jpg` | La página del documento donde está la lámina. | Cualquier visor de imágenes. |
+| `.pdf` | El documento original de la fuente. | Cualquier lector de PDF. |
+| `.md` | Texto con formato (esto que estás leyendo). | Bloc de notas, o cualquier editor que muestre Markdown. |
+
+**Todas las geometrías vienen en EPSG:4326** (WGS84, latitud y longitud en
+grados). Es el sistema en que se publican y el que entiende cualquier
+herramienta sin configurar nada. Si vas a medir distancias o áreas, reproyecta
+antes a UTM 18S (EPSG:32718) o 19S (EPSG:32719) según la zona: en grados, un
+área en «metros cuadrados» no significa nada.
+
+**Por qué no hay shapefiles.** El `.shp` son seis archivos sueltos por capa que
+se separan al copiar, corta los nombres de campo a diez caracteres —`estado_tramite`
+quedaría en `estado_tra`— y se pelea con las tildes. Si tu flujo de trabajo los
+exige, expórtalos tú desde QGIS: clic derecho en la capa → Exportar → Guardar
+como. Pero trabaja con el GeoPackage.
+
+## Cómo saber si tu trabajo quedó bien
+
+Ésta es la parte que más importa y la más fácil de saltarse. Una lámina puede
+estar **perfectamente** georreferenciada y aun así no servir; y puede verse bien
+en pantalla y estar corrida cientos de metros.
+
+Compara siempre contra algo que **no haya participado** en tu trabajo:
+
+1. **Los puntos críticos de SENAPRED** (`puntos_criticos_SENAPRED` en el
+   GeoPackage). Son sitios donde el municipio reportó inundación, y nadie los
+   usó para georreferenciar nada. Si vectorizaste un área de inundación y
+   **ningún** punto crítico cae cerca, sospecha de tu georreferenciación antes
+   de creerle al resultado.
+2. **El modelo del GORE** (`amenaza_modelada_GORE_2016`). Es grueso —35 m— pero
+   independiente: si tu mancha no solapa nada de la clase máxima, algo pasa.
+
+Así se descartó una lámina de la DGA que parecía perfecta: la escala calzaba al
+0,09 % en ambos ejes y los pueblos caían exactos, pero **0 de 77** puntos
+críticos quedaban a menos de 300 m de sus polígonos de riesgo. El mapa estaba
+bien ubicado; lo que dibujaba no era el área que su título prometía.
+
+En cambio, cuando la lámina 2 del plano de Angol se vectorizó, cuatro de seis
+puntos críticos cayeron **dentro** del área de riesgo. Ése es el resultado que
+se busca.
+
+## Glosario de las siglas que vas a encontrar
+
+| Sigla | Qué significa |
+|---|---|
+| **PRC** | Plan Regulador Comunal: el instrumento que zonifica el suelo urbano de una comuna. Lo aprueba el municipio y lo visa la SEREMI. |
+| **IPT** | Instrumento de Planificación Territorial. El PRC es uno. |
+| **AR-1, AR-2a…** | Códigos de «Área de Riesgo» dentro de un PRC. El número y la letra los define cada plan: **AR-2a** en Angol son las áreas inundables o potencialmente inundables. Otro plan puede usar otro código para lo mismo. |
+| **ZR-3, ZR-5…** | Lo mismo, en los planes que numeran sus zonas de riesgo con «ZR». |
+| **OGUC** | Ordenanza General de Urbanismo y Construcciones. Su **artículo 2.1.17** es el que rige las áreas de riesgo: no prohíben construir, **condicionan** — exigen un estudio fundado de un especialista y obras de mitigación. |
+| **EAE** | Evaluación Ambiental Estratégica: el trámite por el que pasan los planes reguladores. Su registro público es de donde salen muchos de estos documentos. |
+| **RRD** | Reducción del Riesgo de Desastres. Los Planes Comunales de RRD (Ley 21.364) suelen traer cartografía que no está en ninguna otra parte. |
+| **PACCC** | Plan de Acción Comunal de Cambio Climático (Ley 21.455). Otra vía por la que aparecen mapas de inundación. |
+| **RMSE** | El error del ajuste al georreferenciar, en metros. Con menos de tres puntos de control no significa nada: no hay residuo que medir. |
+| **SENAPRED** | Servicio Nacional de Prevención y Respuesta ante Desastres, ex ONEMI. |
+| **Derivado** | Geometría que construimos **nosotros** desde una figura impresa. El contenido es de la fuente; el trazado es nuestro. |
 
 ## Lo primero que hay que abrir
 
