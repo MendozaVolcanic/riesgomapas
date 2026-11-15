@@ -1,0 +1,8 @@
+  OK    base sin defectos
+  OK    D1 detectado
+  OK    D2 detectado
+  OK    D3b detectado
+  OK    D5 detectado
+  OK    D5 no se marca si apto
+  OK    D6 detectado
+CONTROL: el instrumento ve cada defecto fabricado

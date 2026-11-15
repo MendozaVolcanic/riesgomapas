@@ -1,0 +1,301 @@
+C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas\tests\auditoria_e2e.py:96: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  return len(set(im.getdata()))
+servidor de auditoría en http://127.0.0.1:61549
+
+--- ESCRITORIO ---
+  [OK] mapa carga [escritorio]
+  [OK] capa osm [escritorio]
+  [OK] capa pc-circ [escritorio]
+  [OK] capa ar-fill [escritorio]
+  [OK] capa huellas-fill [escritorio]
+  [OK] capa camp-fill [escritorio]
+  [OK] capa sar-fill [escritorio]
+  [OK] capa sar-line [escritorio]
+  [OK] capa gore-fill [escritorio]
+  [OK] el mapa dibuja contenido [escritorio] — 13713 colores distintos
+  [OK] el sitio declara que sirve antes de comprar o construir [escritorio]
+  [OK] la evidencia se puede imprimir o guardar como PDF [escritorio]
+  [OK] se puede generar la solicitud de transparencia [escritorio]
+  [OK] la solicitud cita la ley y es específica [escritorio] — 1596 caracteres
+  [OK] al imprimir se incluye la evidencia completa [escritorio]
+  [OK] el sitio nombra a sus autores [escritorio]
+  [OK] el sitio declara que no tiene respaldo institucional [escritorio]
+  [OK] el sitio dice que espera dejar de hacer falta [escritorio]
+  [OK] el pie declara todas las fuentes publicadas [escritorio]
+  [OK] el sitio declara que no registra datos personales [escritorio]
+  [OK] la ficha dice con qué cuenta la comuna [escritorio]
+  [OK] el inventario se distingue de la evidencia de amenaza [escritorio]
+  [OK] el estado de la comuna se puede compartir [escritorio]
+  [OK] los planos liberan memoria al apagarlos [escritorio] — 2 capa(s) cargadas → 0 capas y 0 fuentes
+  [OK] la capa regional se precachea para uso sin señal [escritorio]
+  [OK] elegir una comuna entrega ficha, no sólo mueve el mapa [escritorio]
+  [OK] parte en la pestaña de respuesta [escritorio]
+  [OK] el descargo se lee antes de consultar [escritorio]
+  [OK] la respuesta corta muestra el punto consultado [escritorio]
+  [OK] la respuesta corta explica por qué [escritorio]
+  [OK] la respuesta corta se mantiene breve [escritorio] — 339 caracteres
+  [OK] el botón lleva al detalle [escritorio]
+  [OK] la evidencia completa sigue entera [escritorio] — 4735 caracteres contra 339 del resumen
+  [OK] las capas del mapa están plegadas por omisión [escritorio]
+  [OK] las capas están agrupadas por tipo de evidencia [escritorio] — 4 grupos
+  [OK] los planos se declaran anteproyecto en la leyenda [escritorio]
+  [OK] las láminas vectorizadas están publicadas [escritorio] — 174 polígonos
+  [OK] la capa derivada se dibuja achurada [escritorio]
+  [OK] la capa derivada entra al veredicto [escritorio] — estás dentro de la zona que el estudio de riesgo de tu comun
+  [OK] la ficha muestra la capa derivada y su sello [escritorio]
+  [OK] la capa derivada declara la incertidumbre del borde [escritorio]
+  [OK] el texto compartido lleva la advertencia de «sin registros» [escritorio]
+  [OK] control #cap-areas clicable [escritorio]
+  [OK] control #cap-derivadas clicable [escritorio]
+  [OK] control #cap-planos clicable [escritorio]
+  [OK] control #cap-puntos clicable [escritorio]
+  [OK] control #cap-camp clicable [escritorio]
+  [OK] control #cap-jrc clicable [escritorio]
+  [OK] control #cap-sar clicable [escritorio]
+  [OK] control #cap-gore clicable [escritorio]
+  [OK] sugerencias al escribir [escritorio] — 1 opciones
+  [OK] sugerencias navegables con teclado [escritorio]
+  [OK] Escape cierra las sugerencias [escritorio]
+  [OK] ficha de respuesta [escritorio]
+  [OK] ficha declara «fuente:» [escritorio]
+  [OK] ficha declara «año:» [escritorio]
+  [OK] ficha declara «plan regulador» [escritorio]
+  [OK] ficha declara «senapred» [escritorio]
+  [OK] ficha declara «modelo global» [escritorio]
+  [OK] ficha declara «observado» [escritorio]
+  [OK] la ficha explica que el área de riesgo condiciona, no prohíbe [escritorio]
+  [OK] «encender todo» prende las 8 capas [escritorio]
+  [OK] «apagar todo» apaga las 8 capas [escritorio]
+  [OK] parte con el mapa base de calles [escritorio]
+  [OK] cambia a imagen satelital [escritorio]
+  [OK] marca el cuerpo para aclarar la escala sobre la imagen [escritorio]
+  [OK] las capas de datos sobreviven al cambio de base [escritorio]
+  [OK] el mapa no deja salir de la región [escritorio] — -74.0…-70.6 lon
+  [OK] un punto fuera de la región se declara fuera de alcance [escritorio]
+  [OK] fuera de alcance NO se confunde con ausencia de riesgo [escritorio]
+  [OK] descargo dice que no es un pronóstico [escritorio]
+  [OK] descargo dice que los métodos no son comparables [escritorio]
+  [OK] descargo dice que el estudio fundado tiene otro peso [escritorio]
+  [OK] descargo dice que el borde es lo más incierto [escritorio]
+  [OK] descargo dice que un mapa envejece [escritorio]
+  [OK] la ficha cierra recordando que el borde es lo incierto [escritorio]
+  [OK] capa B declara agua observada [escritorio]
+  [OK] la huella declara su fecha de pasada [escritorio]
+  [OK] capa B distingue «no observado» de «no inundado» [escritorio]
+  [OK] plano se agrega al mapa [escritorio] — 2 capa(s)
+  [OK] las 20 imágenes de plano cargan [escritorio]
+  [OK] catálogo lista comunas [escritorio] — 25 comunas
+  [OK] filtro del catálogo [escritorio]
+  [OK] sin texto roto por datos ausentes [escritorio]
+  [OK] sin desborde horizontal [escritorio]
+  [OK] contraste body [escritorio] — 13.7:1
+  [OK] contraste .cifra-txt [escritorio] — 6.3:1
+  [OK] contraste .incert [escritorio] — 5.4:1
+  [OK] contraste .eyebrow [escritorio] — 6.3:1
+  [OK] contraste .chip [escritorio] — 12.7:1
+  [OK] contraste .capas-titulo [escritorio] — 6.3:1
+  [OK] contraste .fila-comuna .cr [escritorio] — 6.3:1
+  [OK] contraste .sub [escritorio] — 6.3:1
+  [OK] sin errores de JavaScript [escritorio]
+  [OK] todos los recursos cargan [escritorio]
+
+--- ESCRITORIO OSCURO ---
+  [OK] mapa carga [escritorio oscuro]
+  [OK] capa osm [escritorio oscuro]
+  [OK] capa pc-circ [escritorio oscuro]
+  [OK] capa ar-fill [escritorio oscuro]
+  [OK] capa huellas-fill [escritorio oscuro]
+  [OK] capa camp-fill [escritorio oscuro]
+  [OK] capa sar-fill [escritorio oscuro]
+  [OK] capa sar-line [escritorio oscuro]
+  [OK] capa gore-fill [escritorio oscuro]
+  [OK] el mapa dibuja contenido [escritorio oscuro] — 8977 colores distintos
+  [OK] el sitio declara que sirve antes de comprar o construir [escritorio oscuro]
+  [OK] la evidencia se puede imprimir o guardar como PDF [escritorio oscuro]
+  [OK] se puede generar la solicitud de transparencia [escritorio oscuro]
+  [OK] la solicitud cita la ley y es específica [escritorio oscuro] — 1596 caracteres
+  [OK] al imprimir se incluye la evidencia completa [escritorio oscuro]
+  [OK] el sitio nombra a sus autores [escritorio oscuro]
+  [OK] el sitio declara que no tiene respaldo institucional [escritorio oscuro]
+  [OK] el sitio dice que espera dejar de hacer falta [escritorio oscuro]
+  [OK] el pie declara todas las fuentes publicadas [escritorio oscuro]
+  [OK] el sitio declara que no registra datos personales [escritorio oscuro]
+  [OK] la ficha dice con qué cuenta la comuna [escritorio oscuro]
+  [OK] el inventario se distingue de la evidencia de amenaza [escritorio oscuro]
+  [OK] el estado de la comuna se puede compartir [escritorio oscuro]
+  [OK] los planos liberan memoria al apagarlos [escritorio oscuro] — 1 capa(s) cargadas → 0 capas y 0 fuentes
+  [OK] la capa regional se precachea para uso sin señal [escritorio oscuro]
+  [OK] elegir una comuna entrega ficha, no sólo mueve el mapa [escritorio oscuro]
+  [OK] parte en la pestaña de respuesta [escritorio oscuro]
+  [OK] el descargo se lee antes de consultar [escritorio oscuro]
+  [OK] la respuesta corta muestra el punto consultado [escritorio oscuro]
+  [OK] la respuesta corta explica por qué [escritorio oscuro]
+  [OK] la respuesta corta se mantiene breve [escritorio oscuro] — 339 caracteres
+  [OK] el botón lleva al detalle [escritorio oscuro]
+  [OK] la evidencia completa sigue entera [escritorio oscuro] — 4735 caracteres contra 339 del resumen
+  [OK] las capas del mapa están plegadas por omisión [escritorio oscuro]
+  [OK] las capas están agrupadas por tipo de evidencia [escritorio oscuro] — 4 grupos
+  [OK] los planos se declaran anteproyecto en la leyenda [escritorio oscuro]
+  [OK] las láminas vectorizadas están publicadas [escritorio oscuro] — 174 polígonos
+  [OK] la capa derivada se dibuja achurada [escritorio oscuro]
+  [OK] la capa derivada entra al veredicto [escritorio oscuro] — estás dentro de la zona que el estudio de riesgo de tu comun
+  [OK] la ficha muestra la capa derivada y su sello [escritorio oscuro]
+  [OK] la capa derivada declara la incertidumbre del borde [escritorio oscuro]
+  [OK] el texto compartido lleva la advertencia de «sin registros» [escritorio oscuro]
+  [OK] control #cap-areas clicable [escritorio oscuro]
+  [OK] control #cap-derivadas clicable [escritorio oscuro]
+  [OK] control #cap-planos clicable [escritorio oscuro]
+  [OK] control #cap-puntos clicable [escritorio oscuro]
+  [OK] control #cap-camp clicable [escritorio oscuro]
+  [OK] control #cap-jrc clicable [escritorio oscuro]
+  [OK] control #cap-sar clicable [escritorio oscuro]
+  [OK] control #cap-gore clicable [escritorio oscuro]
+  [OK] sugerencias al escribir [escritorio oscuro] — 1 opciones
+  [OK] sugerencias navegables con teclado [escritorio oscuro]
+  [OK] Escape cierra las sugerencias [escritorio oscuro]
+  [OK] ficha de respuesta [escritorio oscuro]
+  [OK] ficha declara «fuente:» [escritorio oscuro]
+  [OK] ficha declara «año:» [escritorio oscuro]
+  [OK] ficha declara «plan regulador» [escritorio oscuro]
+  [OK] ficha declara «senapred» [escritorio oscuro]
+  [OK] ficha declara «modelo global» [escritorio oscuro]
+  [OK] ficha declara «observado» [escritorio oscuro]
+  [OK] la ficha explica que el área de riesgo condiciona, no prohíbe [escritorio oscuro]
+  [OK] «encender todo» prende las 8 capas [escritorio oscuro]
+  [OK] «apagar todo» apaga las 8 capas [escritorio oscuro]
+  [OK] parte con el mapa base de calles [escritorio oscuro]
+  [OK] cambia a imagen satelital [escritorio oscuro]
+  [OK] marca el cuerpo para aclarar la escala sobre la imagen [escritorio oscuro]
+  [OK] las capas de datos sobreviven al cambio de base [escritorio oscuro]
+  [OK] el mapa no deja salir de la región [escritorio oscuro] — -74.0…-70.6 lon
+  [OK] un punto fuera de la región se declara fuera de alcance [escritorio oscuro]
+  [OK] fuera de alcance NO se confunde con ausencia de riesgo [escritorio oscuro]
+  [OK] descargo dice que no es un pronóstico [escritorio oscuro]
+  [OK] descargo dice que los métodos no son comparables [escritorio oscuro]
+  [OK] descargo dice que el estudio fundado tiene otro peso [escritorio oscuro]
+  [OK] descargo dice que el borde es lo más incierto [escritorio oscuro]
+  [OK] descargo dice que un mapa envejece [escritorio oscuro]
+  [OK] la ficha cierra recordando que el borde es lo incierto [escritorio oscuro]
+  [OK] capa B declara agua observada [escritorio oscuro]
+  [OK] la huella declara su fecha de pasada [escritorio oscuro]
+  [OK] capa B distingue «no observado» de «no inundado» [escritorio oscuro]
+  [OK] plano se agrega al mapa [escritorio oscuro] — 2 capa(s)
+  [OK] las 20 imágenes de plano cargan [escritorio oscuro]
+  [OK] catálogo lista comunas [escritorio oscuro] — 25 comunas
+  [OK] filtro del catálogo [escritorio oscuro]
+  [OK] sin texto roto por datos ausentes [escritorio oscuro]
+  [OK] sin desborde horizontal [escritorio oscuro]
+  [OK] contraste body [escritorio oscuro] — 15.4:1
+  [OK] contraste .cifra-txt [escritorio oscuro] — 6.7:1
+  [OK] contraste .incert [escritorio oscuro] — 7.5:1
+  [OK] contraste .eyebrow [escritorio oscuro] — 6.7:1
+  [OK] contraste .chip [escritorio oscuro] — 11.5:1
+  [OK] contraste .capas-titulo [escritorio oscuro] — 6.7:1
+  [OK] contraste .fila-comuna .cr [escritorio oscuro] — 6.7:1
+  [OK] contraste .sub [escritorio oscuro] — 6.7:1
+  [OK] sin errores de JavaScript [escritorio oscuro]
+  [OK] todos los recursos cargan [escritorio oscuro]
+
+--- MÓVIL ---
+  [OK] mapa carga [móvil]
+  [OK] capa osm [móvil]
+  [OK] capa pc-circ [móvil]
+  [OK] capa ar-fill [móvil]
+  [OK] capa huellas-fill [móvil]
+  [OK] capa camp-fill [móvil]
+  [OK] capa sar-fill [móvil]
+  [OK] capa sar-line [móvil]
+  [OK] capa gore-fill [móvil]
+  [OK] el mapa dibuja contenido [móvil] — 17662 colores distintos
+  [OK] el sitio declara que sirve antes de comprar o construir [móvil]
+  [OK] la evidencia se puede imprimir o guardar como PDF [móvil]
+  [OK] se puede generar la solicitud de transparencia [móvil]
+  [OK] la solicitud cita la ley y es específica [móvil] — 1596 caracteres
+  [OK] al imprimir se incluye la evidencia completa [móvil]
+  [OK] el sitio nombra a sus autores [móvil]
+  [OK] el sitio declara que no tiene respaldo institucional [móvil]
+  [OK] el sitio dice que espera dejar de hacer falta [móvil]
+  [OK] el pie declara todas las fuentes publicadas [móvil]
+  [OK] el sitio declara que no registra datos personales [móvil]
+  [OK] la ficha dice con qué cuenta la comuna [móvil]
+  [OK] el inventario se distingue de la evidencia de amenaza [móvil]
+  [OK] el estado de la comuna se puede compartir [móvil]
+  [OK] los planos liberan memoria al apagarlos [móvil] — 2 capa(s) cargadas → 0 capas y 0 fuentes
+  [OK] la capa regional se precachea para uso sin señal [móvil]
+  [OK] elegir una comuna entrega ficha, no sólo mueve el mapa [móvil]
+  [OK] parte en la pestaña de respuesta [móvil]
+  [OK] el descargo se lee antes de consultar [móvil]
+  [OK] la respuesta corta muestra el punto consultado [móvil]
+  [OK] la respuesta corta explica por qué [móvil]
+  [OK] la respuesta corta se mantiene breve [móvil] — 339 caracteres
+  [OK] el botón lleva al detalle [móvil]
+  [OK] la evidencia completa sigue entera [móvil] — 4735 caracteres contra 339 del resumen
+  [OK] las capas del mapa están plegadas por omisión [móvil]
+  [OK] las capas están agrupadas por tipo de evidencia [móvil] — 4 grupos
+  [OK] los planos se declaran anteproyecto en la leyenda [móvil]
+  [OK] las láminas vectorizadas están publicadas [móvil] — 174 polígonos
+  [OK] la capa derivada se dibuja achurada [móvil]
+  [OK] la capa derivada entra al veredicto [móvil] — estás dentro de la zona que el estudio de riesgo de tu comun
+  [OK] la ficha muestra la capa derivada y su sello [móvil]
+  [OK] la capa derivada declara la incertidumbre del borde [móvil]
+  [OK] el texto compartido lleva la advertencia de «sin registros» [móvil]
+  [OK] control #cap-areas clicable [móvil]
+  [OK] control #cap-derivadas clicable [móvil]
+  [OK] control #cap-planos clicable [móvil]
+  [OK] control #cap-puntos clicable [móvil]
+  [OK] control #cap-camp clicable [móvil]
+  [OK] control #cap-jrc clicable [móvil]
+  [OK] control #cap-sar clicable [móvil]
+  [OK] control #cap-gore clicable [móvil]
+  [OK] sugerencias al escribir [móvil] — 1 opciones
+  [OK] sugerencias navegables con teclado [móvil]
+  [OK] Escape cierra las sugerencias [móvil]
+  [OK] ficha de respuesta [móvil]
+  [OK] ficha declara «fuente:» [móvil]
+  [OK] ficha declara «año:» [móvil]
+  [OK] ficha declara «plan regulador» [móvil]
+  [OK] ficha declara «senapred» [móvil]
+  [OK] ficha declara «modelo global» [móvil]
+  [OK] ficha declara «observado» [móvil]
+  [OK] la ficha explica que el área de riesgo condiciona, no prohíbe [móvil]
+  [OK] «encender todo» prende las 8 capas [móvil]
+  [OK] «apagar todo» apaga las 8 capas [móvil]
+  [OK] parte con el mapa base de calles [móvil]
+  [OK] cambia a imagen satelital [móvil]
+  [OK] marca el cuerpo para aclarar la escala sobre la imagen [móvil]
+  [OK] las capas de datos sobreviven al cambio de base [móvil]
+  [OK] el mapa no deja salir de la región [móvil] — -74.0…-70.6 lon
+  [OK] un punto fuera de la región se declara fuera de alcance [móvil]
+  [OK] fuera de alcance NO se confunde con ausencia de riesgo [móvil]
+  [OK] descargo dice que no es un pronóstico [móvil]
+  [OK] descargo dice que los métodos no son comparables [móvil]
+  [OK] descargo dice que el estudio fundado tiene otro peso [móvil]
+  [OK] descargo dice que el borde es lo más incierto [móvil]
+  [OK] descargo dice que un mapa envejece [móvil]
+  [OK] la ficha cierra recordando que el borde es lo incierto [móvil]
+  [OK] capa B declara agua observada [móvil]
+  [OK] la huella declara su fecha de pasada [móvil]
+  [OK] capa B distingue «no observado» de «no inundado» [móvil]
+  [X] plano sobre el mapa [móvil]: se pulsó el botón y no se agregó ninguna capa de imagen
+  [OK] las 20 imágenes de plano cargan [móvil]
+  [OK] catálogo lista comunas [móvil] — 25 comunas
+  [OK] filtro del catálogo [móvil]
+  [OK] sin texto roto por datos ausentes [móvil]
+  [OK] sin desborde horizontal [móvil]
+  [OK] contraste body [móvil] — 13.7:1
+  [OK] contraste .cifra-txt [móvil] — 6.3:1
+  [OK] contraste .incert [móvil] — 5.4:1
+  [OK] contraste .eyebrow [móvil] — 6.3:1
+  [OK] contraste .chip [móvil] — 12.7:1
+  [OK] contraste .capas-titulo [móvil] — 6.3:1
+  [OK] contraste .fila-comuna .cr [móvil] — 6.3:1
+  [OK] contraste .sub [móvil] — 6.3:1
+  [OK] sin errores de JavaScript [móvil]
+  [OK] todos los recursos cargan [móvil]
+
+========================================================================
+AUDITORÍA: 284 comprobaciones OK, 1 hallazgos
+  [ALTA] plano sobre el mapa [móvil]: se pulsó el botón y no se agregó ninguna capa de imagen
+
+capturas en C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas\data\processed\auditoria
+EXIT 1

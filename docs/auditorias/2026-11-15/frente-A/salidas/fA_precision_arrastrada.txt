@@ -1,0 +1,5 @@
+punto de prueba: -73.134459, -38.701075 (Carahue), borde MINVU a 30.0 m
+RUTA sugerencia tras GPS: precisionPos=65 nivel=medio titulo="Estás justo en el borde de un área marcada como inundable"
+   «por qué» menciona «tu ubicación ±65 m»: true
+RUTA buscar() tras GPS:    precisionPos=null nivel=sindato titulo="Sin registros observados ni norma, pero un modelo sí marca este punto"
+DEFECTO CONFIRMADO: la misma dirección da «borde» por sugerencia y no por buscar(); la precisión del GPS se arrastró.

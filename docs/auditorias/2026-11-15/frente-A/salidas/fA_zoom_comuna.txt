@@ -1,0 +1,33 @@
+NUEVA IMPERIAL     puntos= 34  a1,5km= 5  alto    Tu sector tiene registro de inundaciones
+TEODORO SCHMIDT    puntos= 32  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+PADRE LAS CASAS    puntos= 30  a1,5km= 1  bajo    Registros de inundación a cierta distancia
+PUCÓN              puntos= 26  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+FREIRE             puntos= 26  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+SAAVEDRA           puntos= 23  a1,5km= 0  sindato Sin registros observados ni norma, pero un modelo sí marca este punto
+PITRUFQUÉN         puntos= 23  a1,5km= 0  sindato Sin registros observados ni norma, pero un modelo sí marca este punto
+RENAICO            puntos= 19  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+CURARREHUE         puntos= 18  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+VILLARRICA         puntos= 18  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+LAUTARO            puntos= 16  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+LOS SAUCES         puntos= 16  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+GALVARINO          puntos= 14  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+ANGOL              puntos= 14  a1,5km= 1  bajo    Registros de inundación a cierta distancia
+CUNCO              puntos= 14  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+TOLTÉN             puntos= 13  a1,5km= 0  sindato Sin registros observados ni norma, pero un modelo sí marca este punto
+LONQUIMAY          puntos= 11  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+COLLIPULLI         puntos= 10  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+PURÉN              puntos= 10  a1,5km= 2  alto    Tu sector tiene registro de inundaciones
+ERCILLA            puntos= 10  a1,5km= 0  sindato Sin registros observados ni norma, pero un modelo sí marca este punto
+VILCÚN             puntos= 10  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+CARAHUE            puntos=  9  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+CURACAUTÍN         puntos=  9  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+TRAIGUÉN           puntos=  8  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+LONCOCHE           puntos=  8  a1,5km= 1  bajo    Registros de inundación a cierta distancia
+MELIPEUCO          puntos=  7  a1,5km= 0  sindato Sin registros en las fuentes consultadas
+LUMACO             puntos=  4  a1,5km= 1  alto    El agua llegó hasta acá el 3 de agosto de 2026
+PERQUENCO          puntos=  4  a1,5km= 4  bajo    Registros de inundación a cierta distancia
+CHOL CHOL          puntos=  3  a1,5km= 0  sindato Sin registros observados ni norma, pero un modelo sí marca este punto
+GORBEA             puntos=  1  a1,5km= 1  alto    Tu sector tiene registro de inundaciones
+
+comunas con registros: 30; titular «sin dato» al elegir la comuna: 22 (335 registros en esas comunas)
+CONTROL (punto crítico más cercano al centro no es «sin dato»): OK

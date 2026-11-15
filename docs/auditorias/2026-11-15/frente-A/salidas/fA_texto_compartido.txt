@@ -1,0 +1,103 @@
+FALTA   A derivado AR-2a (efecto legal) @ -72.69911, -37.78179
+   nivel=alto titular="Estás en un área de riesgo por inundación del plan regulador"
+   por qué (pantalla): El plano del plan regulador de tu comuna raya esta zona como área de riesgo por inundación. Ese documento existe sólo en papel: la mancha la dibujamos nosotros desde la lámina impresa, con ±8,3 m de i
+   texto compartido:
+      ESTÁS EN UN ÁREA DE RIESGO POR INUNDACIÓN DEL PLAN REGULADOR
+      Ubicación: punto de prueba
+      
+      El satélite miró este punto el 3 de agosto de 2026 y no detectó agua.
+        Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+        y es la foto del instante de la pasada, no el máximo del evento.
+      
+      Puntos críticos registrados cerca:
+      • 801 m — Inundación por desborde de cauce (riesgo Alto)
+        Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)
+      
+      Esto NO es información oficial ni un pronóstico.
+      En emergencia: SENAPRED y tu municipio.
+FALTA   A derivado clase Medio (estudio 2013) @ -72.69639, -37.79894
+   nivel=alto titular="Estás dentro de la zona que el estudio de riesgo de tu comuna marcó como inundable"
+   por qué (pantalla): El estudio de riesgo de tu comuna (2013) marcó esta zona como medio. Ese documento existe sólo en papel: la mancha la dibujamos nosotros desde la lámina impresa, con ±7,7 m de incertidumbre en el bord
+   texto compartido:
+      ESTÁS DENTRO DE LA ZONA QUE EL ESTUDIO DE RIESGO DE TU COMUNA MARCÓ COMO INUNDABLE
+      Ubicación: punto de prueba
+      
+      El satélite miró este punto el 3 de agosto de 2026 y no detectó agua.
+        Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+        y es la foto del instante de la pasada, no el máximo del evento.
+      
+      Sin puntos críticos registrados en 1,5 km.
+      
+      Esto NO es información oficial ni un pronóstico.
+      En emergencia: SENAPRED y tu municipio.
+FALTA   GORE máxima sin puntos (modelo) @ -73.08786, -38.68423
+   nivel=sindato titular="Sin registros observados ni norma, pero un modelo sí marca este punto"
+   por qué (pantalla): Ningún registro observado ni norma alcanza este punto, pero el modelo regional de 2016 lo clasifica como amenaza maxima. Un modelo no es un registro: dice dónde podría llegar el agua, no dónde llegó.
+   texto compartido:
+      SIN REGISTROS OBSERVADOS NI NORMA, PERO UN MODELO SÍ MARCA ESTE PUNTO
+      Ubicación: punto de prueba
+      
+      El satélite no pasó por acá en la ventana del evento.
+        No observado NO es lo mismo que no inundado.
+      
+      Sin puntos críticos registrados en 1,5 km.
+      
+      OJO: que no haya registro NO significa que acá no se inunde.
+      Significa que nadie lo ha levantado.
+      
+      Esto NO es información oficial ni un pronóstico.
+      En emergencia: SENAPRED y tu municipio.
+FALTA   Campamento en área de riesgo @ -72.61253, -38.75646
+   nivel=medio titular="Estás justo en el borde de un área marcada como inundable"
+   por qué (pantalla): Estás a 10 metros del borde de un área marcada como inundable. Ese borde tiene ±10 m de incertidumbre, así que a esta distancia adentro y afuera no se distinguen.
+   texto compartido:
+      ESTÁS JUSTO EN EL BORDE DE UN ÁREA MARCADA COMO INUNDABLE
+      Ubicación: punto de prueba
+      
+      El satélite miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026 y no detectó agua.
+        Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+        y es la foto del instante de la pasada, no el máximo del evento.
+      
+      Sin puntos críticos registrados en 1,5 km.
+      
+      Esto NO es información oficial ni un pronóstico.
+      En emergencia: SENAPRED y tu municipio.
+NOMBRA  CONTROL + B observado @ -72.12303, -37.45710
+   nivel=alto titular="El agua llegó hasta acá el 4 de agosto de 2026"
+   por qué (pantalla): Un satélite midió agua sobre este punto el 4 de agosto de 2026. No es un modelo: es agua que estuvo ahí.
+   texto compartido:
+      EL AGUA LLEGÓ HASTA ACÁ EL 4 DE AGOSTO DE 2026
+      Ubicación: punto de prueba
+      
+      Huella de inundación OBSERVADA por satélite: el agua llegó hasta acá el 4 de agosto de 2026.
+      • Evento: Sistema frontal 30-jul a 4-ago 2026
+        Fuente: Sentinel-1 SENTINEL-1D GRD (Copernicus / ESA) vía Microsoft Planetary Computer (año: 2026)
+      
+      Sin puntos críticos registrados en 1,5 km.
+      
+      Esto NO es información oficial ni un pronóstico.
+      En emergencia: SENAPRED y tu municipio.
+NOMBRA  CONTROL + A MINVU @ -72.62005, -38.76051
+   nivel=alto titular="Estás en un área de riesgo por anegamiento del plan regulador"
+   por qué (pantalla): El plan regulador de tu comuna declaró esta zona área de riesgo por anegamiento. Es la única fuente con efecto legal.
+   texto compartido:
+      ESTÁS EN UN ÁREA DE RIESGO POR ANEGAMIENTO DEL PLAN REGULADOR
+      Ubicación: punto de prueba
+      
+      El satélite miró este punto los días 3 de agosto de 2026 y 4 de agosto de 2026 y no detectó agua.
+        Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+        y es la foto del instante de la pasada, no el máximo del evento.
+      
+      Plan Regulador — área de riesgo declarada:
+      • ANEGAMIENTO
+        Fuente: MINVU — áreas de riesgo de instrumentos de planificación territorial (Art. 2.1.17 OGUC) (año: 2010)
+      
+      Sin puntos críticos registrados en 1,5 km.
+      
+      Esto NO es información oficial ni un pronóstico.
+      En emergencia: SENAPRED y tu municipio.
+
+punto con más registros a 1,5 km: -71.942799, -39.278511
+
+RECORTE: puntos a ≤1500 m = 15; líneas «•» de puntos en el texto = 3; ¿dice el total? false
+controles positivos OK

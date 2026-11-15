@@ -1,0 +1,5 @@
+CONTROL (dentro de derivado, el detalle trae «±»): OK
+puntos con titular de borde: 532
+  detalle SIN explicación de la banda: 532
+  ... y además con «Este punto no cae dentro de un área de riesgo»: 532
+  ejemplo: {"lon":-72.620737,"lat":-38.761129,"d":0.5,"capa":"normativa","titulo":"Estás justo en el borde de un área marcada como inundable"}

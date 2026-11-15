@@ -1,0 +1,3 @@
+capas cargadas (puntos, laminas, gore, sar, areasRiesgo, campamentos): [440,174,2539,1075,65,15]
+CONTROL Angol AR-2a derivado: alto | Estás en un área de riesgo por inundación del plan regulador | laminas 2 OK
+CONTROL mar: sindato | Sin registros en las fuentes consultadas
