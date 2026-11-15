@@ -1,4 +1,4 @@
-# Guía de la práctica — qué hay, qué haces y cómo se evalúa
+# Guía de la práctica: qué hay, qué haces y cómo se evalúa
 
 > Práctica **CITI-295**, Geología UACh, alojada por **Fundación Pewenkem**.
 > 20 días, >160 horas. Léela entera antes del día 1.
@@ -48,22 +48,22 @@ más acotado y el que te da un resultado defendible en la primera semana. Despu�
 
 | Días | Fase | Objetivo | Qué sale de ahí |
 |---|---|---|---|
-| 1–6 | **Angol de punta a punta** | **3** | Un resultado completo, y sabes que el método funciona |
-| 7–14 | **La base de datos regional** | **1** | La capa curada, fechada y ampliada a comunas sin cartografía |
-| 15–20 | **Cruce, análisis y cierre** | **2** | Población e infraestructura expuestas, informe y charla |
+| 1-6 | **Angol de punta a punta** | **3** | Un resultado completo, y sabes que el método funciona |
+| 7-14 | **La base de datos regional** | **1** | La capa curada, fechada y ampliada a comunas sin cartografía |
+| 15-20 | **Cruce, análisis y cierre** | **2** | Población e infraestructura expuestas, informe y charla |
 
 ### Por qué Angol primero, y por qué es el mejor caso
 
 Porque ahí hay una pregunta con respuesta, y no es la que uno esperaría.
 
-El plan regulador de Angol es de **2022** — el segundo más nuevo de la región. Pero
+El plan regulador de Angol es de **2022**: el segundo más nuevo de la región. Pero
 su **Estudio de Riesgo es de septiembre de 2013**, y lo tienes en disco. Es decir: el
 instrumento parece moderno y su evidencia tiene **trece años más** que el plan que la
 usa, y **trece años menos** que la inundación que tiene que explicar.
 
 Y el método con que delimitó esas zonas está declarado en el propio estudio:
-**álgebra de mapas con pesos** sobre variables morfométricas —morfología, pendiente,
-cobertura vegetal— más terreno. **Sin modelación hidráulica, sin caudales y sin
+**álgebra de mapas con pesos** sobre variables morfométricas (morfología, pendiente,
+cobertura vegetal) más terreno. **Sin modelación hidráulica, sin caudales y sin
 períodos de retorno.** El estudio incluso recomienda, en sus conclusiones, hacer el
 estudio hidromorfométrico de microcuencas que nunca se hizo.
 
@@ -91,13 +91,13 @@ puede preguntar lo mismo a escala regional:
 > real, ¿mejora en los planes más nuevos?**
 
 Hay 59 años de rango, de Puerto Saavedra (1964) a Renaico (2023). **Es opcional**:
-no la persigas si el objetivo 2 va atrasado. Y ojo, porque Angol ya la complica —
+no la persigas si el objetivo 2 va atrasado. Y ojo, porque Angol ya la complica:
 un plan de 2022 apoyado en un estudio de 2013 dice que **la fecha del plan no es la
 fecha de su evidencia**, y ésa es una advertencia metodológica que vale por sí sola.
 
 **Por qué todo esto es geología.** La llanura de inundación es una forma del terreno
 que construyó el río depositando sedimento: se lee en terrazas, paleocauces y
-quiebres de pendiente. De hecho el propio estudio de Angol lo dice — sitúa el
+quiebres de pendiente. De hecho el propio estudio de Angol lo dice, sitúa el
 peligro medio «en áreas de paleocauces» donde la red de drenaje fue modificada.
 Verificar eso en el terreno y contra el agua real es geomorfología fluvial aplicada,
 y no está hecho.
@@ -134,15 +134,15 @@ que recibes lo confirma:
 **La base de datos del objetivo 1 los lleva todos**, cada uno etiquetado por tipo de
 amenaza. La remoción en masa es riesgo geológico tanto como la inundación, y son 52
 polígonos: dejarlos fuera mutilaría el objetivo. La línea de alta tensión, en cambio,
-**no es riesgo geológico** — se conserva en la base con su etiqueta, pero no entra en
+**no es riesgo geológico**: se conserva en la base con su etiqueta, pero no entra en
 el análisis.
 
 **Los objetivos 2 y 3 sí se centran en inundación fluvial**, y por una razón
 práctica: es donde tenemos el evento observado y la capa satelital para contrastar.
 Nadie te va a pedir una remoción en masa medida con radar.
 
-**Qué es inundación fluvial**: agua que se sale de un cauce —río, estero, quebrada,
-canal— y ocupa terreno normalmente seco. **No** lo es el **anegamiento urbano por
+**Qué es inundación fluvial**: agua que se sale de un cauce (río, estero, quebrada,
+canal) y ocupa terreno normalmente seco. **No** lo es el **anegamiento urbano por
 drenaje insuficiente**: un colector que colapsa, un paso bajo nivel que se llena.
 Suena parecido y es otro fenómeno, con otra física y otro servicio responsable.
 
@@ -153,7 +153,7 @@ grupos:
 | Grupo de puntos | Enriquecimiento sobre el azar |
 |---|---:|
 | Desborde de cauce y quebradas | ×2,1 |
-| Colectores y anegamiento de caminos | **×1,0** — azar puro |
+| Colectores y anegamiento de caminos | **×1,0**: azar puro |
 
 Los de drenaje **no muestran ninguna señal**, y es lo que predice la física: el
 radar ve agua libre sobre terreno abierto, no un colector bajo una calle.
@@ -195,7 +195,7 @@ que sirva. Los scripts están como referencia. Para leer: `README.md` y
 
 ## 4. Las tres fases
 
-### Fase 1 — Angol de punta a punta (días 1 a 6) · objetivo 3
+### Fase 1: Angol de punta a punta (días 1 a 6) · objetivo 3
 
 Una sola comuna, la cadena entera. Al día 6 tienes un resultado completo y sabes
 que el método funciona.
@@ -218,16 +218,16 @@ defensa te deja decir **«predije esto y obtuve esto otro»**.
 #### 2. El primer término: los polígonos que Angol declaró
 
 **Angol no tiene ni un polígono en la capa que recibes.** El plan está aprobado
-desde 2022 y el vectorial nacional de MINVU no lo trae — nuestra capa va por detrás
+desde 2022 y el vectorial nacional de MINVU no lo trae, nuestra capa va por detrás
 de las aprobaciones, y ésa es una advertencia que ya publicamos en el visor.
 
 Así que los polígonos hay que **levantarlos del plan mismo**. Tienes todo:
 
-- `Estudio_Riesgo.pdf` — 64 páginas, con la metodología, las clases de peligro y las
+- `Estudio_Riesgo.pdf`: 64 páginas, con la metodología, las clases de peligro y las
   figuras de los rásteres de inundación, anegamiento y remoción en masa.
-- `Plano_Zonificacion_Vialidad-PRC_09201-1.pdf` y `-2.pdf` — la zonificación, donde
+- `Plano_Zonificacion_Vialidad-PRC_09201-1.pdf` y `-2.pdf`: la zonificación, donde
   las áreas de riesgo aparecen como zonas `ZR-n`.
-- `Ordenanza_Local_actualizada_MARZO_2026.pdf` — qué se prohíbe y qué se condiciona
+- `Ordenanza_Local_actualizada_MARZO_2026.pdf`: qué se prohíbe y qué se condiciona
   en cada una de esas zonas.
 
 **El método ya está resuelto y probado.** Corre `08_georreferenciar_grilla.py` sobre
@@ -252,7 +252,7 @@ región. Compáralo con Carahue, que registra **795,7 ha**.
 El instrumento no se equivocó: el 3 de agosto, en Angol, ya no había lámina de agua.
 Una llanura agrícola inundada se queda días; un estero urbano drena en horas. **El
 sesgo de esta capa no es del sensor, es del tiempo**: ve bien la inundación lenta y
-extensa, y pierde sistemáticamente la crecida rápida — que es justamente la que mata
+extensa, y pierde sistemáticamente la crecida rápida, que es justamente la que mata
 gente.
 
 Poder afirmar eso con fecha y hora, y no como una vaguedad sobre el radar y las
@@ -278,13 +278,13 @@ fusiones en un polígono único**: es exactamente lo que el proyecto no hace.
 #### 4. Interpreta el terreno tú, antes de comparar
 
 Sobre el modelo de sombras, dibuja las terrazas del Malleco y del Rehue, los
-paleocauces y el quiebre de la llanura — **antes** de mirar el resultado de 2013.
+paleocauces y el quiebre de la llanura, **antes** de mirar el resultado de 2013.
 
 Después calcula la llanura por altura sobre el cauce más próximo (**HAND**, *Height
 Above Nearest Drainage*). No partes en blanco:
 `Valles/scripts/06_watershed_pysheds.py` ya resuelve lo más engorroso con
-**pysheds**, que está instalado: acondicionar el modelo de elevación —rellenar
-depresiones y planicies— y calcular la dirección de flujo por el método **D8**. Te
+**pysheds**, que está instalado: acondicionar el modelo de elevación (rellenar
+depresiones y planicies) y calcular la dirección de flujo por el método **D8**. Te
 falta agregar acumulación de flujo, umbralizarla para definir los cauces, y calcular
 la diferencia de cota contra el cauce receptor. Eso último **es** el HAND.
 
@@ -295,7 +295,7 @@ Entre la zona declarada en 2013 y la inundación reconstruida de 2026:
 - qué fracción del agua real cayó **fuera** de la zona declarada;
 - qué fracción de la zona declarada **no** se inundó.
 
-Significan cosas opuestas — **repórtalos por separado, nunca sumados**. El primero
+Significan cosas opuestas, **repórtalos por separado, nunca sumados**. El primero
 mide lo que el instrumento no vio; el segundo, cuánto se pasó de precavido, que no
 es un error.
 
@@ -311,7 +311,7 @@ el reglamento te pide y que nadie recuerda al final si no las fue anotando.
 
 ---
 
-### Fase 2 — La base de datos regional (días 7 a 14) · objetivo 1
+### Fase 2: La base de datos regional (días 7 a 14) · objetivo 1
 
 Ahora repites a escala regional lo que ya probaste en Angol, y construyes la base de
 datos que es el objetivo 1.
@@ -329,7 +329,7 @@ que hacer con ella:
    prohíbe», más adelante).
 3. **Corregir errores heredados**, empezando por la comuna escrita `Pitufquén`. Cada
    corrección se registra; el dato crudo no se edita nunca.
-4. **Cerrar los 5 polígonos sin año** — Loncoche (dos sectores), Nueva Imperial, Pucón
+4. **Cerrar los 5 polígonos sin año**: Loncoche (dos sectores), Nueva Imperial, Pucón
    y Saavedra (Puerto Saavedra) no están en el Atlas, así que su año hay que sacarlo
    del decreto.
 
@@ -346,7 +346,7 @@ Es una columna de la base de datos y probablemente sea tu hallazgo más citable.
 
 Ésta es la parte del objetivo 1 que nadie más ha hecho. **19 de las 32 comunas no
 tienen ningún vectorial de áreas de riesgo**, y MINVU sólo publica instrumentos
-**vigentes** — así que un plan que no se aprobó no aparece ahí y **no va a aparecer
+**vigentes**, así que un plan que no se aprobó no aparece ahí y **no va a aparecer
 nunca**. Georreferenciarlo no duplica nada: **crea el único vectorial que va a
 existir de ese territorio**.
 
@@ -381,7 +381,7 @@ Cinco procedimientos terminaron en abandono y sus documentos quedaron públicos 
 | PRC Collipulli | 30-08-2016 | 16 |
 | PRC Victoria | 16-06-2015 | 8 |
 | PRC Lonquimay | 23-10-2015 | 3 |
-| PRC Temuco – Terreno Amanecer | 13-08-2015 | 3 |
+| PRC Temuco, Terreno Amanecer | 13-08-2015 | 3 |
 
 Temuco ordena el argumento: la capital regional inició la actualización en 2017, el
 proceso se abandonó, y sigue rigiendo el plan de 2010. **Si el estudio del expediente
@@ -396,18 +396,18 @@ Elegidas por medición, no por intuición:
 |---|---:|---:|---:|---|
 | **Carahue** | **795,7 ha** | 31 | 1989 | La mayor huella de la región y plan antiguo |
 | **Collipulli** | **0 ha** | **66** | 2009 | Media capa regional y **nada de agua observada** |
-| Nueva Imperial | 202,4 ha | 1 | — | Caso intermedio |
+| Nueva Imperial | 202,4 ha | 1 | - | Caso intermedio |
 
 Collipulli es el contraste que más enseña: o el instrumento sobredibuja, o el evento
 no llegó ahí. **Cualquiera de las dos respuestas es un resultado.**
 
 ---
 
-### Fase 3 — Cruce, análisis y cierre (días 15 a 20) · objetivo 2
+### Fase 3: Cruce, análisis y cierre (días 15 a 20) · objetivo 2
 
 El objetivo 2 pide cruzar la base con **demografía e infraestructura**. Ojo: **esas
 dos capas no existen en el proyecto**, así que la fase empieza construyéndolas. Es
-descarga y limpieza, no investigación — pero hay que presupuestarla.
+descarga y limpieza, no investigación, pero hay que presupuestarla.
 
 #### Población
 
@@ -428,7 +428,7 @@ unidades geográficas distintas que hay que unir para cubrir el territorio:
 | **2** | Aldeas | 33 | 17.887 |
 | | **Total** | **17.107** | **1.021.433** |
 
-Las capas 3 y 4 —zonas censales y distritos— son **agregaciones de las anteriores**:
+Las capas 3 y 4 (zonas censales y distritos) son **agregaciones de las anteriores**:
 si las sumas cuentas la misma gente dos veces.
 
 ⚠️ **Y no mezcles urbano con rural sin decirlo.** En Angol, una manzana urbana típica
@@ -459,7 +459,7 @@ utilidad:
 |---|---|---|
 | Establecimientos educacionales | MINEDUC, directorio oficial con coordenadas | Alta ocupación diurna, y son albergue en emergencia |
 | Establecimientos de salud | DEIS / MINSAL | No pueden quedar aislados |
-| Red vial y puentes | MOP – Vialidad; IDE Chile | El corte de acceso es el impacto más frecuente |
+| Red vial y puentes | MOP, Vialidad; IDE Chile | El corte de acceso es el impacto más frecuente |
 | Agua potable rural (APR) | SISS / DOH | Su captación se contamina con la crecida |
 | Bomberos y cuarteles | ONEMI / SENAPRED | Capacidad de respuesta |
 | Cualquier vacío | OpenStreetMap | Cobertura desigual: declárala |
@@ -482,7 +482,7 @@ llanura que calculaste.
 - En el Censo **2017** del INE, `REGION=9` devuelve **cero filas sin error** porque el
   campo es texto; hay que usar `REGION LIKE '%RAUCAN%'`. Cero filas sin mensaje es el
   modo de falla más peligroso que existe. (En el servicio de 2024 el campo sí es
-  numérico — comprobado.)
+  numérico, comprobado.)
 - **Exposición no es riesgo.** Contar gente dentro de un polígono es exposición.
   Llamarlo riesgo exige además vulnerabilidad y capacidad de respuesta. Di lo que
   mediste.
@@ -495,12 +495,12 @@ No la hagas como una investigación aparte: **es el registro de la búsqueda que
 hiciste** en las fases 1 y 2. Anota sobre la marcha qué buscaste, dónde estaba, qué
 no encontraste y a quién habría que pedírselo.
 
-Es un producto por derecho propio —**el catastro no existe en ninguna parte**— y su
+Es un producto por derecho propio (**el catastro no existe en ninguna parte**) y su
 premisa es que la cartografía no vive sólo en los planes reguladores.
 
 *Punto de partida verificado, para que veas el patrón*: los Planes Maestros de Aguas
 Lluvias los hace la Dirección de Obras Hidráulicas para ciudades de más de 50 mil
-habitantes. La página oficial lista sólo **PM–07 Temuco y Padre Las Casas**… pero el
+habitantes. La página oficial lista sólo **PM-07 Temuco y Padre Las Casas**… pero el
 repositorio DIRPLAN del MOP tiene además **Angol (2018)** y **Villarrica (2016)**, que
 la página oficial no muestra. Comprobado: los tres descargan y son PDF válidos.
 
@@ -509,8 +509,8 @@ de la misma ciudad, cinco años posterior al Estudio de Riesgo que estás evalua
 
 | Familia | Quién la elabora | Por qué interesa |
 |---|---|---|
-| Planes Maestros de Aguas Lluvias | MOP – DOH | ✅ confirmado, incluido Angol 2018 |
-| Planes de manejo de cauces | MOP – DOH | Definen fajas y obras sobre los ríos |
+| Planes Maestros de Aguas Lluvias | MOP, DOH | ✅ confirmado, incluido Angol 2018 |
+| Planes de manejo de cauces | MOP, DOH | Definen fajas y obras sobre los ríos |
 | Planes de Reducción del Riesgo y de emergencia | SENAPRED (Ley 21.364) | La ley manda usar los Mapas de Amenaza al planificar |
 | **PROT, Informe Componente Amenazas Naturales** | Gobierno Regional | De ahí salió el modelo de 2016. **Nadie sabe cómo se hizo** |
 | Mapas de Amenaza de Inundación | DGA | El estándar formal; hoy cubre un solo río del país |
@@ -529,7 +529,7 @@ posible.**
 #### Informe y presentación
 
 El informe no supera 10 páginas. La charla son 3 minutos: alcanza para **una
-pregunta, un método y un número** — y la pregunta es Angol. Ensáyala cronometrada
+pregunta, un método y un número**, y la pregunta es Angol. Ensáyala cronometrada
 más de una vez.
 
 ---
@@ -557,7 +557,7 @@ y cada uno está amarrado al objetivo que sirve:
 | Capa de infraestructura crítica | GeoJSON | **2** |
 | **Análisis de exposición** por comuna | CSV + una página de lectura | **2** |
 | **Guía de dónde buscar cartografía** | documento | **2** |
-| **Informe** ≤10 páginas · **presentación** 3 min | — | los tres |
+| **Informe** ≤10 páginas · **presentación** 3 min | - | los tres |
 
 Tres condiciones de entrega, y son las que hacen que un dato sirva o no:
 
@@ -585,7 +585,7 @@ Es un error frecuente y si lo cometes en tu informe se nota:
 > competente, que determine las acciones que deberán ejecutarse para su utilización
 > […] Este tipo de proyectos **podrá recibirse** parcial o totalmente en la medida
 > que se hubieren ejecutado las acciones indicadas.»*
-> — OGUC, art. 2.1.17
+>, OGUC, art. 2.1.17
 
 1. Se puede construir, con estudio de especialista y obras de mitigación
    ejecutadas. Distinto es una **«zona no edificable»**, que sí prohíbe y protege
@@ -708,8 +708,8 @@ pierdas solo dos semanas.
 - **Escribe el informe desde el día 1.** Lo que más se olvida son las dificultades
   encontradas, que el reglamento pide explícitamente.
 
-**Si el tiempo se acorta** —va a pasar, la georreferenciación es lo menos
-predecible— el orden de sacrificio está decidido de antemano para que no improvises
+**Si el tiempo se acorta** (va a pasar, la georreferenciación es lo menos
+predecible) el orden de sacrificio está decidido de antemano para que no improvises
 bajo presión: **nunca** se recortan el informe, la presentación ni el objetivo 3 (Angol); se
 recorta primero el cruce con población; se acota B2 a 3 o 4 planos bien hechos; y la
 guía de fuentes puede quedar en borrador.
@@ -719,7 +719,7 @@ guía de fuentes puede quedar en borrador.
 ## 12. Glosario
 
 **Vectorial y ráster.** Las dos formas de guardar un mapa. **Vectorial** son formas
-con coordenadas —puntos, líneas, polígonos— y se puede consultar («¿este punto está
+con coordenadas (puntos, líneas, polígonos) y se puede consultar («¿este punto está
 dentro de este polígono?»). **Ráster** es una grilla de celdas con un valor cada
 una, como una foto. Importa acá: un plano escaneado es una imagen sin coordenadas y
 no se puede consultar. «No existe en vectorial» significa que sólo existe como

@@ -7,7 +7,7 @@ falta ordenada por lo que más importa.
 Por qué un **GeoPackage** y no una carpeta de shapefiles: un `.gpkg` es un solo
 archivo con todas las capas adentro, sin el enredo de los seis archivos sueltos
 por capa del formato SHP, sin el límite de 10 caracteres en los nombres de campo
-—que truncaría `usos_prohibidos` y `estado_tramite`— y sin problemas de
+(que truncaría `usos_prohibidos` y `estado_tramite`) y sin problemas de
 codificación con las tildes. QGIS lo abre arrastrándolo.
 
 Y una regla que el paquete respeta a propósito: **cada capa se entrega con su
@@ -19,8 +19,8 @@ Uso:
     python 20_paquete_practicante.py --provincia Malleco
     python 20_paquete_practicante.py --provincia Cautin --salida /ruta/
 
-Requiere: 19_estado_comunas.py (web/data/estado-comunas.json — obligatorio,
-        alimenta TAREAS.md) — opcional, cada capa entra si existe: 01, 02, 06,
+Requiere: 19_estado_comunas.py (web/data/estado-comunas.json, obligatorio,
+        alimenta TAREAS.md), opcional, cada capa entra si existe: 01, 02, 06,
         13, 14, 15 y 17 (las ocho capas de web/data/ y data/processed/arclim/
         listadas en CAPAS) y 18 (láminas vectorizadas y censo de retículas).
 Salida: data/processed/paquete_<provincia>/
@@ -36,7 +36,7 @@ Salida: data/processed/paquete_<provincia>/
           LEEME.md / .docx         cómo trabajar y qué devolver
 
         Todo texto sale en Markdown y en Word. El `.md` es la copia de
-        referencia —se versiona, se compara, se abre en cualquier sistema—; el
+        referencia (se versiona, se compara, se abre en cualquier sistema); el
         `.docx` es el que abre quien recibe el paquete, que trabaja en Windows
         con Word y para quien un `.md` es marcado crudo en el Bloc de notas.
 """
@@ -77,7 +77,7 @@ CAPAS = [
      "repite en 3 o más temporadas."),
     ("huella_observada_satelite", WEB_DATA / "sar" / "huella-observada.geojson",
      "Agua observada por radar Sentinel-1 en el evento de jul-ago 2026. Es "
-     "medición, no modelo — pero mira `fecha_observacion`: si la pasada fue "
+     "medición, no modelo, pero mira `fecha_observacion`: si la pasada fue "
      "días después, el agua ya había bajado."),
     ("cobertura_satelite", WEB_DATA / "sar" / "cobertura-sar.geojson",
      "Dónde SÍ pudo mirar el satélite. Fuera de esto, «no hay huella» no "
@@ -98,8 +98,8 @@ CAPAS = [
 def recortar(fc: dict, comunas: set[str], caja: tuple | None = None) -> list[dict]:
     """Recorta a la provincia. Por comuna si el dato la trae; si no, por caja.
 
-    Las capas MODELADAS y la SATELITAL no tienen campo `comuna` —son ráster
-    vectorizado, no un registro administrativo—, así que filtrar sólo por ese
+    Las capas MODELADAS y la SATELITAL no tienen campo `comuna` (son ráster
+    vectorizado, no un registro administrativo), así que filtrar sólo por ese
     campo las dejaba fuera enteras. Y son justamente las que sirven para
     comparar contra lo que declara el plan regulador.
 
@@ -200,7 +200,7 @@ def main() -> None:
     for nombre, ruta, ayuda in CAPAS:
         fc = cargar(ruta)
         if not fc:
-            vacias.append((nombre, f"no existe {ruta.name} — corre el script que lo produce"))
+            vacias.append((nombre, f"no existe {ruta.name}, corre el script que lo produce"))
             continue
         feats = recortar(fc, comunas, caja)
         if not feats:
@@ -289,7 +289,7 @@ def main() -> None:
     # (scripts/ORDEN.md). TAREAS.md existe para decirle al practicante qué
     # falta por comuna: si este archivo no está, la línea de abajo lo
     # reemplazaba por `{"comunas": []}` y el paquete salía con TAREAS.md
-    # diciendo, en silencio, «nada falta en ninguna comuna» — el resultado
+    # diciendo, en silencio, «nada falta en ninguna comuna», el resultado
     # falso opuesto a lo que el archivo promete (F-12, auditoría 2026-09-06).
     _estado_ruta = WEB_DATA / "estado-comunas.json"
     _estado_json = cargar(_estado_ruta)
@@ -328,8 +328,8 @@ def main() -> None:
     filas.sort(key=prioridad)
 
     # Todas las capas, también en shapefile. El GeoPackage sigue siendo la copia
-    # de referencia —conserva los nombres de campo completos y los textos de
-    # procedencia enteros—, pero el shapefile es lo que circula entre servicios
+    # de referencia (conserva los nombres de campo completos y los textos de
+    # procedencia enteros), pero el shapefile es lo que circula entre servicios
     # públicos y lo que abre un ArcGIS antiguo, y pedirle a alguien que exporte
     # doce capas a mano antes de empezar es una barrera tonta.
     shp_todas = dest / "3_capas_en_shapefile"
@@ -354,7 +354,7 @@ def main() -> None:
         # escrito, que es la única forma de saber qué nombre quedó de verdad.
         # Deducirlo de la regla «se corta a diez caracteres» da un resultado
         # falso cuando dos campos chocan: `ordenanza_url` y
-        # `ordenanza_url_vigente` no se pierden —eso llegué a escribir— sino
+        # `ordenanza_url_vigente` no se pierden (eso llegué a escribir) sino
         # que el segundo queda como `ordenanz_1`, un nombre que nadie asocia
         # con el original si no se le dice.
         acortados, raros = [], []
@@ -380,11 +380,11 @@ def main() -> None:
          "⚠️ **Mira la última columna antes de usar una capa.** Cuando dos campos",
          "quedan iguales al cortarse a diez caracteres, el segundo no se pierde:",
          "queda con un nombre que nadie asocia con el original. Lo de abajo NO",
-         "está deducido de la regla — se midió leyendo cada shapefile después de",
+         "está deducido de la regla, se midió leyendo cada shapefile después de",
          "escribirlo y comparando columna por columna.", "",
          ""]
         + [ln for c, n, ac, ra in recortes for ln in
-           [f"**{c}** — {n} geometrías  ",
+           [f"**{c}**: {n} geometrías  ",
             ("Acortados: " + ", ".join(f"`{o}` → `{d}`" for o, d in ac)
              if ac else "Ningún campo cambió de nombre.") + "  ",
             ("⚠️ Renombrados sin parecido: **"
@@ -450,8 +450,8 @@ def reparar_geometrias(gdf, capa: str) -> tuple:
 
     Un polígono «inválido» acá es casi siempre uno que se toca a sí mismo en un
     vértice: pasa al vectorizar un ráster, cuando dos píxeles quedan unidos sólo
-    por la esquina. No es un error de forma —el área no cambia al repararlo, se
-    midió— pero rompe cosas río abajo: los cálculos de área o de intersección
+    por la esquina. No es un error de forma (el área no cambia al repararlo, se
+    midió) pero rompe cosas río abajo: los cálculos de área o de intersección
     pueden dar distinto según la herramienta, y varias operaciones de QGIS se
     niegan a correr sobre una capa con geometrías inválidas.
 
@@ -483,15 +483,15 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
     es la primera pregunta de cualquiera que reciba geometría ajena.
 
     Sale en dos formas por el mismo motivo por el que existe: el `.csv` se abre
-    en Excel y se ordena y filtra —son cientos de filas—; el resumen agrupado
+    en Excel y se ordena y filtra (son cientos de filas); el resumen agrupado
     por documento cabe en una página y es el que se lee.
     """
     import csv
     import fiona
     import geopandas as gpd
 
-    # Las capas que bajamos de un servicio no traen `url` por geometría —su
-    # dirección es de la capa entera, no de cada polígono— así que se toma de la
+    # Las capas que bajamos de un servicio no traen `url` por geometría (su
+    # dirección es de la capa entera, no de cada polígono) así que se toma de la
     # tabla de procedencia que el propio paquete lleva adentro. Sin esto la
     # columna «Enlace» quedaba vacía justo en las capas oficiales, que son las
     # que más falta hace poder ir a mirar.
@@ -516,7 +516,7 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
         # Excel, así que es de donde alguien va a copiar una cifra de hectáreas.
         try:
             lon = float(g.geometry.union_all().centroid.x)
-        except Exception:               # noqa: BLE001 — shapely antiguo
+        except Exception:               # noqa: BLE001  (shapely antiguo)
             lon = float(g.geometry.unary_union.centroid.x)
         utm = 32718 if lon < -72 else 32719
         try:
@@ -565,7 +565,7 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
          "**atributos**: en QGIS, clic derecho en la capa → *Abrir tabla de",
          "atributos*, o la herramienta *Identificar objetos espaciales* y un clic",
          "sobre el polígono. Ahí están las columnas `fuente`, `url`, `anio` y",
-         "—en lo que trazamos nosotros— `incertidumbre_borde_m`.",
+         "(en lo que trazamos nosotros) `incertidumbre_borde_m`.",
          "",
          "Esta tabla es el resumen: una fila por documento. El detalle polígono",
          "por polígono está en **`FUENTE_DE_CADA_POLIGONO.csv`**, que se abre en",
@@ -575,7 +575,7 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
     for (capa, fuente, enlace, anio), fs in sorted(grupos.items()):
         clases = sorted({f["que_es"] for f in fs if f["que_es"]})
         que = ", ".join(clases[:4]) + ("…" if len(clases) > 4 else "")
-        link = f"[abrir]({enlace})" if str(enlace).startswith("http") else "—"
+        link = f"[abrir]({enlace})" if str(enlace).startswith("http") else "-"
         L += [f"### {capa}", "",
               f"{len(fs)} polígonos · {anio or 'sin año declarado'}  ",
               f"Contiene: {que}  ",
@@ -594,11 +594,11 @@ def tabla_de_fuentes(dest: Path, gpkg: Path) -> int:
           "  dejen de compararse.",
           "",
           "Para llegar al plan regulador de esas comunas, usa el enlace de la",
-          "capa —el servicio del MINVU— o busca el instrumento en el registro EAE.",
+          "capa (el servicio del MINVU) o busca el instrumento en el registro EAE.",
           "",
           "Ojo con qué abre cada enlace. Los de las láminas llevan al documento",
           "del municipio; los de las capas oficiales, al **servicio de datos** del",
-          "que se descargan —un servidor ArcGIS o un catálogo—, no a un informe.",
+          "que se descargan (un servidor ArcGIS o un catálogo), no a un informe.",
           "El detalle de cómo se procesó cada una está en la tabla",
           "`00_procedencia_de_cada_capa` del GeoPackage.", ""]
     (dest / "FUENTE_DE_CADA_POLIGONO.md").write_text("\n".join(L), encoding="utf-8")
@@ -660,7 +660,7 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "",
         "Todo esto se hace dentro de QGIS. No necesitas programar ni instalar",
         "nada más. Se explica con una lámina que tenga **cuadrícula UTM impresa**",
-        "—las coordenadas rotuladas en los márgenes—, que es el caso fácil y el",
+        "(las coordenadas rotuladas en los márgenes), que es el caso fácil y el",
         "de casi todas las de `2_laminas_por_georreferenciar`.",
         "",
         "---",
@@ -712,16 +712,16 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "",
         "| Si el Este ronda… | Es huso | Código a elegir |",
         "|---|---|---|",
-        "| 600.000 – 780.000 (Angol, Purén, Traiguén, Collipulli) | 18 Sur | **EPSG:32718** |",
-        "| 200.000 – 350.000 (Lonquimay, Curacautín cordillera) | 19 Sur | **EPSG:32719** |",
+        "| 600.000, 780.000 (Angol, Purén, Traiguén, Collipulli) | 18 Sur | **EPSG:32718** |",
+        "| 200.000, 350.000 (Lonquimay, Curacautín cordillera) | 19 Sur | **EPSG:32719** |",
         "",
         "⚠️ **No le creas al recuadro de información cartográfica de la lámina.**",
         "La de Catripulli declara «Huso 18 Sur» y es 19: con 18 caería en el mar.",
         "Si al terminar la lámina no aterriza sobre su pueblo, el huso es lo",
         "primero que hay que revisar.",
         "",
-        "**Cuántos puntos.** Cuatro o más, **repartidos por toda la hoja** —las",
-        "cuatro esquinas antes que cuatro juntos en un rincón—. Con tres el ajuste",
+        "**Cuántos puntos.** Cuatro o más, **repartidos por toda la hoja** (las",
+        "cuatro esquinas antes que cuatro juntos en un rincón). Con tres el ajuste",
         "todavía deja residuo que medir; con dos, el error sale 0 y esa cifra",
         "miente: no es que esté perfecto, es que no hay nada contra qué comparar.",
         "",
@@ -780,18 +780,18 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "   existe. Si usas shapefile los nombres se cortan a diez caracteres: el",
         "   de la derecha es el que quedará.",
         "",
-        "- **`clase`** — el nombre EXACTO que usa la leyenda: «Alto», «AR-2a»,",
+        "- **`clase`**: el nombre EXACTO que usa la leyenda: «Alto», «AR-2a»,",
         "  «Susceptibilidad media». No lo traduzcas ni lo uniformes.",
-        "- **`comuna`** — en mayúsculas, como en las otras capas.",
-        "- **`amenaza`** — `inundación`",
-        "- **`fuente`** — nombre completo del documento, con su organismo y fecha.",
-        "- **`url`** — el enlace de donde se descarga ese documento.",
-        "- **`anio`** — el año del ESTUDIO, no el del decreto que lo aprueba. Son",
+        "- **`comuna`**: en mayúsculas, como en las otras capas.",
+        "- **`amenaza`**: `inundación`",
+        "- **`fuente`**: nombre completo del documento, con su organismo y fecha.",
+        "- **`url`**: el enlace de donde se descarga ese documento.",
+        "- **`anio`**: el año del ESTUDIO, no el del decreto que lo aprueba. Son",
         "  distintos.",
-        "- **`escala_original`** (`escala_ori` en shapefile) — la escala impresa de",
+        "- **`escala_original`** (`escala_ori` en shapefile), la escala impresa de",
         "  la lámina, si la declara.",
-        "- **`estado_tramite`** (`estado_tra`) — `derivado`",
-        "- **`incertidumbre_borde_m`** (`incertidum`) — el RMSE que te dio el",
+        "- **`estado_tramite`** (`estado_tra`), `derivado`",
+        "- **`incertidumbre_borde_m`** (`incertidum`), el RMSE que te dio el",
         "  georreferenciador, en metros.",
         "",
         "3. Activa la edición (el lápiz), **Añadir polígono**, y dibuja siguiendo",
@@ -836,7 +836,7 @@ def escribir_guia_qgis(dest: Path, prov: str) -> None:
         "  «redondeando» un rótulo que se ve borroso.",
         "- **No rellenar un campo que no sabes.** Va vacío o «no declarado», nunca",
         "  un valor plausible. Ojo con el año: el del plan y el de su estudio de",
-        "  riesgo son distintos —el PRC de Angol es de 2022 y su estudio, de 2013—",
+        "  riesgo son distintos (el PRC de Angol es de 2022 y su estudio, de 2013)",
         "  y poner uno por otro hace parecer moderna una cartografía de hace trece",
         "  años.",
         "- **No mezclar el achurado de inundación con el de remoción en masa.** En",
@@ -854,7 +854,7 @@ def anchos_de_tabla(texto: str) -> str:
 
     Por qué. Pandoc no mide el contenido de las celdas: reparte el ancho de la
     página según lo que mide la fila de guiones. Escritas todas iguales
-    —`|---|---|---|`—, una tabla de nueve columnas sale con nueve columnas de
+    (`|---|---|---|`), una tabla de nueve columnas sale con nueve columnas de
     1,6 cm, y en 1,6 cm una palabra de nueve letras se parte por la mitad y cae
     a la línea siguiente. Eso es lo que se veía en Word.
 
@@ -874,8 +874,8 @@ def anchos_de_tabla(texto: str) -> str:
         sep = filas[1]
         # El peso de una columna NO es el largo de su celda más larga: una celda
         # de sesenta caracteres puede envolverse en tres líneas sin problema.
-        # Lo que no puede pasar es que se parta una palabra —«SENAPRED» cortado
-        # a la mitad—, así que el piso de cada columna es su palabra más larga y
+        # Lo que no puede pasar es que se parta una palabra («SENAPRED» cortado
+        # a la mitad), así que el piso de cada columna es su palabra más larga y
         # el sobrante se reparte por volumen, amortiguado.
         anchos = []
         for i in range(n):
@@ -914,8 +914,8 @@ def a_word(md: Path) -> bool:
     explica de dónde salió cada polígono no se lee, y lo que no se lee da lo
     mismo que no esté.
 
-    El `.md` se conserva porque es la fuente —se versiona, se compara, se abre
-    en cualquier sistema— y porque pesa nada. El `.docx` es la copia para leer.
+    El `.md` se conserva porque es la fuente (se versiona, se compara, se abre
+    en cualquier sistema) y porque pesa nada. El `.docx` es la copia para leer.
 
     Si pandoc no está instalado se avisa y se sigue: el paquete queda completo
     con los `.md`, que es una degradación honesta y no una falla silenciosa
@@ -954,7 +954,7 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     Por qué así y no todo junto en el GeoPackage: quien recibe esto tiene que
     poder abrir el documento del que salió cada polígono SIN volver a
     preguntarnos. Un polígono derivado sin su lámina al lado es una afirmación
-    sin respaldo — y estos polígonos los dibujamos nosotros, así que tener el
+    sin respaldo, y estos polígonos los dibujamos nosotros, así que tener el
     respaldo al lado es lo que permite discutirlos. El GeoPackage único sigue
     existiendo para trabajar cómodo en QGIS; esto es para entender y verificar.
     """
@@ -1048,8 +1048,8 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     gdf.to_file(destino / "poligonos.gpkg", layer=_slug(cfg["id"]), driver="GPKG")
 
     # 3-bis. Y en shapefile, porque es lo que circula en los servicios públicos
-    # chilenos y lo que abre un ArcGIS antiguo. Va en su propia subcarpeta —son
-    # cinco o seis archivos por capa— y con el aviso de lo que el formato le
+    # chilenos y lo que abre un ArcGIS antiguo. Va en su propia subcarpeta (son
+    # cinco o seis archivos por capa) y con el aviso de lo que el formato le
     # hace al dato: nombres de campo cortados a diez caracteres y texto cortado
     # a 254. Ese aviso NO está escrito a mano: se genera comparando el
     # shapefile recién escrito contra el original, así que dice lo que pasó de
@@ -1126,18 +1126,18 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
           f"**Año del estudio:** {proc.get('fecha_dato', 'no declarado')}  "),
          f"**Escala impresa:** {cfg.get('escala_impresa', 'no declarada')}", "",
          "## Qué hay en esta carpeta", "",
-         "- **`documento_original.pdf`** — el documento tal como lo publica la",
+         "- **`documento_original.pdf`**: el documento tal como lo publica la",
          "  fuente. No se modifica.",
-         f"- **`lamina_pagina-{cfg['pagina']}.jpg`** — la página completa, para",
+         f"- **`lamina_pagina-{cfg['pagina']}.jpg`**: la página completa, para",
          "  mirarla sin abrir el PDF.",
-         "- **`lamina_georreferenciada.jpg`** — la misma lámina, **ubicada en el",
+         "- **`lamina_georreferenciada.jpg`**: la misma lámina, **ubicada en el",
          "  mapa**. Arrástrala a QGIS y cae encima de los polígonos: es con lo que",
          "  se comprueba el trazado. Van con ella el `.jgw` y el `.prj`, que son",
-         "  los que la ubican — **se copian los tres juntos**.",
-         "- **`poligonos.geojson`** — los polígonos que derivamos de esa lámina,",
+         "  los que la ubican, **se copian los tres juntos**.",
+         "- **`poligonos.geojson`**: los polígonos que derivamos de esa lámina,",
          "  en EPSG:4326.",
-         "- **`poligonos.gpkg`** — lo mismo, para arrastrar a QGIS.",
-         "- **`shapefile/`** — los mismos polígonos en `.shp`, para ArcGIS o para",
+         "- **`poligonos.gpkg`**: lo mismo, para arrastrar a QGIS.",
+         "- **`shapefile/`**: los mismos polígonos en `.shp`, para ArcGIS o para",
          "  intercambiar. Lee su LEEME: el formato corta nombres y textos.", "",
          "## Qué contiene la geometría", "",
          "| Clase | Polígonos | Hectáreas |",
@@ -1152,7 +1152,7 @@ def carpeta_por_documento(cfg: dict, fc: dict, feats: list[dict], destino: Path)
     if cfg.get("url"):
         L += [f"**Enlace:** {cfg['url']}", ""]
     L += [f"**Cómo se hizo:** {proc.get('metodo', '')}", "",
-          f"**Precisión del borde:** ±{coma(incert.pop()) if len(incert) == 1 else '—'} m.", "",
+          f"**Precisión del borde:** ±{coma(incert.pop()) if len(incert) == 1 else '-'} m.", "",
           f"**Lo que la fuente advierte:** {proc.get('incertidumbre', '')}", ""]
     if efecto:
         L += ["## Efecto legal del contenido", "", efecto, "",
@@ -1218,19 +1218,19 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
                 continue
             # Se marca POR PÁGINA, no por documento: un mismo informe puede
             # tener cinco láminas y sólo una vectorizada. Marcarlo entero como
-            # hecho hacía desaparecer las otras cuatro —las más baratas del
-            # paquete, porque ya tienen cuadrícula— sin que nadie las reclamara.
+            # hecho hacía desaparecer las otras cuatro (las más baratas del
+            # paquete, porque ya tienen cuadrícula) sin que nadie las reclamara.
             hechas = {pag for (arch, pag), _ in ya_hechos.items()
                       if arch == d["archivo"]}
             pendientes_pag = [l["pagina"] for l in d["laminas"]
                               if l["pagina"] not in hechas]
-            pags = ", ".join(str(x) for x in pendientes_pag[:8]) or "—"
+            pags = ", ".join(str(x) for x in pendientes_pag[:8]) or "-"
             if hechas:
                 donde = next(v for (arch, pag), v in ya_hechos.items()
                              if arch == d["archivo"])
                 nota = (f"✅ pág. {', '.join(str(x) for x in sorted(hechas))} ya "
                         f"vectorizada → `1_cartografia_ya_vectorizada/{donde}/`")
-                L += [f"### {com.title()} — {d['archivo']}", ""]
+                L += [f"### {com.title()}: {d['archivo']}", ""]
                 if not pendientes_pag:
                     L += [nota, ""]
                     continue
@@ -1238,11 +1238,11 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
                       f"{nota}; el PDF está ahí.", ""]
                 continue
             hallado = next(iter(DATA_RAW.glob(f"documentos/**/{d['archivo']}")), None)
-            local, total = "—", "—"
+            local, total = "-", "-"
             if hallado and hallado.exists():
                 # El registro EAE publica el mismo documento con nombres
-                # distintos —«IA-Completo» e «IA-Incompleto», «Anteproyecto-Plano»
-                # y «Anteproyecto_Planos» son byte por byte el mismo archivo—, y
+                # distintos («IA-Completo» e «IA-Incompleto», «Anteproyecto-Plano»
+                # y «Anteproyecto_Planos» son byte por byte el mismo archivo), y
                 # copiarlos todos infla el paquete y hace que alguien
                 # georreferencie dos veces la misma lámina. Se compara el
                 # contenido, no el nombre.
@@ -1262,18 +1262,18 @@ def carpeta_pendientes(dest: Path, comunas: set[str],
                     doc = pdfium.PdfDocument(str(hallado))
                     total = str(len(doc))
                     doc.close()
-                except Exception:       # noqa: BLE001 — un PDF ilegible no frena el índice
+                except Exception:       # noqa: BLE001  (un PDF ilegible no frena el índice)
                     pass
             url = d.get("url") or ""
-            L += [f"### {com.title()} — {d['archivo']}", "",
+            L += [f"### {com.title()}: {d['archivo']}", "",
                   f"Láminas en las páginas **{pags}**"
-                  + (f" (de {total})" if total != "—" else "") + "  ",
+                  + (f" (de {total})" if total != "-" else "") + "  ",
                   f"PDF: {local}  ",
                   f"Enlace: {'[ver](' + url + ')' if url else 'no lo tenemos'}", ""]
     # Y los documentos donde se DETECTÓ una cuadrícula, que es otra vía y no
     # coincide con la anterior: TAREAS los nombra uno por uno y hasta ahora
-    # podía nombrar un PDF que no viajaba en el paquete —el PLADECO de Renaico,
-    # por ejemplo—. Prometer evidencia que no se puede abrir es el defecto que
+    # podía nombrar un PDF que no viajaba en el paquete (el PLADECO de Renaico,
+    # por ejemplo). Prometer evidencia que no se puede abrir es el defecto que
     # este proyecto persigue en todas partes; también acá.
     import hashlib
     extra = []
@@ -1317,7 +1317,7 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
     """`hechas_pag` son los (archivo, página) ya vectorizados: no se listan como
     tarea. Sin esto, el primer ítem mandaba a georreferenciar exactamente la
     lámina que ya está hecha y publicada en la carpeta de al lado."""
-    L = [f"# Tareas de georreferenciación — provincia de {prov}", "",
+    L = [f"# Tareas de georreferenciación, provincia de {prov}", "",
          "Ordenadas por lo que más importa: **comunas con gente y con registro de",
          "inundación, pero sin ninguna cartografía consultable**. Una comuna con",
          "muchos documentos ya tiene por dónde empezar; una sin nada, no.", "",
@@ -1326,8 +1326,8 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
          "> fuentes públicas. Esa distinción es el corazón del proyecto: no la",
          "> pierdas al redactar nada.", "",
          # Encabezados cortos a propósito: son nueve columnas en una hoja
-         # vertical, y «Retículas» completo no cabe en el ancho que le toca —se
-         # parte por la mitad en Word—. La leyenda de abajo dice qué es cada una.
+         # vertical, y «Retículas» completo no cabe en el ancho que le toca (se
+         # parte por la mitad en Word). La leyenda de abajo dice qué es cada una.
          "| Comuna | Hab. | Pts. | Crón. | PRC | Docs | Lám. | Retíc. | Hechos |",
          "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for f in filas:
@@ -1335,17 +1335,17 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
                  f"{f['cronicos']} | {f['area']} | {f['docs']} | {f['laminas']} | "
                  f"{f['reticulas']} | {f['derivados']} |")
     L += ["", "**Cómo leer las columnas:**", "",
-          "- **Pts.** — puntos críticos de SENAPRED. **Crón.**, los crónicos",
+          "- **Pts.**: puntos críticos de SENAPRED. **Crón.**, los crónicos",
           "  entre ellos.",
-          "- **PRC** — polígonos en el vectorial público del MINVU. Un 0 con",
+          "- **PRC**: polígonos en el vectorial público del MINVU. Un 0 con",
           "  documentos significa que la cartografía existe pero no está publicada",
           "  en formato consultable: ése es el caso que más rinde georreferenciar.",
-          "- **Lám.** — figuras de cartografía de inundación ya localizadas",
+          "- **Lám.**: figuras de cartografía de inundación ya localizadas",
           "  dentro de los PDF, con su número de página. No hay que buscarlas.",
-          "- **Retíc.** — de esas láminas, cuántas traen una grilla de",
+          "- **Retíc.**: de esas láminas, cuántas traen una grilla de",
           "  coordenadas regular detectada automáticamente. Son las que se pueden",
           "  georreferenciar sin puntos de control a mano.",
-          "- **Hechos** — polígonos que el proyecto ya construyó desde una",
+          "- **Hechos**: polígonos que el proyecto ya construyó desde una",
           "  lámina. No los rehagas; revísalos.", "",
           "---", "", "## Las tres tareas, en orden", "",
           "### 1. Georreferenciar y digitalizar las láminas que ya tienen retícula", "",
@@ -1368,8 +1368,8 @@ def escribir_tareas(dest: Path, prov: str, filas: list[dict],
                 continue
             L.append(f"**{c.title()}**")
             for r in filas_r:
-                L.append(f"- `{r['pdf']}` página {r['pagina']}, imagen {r['imagen']} "
-                         f"— {r['px']} px, {r['lineas']} líneas, paso {r['paso_px']} px")
+                L.append(f"- `{r['pdf']}` página {r['pagina']}, imagen {r['imagen']}"
+                         f", {r['px']} px, {r['lineas']} líneas, paso {r['paso_px']} px")
             L.append("")
     else:
         L.append("_Ninguna detectada por ahora en esta provincia._")
@@ -1406,10 +1406,10 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
                    reparadas: int = 0) -> None:
     fichas = fichas or []
     listado = "\n".join(
-        f"  - `{f['carpeta']}/` — {f['poligonos']} polígonos, {f['hectareas']} ha"
+        f"  - `{f['carpeta']}/`: {f['poligonos']} polígonos, {f['hectareas']} ha"
         for f in fichas) or "  (ninguna todavía en esta provincia)"
     from datetime import date
-    (dest / "LEEME.md").write_text(f"""# Paquete de trabajo — provincia de {prov}
+    (dest / "LEEME.md").write_text(f"""# Paquete de trabajo, provincia de {prov}
 
 > Armado el **{date.today().isoformat()}**. Los datos son los que el proyecto
 > tenía ese día: si pasaron meses, pídenos una copia nueva antes de apoyarte en
@@ -1417,25 +1417,25 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
 
 ## Qué hay acá
 
-- **`COMO_TRABAJAR_EN_QGIS`** — el procedimiento completo, paso a paso. Empieza
+- **`COMO_TRABAJAR_EN_QGIS`**: el procedimiento completo, paso a paso. Empieza
   por acá si vas a producir cartografía nueva: también dice qué entregar de
   vuelta y qué no hay que hacer nunca.
-- **`TAREAS`** — qué falta, por comuna, ordenado por lo que más importa.
-- **`1_cartografia_ya_vectorizada/`** — una carpeta **por documento**: el PDF
+- **`TAREAS`**: qué falta, por comuna, ordenado por lo que más importa.
+- **`1_cartografia_ya_vectorizada/`**: una carpeta **por documento**: el PDF
   original, la página con la lámina en imagen, los polígonos que sacamos de ella
   y un LEEME con su fuente, su método y cuánto se equivoca su borde. El
   documento va junto al polígono a propósito: esa geometría la dibujamos
   nosotros, y sin la lámina al lado no hay cómo discutirla.
 {listado}
-- **`2_laminas_por_georreferenciar/`** — {pendientes} PDF de documentos con
+- **`2_laminas_por_georreferenciar/`**: {pendientes} PDF de documentos con
   cartografía de inundación que todavía no convertimos. Es el trabajo que sigue;
   su LEEME los lista con la página exacta de cada lámina.
-- **`{gpkg}`** — todas las capas de esta provincia en un archivo. Arrástralo a
+- **`{gpkg}`**: todas las capas de esta provincia en un archivo. Arrástralo a
   QGIS y aparecen todas.
-- **`3_capas_en_shapefile/`** — las mismas capas en `.shp`, por comodidad.
-- **`FUENTE_DE_CADA_POLIGONO`** — de dónde salió cada cosa, con el enlace. El
+- **`3_capas_en_shapefile/`**: las mismas capas en `.shp`, por comodidad.
+- **`FUENTE_DE_CADA_POLIGONO`**: de dónde salió cada cosa, con el enlace. El
   resumen por documento en el texto; el detalle en el `.csv`, que abre en Excel.
-- **`ESTADO_DE_LOS_POLIGONOS`** — la revisión que le hicimos a todo esto antes
+- **`ESTADO_DE_LOS_POLIGONOS`**: la revisión que le hicimos a todo esto antes
   de entregártelo. Te dice qué mirar con desconfianza.
 
 ## Lo que ya viene resuelto
@@ -1443,8 +1443,8 @@ def escribir_leeme(dest: Path, prov: str, gpkg: str,
 No hace falta que arregles nada antes de empezar:
 
 - **Las geometrías están reparadas.** {reparadas} polígonos de las capas de
-  satélite y del modelo regional se tocaban a sí mismos en un vértice —cosa
-  habitual al convertir una imagen en polígonos— y eso hace que QGIS se niegue a
+  satélite y del modelo regional se tocaban a sí mismos en un vértice (cosa
+  habitual al convertir una imagen en polígonos) y eso hace que QGIS se niegue a
   correr varias herramientas encima. Se repararon al armar el paquete y no
   cambian de área: se midió antes y después.
 - **Los documentos repetidos ya están fuera.** El registro ambiental publica el
@@ -1453,13 +1453,13 @@ No hace falta que arregles nada antes de empezar:
 
 ## En qué formato está todo
 
-- **`.gpkg`** — GeoPackage: un archivo con varias capas adentro. Se abre en
+- **`.gpkg`**: GeoPackage: un archivo con varias capas adentro. Se abre en
   QGIS, ArcGIS, R o Python.
-- **`.shp`** — shapefile. Son cinco archivos por capa y **se copian juntos o no
+- **`.shp`**: shapefile. Son cinco archivos por capa y **se copian juntos o no
   funciona**. Se abre en lo mismo.
-- **`.geojson`** — texto plano con la geometría y sus atributos.
-- **`.csv`** — tabla, para Excel.
-- **`.docx`** — los textos de este paquete, para Word.
+- **`.geojson`**: texto plano con la geometría y sus atributos.
+- **`.csv`**: tabla, para Excel.
+- **`.docx`**: los textos de este paquete, para Word.
 
 **Todo viene en EPSG:4326** (WGS84, grados). Si vas a medir distancias o áreas,
 reproyecta antes a UTM 18S (EPSG:32718) o 19S (EPSG:32719) según la zona: en
@@ -1482,21 +1482,21 @@ es un instrumento legal, otra es agua medida por satélite en una fecha, otra es
 un modelo global de 1 km. Usarlas como si dijeran lo mismo es el error que el
 proyecto entero existe para evitar.
 
-**A · Normativo** — lo que el plan regulador declaró área de riesgo. Tiene
+**A · Normativo**: lo que el plan regulador declaró área de riesgo. Tiene
 efecto legal. No es una modelación: puede venir de un estudio cualitativo de
 hace trece años.
 
-**A · Derivado** — cartografía de un documento comunal que sólo existía en papel
+**A · Derivado**: cartografía de un documento comunal que sólo existía en papel
 y que nosotros convertimos en geometría. El contenido es del municipio; el
 trazado es nuestro.
 
-**B · Observado** — agua que el radar midió, con fecha. No es «hasta dónde puede
+**B · Observado**: agua que el radar midió, con fecha. No es «hasta dónde puede
 llegar»: es hasta dónde llegó ese día.
 
-**C · Modelado** — lo que un estudio calculó bajo un escenario. No es un
+**C · Modelado**: lo que un estudio calculó bajo un escenario. No es un
 pronóstico.
 
-**D · Operacional** — dónde el municipio reportó problemas. No es una
+**D · Operacional**: dónde el municipio reportó problemas. No es una
 delimitación: son puntos, no áreas.
 
 **Nunca las promedies, ni las unas, ni saques una capa «síntesis».** Si se
@@ -1505,28 +1505,28 @@ salió cada borde.
 
 ## Las siglas
 
-**PRC** — Plan Regulador Comunal: el instrumento que zonifica el suelo urbano.
+**PRC**: Plan Regulador Comunal: el instrumento que zonifica el suelo urbano.
 **IPT** es Instrumento de Planificación Territorial, y el PRC es uno.
 
-**AR-2a, ZR-5…** — códigos de área de riesgo dentro de un plan. Los define cada
+**AR-2a, ZR-5…**: códigos de área de riesgo dentro de un plan. Los define cada
 plan por su cuenta: el AR-2a de Angol son las áreas inundables, y otro plan
 puede usar otro código para lo mismo.
 
-**OGUC** — Ordenanza General de Urbanismo y Construcciones. Su artículo 2.1.17
-rige las áreas de riesgo: no prohíben construir, **condicionan** — exigen un
+**OGUC**: Ordenanza General de Urbanismo y Construcciones. Su artículo 2.1.17
+rige las áreas de riesgo: no prohíben construir, **condicionan**: exigen un
 estudio de un especialista y obras de mitigación.
 
-**EAE** — Evaluación Ambiental Estratégica, el trámite por el que pasan los
+**EAE**: Evaluación Ambiental Estratégica, el trámite por el que pasan los
 planes reguladores. De su registro público salen muchos de estos documentos.
 
-**RRD** y **PACCC** — planes comunales de reducción de riesgo de desastres
+**RRD** y **PACCC**: planes comunales de reducción de riesgo de desastres
 (Ley 21.364) y de cambio climático (Ley 21.455). Suelen traer cartografía que no
 está en ninguna otra parte.
 
-**RMSE** — el error del ajuste al georreferenciar, en metros. Con menos de tres
+**RMSE**: el error del ajuste al georreferenciar, en metros. Con menos de tres
 puntos de control no significa nada.
 
-**SENAPRED** — Servicio Nacional de Prevención y Respuesta ante Desastres, ex
+**SENAPRED**: Servicio Nacional de Prevención y Respuesta ante Desastres, ex
 ONEMI.
 
 ## Si algo no calza

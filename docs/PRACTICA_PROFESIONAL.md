@@ -1,4 +1,4 @@
-# Práctica profesional — base de datos de riesgo geológico urbano y contraste con la inundación de agosto de 2026
+# Práctica profesional: base de datos de riesgo geológico urbano y contraste con la inundación de agosto de 2026
 
 > Plan para **CITI-295 Práctica Profesional (a)**, Geología, Instituto de Ciencias
 > de la Tierra, Universidad Austral de Chile. Institución de acogida: **Fundación
@@ -38,9 +38,9 @@ el 1 necesita a escala. Y el 2 al final, porque es el único que sí depende del
 
 | Días | Fase | Objetivo |
 |---|---|---|
-| 1–6 | Angol de punta a punta | **3** |
-| 7–14 | La base de datos regional | **1** |
-| 15–20 | Cruce, análisis y cierre | **2** |
+| 1-6 | Angol de punta a punta | **3** |
+| 7-14 | La base de datos regional | **1** |
+| 15-20 | Cruce, análisis y cierre | **2** |
 
 ### Los cuatro hallazgos que definen el plan
 
@@ -52,8 +52,8 @@ alcanzar.
 creando su propio objeto de estudio.** El plan está aprobado desde 2022 y el
 vectorial nacional de MINVU no lo trae: nuestra capa va por detrás de las
 aprobaciones. Los polígonos hay que levantarlos del plan mismo, georreferenciando
-sus láminas. Esto convierte la georreferenciación —que en la versión anterior de
-este plan era relleno opcional— en **tarea central y de ruta crítica**.
+sus láminas. Esto convierte la georreferenciación (que en la versión anterior de
+este plan era relleno opcional) en **tarea central y de ruta crítica**.
 
 **2. La huella satelital no sirve para Angol, y hay que decírselo antes de que pierda
 dos días.** Las dos pasadas fueron el 3 de agosto, un día después del evento;
@@ -66,11 +66,11 @@ de clic sobre un ráster.
 **3. Las capas del objetivo 2 no existen: no hay ninguna de población ni de
 infraestructura en el proyecto.** El objetivo dice «cruzar», pero la fase empieza
 construyendo los dos términos. Es descarga y limpieza, no investigación, y por eso
-está al final — pero hay que presupuestarla o el objetivo 2 queda en nada.
+está al final, pero hay que presupuestarla o el objetivo 2 queda en nada.
 
 **4. El plan de Angol es de 2022 y su Estudio de Riesgo es de septiembre de 2013.**
 Está en disco, son 64 páginas, y declara su método: **álgebra de mapas con pesos**
-sobre variables morfométricas —morfología, pendiente, cobertura vegetal— más terreno.
+sobre variables morfométricas (morfología, pendiente, cobertura vegetal) más terreno.
 Sin modelación hidráulica, sin caudales y sin períodos de retorno. En sus propias
 conclusiones recomienda hacer el estudio hidromorfométrico de microcuencas que nunca
 se hizo. Y clasifica el peligro en **mínima / media / máxima**, el mismo esquema
@@ -83,8 +83,8 @@ Ese cuarto hallazgo es el que le da a la práctica una tesis en vez de un invent
 > territorio se hizo trece años antes de la inundación que tenía que anticipar.
 
 Es una advertencia metodológica que se generaliza a toda la base de datos del
-objetivo 1 —y por eso ésta lleva **dos columnas de año**, la del plan y la de su
-estudio— y es defendible en tres minutos.
+objetivo 1 (y por eso ésta lleva **dos columnas de año**, la del plan y la de su
+estudio) y es defendible en tres minutos.
 
 ### Alcance: geológico es más ancho que inundación
 
@@ -97,7 +97,7 @@ contrastar. La distinción va explícita en la guía del estudiante.
 ### Una corrección de fecha
 
 El objetivo 3 dice «domingo 2 de julio». El 2 de julio de 2026 fue **jueves**; el
-domingo 2 fue el de **agosto**, y es la fecha de todo lo documentado — la evacuación
+domingo 2 fue el de **agosto**, y es la fecha de todo lo documentado, la evacuación
 de las 2 AM, el rescate en bote, las pasadas satelitales del día 3. Conviene
 corregirlo en la ficha antes de que llegue al informe.
 
@@ -119,8 +119,8 @@ SIG que la versión anterior**, porque georreferenciar dejó de ser opcional.
 
 **Por qué el eje de la defensa es Angol.** No es una preferencia: es el formato. La
 defensa son **3 minutos y 5 de preguntas**, y ahí no se defiende un inventario sino
-una afirmación. De los tres objetivos, el 1 y el 2 producen productos —una base de
-datos, un análisis de exposición— que son valiosos y no se defienden en tres minutos.
+una afirmación. De los tres objetivos, el 1 y el 2 producen productos (una base de
+datos, un análisis de exposición) que son valiosos y no se defienden en tres minutos.
 El 3 produce una pregunta con respuesta:
 
 > **¿La zona de riesgo que Angol dibujó en 2013 contuvo el agua de 2026?**
@@ -131,8 +131,8 @@ faja de ancho fijo: es una zonificación con base geomorfológica declarada, que
 el peligro medio en paleocauces. Está mejor hecha de lo que uno esperaría, y eso
 obliga a comparar en serio.
 
-**Si sobra tiempo**, la pregunta regional —¿la concordancia mejora con la modernidad
-del instrumento?— queda como línea secundaria, con 59 años de rango entre Puerto
+**Si sobra tiempo**, la pregunta regional (¿la concordancia mejora con la modernidad
+del instrumento?) queda como línea secundaria, con 59 años de rango entre Puerto
 Saavedra (1964) y Renaico (2023). Está explícitamente marcada como opcional en la
 guía, para que no desplace al objetivo 2.
 
@@ -145,8 +145,8 @@ todo lo convierte en alguien que aprieta botones. La regla intermedia:
 En este plan eso son **tres piezas**, todas en el objetivo 3: los polígonos de Angol
 (georreferenciando), la inundación real de Angol (evidencia documental y de terreno)
 y la llanura geomorfológica (interpretación propia más HAND). Más dos mecanismos: un
-**día 0 de reproducción** —verificar una cifra ya publicada; si no calza, encontró un
-problema nuestro— y la regla de **verificar todo dato heredado en al menos un número**.
+**día 0 de reproducción** (verificar una cifra ya publicada; si no calza, encontró un
+problema nuestro) y la regla de **verificar todo dato heredado en al menos un número**.
 
 Y un argumento que le sirve para el informe: **en un trabajo nadie parte de cero**.
 Llegar a un proyecto andando, entenderlo, encontrarle errores y agregarle una pieza
@@ -176,11 +176,11 @@ vectorial del objetivo 1.
 
 **No tomar la huella satelital como «la inundación de Angol».** Es el error que este
 plan más quiere prevenir, porque es invisible: la capa existe, se abre, tiene
-polígonos y da un número. El número es 7,7 ha y es correcto — sólo que mide el día
+polígonos y da un número. El número es 7,7 ha y es correcto, sólo que mide el día
 equivocado.
 
-**No pedir los polígonos a CIGIDEN.** La intuición era razonable —si publicaron el
-Atlas, deben tener los archivos— pero la verificación la desmiente: sus polígonos
+**No pedir los polígonos a CIGIDEN.** La intuición era razonable (si publicaron el
+Atlas, deben tener los archivos) pero la verificación la desmiente: sus polígonos
 salen de las mismas áreas de riesgo de MINVU que ya tenemos. Sí vale escribirles, pero
 por otra cosa (§4).
 
@@ -195,8 +195,8 @@ polígono es exposición. Llamarlo riesgo exige además vulnerabilidad y capacid
 respuesta. El objetivo dice «análisis de riesgo»; lo honesto es entregar exposición
 bien medida y decir explícitamente qué le falta para ser riesgo.
 
-**No depender de una solicitud por Ley de Transparencia.** Puede presentarla —y
-conviene que aprenda a hacerlo— pero el plazo legal es de **20 días hábiles,
+**No depender de una solicitud por Ley de Transparencia.** Puede presentarla (y
+conviene que aprenda a hacerlo) pero el plazo legal es de **20 días hábiles,
 prorrogable por 10**. Una solicitud ingresada el día 1 vence **después** de que
 termine la práctica. Se ingresa como legado para el proyecto, jamás como insumo de su
 informe.
@@ -213,13 +213,13 @@ el reparto y lo que no va en el suyo.
 
 | Días | Fase | Objetivo | Producto principal |
 |---|---|---|---|
-| 1–6 | **Angol** | **3** | Polígonos digitalizados del plan, inundación reconstruida, llanura HAND, tabla de concordancia |
-| 7–14 | **Base de datos** | **1** | Capa curada con tipo de amenaza y **dos columnas de año**; cartografía nueva de comunas sin vectorial |
-| 15–20 | **Cruce y cierre** | **2** | Capas de población e infraestructura, análisis de exposición, guía de fuentes, informe y charla |
+| 1-6 | **Angol** | **3** | Polígonos digitalizados del plan, inundación reconstruida, llanura HAND, tabla de concordancia |
+| 7-14 | **Base de datos** | **1** | Capa curada con tipo de amenaza y **dos columnas de año**; cartografía nueva de comunas sin vectorial |
+| 15-20 | **Cruce y cierre** | **2** | Capas de población e infraestructura, análisis de exposición, guía de fuentes, informe y charla |
 
 **El plan está lleno, y hay que decirlo.** La georreferenciación es la actividad de
-duración menos predecible —depende de si cada retícula es texto vectorial o dibujo, y
-eso no se sabe hasta correrla— y ahora está en la ruta crítica del objetivo 3. Orden
+duración menos predecible (depende de si cada retícula es texto vectorial o dibujo, y
+eso no se sabe hasta correrla) y ahora está en la ruta crítica del objetivo 3. Orden
 de sacrificio acordado de antemano, para no improvisar bajo presión el día 15:
 
 1. **Nunca se recorta**: el objetivo 3 completo, el informe y la charla. Son la
@@ -234,11 +234,11 @@ de sacrificio acordado de antemano, para no improvisar bajo presión el día 15:
 **Media jornada aparte, antes de la fase 2**: leer el régimen normativo real. El área
 de riesgo **no prohíbe, condiciona** (OGUC 2.1.17: se autoriza con estudio fundado de
 profesional especialista y obras de mitigación ejecutadas), y eso obliga a separar en
-la base de datos los dos regímenes que hoy tenemos mezclados —«área de riesgo» y
-«zona no edificable»—, que son estatutos jurídicos distintos.
+la base de datos los dos regímenes que hoy tenemos mezclados («área de riesgo» y
+«zona no edificable»), que son estatutos jurídicos distintos.
 
 ⚠️ Límite heredado y no negociable: **predio sí, persona nunca**, y ninguna afirmación
-de ilegalidad — construir ahí con el estudio correspondiente es legal, y ése es el
+de ilegalidad, construir ahí con el estudio correspondiente es legal, y ése es el
 punto.
 
 ---
@@ -274,14 +274,14 @@ Comprobadas leyendo el servicio, no el catálogo.
 | Huella Sentinel-1 (capa B) | ✅ | 5.082 ha (unión), evento ago-2026, 3 órbitas |
 | Puntos críticos SENAPRED | ✅ | 440 fluviales en la región (1.374 en total) |
 | Catálogo EAE + municipios | ✅ | 354 documentos, 224 láminas localizadas |
-| **Riesgo de inundación GORE Araucanía 2016** | ✅ | **7.203 polígonos, ~35 m** — ver «El modelo regional del Gobierno Regional» |
+| **Riesgo de inundación GORE Araucanía 2016** | ✅ | **7.203 polígonos, ~35 m**: ver «El modelo regional del Gobierno Regional» |
 | Riesgo de anegamiento / remoción / volcánico GORE | ✅ | 4.491 / 10.108 / 240 polígonos |
 | Áreas de riesgo IPT de CIGIDEN | ✅ | 3.402 polígonos nacionales, sólo consulta |
 | **Estudio de Riesgo del PRC de Angol** | ✅ | **64 páginas, sept-2013**, álgebra de mapas, sin hidráulica |
 | Documentos del PRC de Angol (planos, ordenanza, memoria) | ✅ | 24 archivos en disco |
-| **Censo 2024, polígonos** (Esri Chile, `Microdatos_Censo_2024`) | ✅ | **Georreferenciado**: 3 capas — 12.886 manzanas + 4.188 entidades rurales + 33 aldeas = 17.107 · 1.021.433 personas · 216 campos · EPSG:4674 · **no está descargado** |
+| **Censo 2024, polígonos** (Esri Chile, `Microdatos_Censo_2024`) | ✅ | **Georreferenciado**: 3 capas, 12.886 manzanas + 4.188 entidades rurales + 33 aldeas = 17.107 · 1.021.433 personas · 216 campos · EPSG:4674 · **no está descargado** |
 | **Infraestructura crítica (educación, salud, vialidad, APR)** | ❌ | **No existe ninguna capa.** Construirla es el objetivo 2 |
-| Cartas geológicas 1:100.000 | ❓ | **sin verificar** — establecerlo es tarea de la fase 1 |
+| Cartas geológicas 1:100.000 | ❓ | **sin verificar**: establecerlo es tarea de la fase 1 |
 
 Los ❓, ⚠️ y ❌ están declarados a propósito: no comprometemos la práctica de una
 persona sobre un supuesto.
@@ -289,8 +289,8 @@ persona sobre un supuesto.
 ### 5b. El modelo regional del Gobierno Regional, 2016
 
 El Gobierno Regional modeló la amenaza de inundación de toda la región en 2016 para
-el *Informe Componente Amenazas Naturales* del PROT. Está público —republicado por
-CIGIDEN— y **ya lo ingesta `scripts/15_gore_amenaza.py`**.
+el *Informe Componente Amenazas Naturales* del PROT. Está público (republicado por
+CIGIDEN) y **ya lo ingesta `scripts/15_gore_amenaza.py`**.
 
 Es un ráster clasificado convertido a polígonos (los campos `gridcode` y `count_`
 son su firma), de **~35 m**. Validado contra los puntos críticos fluviales de
@@ -309,7 +309,7 @@ del territorio. `MÍNIMA` es azar puro y no se publica.
 
 Tres límites que hay que declarar siempre: las clases **no tienen significado
 físico** (no son períodos de retorno, a diferencia del JRC); **el PROT nunca se
-aprobó** —entró a evaluación en 2013 y no tiene resolución de término—; y **no
+aprobó** (entró a evaluación en 2013 y no tiene resolución de término); y **no
 declara licencia**, así que antes de publicarlo hay que preguntarle al GORE. El
 informe metodológico no está en ningún canal del Gobierno Regional: **no sabemos
 cómo se construyó**, y pedirlo por Ley 20.285 es tarea pendiente.
@@ -328,15 +328,15 @@ dar por supuesto en ninguna dirección.
 
 | Fuente | Horas hasta tenerla en QGIS |
 |---|---:|
-| Censo 2024 (QGIS trae conector ArcGIS nativo y pagina solo) | 1–2 |
-| Áreas de riesgo MINVU / CIGIDEN (mismo camino) | 1–2 |
-| Modelo GORE 2016 | 1–2 |
-| Censo 2017 del INE (+ truco del `LIKE`) | 2–3 |
+| Censo 2024 (QGIS trae conector ArcGIS nativo y pagina solo) | 1-2 |
+| Áreas de riesgo MINVU / CIGIDEN (mismo camino) | 1-2 |
+| Modelo GORE 2016 | 1-2 |
+| Censo 2017 del INE (+ truco del `LIKE`) | 2-3 |
 | Huella Sentinel-1 y JRC (ya son archivos del proyecto) | <1 |
 | HAND desde el DEM | **se le entrega calculado** |
-| **Georreferenciar los planos de Angol** (ruta crítica del objetivo 3) | **4–12**, según si la retícula es vectorial |
-| **Infraestructura crítica** (educación, salud, vialidad, APR) | 4–6, y es construcción desde cero |
-| Reconstruir la inundación de Angol desde documentos | 6–10, irreducible: es lectura y terreno |
+| **Georreferenciar los planos de Angol** (ruta crítica del objetivo 3) | **4-12**, según si la retícula es vectorial |
+| **Infraestructura crítica** (educación, salud, vialidad, APR) | 4-6, y es construcción desde cero |
+| Reconstruir la inundación de Angol desde documentos | 6-10, irreducible: es lectura y terreno |
 
 Lo que **no** entra por costo: descargar y recortar grillas globales de población
 (WorldPop, GHS-POP), que existen y funcionan pero no agregan nada sobre el Censo
@@ -346,8 +346,8 @@ Lo que **no** entra por costo: descargar y recortar grillas globales de poblaci�
 
 ## 5d. Qué cambia si trabaja con IA
 
-Las horas de la tabla anterior suponen trabajo manual. Si usa un asistente —y lo más probable es
-que lo use— el reparto cambia, pero **no de forma pareja**, y ahí está lo
+Las horas de la tabla anterior suponen trabajo manual. Si usa un asistente (y lo más probable es
+que lo use) el reparto cambia, pero **no de forma pareja**, y ahí está lo
 interesante.
 
 **Se desploma** (de horas a minutos): el código de fontanería. Paginar un servicio
@@ -373,7 +373,7 @@ donde la IA no reemplaza a nadie.
 Y una línea que conviene dejar dicha desde el día 1: **la IA puede escribir el
 código; la lectura del terreno y el argumento tienen que ser suyos.** Si el
 asistente interpreta la geomorfología por él, se queda sin nada que defender en los
-5 minutos de preguntas — y ahí es donde una práctica se vacía por dentro.
+5 minutos de preguntas, y ahí es donde una práctica se vacía por dentro.
 
 El programa de CITI-295 **no dice nada sobre uso de IA** (lo revisamos). Al no haber
 regla, el criterio honesto es el mismo que ya rige para lo heredado: **que el
@@ -403,7 +403,7 @@ supervisor. Cruzar hacia planificación territorial, derecho urbano y datos púb
 no es una concesión: es parte de lo que se evalúa.
 
 La frase que ordena la defensa: **no se trata de dibujar mapas, sino de decidir si el
-mapa que rige es geológicamente correcto — y de comprobarlo contra el agua que
+mapa que rige es geológicamente correcto, y de comprobarlo contra el agua que
 efectivamente pasó.**
 
 ---
@@ -413,7 +413,7 @@ efectivamente pasó.**
 | Riesgo | Mitigación |
 |---|---|
 | **No conocemos su nivel de SIG ni de programación, y no hay que suponerlo** | Preguntárselo antes del día 1. El plan funciona en los dos escenarios: curar y caracterizar la base de datos no requiere código, y si maneja SIG y programa, el cálculo de la llanura se le entrega completo en vez de precalculado. **Ojo: este plan carga más SIG que la versión anterior**, porque georreferenciar Angol dejó de ser opcional |
-| **La georreferenciación de Angol se atasca** — está en ruta crítica del objetivo 3 | Es el riesgo número uno de este plan. Mitigación: atacarla el día 2, no el día 5, y tener Galvarino como caso resuelto de referencia. Si la retícula está rasterizada en todos los planos, se digitaliza sobre ortofoto con error declarado |
+| **La georreferenciación de Angol se atasca**: está en ruta crítica del objetivo 3 | Es el riesgo número uno de este plan. Mitigación: atacarla el día 2, no el día 5, y tener Galvarino como caso resuelto de referencia. Si la retícula está rasterizada en todos los planos, se digitaliza sobre ortofoto con error declarado |
 | **Toma la huella satelital como la inundación de Angol** | Advertido en su guía con el número (7,7 ha) y la explicación física. Verificarlo en la primera reunión |
 | Se atasca en el cálculo de la llanura | La base de datos del objetivo 1 y el análisis del 2 ya constituyen práctica aprobable |
 | La zona de 2013 resulta acertada y contuvo el agua | Es un resultado igual de bueno, y más interesante: querría decir que el álgebra de mapas funcionó donde no había hidráulica |
@@ -434,7 +434,7 @@ efectivamente pasó.**
       completa el formulario confidencial de evaluación y lo envía a
       `egeologia@uach.cl` y `karenmoreno@uach.cl`. Se evalúa responsabilidad,
       calidad del trabajo, relaciones en el trabajo, iniciativa, versatilidad y
-      confiabilidad — conviene que sea alguien que lo vea trabajar.
+      confiabilidad, conviene que sea alguien que lo vea trabajar.
 - [ ] Acordar una **reunión breve cada 2 o 3 días**. Con 0 horas de docencia
       directa, el riesgo real de esta asignatura es que el estudiante se pierda
       solo durante dos semanas.
@@ -453,8 +453,8 @@ Que no sea trabajo escolar que termina en un cajón:
    estudio que recomendó el análisis hidráulico que nunca se hizo. Es material para la
    ficha del visor y para la discusión pública.
 3. **Base de datos curada** de riesgo geológico urbano, separada por tipo de amenaza,
-   con tabla de homologación y **dos columnas de año** —la del plan y la de su
-   estudio—, que es una distinción que hoy nadie hace.
+   con tabla de homologación y **dos columnas de año** (la del plan y la de su
+   estudio), que es una distinción que hoy nadie hace.
 4. **Cartografía vectorial que no existe en ninguna otra parte**, digitalizada desde
    planos de instrumentos no aprobados. El Estado sólo publica lo vigente.
 5. **Población e infraestructura expuestas**, que es la pregunta que la gente hace
@@ -466,6 +466,6 @@ Que no sea trabajo escolar que termina en un cajón:
    dónde existe conocimiento técnico público que nunca alcanzó fuerza legal.
 8. **La guía de fuentes**, publicable por la fundación con autoría del estudiante.
 9. **Una advertencia sobre nuestra propia fuente**: el vectorial de MINVU va por detrás
-   de las aprobaciones —Angol 2022 está aprobado y no aparece—, así que la ausencia de
+   de las aprobaciones (Angol 2022 está aprobado y no aparece), así que la ausencia de
    polígono en el visor no significa ausencia de área de riesgo. Es la regla 5 del
    proyecto.
