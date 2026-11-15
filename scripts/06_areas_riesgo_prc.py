@@ -32,10 +32,16 @@ literalmente qué no se puede hacer en ese terreno.
 arriba. Un catálogo oficial desactualizado es la razón habitual de concluir que
 "el dato no existe".
 
+Desde el 15-nov-2026 lo hídrico sale de GeoIDE (geoide.minvu.cl), otro servidor
+del mismo ministerio con una capa por comuna, resolución y fecha: ver
+ZONAS_GEOIDE más abajo. El agregado de services3 queda para lo no hídrico y para
+las comunas que GeoIDE no cubra.
+
 Requiere: nada del pipeline para la capa misma — opcional: 05_eae_documentos.py
         (data/processed/eae/araucania.json, sólo para agregar la fecha del
         procedimiento EAE; si no está, sigue corriendo sin esa fecha)
 Salida: data/processed/areas_riesgo_prc_araucania.geojson
+        data/processed/areas_riesgo_prc_reemplazadas_por_geoide.geojson (respaldo)
         web/data/areas-riesgo-inundacion.geojson
 """
 from __future__ import annotations
@@ -202,6 +208,271 @@ def desde_regional() -> list[dict]:
     return out
 
 
+# ---------------------------------------------------------------------------
+# GeoIDE del MINVU: la fuente que manda para lo hídrico desde el 15-nov-2026
+# ---------------------------------------------------------------------------
+#
+# El MINVU publica los planes reguladores en DOS servidores, y hasta el 15-nov
+# sólo usábamos el agregado de services3. GeoIDE (geoide.minvu.cl) trae una o más
+# capas por comuna con la Resolución y la fecha del Diario Oficial, y trae a
+# Angol, que el agregado no tiene: por eso creíamos que Angol no tenía vectorial
+# y vectorizamos sus láminas a mano (auditoría 15-nov, familias 1 y 2). Lo
+# encontró el practicante, que lo cita en su informe del 13-nov.
+#
+# Decisión de Nicolás (15-nov-2026): GeoIDE reemplaza. Para cada comuna que
+# GeoIDE cubre, sus polígonos hídricos salen de GeoIDE y los del agregado
+# quedan de respaldo en data/processed, no publicados. Lo no hídrico (remoción
+# en masa) sigue saliendo del agregado: este cambio es sólo de inundación.
+
+GEOIDE = "https://geoide.minvu.cl/server/rest/services/IPT/PRC_Araucania/FeatureServer"
+
+# Comuna de cada capa de GeoIDE que aporta zonas hídricas. Explícito y no
+# deducido del campo COM, que viene con la localidad («Puerto Saavedra»).
+COMUNA_DE_CAPA = {
+    "PRC_Angol_Area_de_riesgo": "Angol",
+    "PRC_Carahue": "Carahue",
+    "PRC_Collipulli_Area_de_riesgo": "Collipulli",
+    "PRC_Collipulli": "Collipulli",
+    "PRC_Gorbea": "Gorbea",
+    "PRC_Loncoche": "Loncoche",
+    "PRC_Nueva_Imperial_AR": "Nueva Imperial",
+    "PRC_Pitrufquen": "Pitrufquén",
+    "PRC_Puerto_Saavedra": "Saavedra",
+    "PRC_Renaico_Area_de_riesgo": "Renaico",
+    "PRC_Renaico_Tijeral_Area_de_riesgo": "Renaico",
+    "PRC_Temuco_Areas_de_proteccion_y_riesgo": "Temuco",
+    "PRC_Tolten_Queule_Area_de_riesgo": "Toltén",
+    "PRC_Tolten_Villa_OHiggins_Area_de_riesgo": "Toltén",
+    "PRC_Tolten_Nueva_Tolten_Area_de_riesgo": "Toltén",
+    "PRC_Tolten_Villa_Boldos_Area_de_riesgo": "Toltén",
+    "PRC_Traiguen": "Traiguén",
+    "PRC_Villarrica": "Villarrica",
+}
+
+# Qué zonas de GeoIDE son área de riesgo hídrica y de qué fenómeno.
+#
+# La llave es (capa, ZONA, NOM) normalizados, y el tipo NO se deduce del texto:
+# «zona potencialmente inundable por napa freática» contiene «inundable» y no es
+# un desborde; «inundación por tsunami» tampoco. Una heurística sobre el texto
+# clasificaba mal las dos. Cuando la fuente no trae texto (Loncoche ZR-2A y
+# ZR-2B), el tipo es el que les da la capa nacional del MINVU en
+# CLASIFICACION_RIESGOS, y así se declara.
+ZONAS_GEOIDE: dict[tuple[str, str, str], tuple[str, str]] = {
+    # (capa, ZONA, NOM): (tipo_hidrico, de dónde sale el tipo)
+    ("PRC_Angol_Area_de_riesgo", "AR-2A", "AREAS DE RIESGO INUNDABLES O POTENCIALMENTE INUNDABLES"): ("fluvial", "NOM"),
+    ("PRC_Angol_Area_de_riesgo", "AR-2B", "AREAS DE RIESGO POR ANEGAMIENTO"): ("anegamiento", "NOM"),
+    ("PRC_Carahue", "Z-R10", "Z-R10 ZONA INUNDABLE O POTENCIALMENTE INUNDABLE POR QUEBRADAS"): ("fluvial", "NOM"),
+    ("PRC_Carahue", "Z-R9", "Z-R9 ZONA INUNDABLE O POTENCIALMENTE INUNDABLE POR RIOS Y ESTEROS"): ("fluvial", "NOM"),
+    ("PRC_Carahue", "ZR1A", "ZR1A AREAS INUNDABLES, ALVEOS O CURSOS DE AGUAS DE DOMINIO PUBLICO"): ("fluvial", "NOM"),
+    ("PRC_Carahue", "ZR-1B", "ZR-1B ZONA DE CAUSES NATURALES DE CORRIENTES DISCONTINUAS FORMADAS POR AGUAS PLUVIALES"): ("fluvial", "capa nacional MINVU: INUNDACION"),
+    ("PRC_Collipulli_Area_de_riesgo", "ZR-1", "ZR-1 AREA DE RIESGO POR ANEGAMIENTO"): ("anegamiento", "NOM"),
+    ("PRC_Collipulli_Area_de_riesgo", "ZR-2", "ZR-2 AREA DE RIESGO POR INUNDACION"): ("fluvial", "NOM"),
+    # un canal es un cauce, artificial pero cauce: misma decisión que TIPO_HIDRICO
+    ("PRC_Collipulli_Area_de_riesgo", "ZR-3", "ZR-3 AREA EN TORNO A CANALES"): ("fluvial", "NOM"),
+    ("PRC_Collipulli_Area_de_riesgo", "ZR-5", "ZR-5 AREA Y/O FRANJA DE RESTRICCION POR QUEBRADAS"): ("fluvial", "NOM"),
+    # la capa general de Collipulli trae un ZR-2 y un ZR-5 más, que no se tocan
+    # con los de la capa de riesgo (medido: IoU 0 contra todos)
+    ("PRC_Collipulli", "ZR-2", "ZR-2 AREA DE RIESGO POR INUNDACION"): ("fluvial", "NOM"),
+    ("PRC_Collipulli", "ZR-5", "ZR-5 AREA DE RESTRICCION POR QUEBRADAS"): ("fluvial", "NOM"),
+    ("PRC_Gorbea", "AR1", "ZONA INUNDABLE O POTENCIALMENTE INUNDABLE"): ("fluvial", "NOM"),
+    ("PRC_Loncoche", "ZR-2A", "ZONA ZR-2A"): ("fluvial", "capa nacional MINVU: INUNDACION"),
+    ("PRC_Loncoche", "ZR-2B", "ZONA ZR-2B"): ("fluvial", "capa nacional MINVU: INUNDACION"),
+    ("PRC_Nueva_Imperial_AR", "AR-1", "AR-1 AREA DE RIESGOS ZONAS INUNDABLES O POTENCIALMENTE INUNDABLES"): ("fluvial", "NOM"),
+    # ⚠️ la fuente se contradice: ZONA dice AR-2 y NOM dice AR-1 (94 ha). Se
+    # clasifica por NOM, que es el texto descriptivo, y queda anotado en el
+    # polígono (`nota_fuente`).
+    ("PRC_Nueva_Imperial_AR", "AR-2", "AR-1 AREA DE RIESGOS ZONAS INUNDABLES O POTENCIALMENTE INUNDABLES"): ("fluvial", "NOM; ZONA dice AR-2"),
+    ("PRC_Nueva_Imperial_AR", "AR-2", "AR-2 AREA DE RIESGO ZONA POTENCIALMENTE INUNDABLE POR ANEGAMIENTO"): ("anegamiento", "NOM"),
+    ("PRC_Pitrufquen", "R1-A", "AREA R1-A. ZONA INUNDABLE O POTENCIALMENTE INUNDABLE"): ("fluvial", "NOM"),
+    ("PRC_Puerto_Saavedra", "INUNDABLE RESTRINGIDA", "SIN INFORMACION"): ("fluvial", "ZONA; capa nacional MINVU: INUNDACION"),
+    ("PRC_Renaico_Area_de_riesgo", "AR - 1", "ZONAS INUNDABLES O POTENCIALMENTE INUNDABLES"): ("fluvial", "NOM"),
+    ("PRC_Renaico_Tijeral_Area_de_riesgo", "AR-1", "AREA DE RIESGO DE INUNDACION"): ("fluvial", "NOM"),
+    # «restricción inundación anegamiento»: la capa nacional lo clasifica ANEGAMIENTO
+    ("PRC_Temuco_Areas_de_proteccion_y_riesgo", "ARRI", "ARRI RESTRICCION INUNDACION ANEGAMIENTO"): ("anegamiento", "capa nacional MINVU: ANEGAMIENTO"),
+    ("PRC_Tolten_Queule_Area_de_riesgo", "AR-1", "AREA DE RIESGO ZONAS INUNDABLES O POTENCIALMENTE INUNDABLES"): ("fluvial", "NOM"),
+    ("PRC_Tolten_Queule_Area_de_riesgo", "AR-2", "AREA DE RIESGO ZONAS POTENCIALMENTE INUNDABLES POR NAPAS FREATICAS"): ("napa_freatica", "NOM"),
+    # tsunami: inundación litoral, ni fluvial ni de drenaje (la fuente escribe «Tsuanami»)
+    ("PRC_Tolten_Queule_Area_de_riesgo", "AR-3", "AREA DE RIESGO ZONA DE INUNDACION POR TSUANAMI"): ("litoral", "NOM"),
+    ("PRC_Tolten_Villa_OHiggins_Area_de_riesgo", "AR-3", "AREA DE RIESGO ZONA DE INUNDACION POR TSUNAMI"): ("litoral", "NOM"),
+    ("PRC_Tolten_Nueva_Tolten_Area_de_riesgo", "AR1", "ZONA INUNDABLE POR CERCANIA A RIO"): ("fluvial", "NOM"),
+    ("PRC_Tolten_Nueva_Tolten_Area_de_riesgo", "AR2", "ZONA POTENCIALMENTE INUNDABLE POR NAPA FREATICA"): ("napa_freatica", "NOM"),
+    ("PRC_Tolten_Nueva_Tolten_Area_de_riesgo", "AR3", "ZONA POTENCIALMENTE INUNDABLE POR CERCANIA A RIO"): ("fluvial", "NOM"),
+    ("PRC_Tolten_Nueva_Tolten_Area_de_riesgo", "AR4", "ZONA INUNDABLE POR NAPA FREATICA"): ("napa_freatica", "NOM"),
+    ("PRC_Tolten_Villa_Boldos_Area_de_riesgo", "AR1", "ZONA INUNDABLE POR CERCANIA A RIO"): ("fluvial", "NOM"),
+    ("PRC_Tolten_Villa_Boldos_Area_de_riesgo", "AR2", "ZONA POTENCIALMEBTE INUNDABLE POR NAPA FREATICA"): ("napa_freatica", "NOM"),
+    ("PRC_Traiguen", "ZR1", "ZR1 ZONA DE RIESGO DE INUNDACION"): ("fluvial", "NOM"),
+    ("PRC_Villarrica", "ZR-4", "AREAS INUNDABLES"): ("fluvial", "NOM"),
+    ("PRC_Villarrica", "ZR-9", "ZONA ZR-9: ZONAINUNDABLE POR QUEBRADAS, CURSOS DE AGUA NO CANALIZADO"): ("fluvial", "NOM"),
+}
+
+# Zonas con texto que suena a agua y que NO se publican como área de riesgo
+# hídrica. Son franjas de protección de cauces, lechos y riberas: zonificación
+# urbana, no un área de riesgo del Art. 2.1.17 por inundación, y la capa
+# nacional del MINVU tampoco las clasifica hídricas (eso lo comprueba
+# reemplazar_por_geoide). Están listadas para que la exclusión sea una decisión
+# visible y no un olvido: lo que no está en ninguna de las dos tablas bota el
+# script. Temuco ARC (restricción canal) y ZE7 quedan como decisión pendiente.
+EXCLUIDAS_GEOIDE: set[tuple[str, str, str]] = {
+    ("PRC_Villarrica", "ZR-2", "ZONA ZR-2 DE PROTECCION VERTIENTE Y CURSOS NATURALES DE AGUA"),
+    ("PRC_Villarrica", "ZR-3", "PROTECCION DE VERTIENTES Y CAUCES NATURALES DE AGUA"),
+    ("PRC_Villarrica", "ZR-7", "ZONA ZR-7 DE PROTECCION DE LADERAS Y QUEBRADAS NATURALES"),
+    ("PRC_Victoria", "ZR-1", "ZR-1; ZONA DE PROTECCION DE VERTIENTES Y CURSOS NATURALES DE AGUA"),
+    ("PRC_Temuco", "ZE7", "ZE7 ZONA ESPECIAL RESTRICCION POR ANEGAMIENTO DE INUNDACION"),
+    ("PRC_Temuco_Areas_de_proteccion_y_riesgo", "ARC", "ARC RESTRICCION CANAL"),
+    ("PRC_Loncoche", "LECHO DE CAUCE NATURAL", "LECHO DE CAUCE NATURAL"),
+    ("PRC_Loncoche", "ZR-1", "ZONA DE PROTECCION DE VERTIENTES Y CURSOS NATURALES DE AGUA"),
+    ("PRC_Gorbea", "CURSO DE AGUA", "CURSO DE AGUA"),
+    ("PRC_Freire_Quepe", "LECHO DE CAUCE NATURAL", "LECHO DE CAUCE NATURAL"),
+    ("PRC_Collipulli", "ZAV-2", "ZAV-2 ZONA DE AREAS VERDES CANALES"),
+    ("PRC_Collipulli", "ZP-2", "ZP-2 ZONA DE MANEJO DE CAUCE"),
+    ("PRC_Carahue", "LECHO DE CAUCE", "LECHO DE CAUCE"),
+    ("PRC_Carahue", "ZR1", "ZR1 ZONA DE PROTECCION DE ALVEOS O CURSOS NATURALES DE AGUA"),
+    ("PRC_Tolten_Nueva_Tolten", "CURSO DE AGUA", ""),
+    ("PRC_Tolten_Villa_Boldos", "CURSO AGUA", ""),
+}
+
+# Palabras que obligan a que una zona esté en una de las dos tablas.
+PALABRAS_HIDRICAS = ("INUND", "ANEGA", "NAPA", "TSUNAMI", "TSUANAMI", "QUEBRAD",
+                     "CANAL", "CAUCE", "CAUSE", "ALVEO", "CURSO", "VERTIENTE")
+
+# Zonas del agregado que GeoIDE reemplaza por OTRA zona, no por la misma.
+# Sin esta tabla, reemplazar_por_geoide exige que cada zona hídrica que había
+# siga existiendo en GeoIDE.
+ZONAS_SUPERADAS = {
+    ("NUEVA IMPERIAL", "ZR-1"): "el PRC actualizado (Resolución 111 del 26-07-2025) "
+                                "la reemplaza por las zonas AR-1 y AR-2",
+}
+
+
+def _k(s: str | None) -> str:
+    return " ".join(norm(s).split())
+
+
+def _k_zona(s: str | None) -> str:
+    return norm(s).replace(" ", "")
+
+
+def tipo_geoide(capa: str, zona: str | None, nom: str | None) -> str | None:
+    """Fenómeno hídrico de una zona de GeoIDE según la tabla, o None."""
+    v = ZONAS_GEOIDE.get((capa.strip(), _k(zona), _k(nom)))
+    return v[0] if v else None
+
+
+def seleccionar_geoide(capas: list[tuple[str, list[dict]]]) -> list[dict]:
+    """Features ArcGIS de GeoIDE (en EPSG:4326) → polígonos hídricos GeoJSON.
+
+    Se cae si aparece una zona con texto hídrico que ninguna tabla conoce, o si
+    una zona de la tabla ya no está en su capa: las dos cosas significan que el
+    MINVU cambió el plan y hay que mirarlo, no adivinarlo.
+    """
+    desconocidas, vistas = set(), set()
+    capas_vistas = set()
+    out = []
+    for capa, feats in capas:
+        capa = capa.strip()
+        capas_vistas.add(capa)
+        for x in feats:
+            a = x.get("attributes", {})
+            nom = a.get("NOM") or a.get("NOMBRE")
+            llave = (capa, _k(a.get("ZONA")), _k(nom))
+            if llave in ZONAS_GEOIDE:
+                vistas.add(llave)
+            elif llave not in EXCLUIDAS_GEOIDE:
+                texto = llave[1] + " " + llave[2]
+                if any(p in texto for p in PALABRAS_HIDRICAS):
+                    desconocidas.add(llave)
+                continue
+            else:
+                continue
+            tipo, base = ZONAS_GEOIDE[llave]
+            g = anillos_a_geojson(x.get("geometry") or {})
+            if not g:
+                continue
+            doc = " ".join(str(a.get(c) or "").strip() for c in ("T_DO", "N_DOC")).strip()
+            p_do = (a.get("P_DO") or "").strip()
+            props = {
+                "comuna": COMUNA_DE_CAPA[capa],
+                "sector": (a.get("LOCALIDAD") or a.get("LOC") or a.get("SECTOR") or "").strip() or None,
+                "zona": (a.get("ZONA") or "").strip() or None,
+                "nombre": (nom or "").strip() or None,
+                "clasificacion": (nom or "").strip() if base.startswith("NOM") else
+                                 f"{(a.get('ZONA') or '').strip()} ({base})",
+                "usos_prohibidos": (a.get("UPROH") or a.get("UPROM") or "").strip() or None,
+                "usos_permitidos": (a.get("UPERM") or "").strip() or None,
+                "ordenanza_url": None,
+                "ordenanza_url_vigente": False,
+                "es_inundacion": True,
+                "tipo_hidrico": tipo,
+                "tipo_hidrico_segun": base,
+                "origen_capa": f"GeoIDE {capa}",
+                "instrumento": (f"{doc} del {p_do}" if doc and p_do else doc or None),
+                **sello("MINVU GeoIDE: áreas de riesgo del Plan Regulador Comunal "
+                        "(Art. 2.1.17 OGUC)", p_do[-4:] if len(p_do) >= 4 else None),
+            }
+            if p_do:
+                props["anio_fuente"] = "GeoIDE MINVU, fecha de publicación en el Diario Oficial (P_DO)"
+            if "ZONA dice" in base:
+                props["nota_fuente"] = ("la fuente se contradice: el campo ZONA dice "
+                                        f"{props['zona']} y el nombre dice AR-1; se clasificó por el nombre")
+            out.append({"type": "Feature", "geometry": g, "properties": props})
+    faltan = {k for k in ZONAS_GEOIDE if k[0] in capas_vistas} - vistas
+    if desconocidas or faltan:
+        raise SystemExit(
+            "GeoIDE cambió respecto de la tabla revisada a mano.\n"
+            f"  zonas con texto hídrico que ninguna tabla conoce: {sorted(desconocidas)}\n"
+            f"  zonas de ZONAS_GEOIDE que ya no están en su capa: {sorted(faltan)}\n"
+            "Revisa cada una y agrégala a ZONAS_GEOIDE o a EXCLUIDAS_GEOIDE: "
+            "clasificarla por parecido es poner un área con efecto legal donde no va.")
+    return out
+
+
+def desde_geoide() -> list[dict]:
+    """Descarga TODAS las capas de GeoIDE de La Araucanía, no sólo las de la
+    tabla: así una zona hídrica nueva en una capa que no mirábamos bota el
+    script en vez de quedar fuera. outSR=4326 lo pide consultar_capa_arcgis;
+    no se reproyecta a mano (la descarga de la auditoría venía en 32719 sin
+    declararlo, y leída como 32718 daba 0 % de solape).
+    """
+    log("GeoIDE MINVU, servicio IPT/PRC_Araucania")
+    info = get_json(GEOIDE, {"f": "json"})
+    capas = []
+    for capa in info.get("layers", []):
+        feats = consultar_capa_arcgis(f"{GEOIDE}/{capa['id']}", campos="*")
+        capas.append((capa["name"], feats))
+    out = seleccionar_geoide(capas)
+    log(f"  {len(capas)} capas, {len(out)} polígonos hídricos")
+    return out
+
+
+def reemplazar_por_geoide(agregado: list[dict], geoide: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Para cada comuna que GeoIDE cubre, sus hídricos del agregado se retiran.
+
+    Devuelve (lo que queda + GeoIDE, lo retirado). Se cae si una zona hídrica
+    del agregado no aparece en GeoIDE para esa comuna y no está en
+    ZONAS_SUPERADAS: reemplazar no puede ser perder un área de riesgo.
+    """
+    cubiertas = {norm(f["properties"]["comuna"]) for f in geoide}
+    zonas_geoide = {(norm(f["properties"]["comuna"]), _k_zona(f["properties"]["zona"]))
+                    for f in geoide}
+    quedan, retiradas, perdidas = [], [], set()
+    for f in agregado:
+        p = f["properties"]
+        c = norm(p.get("comuna"))
+        if p.get("es_inundacion") and c in cubiertas:
+            retiradas.append(f)
+            z = _k_zona(p.get("zona"))
+            if (c, z) not in zonas_geoide and (c, z) not in ZONAS_SUPERADAS:
+                perdidas.add((p.get("comuna"), p.get("zona")))
+        else:
+            quedan.append(f)
+    if perdidas:
+        raise SystemExit(
+            f"zonas hídricas del agregado que GeoIDE no trae: {sorted(perdidas)}. "
+            "O falta en ZONAS_GEOIDE, o el plan la cambió y va en ZONAS_SUPERADAS "
+            "con su razón.")
+    return quedan + geoide, retiradas
+
+
 def centroide(geom: dict) -> tuple[float, float]:
     """Centroide aproximado por promedio de vértices del primer anillo exterior.
 
@@ -300,6 +571,20 @@ def main() -> None:
     feats = deduplicar(desde_nacional() + desde_regional())
     if not feats:
         raise SystemExit("no se obtuvo ningún polígono — revisar los servicios MINVU")
+    # Primero se corrige el nombre de comuna del agregado (abajo se hace para
+    # todos, pero el reemplazo cruza por comuna y «Puerto Saavedra» no calzaría
+    # con «Saavedra»).
+    _corr = {norm(k): v for k, v in (cfg.get("correcciones_nombre_comuna") or {}).items()}
+    for f in feats:
+        bruto = (f["properties"].get("comuna") or "").strip()
+        if norm(bruto) in _corr:
+            f["properties"]["comuna_fuente"] = bruto
+            f["properties"]["comuna"] = _corr[norm(bruto)]
+    feats, retiradas = reemplazar_por_geoide(feats, desde_geoide())
+    for f in retiradas:
+        f["properties"]["reemplazado_por"] = "GeoIDE MINVU (decisión 15-nov-2026)"
+    log(f"  {len(retiradas)} polígonos hídricos del agregado quedan de respaldo, "
+        "reemplazados por GeoIDE")
 
     eae = fechas_eae_por_comuna()
     for f in feats:
@@ -311,11 +596,15 @@ def main() -> None:
 
     meta = procedencia(
         fuente="MINVU — Áreas de riesgo de Instrumentos de Planificación Territorial",
-        url=NACIONAL,
-        metodo="Descarga vía ArcGIS REST de la capa nacional de áreas de riesgo PRC "
-               "filtrada a La Araucanía, más las capas de riesgo del servicio "
-               "regional 09_PRC_La_Araucania. Conversión de anillos ArcGIS a "
-               "GeoJSON respetando el signo del área para los huecos.",
+        url=GEOIDE,
+        metodo="Las áreas de riesgo hídricas salen de GeoIDE del MINVU "
+               "(IPT/PRC_Araucania, una o más capas por comuna, con resolución y "
+               "fecha del Diario Oficial), clasificadas por una tabla revisada a "
+               "mano zona por zona. Para las comunas que GeoIDE no cubre, y para "
+               "lo no hídrico, la capa nacional de áreas de riesgo PRC filtrada a "
+               "La Araucanía más el servicio regional 09_PRC_La_Araucania. Cada "
+               "polígono dice su capa de origen en `origen_capa`. Conversión de "
+               "anillos ArcGIS a GeoJSON respetando el signo del área para los huecos.",
         capa_evidencia="A_normativo",
         incertidumbre="Son áreas de riesgo del instrumento normativo (Art. 2.1.17 OGUC), "
                       "no una modelación hidráulica. Sólo existen dentro del límite "
@@ -372,8 +661,19 @@ def main() -> None:
         # y el catastro del Atlas usa el nombre largo, así que buscar sólo por
         # el corregido dejaba a esa comuna sin año, indistinguible de una que
         # el Atlas de verdad no cubre.
-        a = (anios.get((f["properties"].get("comuna") or "").strip())
-             or anios.get((f["properties"].get("comuna_fuente") or "").strip()))
+        # La fecha del Diario Oficial que trae GeoIDE es del instrumento mismo y
+        # gana sobre el catastro: el Atlas daba 2012 a todo Toltén, y Nueva
+        # Toltén y Villa Boldos son de la Resolución 38 de 2026.
+        if f["properties"].get("anio_fuente"):
+            continue
+        # GeoIDE ya trae el nombre oficial («Saavedra») y no deja comuna_fuente,
+        # así que también se prueban los nombres que la tabla de correcciones
+        # asocia a esa comuna: sin esto Saavedra perdió su 1964.
+        oficial = (f["properties"].get("comuna") or "").strip()
+        a = (anios.get(oficial)
+             or anios.get((f["properties"].get("comuna_fuente") or "").strip())
+             or next((anios[k] for k, v in (cfg.get("correcciones_nombre_comuna") or {}).items()
+                      if v == oficial and k in anios), None))
         if a:
             f["properties"]["anio"] = a
             f["properties"]["anio_fuente"] = ("Atlas del Riesgo de Desastre, "
@@ -383,6 +683,12 @@ def main() -> None:
         f"({len(anios)} comunas con año conocido)")
 
     escribir_geojson(feats, DATA_PROC / "areas_riesgo_prc_araucania.geojson", meta)
+    # El respaldo: lo que el agregado decía para las comunas que GeoIDE cubre.
+    # No se publica, pero se guarda para poder comparar versiones.
+    escribir_geojson(retiradas, DATA_PROC / "areas_riesgo_prc_reemplazadas_por_geoide.geojson",
+                     {**meta, "metodo": "Polígonos hídricos del agregado nacional y regional "
+                      "del MINVU retirados porque GeoIDE publica la misma comuna con "
+                      "resolución y fecha; respaldo, no se publican."})
 
     # Se publican TODOS los hídricos, pero cada uno diciendo qué fenómeno es.
     #

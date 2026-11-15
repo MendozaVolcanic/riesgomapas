@@ -266,3 +266,16 @@ anio_instrumento_comuna:
 correcciones_nombre_comuna:
   "Pitufquén": "Pitrufquén"
   "Puerto Saavedra": "Saavedra"
+
+# ---------------------------------------------------------------------------
+# LÁMINAS VECTORIZADAS QUE QUEDAN DE RESPALDO
+#
+# Las vectorizamos porque creíamos que el MINVU no publicaba esa geometría. Si
+# después aparece el vectorial oficial del mismo instrumento, la lámina deja de
+# publicarse (el visor no puede mostrar dos bordes del mismo plan, uno de ellos
+# nuestro) pero se queda en data/processed/laminas/ para poder compararlas.
+# Sólo las del MISMO instrumento: el estudio de riesgo de Angol de 2013 es otro
+# documento y sigue publicado.
+laminas_de_respaldo:
+  "angol-prc-ar2a-lamina1": "GeoIDE MINVU publica el PRC de Angol (Resolución 40, 14-10-2022); decisión 15-nov-2026"
+  "angol-prc-ar2a-lamina2": "GeoIDE MINVU publica el PRC de Angol (Resolución 40, 14-10-2022); decisión 15-nov-2026"

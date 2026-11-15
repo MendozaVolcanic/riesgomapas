@@ -1,6 +1,69 @@
 # Continuar riesgomapas: prompt para la próxima sesión
 
-## Estado al 15-nov-2026, noche: familias 3 y 4 arregladas, Nicolás decidió las cinco
+## Estado al 15-nov-2026, cierre: familias 1 y 2 hechas, capa A hídrica desde GeoIDE en toda la región
+
+Nicolás pidió hacerlo regional («Sí, toda la región»), así que las familias 1 y 2 son
+un solo importador. Mediciones en `docs/auditorias/2026-11-15/arreglos/familias-1-2/README.md`.
+
+### Lo que se hizo
+
+- **Script 06**: lo hídrico sale de GeoIDE (`IPT/PRC_Araucania`, baja las 38 capas con
+  `outSR=4326`). El tipo de fenómeno sale de una tabla explícita por (capa, ZONA, NOM),
+  `ZONAS_GEOIDE`, y lo que suena a agua y no se publica está en `EXCLUIDAS_GEOIDE`. Una
+  zona con texto hídrico que no está en ninguna bota el script; también si una zona de
+  la tabla desaparece, o si el reemplazo pierde una zona del agregado (salvo las de
+  `ZONAS_SUPERADAS`: Nueva Imperial ZR-1, reemplazada por la Res. 111/2025).
+- Publicado: 136 polígonos hídricos (antes 65) en 13 comunas. Angol 21, Renaico 20,
+  Toltén 21, Nueva Imperial 9: IoU 1,0 contra GeoIDE. Los 65 del agregado quedan de
+  respaldo en `data/processed/areas_riesgo_prc_reemplazadas_por_geoide.geojson`.
+- Año por polígono: la fecha del Diario Oficial de GeoIDE gana sobre el Atlas (Angol
+  2022, Renaico 2023, Nueva Imperial 2025, Nueva Toltén y Villa Boldos 2026). El visor
+  muestra «Instrumento: Resolución N del dd/mm/aaaa» (F-111) y ya no dice «el año no
+  está declarado» bajo un polígono que lo trae.
+- **Lámina del plan de Angol** (54 polígonos): respaldo en `data/processed/laminas/`,
+  fuera del visor (`laminas_de_respaldo` en la configuración). El estudio de 2013 sigue.
+- F-103: los textos visibles del visor salían del dato (`estado-comunas.json`); Angol
+  ya tiene 21 polígonos y sale de la lista de comunas sin vectorial (19 de 32).
+  Comentarios de `app.js` corregidos. `sw.js` a v24.
+- `tests/auditoria_e2e.py`: dos puntos fijos quedaron obsoletos por el cambio de datos
+  (estaban en la lámina retirada y en el borde del ZR-1 viejo); se movieron a puntos
+  equivalentes, con la razón en el comentario. No se bajó ninguna exigencia.
+- Pruebas: `pytest` 79 verdes (11 nuevas en `tests/test_capa_a_geoide.py`, rojas
+  antes); `auditoria_datos.py` 151 OK y los 2 medios de septiembre; `auditoria_e2e.py`
+  312 OK, 0 hallazgos.
+
+### Decisiones abiertas que dejó la tabla (no bloquean)
+
+1. **Temuco ARC «restricción canal» (117 ha) y ZE7 «restricción por anegamiento de
+   inundación» (84 ha)**: excluidas porque la capa nacional del MINVU no las clasifica
+   hídricas. Collipulli ZR-3 «en torno a canales» sí se publica, como antes. Falta un
+   criterio único para los canales.
+2. **Nueva Imperial**: un polígono de 94 ha tiene ZONA AR-2 y nombre AR-1 (inundable).
+   Se clasificó fluvial por el nombre y lleva `nota_fuente`. Lo resuelve la ordenanza.
+3. **Loncoche ZR-2A y ZR-2B**: GeoIDE no trae texto; se clasifican por la capa nacional.
+4. GeoIDE responde lento: unos 6 minutos, con reintentos, para las 38 capas.
+
+### Pendiente, igual que antes
+
+Familia 5 (población expuesta por comuna, con su rango); F-104, F-107, F-108, F-109;
+`mostrarPlano` y `isStyleLoaded`; `fA_zoom_comuna.js`; `vC_aldeas_doble_conteo.py`;
+guiones largos viejos; **pedirle al practicante** sus polígonos, la tabla del Anexo 1,
+los `.points` y el script del cruce. Y el **merge a `main`**: Nicolás lo dejó para
+después de las familias 1 a 4, que ya están; falta su OK.
+
+### Prompt para abrir la próxima sesión
+
+> Estoy en `C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas`. Lee
+> `CLAUDE.md`, `REGLAS.md` y la primera sección de `docs/PROXIMA_SESION.md`. Verifica
+> que la rama esté al día con `origin` y que `pytest` dé 79 verdes. Las familias 1 a 4
+> de la auditoría del 15-nov están hechas: pregúntame por el merge a `main` y por el
+> criterio de canales (Temuco ARC frente a Collipulli ZR-3). Después, familia 5:
+> población expuesta por comuna con su rango, nunca un solo número. Nada de guiones
+> largos, y las capas no se fusionan.
+
+---
+
+## Histórico: estado al 15-nov-2026, noche: familias 3 y 4 arregladas, Nicolás decidió las cinco
 
 ### Decisiones de Nicolás (15-nov-2026, noche, opción elegida tal cual en el chat)
 

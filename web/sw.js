@@ -13,7 +13,7 @@
  */
 // Subir este número en cada publicación: al activarse, el service worker borra
 // las cachés de versiones anteriores.
-const VERSION = 'riesgomapas-v23';
+const VERSION = 'riesgomapas-v24';
 const CACHE_APP = `${VERSION}-app`;
 // La caché de teselas NO lleva la versión en el nombre, a propósito: son
 // imágenes del mapa base que no cambian cuando cambia el sitio, y son lo más

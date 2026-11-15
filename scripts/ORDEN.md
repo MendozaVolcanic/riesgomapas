@@ -15,7 +15,7 @@
 | 08 | `08_georreferenciar_grilla.py` | planos con retícula vectorial → GeoTIFF | 07 |
 | 10 | `10_exportar_superposiciones.py` | publica los planos al visor | 08 |
 | 01 | `01_senapred_puntos_criticos.py` | capa D + índice de comunas | — |
-| 06 | `06_areas_riesgo_prc.py` | capa A: áreas de riesgo del MINVU | — (05 opcional: fecha EAE) |
+| 06 | `06_areas_riesgo_prc.py` | capa A: áreas de riesgo del MINVU (hídricas desde GeoIDE) | — (05 opcional: fecha EAE) |
 | 13 | `13_campamentos_riesgo.py` | campamentos dentro de área de riesgo | — (MINVU entrega el cruce hecho) |
 | 02 | `02_jrc_amenaza_modelada.py` | capa C global | — |
 | 15 | `15_gore_amenaza.py` | capa C regional a 35 m | — |

@@ -7,7 +7,7 @@
   "incertidumbre": "Es un inventario de LO QUE ENCONTRAMOS, no de lo que existe. Que una comuna aparezca sin cartografía significa que no la hallamos en fuentes públicas consultables, no que no se inunde ni que el municipio no la tenga en papel. AUSENCIA DE DATO NO ES AUSENCIA DE RIESGO.",
   "escala_original": null,
   "fecha_dato": "cruce al día de la corrida",
-  "generado": "2026-11-15T13:14:44+00:00"
+  "generado": "2026-11-15T16:58:08+00:00"
  },
  "fuente": "varias",
  "anio": "no declarado por la fuente",
@@ -21,15 +21,13 @@
    "viviendas_agua_de_rio": 495,
    "puntos_inundacion": 14,
    "puntos_cronicos": 3,
-   "poligonos_area_riesgo": 0,
+   "poligonos_area_riesgo": 21,
    "documentos": 41,
    "laminas_localizadas": 11,
    "planos_georreferenciados": 0,
    "planos_por_estado": {},
-   "poligonos_vectorizados_por_nosotros": 150,
-   "le_falta": [
-    "no tiene su área de riesgo por inundación en el vectorial público del MINVU"
-   ]
+   "poligonos_vectorizados_por_nosotros": 96,
+   "le_falta": []
   },
   {
    "comuna": "Carahue",
@@ -80,7 +78,7 @@
    "viviendas_agua_de_rio": 500,
    "puntos_inundacion": 10,
    "puntos_cronicos": 0,
-   "poligonos_area_riesgo": 38,
+   "poligonos_area_riesgo": 44,
    "documentos": 30,
    "laminas_localizadas": 5,
    "planos_georreferenciados": 0,
@@ -353,7 +351,7 @@
    "viviendas_agua_de_rio": 154,
    "puntos_inundacion": 34,
    "puntos_cronicos": 12,
-   "poligonos_area_riesgo": 1,
+   "poligonos_area_riesgo": 9,
    "documentos": 4,
    "laminas_localizadas": 8,
    "planos_georreferenciados": 0,
@@ -471,7 +469,7 @@
    "viviendas_agua_de_rio": 103,
    "puntos_inundacion": 19,
    "puntos_cronicos": 0,
-   "poligonos_area_riesgo": 1,
+   "poligonos_area_riesgo": 20,
    "documentos": 10,
    "laminas_localizadas": 0,
    "planos_georreferenciados": 0,
@@ -545,7 +543,7 @@
    "viviendas_agua_de_rio": 953,
    "puntos_inundacion": 13,
    "puntos_cronicos": 11,
-   "poligonos_area_riesgo": 4,
+   "poligonos_area_riesgo": 21,
    "documentos": 8,
    "laminas_localizadas": 20,
    "planos_georreferenciados": 0,

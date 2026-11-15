@@ -446,9 +446,11 @@ function evaluar(lon, lat) {
   // Capa A DERIVADA: las láminas de peligro que vectorizamos nosotros desde el
   // documento impreso. Se dibujaban en el mapa y no entraban acá, así que un
   // vecino de Angol parado dentro del AR-2a de su propio plan regulador leía
-  // «no cae dentro de un área de riesgo»: Angol y Curarrehue no tienen ni un
-  // polígono en el vectorial del MINVU, de modo que ésta es la única evidencia
-  // normativa que existe para ellas y era justo la que el veredicto no miraba.
+  // «no cae dentro de un área de riesgo»: en ese momento creíamos que Angol no
+  // tenía vectorial del MINVU, y ésta era la única evidencia de su plan. Desde
+  // el 15-nov-2026 Angol sale de GeoIDE (capa normativa) y su lámina del plan
+  // queda de respaldo; esta rama sigue sirviendo a Curarrehue y a los estudios
+  // de riesgo, que no son plan regulador.
   const laminas = poligonosQueContienen(lon, lat, estado.laminas);
   const gore = poligonosQueContienen(lon, lat, estado.gore);
   const enMancha = dentroDeMancha(lon, lat, estado.jrc);
@@ -931,12 +933,15 @@ function atribucion(fc, primerFeature) {
   const fuente = p.fuente || proc.fuente || 'fuente no declarada';
   // Sin un polígono concreto no hay año que atribuir. Antes se caía al año de
   // la procedencia, que describe la descarga y no el instrumento: bajo un punto
-  // de Angol —que no tiene ni un polígono en el vectorial del MINVU— salía
+  // de Angol (que entonces no tenía polígonos en la capa del MINVU) salía
   // «Año: 2010», que es el del plan de Temuco.
   const anio = primerFeature ? (p.anio || proc.fecha_dato || 'año no declarado') : null;
   const bajado = (proc.generado || '').slice(0, 10);
   return `<p class="fuente"><strong>Fuente:</strong> ${esc(fuente)}` +
          (anio ? ` · <strong>Año:</strong> ${esc(anio)}` : '') +
+         // GeoIDE trae la resolución y su fecha en el Diario Oficial: es lo que
+         // permite ir a buscar el instrumento, no sólo su año (F-111).
+         (primerFeature && p.instrumento ? ` · <strong>Instrumento:</strong> ${esc(p.instrumento)}` : '') +
          (bajado ? ` · <span class="incert">datos obtenidos ${esc(bajado)}</span>` : '') +
          `</p>`;
 }
@@ -1010,8 +1015,8 @@ function render(res, etiqueta, lon, lat) {
   } else if (estado.areasRiesgo) {
     // Con cuidado: este bloque habla del VECTORIAL que publica el MINVU, no de
     // «el plan regulador» a secas. Decir «no cae dentro de un área declarada en
-    // el plan regulador» era falso en Angol y Curarrehue, donde el plan sí la
-    // declara —en un plano de papel que nosotros vectorizamos— y el titular de
+    // el plan regulador» era falso donde el plan sí la declara en un plano de
+    // papel que nosotros vectorizamos (Angol hasta el 15-nov-2026), y el titular de
     // esta misma ficha lo dice cuatro centímetros más arriba. Una ficha que se
     // contradice consigo misma no se puede usar para decidir nada.
     // Si el punto cae en la banda de un borde normativo o derivado, «no cae
@@ -1039,10 +1044,14 @@ function render(res, etiqueta, lon, lat) {
   }
   // Sin polígono en el punto no hay año que atribuir: pasarle el primero de la
   // capa mostraba el año del instrumento de OTRA comuna —«Año: 2010», que es el
-  // de Temuco— bajo un punto de Angol que no tiene ni un polígono del MINVU.
+  // de Temuco— bajo un punto de Angol, que entonces no tenía polígonos del MINVU.
   html += atribucion(estado.areasRiesgo, res.areas[0] || null);
   if (res.areas.length) {
-    const conEae = res.areas.filter((a) => a.properties.eae_fecha_ingreso);
+    // Sólo cuando el polígono no trae su instrumento: los de GeoIDE dicen la
+    // resolución y su fecha, y decirles «el año no está declarado» los
+    // contradecía dos líneas más abajo.
+    const conEae = res.areas.filter((a) => a.properties.eae_fecha_ingreso &&
+                                           !a.properties.instrumento);
     if (conEae.length) {
       const a = conEae[0].properties;
       html += `<p class="incert">El año del plan regulador no está declarado en la
@@ -1059,8 +1068,8 @@ function render(res, etiqueta, lon, lat) {
 
   /* --- Capa A DERIVADA: cartografía que existía sólo en papel y que
      convertimos en geometría. Va inmediatamente después del bloque normativo
-     porque en Angol y Curarrehue es la ÚNICA evidencia normativa que hay —esas
-     comunas no tienen ni un polígono en el vectorial del MINVU—, y hasta el
+     porque donde no hay vectorial del MINVU es la ÚNICA evidencia que hay (en
+     Angol lo fue hasta el 15-nov-2026, cuando apareció su capa en GeoIDE), y hasta el
      7-sep-2026 no aparecía en ninguna parte de esta ficha: se dibujaba en el
      mapa y nada más. El sello dice «derivado» con TEXTO, no sólo con el
      achurado del borde, porque REGLAS §1.5 lo exige y porque el color no se

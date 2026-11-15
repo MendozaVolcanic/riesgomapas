@@ -169,7 +169,13 @@ def main() -> None:
     # tiene efecto legal.
     vect: dict[str, int] = {}
     derivados = []
+    # Las láminas cuyo instrumento ya publica el MINVU en vectorial quedan de
+    # respaldo: en disco, no en el visor (config `laminas_de_respaldo`).
+    respaldo = cfg.get("laminas_de_respaldo") or {}
     for f in sorted((DATA_PROC / "laminas").glob("*.geojson")):
+        if f.stem in respaldo:
+            log(f"  {f.stem}: de respaldo, no se publica ({respaldo[f.stem]})")
+            continue
         d = cargar(f)
         for ft in (d or {}).get("features", []):
             k2 = norm(ft["properties"].get("comuna"))

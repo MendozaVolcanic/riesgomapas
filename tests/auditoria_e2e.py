@@ -198,7 +198,10 @@ def auditar_lo_que_dice_el_veredicto(page, aud: Auditoria, etq: str) -> None:
         aud.falla(f"punto de borde para el detalle [{etq}]", "ya no es de borde: no corre")
 
     # F-105: acercarse al borde no puede bajar el nivel que dan los registros.
-    lat0, lon0 = -38.7465676360515, -72.95729860403075
+    # Punto 5 m afuera del área de riesgo de Nueva Imperial. Hasta el 15-nov
+    # era el borde del ZR-1 viejo; GeoIDE trajo la versión de 2025 y ese punto
+    # quedó 24 m adentro, así que se movió al borde nuevo más cercano.
+    lat0, lon0 = -38.746458701710466, -72.9569970087293
     niveles = []
     for m in (0, 60, 120):
         r = ficha([lon0 + m / (111320 * math.cos(math.radians(lat0))), lat0])
@@ -223,7 +226,10 @@ def auditar_lo_que_dice_el_veredicto(page, aud: Auditoria, etq: str) -> None:
 
     # F-102: el texto que se reenvía tiene que nombrar la capa que decidió.
     for nombre, ll, exige, patron in [
-        ("lámina derivada", [-72.69911, -37.78179], "laminas", "trazado"),
+        # estudio de Angol de 2013, a más de 500 m de toda área normativa. El
+        # punto anterior estaba en la lámina del plan de Angol, que desde el
+        # 15-nov queda de respaldo porque GeoIDE publica ese plan.
+        ("lámina derivada", [-72.670902, -37.788388], "laminas", "trazado"),
         ("modelo sin registros", [-73.08786, -38.68423], "gore", "modelo"),
         ("borde", [-72.620737, -38.761129], "borde", "borde"),
     ]:
