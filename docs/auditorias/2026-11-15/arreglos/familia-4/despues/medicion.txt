@@ -1,0 +1,5 @@
+features 17074 personas 1003546
+por unidad_censal {'manzana_urbana': 12381, 'manzana_aldea': 505, 'entidad_rural': 4188} {'manzana_urbana': 673286, 'manzana_aldea': 17887, 'entidad_rural': 312373}
+unidad x AREA_C (F-380: manzana_urbana ya no incluye rurales) {('manzana_urbana', 'URBANO'): 12381, ('manzana_aldea', 'RURAL'): 505, ('entidad_rural', 'RURAL'): 4188}
+unidades 'aldea' (F-300): 0
+estado-comunas suma personas 1003546

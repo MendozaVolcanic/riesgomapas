@@ -1,0 +1,9 @@
+control OK: 1 aldea duplicada detectada, 1 no
+Traceback (most recent call last):
+  File "C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas\tools\auditoria\vC_aldeas_doble_conteo.py", line 42, in <module>
+    d['igual'] = d.n == d.suma_rp
+                 ^^^
+  File "C:\Users\nmend\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\generic.py", line 6206, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'n'. Did you mean: 'ne'?

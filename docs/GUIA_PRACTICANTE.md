@@ -418,18 +418,28 @@ unir por código. Servicio *Microdatos Censo 2024* de Esri Chile, verificado:
 https://services.arcgis.com/r7t1P5pnkoOLRdhr/arcgis/rest/services/Microdatos_Censo_2024/FeatureServer
 ```
 
-⚠️ **Pero la región no está en una sola capa, y ahí está la trampa.** Son tres
-unidades geográficas distintas que hay que unir para cubrir el territorio:
+> **Corregido el 15-nov-2026 (F-300, `docs/auditorias/2026-11-15/SINTESIS.md`).** Esta
+> sección decía que había que unir tres capas, con un total de 17.107 polígonos y
+> 1.021.433 personas. La capa de aldeas está **duplicada**: cada aldea es la suma exacta
+> de sus manzanas de tipo «ALDEA», que ya vienen en la capa 0. El total correcto es
+> 17.074 polígonos y **1.003.546 personas**. Desde esa fecha el script 16 lee el GPKG del
+> INE (el mismo dato que Esri, archivo fijo):
+> `https://storage.googleapis.com/bktdescargascenso2024/Cartografia/GPKG/Cartografia_censo2024_R09.zip`
+
+⚠️ **Pero la región no está en una sola capa, y ahí está la trampa.** Son dos
+unidades geográficas distintas que hay que unir para cubrir el territorio, y una
+tercera que parece unidad y no lo es:
 
 | Capa | Qué es | Polígonos en R09 | Población |
 |---:|---|---:|---:|
-| **0** | Manzanas (urbanas) | 12.886 | 691.173 |
+| **0** | Manzanas urbanas (`TIPO_MZ` URBANO) | 12.381 | 673.286 |
+| **0** | Manzanas de aldea (`TIPO_MZ` ALDEA, área rural) | 505 | 17.887 |
 | **1** | Manzanas-entidades (rurales) | 4.188 | 312.373 |
-| **2** | Aldeas | 33 | 17.887 |
-| | **Total** | **17.107** | **1.021.433** |
+| | **Total** | **17.074** | **1.003.546** |
+| ~~**2**~~ | ~~Aldeas~~: **no se suma**, es la suma de las 505 manzanas de aldea | 33 | 17.887 |
 
-Las capas 3 y 4 (zonas censales y distritos) son **agregaciones de las anteriores**:
-si las sumas cuentas la misma gente dos veces.
+Las capas 3 y 4 (zonas censales y distritos) y la de aldeas son **agregaciones de las
+anteriores**: si las sumas cuentas la misma gente dos veces.
 
 ⚠️ **Y no mezcles urbano con rural sin decirlo.** En Angol, una manzana urbana típica
 mide ~116 × 119 m con 39 personas; una entidad rural mide ~543 × 770 m con 7. Son
@@ -478,7 +488,8 @@ llanura que calculaste.
 - **Reproyecta a UTM (EPSG:32718/32719) antes de medir superficies.** En grados el
   número no significa nada.
 - El servicio del Censo 2024 es un **espejo de Esri Chile**, no del INE: contrasta un
-  par de totales comunales antes de publicar.
+  par de totales comunales antes de publicar. *(15-nov-2026: contrastado; es el mismo
+  dato que el GPKG del INE en 17 campos, y el proyecto ahora lee el GPKG.)*
 - En el Censo **2017** del INE, `REGION=9` devuelve **cero filas sin error** porque el
   campo es texto; hay que usar `REGION LIKE '%RAUCAN%'`. Cero filas sin mensaje es el
   modo de falla más peligroso que existe. (En el servicio de 2024 el campo sí es

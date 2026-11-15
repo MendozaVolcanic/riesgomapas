@@ -268,7 +268,7 @@ Comprobadas leyendo el servicio, no el catálogo.
 | Fuente | Estado | Detalle |
 |---|---|---|
 | Áreas de riesgo IPT (MINVU) | ✅ | 124 polígonos en la región, 63 hídricos |
-| Censo 2024, polígonos | ✅ | 17.107 unidades en R09 repartidas en **3 capas**, 1.021.433 personas, 216 campos |
+| Censo 2024, polígonos | ✅ | 17.074 unidades en R09 en **2 capas** (la de aldeas duplica; corregido el 15-nov-2026, F-300; antes decía 17.107 y 1.021.433), **1.003.546 personas** |
 | Censo 2017 por manzana (INE) | ✅ | 9.224 manzanas + 4.166 entidades, ojo con `REGION` texto |
 | DEM Copernicus GLO-30 | ✅ | anónimo, ya integrado al pipeline |
 | Huella Sentinel-1 (capa B) | ✅ | 5.082 ha (unión), evento ago-2026, 3 órbitas |
@@ -279,7 +279,7 @@ Comprobadas leyendo el servicio, no el catálogo.
 | Áreas de riesgo IPT de CIGIDEN | ✅ | 3.402 polígonos nacionales, sólo consulta |
 | **Estudio de Riesgo del PRC de Angol** | ✅ | **64 páginas, sept-2013**, álgebra de mapas, sin hidráulica |
 | Documentos del PRC de Angol (planos, ordenanza, memoria) | ✅ | 24 archivos en disco |
-| **Censo 2024, polígonos** (Esri Chile, `Microdatos_Censo_2024`) | ✅ | **Georreferenciado**: 3 capas, 12.886 manzanas + 4.188 entidades rurales + 33 aldeas = 17.107 · 1.021.433 personas · 216 campos · EPSG:4674 · **no está descargado** |
+| **Censo 2024, polígonos** (GPKG del INE desde el 15-nov-2026; antes Esri Chile, `Microdatos_Censo_2024`, mismo dato) | ✅ | **Georreferenciado**: 12.886 manzanas (505 de ellas de aldea) + 4.188 entidades rurales = 17.074 · 1.003.546 personas (corregido el 15-nov-2026, F-300: las 33 aldeas son la suma de sus manzanas y no se suman; antes decía 17.107 · 1.021.433) · 216 campos · EPSG:4674 · **no está descargado** |
 | **Infraestructura crítica (educación, salud, vialidad, APR)** | ❌ | **No existe ninguna capa.** Construirla es el objetivo 2 |
 | Cartas geológicas 1:100.000 | ❓ | **sin verificar**: establecerlo es tarea de la fase 1 |
 

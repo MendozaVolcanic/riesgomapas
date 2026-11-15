@@ -246,7 +246,7 @@ def main() -> None:
             "personas": (pob or {}).get("personas"),
             "mayores_60": (pob or {}).get("mayores_60"),
             "viviendas_hacinadas": (pob or {}).get("viv_hacinadas"),
-            "hogares_agua_de_rio": (pob or {}).get("agua_de_rio"),
+            "viviendas_agua_de_rio": (pob or {}).get("agua_de_rio"),
             "puntos_inundacion": pc.get("puntos_inundacion", 0),
             "puntos_cronicos": pc.get("cronicos", 0),
             "poligonos_area_riesgo": con_area.get(k, 0),

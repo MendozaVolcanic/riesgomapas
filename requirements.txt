@@ -15,6 +15,7 @@ pytest>=8.0
 # Tras instalar: python -m playwright install chromium
 playwright>=1.40
 
-# Nota: geopandas, shapely y fiona no son necesarios para el pipeline actual —
-# todo el trabajo vectorial se hace con GeoJSON plano. Se agregan cuando entre
-# la capa B (SAR) o el análisis de exposición censal.
+# Lectura de GPKG (script 16, censo del INE) y paquete del practicante (script 20).
+# El resto del pipeline trabaja con GeoJSON plano.
+geopandas>=1.0
+pyogrio>=0.7

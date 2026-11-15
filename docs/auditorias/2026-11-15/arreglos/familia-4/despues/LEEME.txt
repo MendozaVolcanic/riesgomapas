@@ -1,0 +1,1 @@
+vC_aldeas_doble_conteo.py despues: --control OK; la corrida real cae con AttributeError porque no quedan aldeas que medir (DataFrame vacio). Medicion equivalente en medicion.txt.

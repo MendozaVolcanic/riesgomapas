@@ -81,7 +81,7 @@ def main():
         proy = a_utm(cx)
         manz = [f for f in censo["features"]
                 if f["properties"]["NOM_COMUNA"].upper() == nom_censo
-                and f["properties"]["unidad_censal"] in ("manzana_urbana", "aldea")
+                and f["properties"]["unidad_censal"] in ("manzana_urbana", "manzana_aldea", "aldea")
                 and shape(f["geometry"]).intersects(caja)]
         if not manz:
             print(f"INSTRUMENTO MUERTO: sin manzanas para {nombre}"); sys.exit(2)

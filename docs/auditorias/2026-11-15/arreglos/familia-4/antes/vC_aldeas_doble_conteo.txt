@@ -1,0 +1,5 @@
+control OK: 1 aldea duplicada detectada, 1 no
+32      NaN  938      938    21  manzana_urbana                    0.923     60.1   True
+aldeas 33 con suma exacta 33 pob aldeas 17887 pob suma_rp 17887
+tipos de unidades dentro: {'manzana_urbana': 33}
+total con aldeas 1021433 sin aldeas 1003546 diferencia 17887
