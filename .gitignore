@@ -57,3 +57,8 @@ tools/auditoria/**/*.tif
 tools/auditoria/**/*.geojson
 tools/auditoria/**/*.jpg
 data/processed/paquete_*.zip
+
+# Recortes y capturas de las auditorías en docs/: evidencia regenerable con su
+# instrumento (vB_angol_fondo_oscuro.py y similares), no fuente. Ninguna
+# auditoría anterior versionó imágenes.
+docs/auditorias/**/*.png

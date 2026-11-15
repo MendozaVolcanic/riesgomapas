@@ -1,0 +1,30 @@
+GeoIDE AR-2a ∩ AR-2b: 9.26 ha de 15.64 ha de AR-2b
+AR-2b a menos de 5 m de AR-2a: 10.29 ha
+
+== angol-prc-ar2a-lamina1 ==
+  fondo gris en G∩N: p10/p50/p90 = 147/177/194 (n=114675)
+  fondo gris en G-N: p10/p50/p90 = 122/145/215 (n=45914)
+  G-N con fondo oscuro (<150): 21.53 ha de 41.32 ha
+  G∩N con fondo oscuro (<150): 10.95 ha de 103.21 ha
+  contraste 28: marcas/ha G∩N 157 | G-N claro 32 | G-N oscuro 22 | anillo ruido 3 | anillo ruido oscuro 2
+  contraste 14: marcas/ha G∩N 148 | G-N claro 25 | G-N oscuro 86 | anillo ruido 8 | anillo ruido oscuro 5
+  (chequeo vivo: 16125 marcas c28 en G∩N de esta lámina)
+
+== angol-prc-ar2a-lamina2 ==
+  fondo gris en G∩N: p10/p50/p90 = 151/190/230 (n=125868)
+  fondo gris en G-N: p10/p50/p90 = 133/188/232 (n=44116)
+  G-N con fondo oscuro (<150): 11.63 ha de 39.70 ha
+  G∩N con fondo oscuro (<150): 10.08 ha de 113.28 ha
+  contraste 28: marcas/ha G∩N 128 | G-N claro 39 | G-N oscuro 21 | anillo ruido 5 | anillo ruido oscuro 2
+  contraste 14: marcas/ha G∩N 104 | G-N claro 26 | G-N oscuro 91 | anillo ruido 7 | anillo ruido oscuro 6
+
+== Descomposición de G-N (celdas de 3 m) ==
+  borde<=10m            29.14 ha
+  oscuro>10m            23.56 ha
+  claro>10m_en_AR2b      2.27 ha
+  claro>10m_resto       23.41 ha
+  total 78.38 ha (G-N exacto 78.37 ha)
+
+== CONTROL: cuadrado de fondo oscuro sin AR, lejos de G∪N ==
+  contraste 28: cuadrado oscuro sin AR en 703722,5813307 (fracción oscura 1.00): 0 marcas/ha
+  contraste 14: cuadrado oscuro sin AR en 703722,5813307 (fracción oscura 1.00): 0 marcas/ha

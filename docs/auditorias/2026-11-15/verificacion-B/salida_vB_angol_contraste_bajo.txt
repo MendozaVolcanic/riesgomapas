@@ -1,0 +1,4 @@
+contraste 28: N 225.22 ha | cobertura de G 0.722 | G-N 78.36 ha | N-G 21.38 ha | N-G fuera de AR-2b 21.15 ha | IoU 0.671 | G-N con N+10 m 48.84 ha
+contraste 20: N 231.78 ha | cobertura de G 0.728 | G-N 76.81 ha | N-G 26.38 ha | N-G fuera de AR-2b 25.59 ha | IoU 0.666 | G-N con N+10 m 45.25 ha
+contraste 14: N 317.31 ha | cobertura de G 0.689 | G-N 87.80 ha | N-G 122.90 ha | N-G fuera de AR-2b 121.78 ha | IoU 0.480 | G-N con N+10 m 57.27 ha
+contraste 10: N 347.11 ha | cobertura de G 0.625 | G-N 105.72 ha | N-G 170.62 ha | N-G fuera de AR-2b 169.49 ha | IoU 0.390 | G-N con N+10 m 73.36 ha

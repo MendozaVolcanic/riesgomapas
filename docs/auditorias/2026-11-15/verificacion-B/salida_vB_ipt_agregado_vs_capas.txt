@@ -1,0 +1,10 @@
+REG distintos en el agregado (descarga del auditor): Counter({'La Araucanía': 232, 'Araucanía': 17})
+  Angol           agregado(REG Araucan)  81 | agregado(COM=, sin filtro REG) 81 | capas [29] suman 81
+  Renaico         agregado(REG Araucan)  22 | agregado(COM=, sin filtro REG) 22 | capas [9, 31] suman 22
+  Toltén          agregado(REG Araucan)  21 | agregado(COM=, sin filtro REG) 21 | capas [4, 6, 34, 37] suman 21
+  Nueva Imperial  agregado(REG Araucan)  10 | agregado(COM=, sin filtro REG) 10 | capas [33] suman 10
+  Collipulli      agregado(REG Araucan)  64 | agregado(COM=, sin filtro REG) 64 | capas [23] suman 68
+  Carahue         agregado(REG Araucan)  31 | agregado(COM=, sin filtro REG) 31 | capas [25] suman 15
+  Temuco          agregado(REG Araucan)   3 | agregado(COM=, sin filtro REG) 3 | capas [12] suman 24
+Angol agregado vs capa 29: 567.70 ha vs 567.70 ha, IoU 1.0000
+Angol agregado por ZONA: {'AR-1c': 38, 'AR-2a': 10, 'AR-1b': 18, 'AR-1a': 4, 'AR-2b': 11}

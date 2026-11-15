@@ -1,0 +1,56 @@
+angol-prc-ar2a-lamina1: 22448 marcas AR-2a en la hoja, huella útil 1887 ha, RMSE 4.94 m
+angol-prc-ar2a-lamina2: 21876 marcas AR-2a en la hoja, huella útil 2000 ha, RMSE 1.22 m
+[real] G: 10 features, suma 282.21 ha, disuelto 282.21 ha (solape interno 0.00 ha)
+[real] N: 54 polígonos, disuelto 225.22 ha; suma campo hectareas 227.57 ha
+[real] G∩N 203.84 ha | cobertura de G 0.722 | G-N 78.37 ha | N-G 21.38 ha | IoU 0.671
+[real] G fuera de la huella útil de ambas láminas: 0.00 ha; de G-N, fuera de huella: 0.00 ha
+[real] densidad de marcas AR-2a en G∩N: 149 /ha (30438 marcas); en un anillo de 300 m fuera de G∪N: 5 /ha
+[real] G-N en 448 piezas; >=2000 m2: 61 piezas, 69.83 ha; <2000 m2: 387 piezas, 8.54 ha
+[real] piezas >=2000 m2 por causa (ha): a_achurado_perdido 0.24, b_sin_achurado 20.82, intermedia 48.77, fuera_huella 0.00
+[real] 12 piezas mayores: área ha | causa | marcas/ha | ancho medio m | dist a N m | punto
+     11.10 | intermedia           |     26 |   26.1 |    0.0 | 701514,5814644
+      7.42 | intermedia           |     35 |   67.4 |    0.0 | 702770,5814213
+      4.61 | intermedia           |     28 |   34.9 |    0.0 | 704708,5812533
+      3.15 | b_sin_achurado       |     21 |   15.2 |    0.0 | 705075,5812122
+      2.83 | b_sin_achurado       |     22 |   45.7 |    0.0 | 700412,5814870
+      2.47 | intermedia           |     34 |   21.3 |    0.0 | 702277,5812078
+      2.34 | b_sin_achurado       |     15 |   21.4 |    0.0 | 702493,5815576
+      2.27 | intermedia           |     28 |   17.8 |    0.0 | 704377,5812604
+      2.16 | b_sin_achurado       |     11 |   10.7 |    0.0 | 700945,5814141
+      2.09 | intermedia           |     42 |   22.1 |    0.0 | 703113,5812345
+      1.89 | intermedia           |     39 |   21.6 |    0.0 | 703312,5812326
+      1.68 | b_sin_achurado       |     11 |   12.6 |    0.0 | 701545,5812167
+[real] traslación óptima (-4,-4) m -> IoU 0.680; G-N tras trasladar 76.86 ha
+[real] G-N después de engordar N 5 m: 60.73 ha
+[real] G-N después de engordar N 10 m: 49.12 ha
+[real] G-N después de engordar N 15 m: 41.81 ha
+[real] G-N después de engordar N 25 m: 34.17 ha
+[AR-2b] 15.64 ha; dentro de huella 15.64 ha; cubierto por N 0.101; marcas AR-2a/ha dentro: 30 (470)
+== CONTROL ==
+[control] G: 11 features, suma 284.17 ha, disuelto 284.17 ha (solape interno 0.00 ha)
+[control] N: 53 polígonos, disuelto 193.49 ha; suma campo hectareas 195.84 ha
+[control] G∩N 173.07 ha | cobertura de G 0.609 | G-N 111.10 ha | N-G 20.42 ha | IoU 0.568
+[control] G fuera de la huella útil de ambas láminas: 0.00 ha; de G-N, fuera de huella: 0.00 ha
+[control] densidad de marcas AR-2a en G∩N: 142 /ha (24551 marcas); en un anillo de 300 m fuera de G∪N: 5 /ha
+[control] G-N en 406 piezas; >=2000 m2: 60 piezas, 103.04 ha; <2000 m2: 346 piezas, 8.06 ha
+[control] piezas >=2000 m2 por causa (ha): a_achurado_perdido 32.75, b_sin_achurado 19.34, intermedia 50.95, fuera_huella 0.00
+[control] 12 piezas mayores: área ha | causa | marcas/ha | ancho medio m | dist a N m | punto
+     32.51 | a_achurado_perdido   |    182 |  154.3 |    0.0 | 703906,5815345
+     11.10 | intermedia           |     26 |   26.1 |    0.0 | 701514,5814644
+      7.42 | intermedia           |     35 |   67.4 |    0.0 | 702770,5814213
+      4.61 | intermedia           |     28 |   34.9 |    0.0 | 704708,5812533
+      3.15 | b_sin_achurado       |     21 |   15.2 |    0.0 | 705075,5812122
+      2.83 | intermedia           |     22 |   45.7 |    0.0 | 700412,5814870
+      2.47 | intermedia           |     34 |   21.3 |    0.0 | 702277,5812078
+      2.34 | b_sin_achurado       |     15 |   21.4 |    0.0 | 702493,5815576
+      2.27 | intermedia           |     28 |   17.8 |    0.0 | 704377,5812604
+      2.16 | b_sin_achurado       |     11 |   10.7 |    0.0 | 700945,5814141
+      2.09 | intermedia           |     42 |   22.1 |    0.0 | 703113,5812345
+      1.96 | b_sin_achurado       |      0 |   70.0 |  902.8 | 699552,5813307
+[control] traslación óptima (-4,-2) m -> IoU 0.574; G-N tras trasladar 109.89 ha
+[control] G-N después de engordar N 5 m: 94.11 ha
+[control] G-N después de engordar N 10 m: 82.75 ha
+[control] G-N después de engordar N 15 m: 75.54 ha
+[control] G-N después de engordar N 25 m: 67.96 ha
+CONTROL borrado 31.73 ha -> clasificado (a): OK
+CONTROL falso 1.96 ha en 699552,5813307 -> clasificado (b): OK

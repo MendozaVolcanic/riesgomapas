@@ -1,0 +1,42 @@
+visor Renaico: Tijeral/AR-1/año 2023/7.84 ha
+visor Nueva Imperial: Nueva Imperial/ZR-1/año no declarado por la fuente/18.25 ha
+visor Toltén: Queule/AR-1/año 2012/19.85 ha; Queule/AR-3/año 2012/68.48 ha; Queule/AR-2/año 2012/0.17 ha; Villa O´Higgins/AR-3/año 2012/8.84 ha
+
+== capa 9 PRC_Renaico_Tijeral_Area_de_riesgo (2 features, descarga 2026-11-15 09:55) ==
+    1 x AR-2     None                                                                       8.10 ha
+    1 x AR-1     None                                                                       7.84 ha
+  documentos (T_DO, N_DOC, P_DO, LOC): [(None, None, None, None)]
+
+== capa 31 PRC_Renaico_Area_de_riesgo (20 features, descarga 2026-11-15 09:55) ==
+   19 x AR - 1   Zonas inundables o potencialmente inundables                              15.97 ha
+    1 x AR - 2   Zonas propensas a avalanchas, rodados o aluviones o erosiones acentuad     0.99 ha
+  documentos (T_DO, N_DOC, P_DO, LOC): [('Resolución', '90', '18/02/2023', 'Renaico')]
+
+== capa 33 PRC_Nueva_Imperial_AR (10 features, descarga 2026-11-15 09:55) ==
+    1 x AR-2     AR-1 Área de Riesgos Zonas inundables o potencialmente inundables         94.10 ha
+    3 x AR-1     AR-1 Área de Riesgos Zonas inundables o potencialmente inundables         74.65 ha
+    5 x AR-2     AR-2 Área de riesgo Zona Potencialmente Inundable por anegamiento          9.67 ha
+    1 x AR-3     AR-3 Área de riesgo Zona propensas a remoción en masa                      8.19 ha
+  documentos (T_DO, N_DOC, P_DO, LOC): [('Resolución', '111', '26/07/2025', 'Nueva Imperial'), ('Resolución', '111', '26/07/2025', 'Villa Almagro')]
+
+== capa 34 PRC_Tolten_Nueva_Tolten_Area_de_riesgo (6 features, descarga 2026-11-15 09:55) ==
+    1 x AR4      Zona inundable por napa freática                                           5.05 ha
+    1 x AR3      Zona potencialmente inundable por cercanía a río                           3.32 ha
+    3 x AR2      Zona potencialmente inundable por napa freática                            3.26 ha
+    1 x AR1      Zona inundable por cercanía a río                                          1.72 ha
+  documentos (T_DO, N_DOC, P_DO, LOC): [('Resolución', '38', '08/05/2026', 'Nueva Toltén')]
+
+== capa 37 PRC_Tolten_Villa_Boldos_Area_de_riesgo (11 features, descarga 2026-11-15 09:55) ==
+    9 x AR1      Zona inundable por cercanía a río                                          6.92 ha
+    2 x AR2      Zona potencialmebte inundable por napa freática                            1.65 ha
+  documentos (T_DO, N_DOC, P_DO, LOC): [('Resolución', '38', '08/05/2026', 'Villa Los Boldos')]
+
+== Cruce geométrico (EPSG:32718) ==
+  Renaico capa 9: sin features hídricas por texto
+  Renaico capa 31: hídrico GeoIDE 15.97 ha (19 feats); cubierto por el visor 0.000; visor dentro de esta capa (cualquier zona) 0.000; distancia visor-capa 6076 m
+  chequeo vivo: visor Renaico ∩ capa 9 = 7.84 ha
+  Nueva Imperial capa 33: hídrico GeoIDE 154.71 ha (9 feats); cubierto por el visor 0.102; visor dentro de esta capa (cualquier zona) 0.868; distancia visor-capa 0 m
+  Toltén capa 34: hídrico GeoIDE 13.34 ha (6 feats); cubierto por el visor 0.000; visor dentro de esta capa (cualquier zona) 0.000; distancia visor-capa 8401 m
+  Toltén capa 37: hídrico GeoIDE 8.57 ha (11 feats); cubierto por el visor 0.000; visor dentro de esta capa (cualquier zona) 0.000; distancia visor-capa 13887 m
+
+CONTROL Toltén con GeoIDE inyectado: cobertura 1.000 -> OK
