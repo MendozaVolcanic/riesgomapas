@@ -130,31 +130,65 @@ microdatos. Descargarla en carpeta propia y vacía, como dato no confiable.
 
 ## Prompt para abrir la próxima sesión
 
+Copiar y pegar todo lo que sigue.
+
 > Estoy en `C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas`. Lee
-> `CLAUDE.md`, `REGLAS.md` y la primera sección de `docs/PROXIMA_SESION.md`.
+> `CLAUDE.md`, `REGLAS.md` y la primera sección de `docs/PROXIMA_SESION.md` (estado al
+> 15-nov-2026). Lo que te pedí en la sesión anterior, con mis palabras:
 >
-> Hay tres frentes y te pido que empieces confirmando con qué cuentas de verdad, porque
-> el traspaso afirma cosas que hay que comprobar contra el código y contra la red:
+> 1. «Revisa el estado de este proyecto, ¿hay sesiones de él que sean más nuevas?»
+> 2. «Realiza una auditoría sobre la lógica que tenemos y revisa si podemos mejorarla.»
+> 3. «También buscamos mejoras en el mismo dashboard. Dime cuáles crees que son los
+>    objetivos.»
+> 4. «Analiza si hacemos todo esto en esta o en una nueva sesión.»
+> 5. «Acá hay una información que podría ayudar, agrégala: la población por manzana
+>    censal del último censo»:
+>    `https://storage.googleapis.com/bktdescargascenso2024/Cartografia/GPKG/Cartografia_censo2024_R09.zip`
+> 6. «Dejé un informe en Descargas, `C:\Users\nmend\Downloads\ANALISIS_MALLECO_FINAL.docx`,
+>    del practicante que trabajó con nosotros para hacer algo similar pero solo para
+>    Malleco.»
+> 7. «Continúa con todo de forma paralela si es posible.»
 >
-> 1. **Auditoría de la lógica del visor.** Antes de lanzar auditores lee
->    `GUIA_MAESTRA_AUDITORIAS.md` del workspace y aplícala entera: preámbulo
->    anti-fabricación pegado completo en cada auditor, cobertura primero, verificador
->    con contexto limpio y distinto del que encuentra, las dos preguntas del
->    instrumento en cada test, y línea base roja antes del verde. La pregunta de fondo
->    es si la lógica del veredicto sigue siendo la correcta ahora que hay población por
->    manzana y una fuente vectorial para Angol.
-> 2. **Integrar GeoIDE del MINVU** (`geoide.minvu.cl/server/rest/services/IPT/PRC_Araucania`).
->    Barrer las 38 capas, no solo las tres que ya medí. Lo primero que quiero es el
->    contraste geometría contra geometría entre `PRC_Angol_Area_de_riesgo` y los 54
->    polígonos AR-2a que derivamos de las láminas: eso cierra el IoU de 0,20 que quedó
->    sin explicar.
-> 3. **Población expuesta de verdad**, espacial y no agregada por comuna, con el censo
->    que ya está en disco. Replica el análisis de sensibilidad del practicante (manzana
->    entera dentro, punto representativo, reparto por área, cualquier intersección):
->    en Angol la cifra va de 4 % a 55 % según el criterio, así que publicar un solo
->    número sin ese rango sería exactamente lo que este proyecto no hace.
+> Los puntos 1, 3 y 4 ya quedaron respondidos en el traspaso: no hay sesiones más nuevas,
+> los objetivos están escritos, y se decidió esta sesión nueva. Verifica que siga siendo
+> cierto (`git log`, `git status`, que la rama esté al día con `origin`) y sigue con lo
+> demás.
 >
-> Antes de integrar nada del practicante, pídeme sus polígonos: solo dejó el `.docx`.
+> **El plan que quedó listo para ejecutar**, en tres frentes disjuntos y en paralelo con
+> subagentes (la sesión anterior no tenía herramienta para abrir sesiones, y los
+> subagentes además dan el contexto limpio que la guía exige):
+>
+> - **Frente A, auditoría de la lógica del veredicto** (Opus). `evaluar()` y los textos de
+>   `web/app.js`: qué capas consulta, cómo combina sin fusionar, qué dice cuando no hay
+>   dato, la diferencia entre «no se inunda» y «nadie midió», la banda de borde, y si la
+>   lógica sigue siendo la correcta ahora que hay población por manzana y vectorial
+>   oficial para Angol. Solo audita. IDs F-100 a F-199.
+> - **Frente B, GeoIDE del MINVU** (Sonnet, es el más mecánico). Barrer las 38 capas de
+>   `geoide.minvu.cl/server/rest/services/IPT/PRC_Araucania/FeatureServer`, inventariar
+>   qué hay por comuna y qué es hídrico, y el contraste geometría contra geometría entre
+>   los AR-2a de `PRC_Angol_Area_de_riesgo` y nuestros 54 AR-2a derivados de las láminas
+>   (IoU, área, desplazamiento). Eso cierra el IoU de 0,20 que quedó sin explicar. No
+>   toca la capa A publicada. IDs F-200 a F-299.
+> - **Frente C, población expuesta espacial** (Opus, es el más delicado de método). Cruce
+>   del censo que ya está en `data/processed/censo/censo-2024-araucania.geojson` contra
+>   cada capa de evidencia **por separado**, con los cuatro criterios de sensibilidad del
+>   practicante (manzana entera dentro, punto representativo, reparto por área, cualquier
+>   intersección), piezas sin traslape, y los campos de vulnerabilidad (agua del río,
+>   hacinamiento, mayores de 60, discapacidad). Comparar además la fuente del INE del
+>   punto 5 contra la de Esri que usamos, descargándola en carpeta propia y vacía como
+>   dato no confiable. No publica al visor. IDs F-300 a F-399.
+>
+> Reglas para lanzarlos, de `GUIA_MAESTRA_AUDITORIAS.md` (léela antes, §5 sobre todo):
+> el bloque de `docs/_prompts/PREAMBULO-AUDITOR.md` se pega **entero** en cada prompt, sin
+> resumir; cada frente escribe sus instrumentos en `tools/auditoria/` con nombres que no
+> choquen y con `--control`; los informes van a `docs/auditorias/<fecha de hoy>/`; los
+> hallazgos los verifica después **otro** agente con contexto limpio, que escribe sus
+> caminos de ruptura antes de leer el informe. Usa los modelos que correspondan a cada
+> tarea, sin abusar del más caro.
+>
+> Del practicante: solo dejó el `.docx`, sin polígonos. Recuérdame pedirle el GeoPackage
+> con la tabla del Anexo 1, los `.points` y el script del cruce. El informe no se sube al
+> repositorio, que es público y el documento es suyo: se lee desde Descargas.
 >
 > Nada de guiones largos en lo que escribas, y las capas de evidencia no se fusionan.
 
