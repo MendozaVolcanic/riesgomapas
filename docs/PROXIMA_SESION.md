@@ -1,6 +1,80 @@
 # Continuar riesgomapas: prompt para la próxima sesión
 
-## Estado al 15-nov-2026, tarde: la auditoría de los tres frentes está hecha y verificada
+## Estado al 15-nov-2026, noche: familias 3 y 4 arregladas, Nicolás decidió las cinco
+
+### Decisiones de Nicolás (15-nov-2026, noche, opción elegida tal cual en el chat)
+
+| # | Pregunta | Decisión |
+|---|---|---|
+| 1 | Angol | «GeoIDE reemplaza, lámina de respaldo»: el vectorial oficial (AR-2a y AR-2b, Res. 40/2022) pasa a A normativo; la vectorizada queda trazable en `data/processed`, fuera del visor |
+| 2 y 3 | Censo y población al visor | «INE GPKG, por comuna»: fuente fija con sha256; población expuesta precalculada por comuna, con su rango |
+| 4 | Tsunami | «No por ahora, anotar»: hecho, `docs/INVENTARIO_FUENTES.md` §6a |
+| 5 | `main` | «Después de familias 1 a 4»: faltan la 1 y la 2 |
+
+### Lo que se hizo (commits en la rama, **sin push**)
+
+- **`e4dc07b` Familia 4, censo** (F-300, F-309, F-380, F-308). El script 16 lee el GPKG
+  del INE (`Manzanas_CPV24` + `Entidades_CPV24`) y omite `Aldeas_CPV24` solo después de
+  comprobar que cada aldea es la suma de sus manzanas «ALDEA» (si no, se cae). Rótulos
+  `manzana_urbana` / `manzana_aldea` / `entidad_rural`. Región 1.003.546 personas (antes
+  1.021.433); `estado-comunas.json` cambia `personas` en exactamente 19 comunas y ningún
+  otro campo; `hogares_agua_de_rio` pasa a `viviendas_agua_de_rio`. Guarda
+  `tests/test_censo.py`, 4 rojas antes y verdes después. Rebaja propagada con marca en
+  `GUIA_PRACTICANTE.md` y `PRACTICA_PROFESIONAL.md`. Mediciones en
+  `docs/auditorias/2026-11-15/arreglos/familia-4/`.
+- **`f342ede`** tsunami anotado en el inventario.
+- **`906a8c3` Familia 3, veredicto** (F-100, F-101, F-102, F-105, F-106, F-110, F-113;
+  hecho por un subagente, verificado aquí). Dos raíces: (1) `porQue`, el detalle y el
+  texto compartido decidían por su cuenta; ahora `evaluar` devuelve `decide` y los tres
+  lo leen; (2) el visor respondía sobre puntos que nadie eligió. Mediciones: F-101
+  «Sin registros» 22 de 30 comunas a 0 (`vA_sondas`); F-105 el mismo punto da alto a 0,
+  60 y 120 m (antes medio a 0 m; lo repetí con `vA_borde_no_monotono.js`); F-100 de 532
+  de 532 puntos sin explicación a 0; F-102 de 4 FALTA a 0; F-106 la precisión del GPS
+  ya no se arrastra. Guarda: 9 comprobaciones nuevas en `tests/auditoria_e2e.py`
+  (`auditar_lo_que_dice_el_veredicto`), rojas antes del cambio. `sw.js` a v23.
+- Pruebas: `pytest` 68 verdes; `auditoria_datos.py` 151 OK y los 2 hallazgos medios de
+  septiembre (años de la capa A, km² de la capa B); `auditoria_e2e.py` 312 OK y 0
+  hallazgos en la corrida de verificación (con el código de las dos familias juntas).
+
+### Lo que no se hizo y por qué
+
+1. **Familias 1 y 2 (capa A, GeoIDE)**: ya tienen decisión, no alcanzó la sesión. La 1
+   toca `web/app.js` (F-103: cinco textos dicen que Angol no tiene vectorial) y
+   `estado-comunas.json` (`le_falta` de Angol dice lo mismo); la 2 toca la capa A
+   (Nueva Imperial Res. 111/2025, Renaico, Toltén). Van **de a una**: comparten archivos.
+2. **Familia 5, población expuesta por comuna** (decisión 3): no empezada. Publicar el
+   rango (reparto por área con el error de borde de cada lámina), nunca un solo número.
+3. **F-104, F-107, F-108, F-109**: decisiones de diseño, sin tocar. F-108 (campamentos
+   fuera del veredicto, Wenehuen con titular «Sin registros») es la que más pesa.
+4. **Falla intermitente del e2e «plano sobre el mapa [móvil]»**: no se repitió en 4
+   corridas. La causa está en el visor: `mostrarPlano` no carga mientras
+   `map.isStyleLoaded()` es falso, y en MapLibre 4.7.1 eso dura mientras carga
+   cualquier tesela; si el `moveend` llega antes, el plano no se agrega ni se reintenta.
+   La prueba ahora espera por contenido (hasta 12 s). Arreglo del visor pendiente:
+   intentar `addSource` y reintentar en `idle`.
+5. `tools/auditoria/fA_zoom_comuna.js` sigue imprimiendo 22: evalúa el centroide, no la
+   interfaz. El instrumento que mide el visor real es `vA_sondas.js F101`.
+6. `vC_aldeas_doble_conteo.py` se cae con `AttributeError` sobre el censo nuevo porque
+   ya no hay aldeas que medir (DataFrame vacío). No se tocó: es la medición de antes.
+7. Guiones largos: quedan los de antes (unos 25 en el paquete, 53 en `web/app.js`).
+8. **Pedirle al practicante** sus polígonos, la tabla del Anexo 1, los `.points` y el
+   script del cruce. Sigue sin hacerse.
+
+### Prompt para abrir la próxima sesión
+
+> Estoy en `C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas`. Lee
+> `CLAUDE.md`, `REGLAS.md`, la primera sección de `docs/PROXIMA_SESION.md` y
+> `docs/auditorias/2026-11-15/SINTESIS.md`. Verifica que la rama esté al día con
+> `origin` y que `pytest` dé 68 verdes. Las decisiones ya están tomadas (tabla de
+> arriba). Haz la familia 1 (Angol: GeoIDE como A normativo, la vectorizada de
+> respaldo, F-103 en los textos) y después la 2 (capa A de Nueva Imperial, Renaico y
+> Toltén), de a una, con el ciclo de GUIA_MAESTRA_AUDITORIAS.md §6: medición antes y
+> después, guarda roja primero, commit por familia. Con eso, pregúntame por el merge a
+> `main`. Nada de guiones largos, y las capas no se fusionan.
+
+---
+
+## Histórico: estado al 15-nov-2026, tarde: la auditoría de los tres frentes está hecha y verificada
 
 Los tres frentes que dejó planeados el traspaso de la mañana corrieron en paralelo, cada
 uno con su verificador de contexto limpio y del otro modelo. **50 hallazgos de los
@@ -55,6 +129,14 @@ Además, hecho hoy:
 4. **Tsunami**: GeoIDE tiene un servicio de inundación por tsunami para cuatro comunas
    costeras (F-208, F-280). riesgomapas es fluvial; ¿entra como capa aparte o no?
 5. **Publicar la rama**: sigue sin merge a `main`.
+
+**Decididas por Nicolás el 15-nov-2026, noche** (respuesta en el chat de la sesión de
+arreglos, opción elegida tal cual):
+
+1. Angol: «GeoIDE reemplaza, lámina de respaldo».
+2. y 3. Censo: «INE GPKG, por comuna».
+4. Tsunami: «No por ahora, anotar».
+5. `main`: «Después de familias 1 a 4».
 
 ### Prompt para abrir la próxima sesión
 
