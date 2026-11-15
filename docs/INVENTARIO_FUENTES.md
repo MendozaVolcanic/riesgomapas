@@ -679,6 +679,12 @@ Pitrufquén, Traiguén, Lumaco, Angol, Victoria, Carahue, Toltén, Teodoro Schmi
 
 ---
 
+## 6a. Fuentes que existen y quedan fuera por decisión (15-nov-2026)
+
+| Fuente | Qué es | Por qué queda fuera |
+|---|---|---|
+| **GeoIDE MINVU, `Informacion_Regional/Ar_Araucania`** (`https://geoide.minvu.cl/server/rest/services/Informacion_Regional/Ar_Araucania/MapServer`) | Inundación por **tsunami** (inferido: tiempos de arribo en clases de 5 min, velocidades sobre 10 m/s, franja solo litoral; la descripción del servicio está vacía). Tres capas: profundidad (Bajo < 0,5 m, Medio 0,5 a 2 m, Alto > 2 m), tiempos de arribo, velocidad. Anónimo, EPSG:32718. Cubre Carahue, Saavedra, Teodoro Schmidt y Toltén (F-208, F-280). | riesgomapas es fluvial. Decisión de Nicolás del 15-nov-2026: «No por ahora, anotar». Si entra algún día, va como capa aparte (otro fenómeno, REGLAS §1.4), nunca dentro del veredicto fluvial. |
+
 ## 6b. Fuentes sondeadas que NO rinden (para no volver a intentarlas)
 
 Documentarlas ahorra la próxima sesión. Todas fueron verificadas, no descartadas
