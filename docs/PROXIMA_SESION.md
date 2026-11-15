@@ -1,6 +1,173 @@
-# Continuar riesgomapas — prompt para la próxima sesión
+# Continuar riesgomapas: prompt para la próxima sesión
 
-## Estado al 7-sep-2026 — el ciclo de arreglo de la auditoría está hecho
+## Estado al 15-nov-2026: el proyecto despertó con tres novedades que reordenan el plan
+
+El proyecto estuvo dormido dos meses (último commit, 8-sep). Al retomarlo: **64 tests
+verdes sin tocar nada** y árbol limpio, así que lo que el traspaso de septiembre afirma
+sigue siendo cierto contra el código de hoy.
+
+Lo primero que se hizo fue poner a salvo el trabajo: había **45 commits locales sin
+subir** y `origin/main` seguía en el 12 de agosto. Tres meses de trabajo existían solo
+en un disco. La rama `visor-simple-y-laminas-vectorizadas` ya está en GitHub con
+upstream configurado (132 archivos, 30.394 inserciones), revisada antes de empujar: sin
+credenciales, sin archivos sobre 5 MB, y el zip del paquete y el censo correctamente
+ignorados. **`main` no se tocó**, así que la decisión de publicar sigue pendiente.
+
+### 1. El practicante entregó su informe, y hay que pedirle los datos
+
+`ANALISIS_MALLECO_FINAL.docx` de Sebastián Ignacio Catalán Mancilla, fechado el
+13-nov-2026. Hizo con nuestro paquete exactamente el análisis que a riesgomapas le
+falta, y en algunas cosas fue más lejos:
+
+- **Vectorizó siete comunas** (Angol, Collipulli, Los Sauces, Lumaco, Purén, Renaico y
+  Traiguén) partiendo de los documentos que `TAREAS.md` le priorizó. Nosotros teníamos
+  tres láminas de una sola comuna.
+- **Amplió a tres peligros**: remoción en masa, inundación y anegamiento. riesgomapas
+  está acotado a inundación fluvial.
+- **Calculó población expuesta por reparto de área**: habitantes por la fracción de
+  superficie de la manzana que cae dentro de la zona. Resultado: **14.158 de 125.584
+  habitantes de poblados (11,3 %)**, y Angol concentra el 73 % (10.387 personas,
+  20,1 %). Lumaco es el de mayor porcentaje (44,3 %).
+- **Hizo el análisis de sensibilidad que el método exige**, y es la parte más honesta
+  del informe: según el criterio, Angol va de 2.175 personas (4 %, solo manzanas
+  enteramente dentro) a 28.192 (55 %, cualquier manzana que roce la zona). Eligió el
+  reparto por área, 10.387, que coincide con el del punto representativo (10.674).
+- Cruzó además establecimientos educacionales, de salud, antenas y red vial, y declaró
+  sus límites sin adornos: exposición potencial y no riesgo, sin obras de mitigación,
+  y los porcentajes entre comunas no son comparables ni son un ranking.
+
+**Lo que falta y hay que pedirle: los polígonos.** En Descargas solo está el `.docx`.
+Sin su base georreferenciada no se puede integrar a riesgomapas ni verificar ninguna de
+sus cifras. Pedirle el GeoPackage o los shapefiles con la tabla de atributos del Anexo 1,
+y si los tiene, el `.points` de cada georreferenciación y el script de Python del cruce.
+
+**La tensión conceptual que hay que resolver antes de integrar**: él construyó una «base
+unificada de peligros» y riesgomapas tiene prohibido fusionar capas de evidencia. No es
+contradicción automática, porque cada polígono suyo conserva fuente, año y escala, pero
+hay que decidir cómo entra: como capa A derivado con su procedencia por polígono, y
+nunca como una capa única de «peligro».
+
+### 2. Angol sí está en el vectorial del MINVU, en otro servidor
+
+Esto corrige una conclusión del proyecto. riesgomapas afirma que Angol no tiene ni un
+polígono de área de riesgo en el vectorial del MINVU, y ésa fue la razón de vectorizar
+sus láminas a mano. Es cierto para el servicio que usamos
+(`services3.arcgis.com/.../prc_riesgo_nacional_visor_P`, el agregado nacional) y **falso
+para GeoIDE**, otro servidor del mismo ministerio que el practicante citó en su
+bibliografía:
+
+    https://geoide.minvu.cl/server/rest/services/IPT/PRC_Araucania/FeatureServer
+
+38 capas, una por comuna, con capas propias de área de riesgo. Medido el 15-nov:
+
+| Capa | Polígonos | Lo que teníamos |
+|---|---:|---:|
+| `PRC_Angol_Area_de_riesgo` (29) | 81 | 0 |
+| `PRC_Collipulli_Area_de_riesgo` (23) | 68 | 38 |
+| `PRC_Renaico_Area_de_riesgo` (31) | 20 | 1 |
+
+Traen `ZONA` (AR-1c, AR-2a), `NOM` («Áreas de Riesgo Inundables o Potencialmente
+Inundables», el texto exacto que usamos), `UPERM`, `UPROH`, y los datos del
+instrumento: `T_DO` Resolución, `N_DOC` 40, `P_DO` **14/10/2022**.
+
+Tres consecuencias:
+
+1. **Responde la pregunta que quedó abierta el 8-sep.** El plano del PRC de Angol
+   declara 2026 (su ordenanza) y no se sabía de qué año era la evidencia. GeoIDE dice
+   que el instrumento es la Resolución 40 del 14-10-2022.
+2. **Es la validación independiente que faltaba** para los 54 polígonos AR-2a que
+   derivamos de las láminas, y el IoU de 0,20 contra el clasificador independiente
+   seguía sin explicación. Ahora hay con qué contrastar, geometría contra geometría.
+3. **El anti-patrón se generaliza**: ya estaba anotado que un catálogo estatal caído no
+   prueba que el dato no exista. La variante nueva es que **un servicio del MINVU no
+   son todos los servicios del MINVU**. Hay que barrer `geoide.minvu.cl` completo antes
+   de volver a declarar que a una comuna le falta su vectorial.
+
+### 3. El censo por manzana ya está descargado, pero no llega al visor
+
+Nicolás propuso agregar la población por manzana del Censo 2024. Ya está:
+`data/processed/censo/censo-2024-araucania.geojson`, que produce
+`scripts/16_censo_2024.py`. **17.107 polígonos** (12.381 manzanas urbanas y 4.726
+entidades rurales), **1.021.433 personas**, y campos que para inundación valen oro:
+
+`n_fuente_agua_rio` (quien saca agua del río pierde el agua potable, no solo la casa),
+`n_viv_hacinadas`, `n_mat_paredes_precarios`, `n_tipo_viv_mediagua`, `n_edad_60_mas`,
+`n_edad_0_5`, `n_discapacidad`, `n_jefatura_mujer`, `n_hog_allegados`,
+`n_distrib_agua_acarreo`.
+
+**Dos cosas lo frenan.** Pesa **69,8 MB**, y el visor tiene que funcionar offline en un
+celular de gama baja, así que hay que decidir qué se publica (agregado por manzana
+recortado a las manchas, teselas vectoriales, o precalculado). Y hoy el cruce es solo
+**agregado por comuna** en `estado-comunas.json`: dice que Angol tiene 52.605 personas
+y 495 hogares con agua de río, pero no cuántos de ellos están **dentro** de la mancha.
+Ésa es la brecha de lógica central del visor, y es la misma que el practicante resolvió
+para su informe.
+
+Nicolás también pasó la **fuente oficial del INE** en GPKG, que no es la que usamos
+(nosotros vamos al servicio de Esri Chile). Responde 200, pesa 40,1 MB y está
+actualizada a diciembre de 2025:
+
+    https://storage.googleapis.com/bktdescargascenso2024/Cartografia/GPKG/Cartografia_censo2024_R09.zip
+
+Vale compararlas antes de elegir: la del INE es fuente primaria y la de Esri trae los
+microdatos. Descargarla en carpeta propia y vacía, como dato no confiable.
+
+## Lo que sigue pendiente de antes
+
+1. **Regenerar la capa B.** El total ya está bien (5.082 ha, la unión). Lo que exige
+   volver a bajar los rásters: `make_valid` al vectorizar (585 de 1.075 polígonos
+   inválidos en origen, 0 en lo que se entrega) y medir el enriquecimiento sobre lo
+   publicado y no sobre la máscara ráster.
+2. **Cuatro polígonos sin año** en la capa A: Loncoche (dos sectores), Nueva Imperial y
+   Pucón. Ahora hay dónde buscarlo: GeoIDE trae `P_DO` y `N_DOC` por comuna.
+3. **La cola de validación en campo** (C-01 a C-13 del informe del 6-sep).
+4. **Publicar**, que sigue siendo decisión y no tarea: falta hosting, gzip, y
+   geocodificador y teselas propios. Hoy usa Nominatim y el servidor de OSM, que no
+   admiten tráfico de producción.
+5. **Deuda de estilo**: los documentos del paquete del practicante tienen guiones
+   largos, contra la regla del workspace. `grep -c "—"` tiene que dar 0 en cada `.md`
+   antes de entregar, y los `.docx` se regeneran con el script 20.
+
+## Prompt para abrir la próxima sesión
+
+> Estoy en `C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas`. Lee
+> `CLAUDE.md`, `REGLAS.md` y la primera sección de `docs/PROXIMA_SESION.md`.
+>
+> Hay tres frentes y te pido que empieces confirmando con qué cuentas de verdad, porque
+> el traspaso afirma cosas que hay que comprobar contra el código y contra la red:
+>
+> 1. **Auditoría de la lógica del visor.** Antes de lanzar auditores lee
+>    `GUIA_MAESTRA_AUDITORIAS.md` del workspace y aplícala entera: preámbulo
+>    anti-fabricación pegado completo en cada auditor, cobertura primero, verificador
+>    con contexto limpio y distinto del que encuentra, las dos preguntas del
+>    instrumento en cada test, y línea base roja antes del verde. La pregunta de fondo
+>    es si la lógica del veredicto sigue siendo la correcta ahora que hay población por
+>    manzana y una fuente vectorial para Angol.
+> 2. **Integrar GeoIDE del MINVU** (`geoide.minvu.cl/server/rest/services/IPT/PRC_Araucania`).
+>    Barrer las 38 capas, no solo las tres que ya medí. Lo primero que quiero es el
+>    contraste geometría contra geometría entre `PRC_Angol_Area_de_riesgo` y los 54
+>    polígonos AR-2a que derivamos de las láminas: eso cierra el IoU de 0,20 que quedó
+>    sin explicar.
+> 3. **Población expuesta de verdad**, espacial y no agregada por comuna, con el censo
+>    que ya está en disco. Replica el análisis de sensibilidad del practicante (manzana
+>    entera dentro, punto representativo, reparto por área, cualquier intersección):
+>    en Angol la cifra va de 4 % a 55 % según el criterio, así que publicar un solo
+>    número sin ese rango sería exactamente lo que este proyecto no hace.
+>
+> Antes de integrar nada del practicante, pídeme sus polígonos: solo dejó el `.docx`.
+>
+> Nada de guiones largos en lo que escribas, y las capas de evidencia no se fusionan.
+
+---
+
+Lo de abajo es el traspaso anterior. Se conserva entero: saber qué se creía antes es
+lo que caza los falsos positivos.
+
+---
+
+## Histórico: traspaso del 7-sep-2026
+
+## Estado al 7-sep-2026: el ciclo de arreglo de la auditoría está hecho
 
 **Verde y árbol limpio**: 64 tests · 151 comprobaciones de datos con 2 hallazgos medios
 declarados · **285** comprobaciones en navegador real (eran 273; las 12 nuevas son las que
