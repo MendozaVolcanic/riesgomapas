@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import http.server
 import json
+import math
 import socket
 import socketserver
 import sys
@@ -114,6 +115,138 @@ def contraste(hex_fondo: str, hex_texto: str) -> float:
         return .2126 * n[0] + .7152 * n[1] + .0722 * n[2]
     a, b = lum(hex_fondo), lum(hex_texto)
     return (max(a, b) + .05) / (min(a, b) + .05)
+
+
+_FICHA_JS = """([lon, lat]) => {
+    // La misma cadena que recorre la persona, sin el mapa: evaluar, la razón
+    // en pantalla y el texto que se reenvía. Se fija la precisión en null para
+    // que el bloque no herede la de un bloque anterior (REGLAS §4.3).
+    estado.precisionPos = null;
+    const r = evaluar(lon, lat);
+    estado.ultimo = { res: r, etiqueta: 'Auditoría', lon, lat };
+    const plano = (h) => String(h).replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' ');
+    return { nivel: r.nivel, titulo: r.titulo, porQue: plano(porQue(r)),
+             texto: textoFicha(), gore: r.gore.length, mancha: !!r.enMancha,
+             borde: !!r.borde, ncerca: r.cerca.length, laminas: r.laminas.length,
+             graves300: r.cerca.filter((c) => c.d <= 300 &&
+               ['Muy Alto', 'Alto'].includes(c.f.properties.nivel)).length };
+}"""
+
+_RANGO = {"sindato": 0, "bajo": 1, "medio": 2, "alto": 3}
+
+
+def auditar_lo_que_dice_el_veredicto(page, aud: Auditoria, etq: str) -> None:
+    """Familia 3 de la auditoría del 15-nov-2026: lo que el veredicto le dice a
+    la persona. Cada comprobación usa un punto real del informe y exige que el
+    punto todavía tenga la condición que lo hace útil; si no la tiene, falla
+    como «no corre» en vez de dar un verde que no miró nada (REGLAS §4.2).
+    """
+    ficha = lambda ll: page.evaluate(_FICHA_JS, ll)  # noqa: E731
+
+    # F-101: elegir una comuna respondía sobre el centro de la caja de sus
+    # registros, un punto que nadie eligió: «Sin registros» en 22 de 30 comunas
+    # con registros. Pucón tiene decenas y era una de las 22.
+    n_pucon = page.evaluate("() => estado.puntos.features.filter((f) => "
+                            "f.properties.comuna === 'PUCÓN').length")
+    page.fill("#q", "Pucón")
+    try:
+        page.wait_for_function(
+            "() => [...document.querySelectorAll('#sugerencias li')]"
+            ".some((li) => /puc[oó]n/i.test(li.textContent))", timeout=5000)
+        page.locator("#sugerencias li", has_text="Pucón").first.click(timeout=3000)
+        page.wait_for_function(
+            "() => /puc[oó]n/i.test(document.querySelector('#respuesta').innerText)",
+            timeout=5000)
+        t = page.locator("#respuesta").inner_text()
+        if n_pucon and "sin registros" not in t.lower() and str(n_pucon) in t:
+            aud.ok(f"elegir una comuna responde sobre la comuna [{etq}]",
+                   f"Pucón, {n_pucon} registros")
+        else:
+            aud.falla(f"elegir una comuna [{etq}]",
+                      f"Pucón tiene {n_pucon} registros y la respuesta dice: "
+                      f"«{t[:120]}»")
+    except Exception as exc:
+        aud.falla(f"elegir una comuna [{etq}]",
+                  f"no se pudo elegir Pucón: {str(exc).splitlines()[0][:100]}")
+    page.fill("#q", "")
+
+    # F-106: la precisión del GPS no puede sobrevivir a una consulta que no
+    # viene del GPS. Se prueba en consultar(), que es por donde pasan todas.
+    quedo = page.evaluate("""async () => {
+        estado.precisionPos = 65;
+        await consultar(-72.6, -38.74, 'Auditoría precisión');
+        const p = estado.precisionPos; estado.precisionPos = null; return p; }""")
+    if quedo is None:
+        aud.ok(f"la precisión del GPS no se arrastra a otra consulta [{etq}]")
+    else:
+        aud.falla(f"precisión del GPS arrastrada [{etq}]",
+                  f"tras consultar una dirección quedó precisionPos={quedo}")
+
+    # F-100: con titular de borde, la pestaña de detalle (la que se imprime)
+    # explicaba nada y decía «no cae dentro» debajo.
+    page.evaluate("() => consultar(-72.620737, -38.761129, 'Auditoría borde')")
+    page.wait_for_function(
+        "() => estado.ultimo && estado.ultimo.etiqueta === 'Auditoría borde'", timeout=5000)
+    if page.evaluate("() => !!estado.ultimo.res.borde"):
+        det = page.evaluate("() => document.querySelector('#detalle-ficha').innerText")
+        if "adentro y afuera" in det and "Este punto no cae dentro" not in det:
+            aud.ok(f"el detalle explica la banda de borde [{etq}]")
+        else:
+            aud.falla(f"detalle bajo titular de borde [{etq}]",
+                      "no explica la banda o dice «no cae dentro» bajo un titular de borde")
+    else:
+        aud.falla(f"punto de borde para el detalle [{etq}]", "ya no es de borde: no corre")
+
+    # F-105: acercarse al borde no puede bajar el nivel que dan los registros.
+    lat0, lon0 = -38.7465676360515, -72.95729860403075
+    niveles = []
+    for m in (0, 60, 120):
+        r = ficha([lon0 + m / (111320 * math.cos(math.radians(lat0))), lat0])
+        niveles.append((m, r["nivel"], r["borde"], r["graves300"]))
+    if not (niveles[0][2] and niveles[0][3]):
+        aud.falla(f"punto de borde con registro grave [{etq}]", f"no corre: {niveles}")
+    elif _RANGO[niveles[0][1]] >= max(_RANGO[n[1]] for n in niveles[1:]):
+        aud.ok(f"el borde no rebaja el nivel de los registros [{etq}]",
+               " · ".join(f"{m} m {n}" for m, n, _, _ in niveles))
+    else:
+        aud.falla(f"el borde rebaja el nivel [{etq}]",
+                  " · ".join(f"{m} m {n}" for m, n, _, _ in niveles))
+
+    # F-110: con un registro a 501-1.500 m el resumen callaba el modelo.
+    r = ficha([-73.123908, -38.70824819942508])
+    if r["nivel"] != "bajo" or not r["gore"]:
+        aud.falla(f"punto bajo con modelo [{etq}]", f"no corre: {r['nivel']}, gore={r['gore']}")
+    elif "modelo" in r["porQue"]:
+        aud.ok(f"el resumen nombra el modelo bajo un registro lejano [{etq}]")
+    else:
+        aud.falla(f"el modelo queda callado [{etq}]", r["porQue"][:120])
+
+    # F-102: el texto que se reenvía tiene que nombrar la capa que decidió.
+    for nombre, ll, exige, patron in [
+        ("lámina derivada", [-72.69911, -37.78179], "laminas", "trazado"),
+        ("modelo sin registros", [-73.08786, -38.68423], "gore", "modelo"),
+        ("borde", [-72.620737, -38.761129], "borde", "borde"),
+    ]:
+        r = ficha(ll)
+        cuerpo = r["texto"].split("\n", 1)[1]   # sin el titular
+        if not r[exige]:
+            aud.falla(f"texto compartido, {nombre} [{etq}]", "el punto ya no sirve: no corre")
+        elif patron in cuerpo.lower():
+            aud.ok(f"el texto compartido nombra la capa que decidió: {nombre} [{etq}]")
+        else:
+            aud.falla(f"texto compartido sin la capa que decidió: {nombre} [{etq}]",
+                      cuerpo[:140].replace("\n", " / "))
+
+    # F-113: si el texto lista 3 puntos, tiene que decir cuántos hay.
+    r = ficha([-71.942799, -39.278511])
+    if r["ncerca"] <= 3:
+        aud.falla(f"punto con muchos registros [{etq}]", f"no corre: {r['ncerca']}")
+    elif f"1,5 km: {r['ncerca']}" in r["texto"]:
+        aud.ok(f"el texto compartido dice cuántos registros hay [{etq}]", str(r["ncerca"]))
+    else:
+        aud.falla(f"el texto recorta sin decir el total [{etq}]",
+                  f"hay {r['ncerca']} y el texto no lo dice")
+    page.evaluate("() => irAPestana('respuesta', false)")
 
 
 def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) -> None:
@@ -550,6 +683,8 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     page.evaluate("() => irAPestana('respuesta', false)")
     page.wait_for_timeout(200)
 
+    auditar_lo_que_dice_el_veredicto(page, aud, etq)
+
     for cid in ["cap-areas", "cap-derivadas", "cap-planos", "cap-puntos",
                 "cap-camp", "cap-jrc", "cap-sar", "cap-gore"]:
         el = page.locator(f"#{cid}")
@@ -906,7 +1041,14 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
     if btn.count():
         try:
             btn.click(timeout=4000)
-            page.wait_for_timeout(3500)
+            # Por contenido, no por tiempo (REGLAS §4.4): en móvil el fitBounds
+            # y la carga de teselas a veces pasaban de los 3,5 s fijos.
+            try:
+                page.wait_for_function(
+                    "() => estado.mapa.getStyle().layers.some(l => l.id.startsWith('plano-'))",
+                    timeout=12000)
+            except Exception:
+                pass   # se informa abajo como falla, con su mensaje
             capas2 = page.evaluate("() => estado.mapa.getStyle().layers.map(l => l.id)")
             planos = [c for c in capas2 if c.startswith("plano-")]
             if planos:

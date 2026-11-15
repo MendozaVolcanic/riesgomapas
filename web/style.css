@@ -275,6 +275,9 @@ button[disabled] { opacity: .55; cursor: progress; }
    escala: si usara el gris de «sin dato» se leería como un veredicto flojo, y
    es otra cosa — es el sitio diciendo que no sabe. */
 .v-fuera { background: var(--panel-alto); border-style: dashed; font-weight: 600; }
+/* Elegir una comuna tampoco es un veredicto: es un conteo de registros. Lleva
+   el mismo trazo que «fuera de alcance» para no leerse como un nivel. */
+.v-comuna { background: var(--panel-alto); border-style: dashed; }
 
 .direccion { color: var(--tinta-suave); font-size: var(--paso-3); margin: 0 0 .9rem; word-break: break-word; }
 

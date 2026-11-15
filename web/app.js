@@ -468,14 +468,19 @@ function evaluar(lon, lat) {
     }
   }
 
-  let nivel, titulo;
+  // `decide` dice qué regla puso el titular. porQue(), la ficha y el texto que
+  // se reenvía lo leen en vez de volver a deducirlo cada uno por su cuenta: así
+  // se desalinearon antes, y el texto compartido quedaba sin la capa que mandó.
+  let nivel, titulo, decide;
   if (sar.length >= 1) {
     nivel = 'alto';
+    decide = 'observada';
     const f = fechaLarga(sar[0].properties.fecha_observacion);
     titulo = f ? `El agua llegó hasta acá el ${f}`
                : 'El agua llegó hasta acá: huella observada por satélite';
   } else if (areas.length >= 1) {
     nivel = 'alto';
+    decide = 'normativa';
     // El fenómeno se nombra acá, no sólo en la pestaña de detalle. Que el río
     // se salga y que el colector no dé abasto son cosas distintas —otra física,
     // otra mitigación y otro servicio a quién reclamarle—, el sitio lo argumenta
@@ -487,25 +492,35 @@ function evaluar(lon, lat) {
       : 'Estás en un área de riesgo por inundación del plan regulador';
   } else if (laminas.length >= 1) {
     nivel = 'alto';
+    decide = 'derivada';
     // El título distingue lo que la fuente distingue: 26 de estos polígonos son
     // el área de riesgo de un plan regulador aprobado —traen `efecto_legal`— y
     // el resto son levantamientos de riesgo sin efecto normativo propio.
     titulo = laminas.some((f) => f.properties.efecto_legal)
       ? 'Estás en un área de riesgo por inundación del plan regulador'
       : 'Estás dentro de la zona que el estudio de riesgo de tu comuna marcó como inundable';
+  } else if (graves.length >= 1 || en(RADIOS.cercano).length >= 3) {
+    // Los registros graves van ANTES que la banda de borde. Al revés, estar a
+    // pocos metros de un polígono BAJABA el nivel: el mismo punto daba «medio»
+    // a 0 m del borde y «alto» a 60 m (auditoría 15-nov-2026, F-105). La banda
+    // existe para no afirmar de más, no para quitarle peso a lo registrado; si
+    // también hay borde, porQue() lo dice igual.
+    nivel = 'alto';
+    decide = 'registros';
+    titulo = 'Tu sector tiene registro de inundaciones';
   } else if (borde) {
     // Ni dentro ni fuera: en la franja donde el borde del dato y la precisión
     // de tu ubicación se superponen. Decir «no» acá sería afirmar de más.
     nivel = 'medio';
+    decide = 'borde';
     titulo = 'Estás justo en el borde de un área marcada como inundable';
-  } else if (graves.length >= 1 || en(RADIOS.cercano).length >= 3) {
-    nivel = 'alto';
-    titulo = 'Tu sector tiene registro de inundaciones';
   } else if (en(RADIOS.medio).length >= 1) {
     nivel = 'medio';
+    decide = 'registros';
     titulo = 'Hay registros de inundación cerca';
   } else if (cerca.length >= 1) {
     nivel = 'bajo';
+    decide = 'lejanos';
     titulo = 'Registros de inundación a cierta distancia';
   } else if (gore.length || enMancha) {
     // No hay registro NI norma, pero un modelo sí dice algo de este punto.
@@ -515,13 +530,15 @@ function evaluar(lon, lat) {
     // (REGLAS §1.3), así que el modelo no levanta el nivel — pero el titular
     // deja de negar lo que la ficha de más abajo afirma.
     nivel = 'sindato';
+    decide = 'modelo';
     titulo = 'Sin registros observados ni norma, pero un modelo sí marca este punto';
   } else {
     nivel = 'sindato';
+    decide = 'nada';
     titulo = 'Sin registros en las fuentes consultadas';
   }
 
-  return { nivel, titulo, cerca, areas, sar, coberturaSar, laminas, borde,
+  return { nivel, titulo, decide, precision: estado.precisionPos || null, cerca, areas, sar, coberturaSar, laminas, borde,
            enCoberturaSar: coberturaSar.length > 0,
            planos: planosQueCubren(lon, lat),
            campamentos: poligonosQueContienen(lon, lat, estado.campamentos),
@@ -573,10 +590,16 @@ function comunaDe(res, lon, lat) {
     if (dmin > 8000) return null;
   }
   if (!mejor) return null;
+  const c = estadoDeComuna(mejor);
+  return c ? { ...c, _km: Math.round(dmin / 100) / 10 } : null;
+}
+
+/** La ficha de inventario de una comuna, por nombre, con o sin tildes. */
+function estadoDeComuna(nombre) {
+  if (!estado.estadoComunas) return null;
   const k = (t) => String(t || '').normalize('NFD')
     .replace(/[̀-ͯ]/g, '').replace(/[^a-z]/gi, '').toLowerCase();
-  const c = estado.estadoComunas.find((x) => k(x.comuna) === k(mejor));
-  return c ? { ...c, _km: Math.round(dmin / 100) / 10 } : null;
+  return estado.estadoComunas.find((x) => k(x.comuna) === k(nombre)) || null;
 }
 
 /** Qué tiene y qué le falta a la comuna, en la pestaña de detalle.
@@ -726,61 +749,112 @@ function textoComuna(c) {
  *  casa necesita una razón, no un inventario. El inventario está a un toque.
  */
 function porQue(res) {
-  if (res.sar.length) {
-    const f = fechaLarga(res.sar[0].properties.fecha_observacion);
-    return `Un satélite midió agua sobre este punto${f ? ` el ${f}` : ''}. No es un
-            modelo: es agua que estuvo ahí.`;
+  const base = porQueBase(res);
+  // Lo que acompaña a la razón principal sin cambiar el nivel. Las capas no se
+  // fusionan (REGLAS §1.3): el modelo no sube un registro lejano, pero tampoco
+  // se calla. Con un registro a 900 m el resumen hablaba sólo de esa distancia
+  // aunque el modelo regional marcara el punto como amenaza máxima (F-110).
+  const extra = [];
+  if (res.borde && res.decide === 'registros') extra.push(`Además, ${fraseBorde(res)}`);
+  if ((res.gore.length || res.enMancha) &&
+      ['registros', 'borde', 'lejanos'].includes(res.decide)) {
+    extra.push(`Por otra parte, ${fraseModelo(res)}. Un modelo no es un
+                registro: dice dónde podría llegar el agua, no dónde llegó.`);
   }
-  if (res.areas.length) {
-    const t = res.areas[0].properties.tipo_hidrico;
-    return `El plan regulador de tu comuna declaró esta zona <strong>área de riesgo
-            por ${esc(t && t !== 'fluvial' ? (FENOMENO_CORTO[t] || t) : 'inundación')}</strong>.
-            Es la única fuente con efecto legal.`;
+  return [base, ...extra].join(' ');
+}
+
+/** Qué borde es. «Un área marcada como inundable» a secas no dice si es norma,
+ *  trazado nuestro o agua medida, y eso cambia cuánto pesa. */
+const QUE_BORDE = {
+  normativa: 'un área de riesgo del plan regulador',
+  derivada: 'una zona que la cartografía de tu comuna marca como inundable (trazado nuestro, desde la lámina impresa)',
+  observada: 'una mancha donde el satélite midió agua',
+};
+
+function fraseBorde(res) {
+  const i = incertidumbreBorde(res.borde.f);
+  return `estás a ${metros(res.borde.d)} del borde de
+          ${QUE_BORDE[res.borde.capa] || 'un área marcada como inundable'}. Ese
+          borde tiene ±${num(i)} m de incertidumbre${
+            res.precision ? ` y tu ubicación ±${Math.round(res.precision)} m` : ''},
+          así que a esta distancia <strong>adentro y afuera no se distinguen</strong>.`;
+}
+
+function metros(d) {
+  const n = Math.round(d);
+  return `${n} ${n === 1 ? 'metro' : 'metros'}`;
+}
+
+function claseGore(c) {
+  return { MAXIMA: 'máxima', MEDIA: 'media' }[c] || String(c || '').toLowerCase();
+}
+
+function fraseModelo(res) {
+  return res.gore.length
+    ? `el modelo regional de 2016 clasifica este punto como amenaza
+       <strong>${esc(claseGore(res.gore[0].properties.clase))}</strong>`
+    : `este punto cae dentro de la mancha que un modelo global calcula para una
+       crecida de 100 años`;
+}
+
+function porQueBase(res) {
+  switch (res.decide) {
+    case 'observada': {
+      const f = fechaLarga(res.sar[0].properties.fecha_observacion);
+      return `Un satélite midió agua sobre este punto${f ? ` el ${f}` : ''}. No es un
+              modelo: es agua que estuvo ahí.`;
+    }
+    case 'normativa': {
+      const t = res.areas[0].properties.tipo_hidrico;
+      return `El plan regulador de tu comuna declaró esta zona <strong>área de riesgo
+              por ${esc(t && t !== 'fluvial' ? (FENOMENO_CORTO[t] || t) : 'inundación')}</strong>.
+              Es la única fuente con efecto legal.`;
+    }
+    case 'derivada': {
+      const p = res.laminas[0].properties;
+      const norma = res.laminas.some((f) => f.properties.efecto_legal);
+      return `${norma
+        ? `El plano del plan regulador de tu comuna raya esta zona como
+           <strong>área de riesgo por inundación</strong>`
+        : `El estudio de riesgo de tu comuna (${esc(p.anio)}) marcó esta zona como
+           <strong>${esc(String(p.clase).toLowerCase())}</strong>`}.
+        Ese documento existe sólo en papel: la mancha la dibujamos nosotros desde
+        la lámina impresa, con ±${esc(num(incertidumbreBorde(res.laminas[0])))} m
+        de incertidumbre en el borde.`;
+    }
+    case 'borde': {
+      const t = fraseBorde(res);
+      return t.charAt(0).toUpperCase() + t.slice(1);
+    }
+    case 'registros': {
+      const cercanos = res.cerca.filter((c) => c.d <= RADIOS.medio);
+      const cronicos = cercanos.filter((c) => c.f.properties.cronico).length;
+      return `Hay ${cercanos.length} punto${cercanos.length > 1 ? 's' : ''} donde el
+              municipio reportó inundación a menos de 500 metros` +
+             (cronicos ? `, y ${cronicos} se ${cronicos > 1 ? 'repiten' : 'repite'}
+              temporada tras temporada.` : '.');
+    }
+    case 'lejanos':
+      return `El registro más cercano de inundación está a
+              ${Math.round(res.cerca[0].d)} metros.`;
+    // Antes esta frase se mostraba también cuando el modelo regional clasificaba
+    // el punto como amenaza máxima cuatro párrafos más abajo, en la misma ficha.
+    case 'modelo':
+      return `Ningún registro observado ni norma alcanza este punto, pero
+              ${fraseModelo(res)}. Un modelo no es un registro: dice dónde podría
+              llegar el agua, no dónde llegó.`;
+    default:
+      return `Ninguna de las fuentes consultadas registra inundación en este punto.`;
   }
-  if (res.laminas.length) {
-    const p = res.laminas[0].properties;
-    const norma = res.laminas.some((f) => f.properties.efecto_legal);
-    return `${norma
-      ? `El plano del plan regulador de tu comuna raya esta zona como
-         <strong>área de riesgo por inundación</strong>`
-      : `El estudio de riesgo de tu comuna (${esc(p.anio)}) marcó esta zona como
-         <strong>${esc(String(p.clase).toLowerCase())}</strong>`}.
-      Ese documento existe sólo en papel: la mancha la dibujamos nosotros desde
-      la lámina impresa, con ±${esc(num(incertidumbreBorde(res.laminas[0])))} m
-      de incertidumbre en el borde.`;
-  }
-  if (res.borde) {
-    const i = incertidumbreBorde(res.borde.f);
-    return `Estás a ${Math.round(res.borde.d)} metros del borde de un área marcada
-            como inundable. Ese borde tiene ±${num(i)} m de incertidumbre${
-              estado.precisionPos ? ` y tu ubicación ±${Math.round(estado.precisionPos)} m` : ''},
-            así que a esta distancia <strong>adentro y afuera no se distinguen</strong>.`;
-  }
-  const cercanos = res.cerca.filter((c) => c.d <= RADIOS.medio);
-  if (cercanos.length) {
-    const cronicos = cercanos.filter((c) => c.f.properties.cronico).length;
-    return `Hay ${cercanos.length} punto${cercanos.length > 1 ? 's' : ''} donde el
-            municipio reportó inundación a menos de 500 metros` +
-           (cronicos ? `, y ${cronicos} se ${cronicos > 1 ? 'repiten' : 'repite'}
-            temporada tras temporada.` : '.');
-  }
-  if (res.cerca.length) {
-    return `El registro más cercano de inundación está a
-            ${Math.round(res.cerca[0].d)} metros.`;
-  }
-  // Antes esta frase se mostraba también cuando el modelo regional clasificaba
-  // el punto como amenaza máxima cuatro párrafos más abajo, en la misma ficha.
-  if (res.gore.length || res.enMancha) {
-    const cl = res.gore.length ? String(res.gore[0].properties.clase || '').toLowerCase() : '';
-    return `Ningún registro observado ni norma alcanza este punto, pero
-            ${res.gore.length
-              ? `el modelo regional de 2016 lo clasifica como amenaza
-                 <strong>${esc(cl)}</strong>`
-              : `cae dentro de la mancha modelada para una crecida de 100 años`}.
-            Un modelo no es un registro: dice dónde podría llegar el agua, no
-            dónde llegó.`;
-  }
-  return `Ninguna de las fuentes consultadas registra inundación en este punto.`;
+}
+
+/** El mismo texto sin etiquetas, para lo que se reenvía como texto plano. */
+function textoPlano(html) {
+  return String(html).replace(/<[^>]+>/g, '')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ').trim();
 }
 
 /** Respuesta corta: veredicto, una razón, y el camino a la evidencia. */
@@ -883,7 +957,12 @@ function render(res, etiqueta, lon, lat) {
       <span class="icono" aria-hidden="true">${ICONO[res.nivel]}</span>
       <span>${esc(res.titulo)}</span>
     </div>
-    <p class="direccion">📍 ${esc(etiqueta)}</p>`;
+    <p class="direccion">📍 ${esc(etiqueta)}</p>
+    <p class="por-que">${porQue(res)}</p>`;
+  // La razón va también acá, no sólo en el resumen. Esta pestaña es la que se
+  // copia y se imprime para la Dirección de Obras; con titular de borde traía
+  // el titular y, debajo, «no cae dentro» sin distancia ni incertidumbre: quien
+  // la leía se quedaba con la frase negativa (auditoría 15-nov-2026, F-100).
 
   /* --- Capa A: plan regulador. Va primera porque es la única con efecto legal --- */
   html += `<div class="evidencia">
@@ -935,12 +1014,23 @@ function render(res, etiqueta, lon, lat) {
     // declara —en un plano de papel que nosotros vectorizamos— y el titular de
     // esta misma ficha lo dice cuatro centímetros más arriba. Una ficha que se
     // contradice consigo misma no se puede usar para decidir nada.
+    // Si el punto cae en la banda de un borde normativo o derivado, «no cae
+    // dentro» afirma de más: a esa distancia el dato no distingue.
+    const bordeA = res.borde && ['normativa', 'derivada'].includes(res.borde.capa)
+      ? res.borde : null;
     html += res.laminas.length
       ? `<p>Este punto no está en el vectorial que publica el MINVU. Sí está
          dentro de la cartografía del propio documento comunal, que aparece más
          abajo: el organismo todavía no la publica en formato consultable.</p>`
-      : `<p>Este punto no cae dentro de un área de riesgo por inundación
-         declarada en el plan regulador.</p>`;
+      : bordeA
+        ? `<p>Este punto queda a <strong>${metros(bordeA.d)}</strong>
+           del borde de ${QUE_BORDE[bordeA.capa]}. Ese borde tiene
+           ±${esc(num(incertidumbreBorde(bordeA.f)))} m de incertidumbre${
+             res.precision ? ` y tu ubicación ±${Math.round(res.precision)} m` : ''},
+           así que a esta distancia <strong>adentro y afuera no se
+           distinguen</strong>: no se puede afirmar que quede fuera.</p>`
+        : `<p>Este punto no cae dentro de un área de riesgo por inundación
+           declarada en el plan regulador.</p>`;
     html += `<p class="incert">Que no aparezca no significa que no exista: esta capa
              sólo trae instrumentos ya vigentes y publicados, y va por detrás de las
              aprobaciones. Además, la mayoría de las comunas de la región no ha
@@ -1075,6 +1165,12 @@ function render(res, etiqueta, lon, lat) {
     html += `<p>El satélite <strong>sí miró este punto</strong>${cuando}
              y <strong>no detectó agua</strong>
              ${fechas.length > 1 ? 'en esas pasadas' : 'en esa pasada'}.</p>
+             ${res.borde && res.borde.capa === 'observada'
+               ? `<p>Pero queda a <strong>${metros(res.borde.d)}</strong>
+                  del borde de una mancha donde sí midió agua, y ese borde tiene
+                  ±${esc(num(incertidumbreBorde(res.borde.f)))} m de
+                  incertidumbre: a esta distancia adentro y afuera no se
+                  distinguen.</p>` : ''}
              <p><strong>Eso no quiere decir que no se haya inundado.</strong> El radar
              tiene cuatro límites conocidos, y los cuatro empujan en la misma
              dirección: hacia quedarse corto.</p>
@@ -1257,39 +1353,7 @@ function render(res, etiqueta, lon, lat) {
   $('#btn-centrar').addEventListener('click', () =>
     estado.mapa && estado.mapa.flyTo({ center: [lon, lat], zoom: 14 }));
 
-  const btnComuna = $('#btn-compartir-comuna');
-  if (btnComuna) {
-    btnComuna.addEventListener('click', async () => {
-      const c = comunaDe(res, lon, lat);
-      if (!c) return;
-      const texto = textoComuna(c);
-      if (navigator.share) {
-        try { await navigator.share({ title: `Inundaciones en ${c.comuna}`, text: texto }); return; }
-        catch { /* el usuario canceló */ }
-      }
-      try {
-        await navigator.clipboard.writeText(texto);
-        elEstado().textContent = `Estado de ${c.comuna} copiado. Ya lo puedes pegar.`;
-      } catch { elEstado().textContent = 'No se pudo copiar automáticamente.'; }
-    });
-  }
-
-  const btnSol = $('#btn-solicitud');
-  if (btnSol) {
-    btnSol.addEventListener('click', async () => {
-      const c = comunaDe(res, lon, lat);
-      if (!c) return;
-      const texto = textoSolicitud(c);
-      try {
-        await navigator.clipboard.writeText(texto);
-        elEstado().textContent =
-          'Solicitud copiada. Pégala en portaltransparencia.cl, dirigida al '
-          + 'MINVU (SEREMI de La Araucanía), a la DGA o a tu municipalidad.';
-      } catch {
-        elEstado().textContent = 'No se pudo copiar automáticamente.';
-      }
-    });
-  }
+  enlazarBloqueComuna(comunaDe(res, lon, lat));
 
   const btnPlano = $('#btn-plano');
   if (btnPlano) {
@@ -1324,9 +1388,49 @@ function render(res, etiqueta, lon, lat) {
 
 /* --------------------------------------------------------------- acciones */
 
+/** Los dos botones del bloque de la comuna: compartir su estado y pedirle el
+ *  mapa a la autoridad. Los usan la ficha de un punto y la de una comuna. */
+function enlazarBloqueComuna(c) {
+  if (!c) return;
+  const btnComuna = $('#btn-compartir-comuna');
+  if (btnComuna) {
+    btnComuna.addEventListener('click', async () => {
+      const texto = textoComuna(c);
+      if (navigator.share) {
+        try { await navigator.share({ title: `Inundaciones en ${c.comuna}`, text: texto }); return; }
+        catch { /* el usuario canceló */ }
+      }
+      try {
+        await navigator.clipboard.writeText(texto);
+        elEstado().textContent = `Estado de ${c.comuna} copiado. Ya lo puedes pegar.`;
+      } catch { elEstado().textContent = 'No se pudo copiar automáticamente.'; }
+    });
+  }
+  const btnSol = $('#btn-solicitud');
+  if (btnSol) {
+    btnSol.addEventListener('click', async () => {
+      const texto = textoSolicitud(c);
+      try {
+        await navigator.clipboard.writeText(texto);
+        elEstado().textContent =
+          'Solicitud copiada. Pégala en portaltransparencia.cl, dirigida al '
+          + 'MINVU (SEREMI de La Araucanía), a la DGA o a tu municipalidad.';
+      } catch {
+        elEstado().textContent = 'No se pudo copiar automáticamente.';
+      }
+    });
+  }
+}
+
 function textoFicha() {
   const { res, etiqueta } = estado.ultimo;
-  const l = [`${res.titulo.toUpperCase()}`, `Ubicación: ${etiqueta}`, ''];
+  // La razón del titular viaja en la segunda línea, igual que en pantalla.
+  // Sin ella llegaba por WhatsApp «ESTÁS EN UN ÁREA DE RIESGO...» respaldado
+  // sólo por «el satélite miró y no detectó agua», que se lee al revés
+  // (auditoría 15-nov-2026, F-102).
+  const razon = textoPlano(porQue(res));
+  const l = [`${res.titulo.toUpperCase()}`, `Ubicación: ${etiqueta}`,
+             `Por qué: ${razon}`, ''];
   // La huella observada va arriba: es el dato más concreto de la ficha —una
   // fecha en que hubo agua acá— y es el que la gente reenvía.
   if (res.sar.length) {
@@ -1352,16 +1456,52 @@ function textoFicha() {
   }
   if (res.areas.length) {
     const p0 = res.areas[0].properties;
-    l.push('Plan Regulador — área de riesgo declarada:');
+    l.push('Plan Regulador, área de riesgo declarada:');
     for (const a of res.areas) l.push(`• ${a.properties.clasificacion || 'Área de riesgo'}`);
     l.push(`  Fuente: ${p0.fuente} (año: ${p0.anio})`);
     l.push('');
   }
+  if (res.laminas.length) {
+    l.push('Cartografía del documento comunal (trazado derivado: la dibujamos nosotros',
+           `desde la lámina impresa, con ±${num(incertidumbreBorde(res.laminas[0]))} m en el borde):`);
+    // Cada zona con su propia fuente: en Angol se superponen el plano del plan
+    // regulador y el estudio de 2013, y no dicen lo mismo.
+    for (const f of res.laminas) {
+      const q = f.properties;
+      l.push(`• ${q.clase}${q.efecto_legal ? ' (plan regulador, con efecto legal)'
+                                            : ' (estudio de riesgo, sin efecto legal)'}`,
+             `  Fuente: ${q.fuente} (año: ${q.anio || 'no declarado'})`);
+    }
+    l.push('');
+  }
+  if (res.gore.length || res.enMancha) {
+    if (res.gore.length) {
+      const g = res.gore[0].properties;
+      l.push(`Modelo regional: amenaza ${claseGore(g.clase)}.`,
+             `  Fuente: ${g.fuente || 'no declarada'} (año: ${g.anio || 'no declarado'})`);
+    }
+    if (res.enMancha) {
+      l.push('Modelo global: dentro de la mancha de una crecida de 100 años (resolución ~1 km).');
+    }
+    if (!/Un modelo no es un registro/.test(razon)) {
+      l.push('  Un modelo no es un registro: dice dónde podría llegar el agua, no dónde llegó.');
+    }
+    l.push('');
+  }
+  if (res.campamentos.length) {
+    const c = res.campamentos[0].properties;
+    l.push(`Este punto está dentro del campamento ${c.nombre}: el catastro de ${c.anio}`,
+           `  registra ${c.hogares} ${c.hogares === 1 ? 'hogar' : 'hogares'} en área de riesgo por ` +
+           `${String(c.tipo_riesgo || 'inundación').toLowerCase()}.`, '');
+  }
+  // Se listan los tres más cercanos, pero se dice cuántos hay: recortar sin
+  // decirlo hacía que 15 registros se leyeran como 3 (F-113).
   const cerca = res.cerca.slice(0, 3);
   if (cerca.length) {
-    l.push('Puntos críticos registrados cerca:');
+    l.push(`Puntos críticos registrados a menos de 1,5 km: ${res.cerca.length}.` +
+           (res.cerca.length > cerca.length ? ` Los ${cerca.length} más cercanos:` : ''));
     for (const { f, d } of cerca) {
-      l.push(`• ${Math.round(d)} m — ${f.properties.causa} (riesgo ${f.properties.nivel})`);
+      l.push(`• ${Math.round(d)} m: ${f.properties.causa} (riesgo ${f.properties.nivel})`);
     }
     l.push(`  Fuente: ${cerca[0].f.properties.fuente} (temporada ${cerca[0].f.properties.anio})`);
   } else {
@@ -1542,7 +1682,13 @@ function pedirSugerencias() {
   }, 450);
 }
 
-async function consultar(lon, lat, etiqueta) {
+async function consultar(lon, lat, etiqueta, precision = null) {
+  // La precisión de la posición entra por acá y en ningún otro lado. Era un
+  // estado global que cada vía de consulta tenía que acordarse de borrar; la
+  // sugerencia de dirección y la elección de comuna no lo hacían, y una
+  // dirección escrita heredaba el ±65 m del GPS de la consulta anterior
+  // (auditoría 15-nov-2026, F-106). Sólo ubicarme() la pasa.
+  estado.precisionPos = Number.isFinite(precision) ? precision : null;
   // La interfaz se enlaza antes de que lleguen los datos, a propósito. Si
   // alguien alcanza a consultar en ese rato, se le dice — que es infinitamente
   // mejor que un error de JavaScript o una ficha en blanco.
@@ -1592,7 +1738,6 @@ function renderFuera(etiqueta, lon, lat) {
 async function buscar() {
   const q = $('#q').value.trim();
   if (!q) return;
-  estado.precisionPos = null;   // esta posición no viene del GPS
   const btn = $('#btn-buscar');
   btn.disabled = true;
   elEstado().textContent = 'Buscando la dirección…';
@@ -1623,14 +1768,15 @@ function ubicarme() {
       // La precisión que informa el aparato se guarda y se usa: decide el ancho
       // de la franja donde el veredicto no puede distinguir adentro de afuera.
       // Se descartaba, y con ella la única medida de cuánto se puede confiar en
-      // la posición desde la que se responde.
-      estado.precisionPos = Number.isFinite(accuracy) ? accuracy : null;
+      // la posición desde la que se responde. Viaja como argumento de
+      // consultar(), que es quien la fija para esta consulta y sólo para ésta.
+      //
       // Se avisa ANTES de consultar: quien abre esto desde otra región merece
       // saber por qué no obtiene respuesta, en vez de deducirlo de una ficha
       // vacía.
       elEstado().textContent = dentroDeRegion(lon, lat) ? ''
         : `Estás fuera de ${REGION.nombre}: este prototipo sólo cubre esa región.`;
-      consultar(lon, lat, 'Tu ubicación actual');
+      consultar(lon, lat, 'Tu ubicación actual', accuracy);
     },
     (err) => {
       // err.message lo escribe el navegador y viene en su idioma, casi siempre
@@ -2021,7 +2167,6 @@ function iniciarMapa() {
       const capas = ['pc-circ', 'huellas-fill', 'ar-fill', 'camp-fill']
         .filter((c) => m.getLayer(c));
       if (m.queryRenderedFeatures(e.point, { layers: capas }).length) return;
-      estado.precisionPos = null;   // un toque en el mapa no tiene precisión de GPS
       consultar(e.lngLat.lng, e.lngLat.lat,
         `Punto seleccionado (${e.lngLat.lat.toFixed(4)}, ${e.lngLat.lng.toFixed(4)})`);
     });
@@ -2264,12 +2409,52 @@ function zoomComuna(c) {
   //
   // Elegir «Angol» en las sugerencias movía la vista y nada más: quien navega
   // con teclado, quien usa lector de pantalla o quien tiene el mapa caído por
-  // WebGL elegía su comuna y no obtenía ninguna ficha. El mapa quedaba como
-  // única vía real de respuesta, que es justo lo contrario de lo que este visor
-  // necesita — y el caso rural, el más frecuente, es el que peor lo pasaba.
-  const cx = (Math.min(...lons) + Math.max(...lons)) / 2;
-  const cy = (Math.min(...lats) + Math.max(...lats)) / 2;
-  consultar(cx, cy, `${c.comuna} (centro de los registros de la comuna)`);
+  // WebGL elegía su comuna y no obtenía ninguna ficha.
+  //
+  // Pero se responde sobre la COMUNA, que es lo que se eligió. Antes se
+  // consultaba el centro de la caja de sus registros como si fuera una casa, y
+  // ese centro casi nunca tiene un registro cerca: 22 de 30 comunas con
+  // registros recibían «Sin registros» (Pucón con 26, Curarrehue con 18). Un
+  // veredicto sobre un punto que nadie eligió es un resultado plausible y
+  // equivocado (auditoría 15-nov-2026, F-101).
+  renderComuna(c, feats);
+}
+
+/** La respuesta al elegir una comuna: cuántos registros tiene y qué información
+ *  existe, sin veredicto de punto. Para saber de una casa hay que elegir la casa. */
+function renderComuna(c, feats) {
+  const inv = estadoDeComuna(c.comuna);
+  const n = feats.length;
+  const cronicos = feats.filter((f) => f.properties.cronico).length;
+  if (estado.marcador) { estado.marcador.remove(); estado.marcador = null; }
+  estado.precisionPos = null;
+  estado.ultimo = null;   // no hay ficha de un punto que compartir
+
+  const cont = $('#respuesta');
+  cont.innerHTML = `
+    <div class="veredicto v-comuna">
+      <span class="icono" aria-hidden="true">🗺️</span>
+      <h2>${esc(c.comuna)}: ${n} ${n === 1 ? 'punto' : 'puntos'} donde el municipio
+          reportó inundación</h2>
+    </div>
+    <p class="por-que">${cronicos
+      ? `${cronicos} ${cronicos === 1 ? 'se repite' : 'se repiten'} en 3 o más
+         temporadas del Programa Invierno. `
+      : ''}${estado.mapa ? 'Están marcados en el mapa.' : ''}</p>
+    <p class="aviso-fuerte">Elegiste una comuna, no un lugar: esto no dice si tu
+       casa se inunda. Para eso escribe tu dirección, toca el mapa o usa tu
+       ubicación. Donde no hay registro <strong>no significa que no se
+       inunde</strong>: significa que nadie lo ha levantado.</p>
+    <div class="acciones">
+      <button type="button" id="btn-ver-detalle">Qué información hay para ${esc(c.comuna)}</button>
+    </div>`;
+  cont.classList.remove('oculto');
+  $('#btn-ver-detalle').addEventListener('click', () => irAPestana('detalle'));
+
+  $('#detalle-ficha').innerHTML = inv
+    ? bloqueComuna(inv)
+    : `<p class="nota">No tenemos el inventario de ${esc(c.comuna)}.</p>`;
+  enlazarBloqueComuna(inv);
 }
 
 /* ------------------------------------------------------------------ inicio */
