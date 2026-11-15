@@ -1,0 +1,17 @@
+G menos N (u=4.6): 448 piezas, total 78.37 ha
+   hueco_interior     2 piezas    0.23 ha
+   franja_borde       0 piezas    0.00 ha
+   pieza_chica      385 piezas    8.31 ha
+   otra              61 piezas   69.83 ha
+G menos N (u=8.3): 448 piezas, total 78.37 ha
+   hueco_interior     2 piezas    0.23 ha
+   franja_borde       0 piezas    0.00 ha
+   pieza_chica      385 piezas    8.31 ha
+   otra              61 piezas   69.83 ha
+N menos G: 21.38 ha; a <=8,3 m de G: 11.82 ha; a <=25 m: 15.88 ha
+   G menos N dentro de 4.6 m de N: 0.21
+   G menos N dentro de 8.3 m de N: 0.33
+   G menos N dentro de 16.6 m de N: 0.49
+   G menos N dentro de 25 m de N: 0.56
+   G menos N dentro de 50 m de N: 0.67
+   10 piezas mayores (ha): [11.1, 7.42, 4.61, 3.15, 2.83, 2.47, 2.34, 2.27, 2.16, 2.09] | n piezas: 448 | ha en piezas <2000 m2: 8.54

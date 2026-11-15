@@ -1,0 +1,15 @@
+comuna,geoide_poligonos_riesgo_toda_amenaza,geoide_poligonos_hidricos,geoide_ha_hidricas,proyecto_poligonos_capaA,proyecto_ha_capaA,iou_union,interseccion_ha,ha_solo_geoide,ha_solo_proyecto,zonas_geoide_hidricas,L0_poligonos_hidricos,L0_ha_hidricas,L0_vs_38capas_iou,estado_dice_sin_vectorial,estado_poligonos_area_riesgo
+angol,81,21,288.6,0,0.0,,0,288.6,0.0,AR-2a AR-2b,21,288.6,1.0,si,0
+carahue,30,8,104.3,9,107.3,0.971,104.3,0.0,3.1,Z-R10 Z-R9 ZR1a,8,104.3,1.0,no,9
+collipulli,70,41,111.9,38,143.1,0.771,111.0,0.9,32.1,ZR-1 ZR-2 ZR-5,41,111.9,1.0,no,38
+gorbea,2,1,10.8,1,10.8,1.0,10.8,0.0,0.0,AR1,1,10.8,1.0,no,1
+loncoche,0,0,0.0,2,19.1,,0,0.0,19.1,,0,0.0,,no,2
+nueva imperial,10,9,154.7,1,18.3,0.101,15.8,138.9,2.4,AR-1 AR-2,9,154.7,1.0,no,1
+pitrufquen,6,4,77.6,4,77.6,1.0,77.6,0.0,0.0,R1-A,4,77.6,1.0,no,4
+renaico,22,20,23.8,1,7.8,0.329,7.8,16.0,0.0,AR - 1 AR-1,20,23.8,1.0,no,1
+saavedra,1,1,46.3,1,46.3,1.0,46.3,0.0,0.0,Inundable restringida,1,46.3,1.0,no,1
+temuco,25,2,1595.7,1,1594.3,0.999,1594.3,1.5,0.0,ARRI ZE7,1,1594.3,0.999,no,1
+tolten,21,21,99.2,4,77.3,0.779,77.3,21.9,0.0,AR-1 AR-2 AR-3 AR1 AR2 AR3 AR4,21,99.2,1.0,no,4
+traiguen,1,1,55.7,1,55.7,1.0,55.7,0.0,0.0,ZR1,1,55.7,1.0,no,1
+victoria,2,0,0.0,0,0.0,,0,0.0,0.0,,0,0.0,,si,0
+villarrica,3,2,10.9,2,10.9,1.0,10.9,0.0,0.0,ZR-4 ZR-9,2,10.9,1.0,no,2

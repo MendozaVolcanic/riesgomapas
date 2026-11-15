@@ -1,0 +1,14 @@
+angol           G_riesgo= 81 G_hid= 21 G_ha=   288.6 | A=  0 A_ha=     0.0 IoU=       inter=    0.0 soloG=  288.6 soloA=    0.0 | L0 n=21 ha=288.6 iouL0v38=1.0 | dice_sin_vec=si est_pol=0
+carahue         G_riesgo= 30 G_hid=  8 G_ha=   104.3 | A=  9 A_ha=   107.3 IoU=0.971  inter=  104.3 soloG=    0.0 soloA=    3.1 | L0 n=8 ha=104.3 iouL0v38=1.0 | dice_sin_vec=no est_pol=9
+collipulli      G_riesgo= 70 G_hid= 41 G_ha=   111.9 | A= 38 A_ha=   143.1 IoU=0.771  inter=  111.0 soloG=    0.9 soloA=   32.1 | L0 n=41 ha=111.9 iouL0v38=1.0 | dice_sin_vec=no est_pol=38
+gorbea          G_riesgo=  2 G_hid=  1 G_ha=    10.8 | A=  1 A_ha=    10.8 IoU=1.0    inter=   10.8 soloG=    0.0 soloA=    0.0 | L0 n=1 ha=10.8 iouL0v38=1.0 | dice_sin_vec=no est_pol=1
+loncoche        G_riesgo=  0 G_hid=  0 G_ha=     0.0 | A=  2 A_ha=    19.1 IoU=       inter=    0.0 soloG=    0.0 soloA=   19.1 | L0 n=0 ha=0.0 iouL0v38= | dice_sin_vec=no est_pol=2
+nueva imperial  G_riesgo= 10 G_hid=  9 G_ha=   154.7 | A=  1 A_ha=    18.3 IoU=0.101  inter=   15.8 soloG=  138.9 soloA=    2.4 | L0 n=9 ha=154.7 iouL0v38=1.0 | dice_sin_vec=no est_pol=1
+pitrufquen      G_riesgo=  6 G_hid=  4 G_ha=    77.6 | A=  4 A_ha=    77.6 IoU=1.0    inter=   77.6 soloG=    0.0 soloA=    0.0 | L0 n=4 ha=77.6 iouL0v38=1.0 | dice_sin_vec=no est_pol=4
+renaico         G_riesgo= 22 G_hid= 20 G_ha=    23.8 | A=  1 A_ha=     7.8 IoU=0.329  inter=    7.8 soloG=   16.0 soloA=    0.0 | L0 n=20 ha=23.8 iouL0v38=1.0 | dice_sin_vec=no est_pol=1
+saavedra        G_riesgo=  1 G_hid=  1 G_ha=    46.3 | A=  1 A_ha=    46.3 IoU=1.0    inter=   46.3 soloG=    0.0 soloA=    0.0 | L0 n=1 ha=46.3 iouL0v38=1.0 | dice_sin_vec=no est_pol=1
+temuco          G_riesgo= 25 G_hid=  2 G_ha=  1595.7 | A=  1 A_ha=  1594.3 IoU=0.999  inter= 1594.3 soloG=    1.5 soloA=    0.0 | L0 n=1 ha=1594.3 iouL0v38=0.999 | dice_sin_vec=no est_pol=1
+tolten          G_riesgo= 21 G_hid= 21 G_ha=    99.2 | A=  4 A_ha=    77.3 IoU=0.779  inter=   77.3 soloG=   21.9 soloA=    0.0 | L0 n=21 ha=99.2 iouL0v38=1.0 | dice_sin_vec=no est_pol=4
+traiguen        G_riesgo=  1 G_hid=  1 G_ha=    55.7 | A=  1 A_ha=    55.7 IoU=1.0    inter=   55.7 soloG=    0.0 soloA=    0.0 | L0 n=1 ha=55.7 iouL0v38=1.0 | dice_sin_vec=no est_pol=1
+victoria        G_riesgo=  2 G_hid=  0 G_ha=     0.0 | A=  0 A_ha=     0.0 IoU=       inter=    0.0 soloG=    0.0 soloA=    0.0 | L0 n=0 ha=0.0 iouL0v38= | dice_sin_vec=si est_pol=0
+villarrica      G_riesgo=  3 G_hid=  2 G_ha=    10.9 | A=  2 A_ha=    10.9 IoU=1.0    inter=   10.9 soloG=    0.0 soloA=    0.0 | L0 n=2 ha=10.9 iouL0v38=1.0 | dice_sin_vec=no est_pol=2

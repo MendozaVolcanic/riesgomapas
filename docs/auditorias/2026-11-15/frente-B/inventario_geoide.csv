@@ -1,0 +1,39 @@
+capa_id,capa,comuna,tipo_capa,geometria,n_features,n_anillos,n_riesgo_cualquier_amenaza,n_inundacion,n_anegamiento,n_napa,n_tsunami,n_cauce_quebrada,n_hidricos_inund_aneg_napa,ha_inund_aneg_napa,zonas_inund_aneg_napa,zonas_cauce_quebrada,tiene_campos_instrumento,T_DO,N_DOC,P_DO,campos
+0,PRC_Pucon,Pucon,zonificacion,Polygon,22,30,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+1,PRC_Villarrica,Villarrica,zonificacion,Polygon,40,69,3,2,0,0,0,4,2,10.9,ZR-4 ZR-9,ZR-2 ZR-3 ZR-7,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+2,PRC_Victoria,Victoria,zonificacion,Polygon,19,40,2,0,0,0,0,1,0,0.0,,ZR-1,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+3,PRC_Traiguen,Traiguen,zonificacion,Polygon,15,38,1,1,0,0,0,0,1,55.7,ZR1,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+4,PRC_Tolten_Queule_Area_de_riesgo,Tolten,area_de_riesgo,Polygon,3,4,3,1,0,1,1,0,2,20.0,AR-1 AR-2,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+5,PRC_Tolten_Queule,Tolten,zonificacion,Polygon,8,23,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+6,PRC_Tolten_Villa_OHiggins_Area_de_riesgo,Tolten,area_de_riesgo,Polygon,1,1,1,0,0,0,1,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+7,PRC_Tolten_Villa_OHiggins,Tolten,zonificacion,Polygon,6,10,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+8,PRC_Puerto_Saavedra,Saavedra,zonificacion,Polygon,13,23,1,1,0,0,0,0,1,46.3,Inundable restringida,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+9,PRC_Renaico_Tijeral_Area_de_riesgo,Renaico,area_de_riesgo,Polygon,2,2,2,1,0,0,0,0,1,7.8,AR-1,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+10,PRC_Renaico_Tijeral,Renaico,zonificacion,Polygon,5,12,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+11,PRC_Temuco,Temuco,zonificacion,Polygon,1788,5355,1,0,1,0,0,0,1,84.1,ZE7,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROM CUT OBJECTID
+12,PRC_Temuco_Areas_de_proteccion_y_riesgo,Temuco,area_de_riesgo,Polygon,24,3217,24,0,1,0,0,0,1,1594.3,ARRI,,no,sin campo,sin campo,sin campo,Capa REGION COMUNA SECTOR ZONA NOMBRE UPERM UPROM OBJECTID
+13,PRC_Temuco_Cajon,Temuco,zonificacion,Polygon,15,29,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+14,PRC_Pitrufquen,Pitrufquen,zonificacion,Polygon,17,17,6,4,0,0,0,0,4,77.6,R1-A,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROM CUT OBJECTID
+15,PRC_Padre _Las_Casas,Padre Las Casas,zonificacion,Polygon,1,1,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+16,PRC_Nueva_Imperial,Nueva Imperial,zonificacion,Polygon,183,273,0,0,0,0,0,0,0,0.0,,,si,Resolución(183),111(183),26/07/2025(183),CAPA REG COM ZONA UPERM UPROH OBJECTID LOC NOM P_DO N_DO T_DO OBS SDPM COS OBS_COS CC AGRU AMAXED OBS_AMAXED DIST RAS ANTJ DEN OBS_DEN OBS_DIST
+17,PRC_Lonquimay_Villa_Portales,Lonquimay,zonificacion,Polygon,20,24,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+18,PRC_Loncoche,Loncoche,zonificacion,Polygon,19,38,0,0,0,0,0,2,0,0.0,,Lecho de Cauce Natural ZR-1,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+19,PRC_Lautaro ,Lautaro,zonificacion,Polygon,18,33,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+20,PRC_Gorbea,Gorbea,zonificacion,Polygon,13,42,2,1,0,0,0,1,1,10.8,AR1,Curso de agua,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+21,PRC_Freire_Quepe,Freire,zonificacion,Polygon,11,17,0,0,0,0,0,1,0,0.0,,Lecho de Cauce Natural,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+22,PRC_Curacautin,Curacautin,zonificacion,Polygon,11,23,0,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+23,PRC_Collipulli_Area_de_riesgo,Collipulli,area_de_riesgo,Polygon,68,71,68,24,2,0,0,13,26,86.0,ZR-1 ZR-2,ZR-5,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROM CUT OBJECTID
+24,PRC_Collipulli,Collipulli,zonificacion,Polygon,103,157,2,1,0,0,0,5,1,5.7,ZR-2,ZP-2 ZR-5,no,sin campo,sin campo,sin campo,Capa REG LOCALIDAD COM ZONA NOMBRE UPERM UPROH CUT OBJECTID
+25,PRC_Carahue_Area_de_riesgo,Carahue,area_de_riesgo,Polygon,15,16,15,0,0,0,0,0,0,0.0,,,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+26,PRC_Carahue,Carahue,zonificacion,Polygon,68,94,15,8,0,0,0,6,8,104.3,Z-R10 Z-R9 ZR1a,Lecho de Cauce ZR1,no,sin campo,sin campo,sin campo,Capa REG COM LOCALIDAD ZONA NOMBRE UPERM UPROH CUT OBJECTID
+27,PRC_Angol,Angol,zonificacion,Polygon,890,903,0,0,0,0,0,0,0,0.0,,,si,Resolución(889),40(889),14/10/2022(890),OBJECTID_1 OBJECTID Shape_Leng REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS Shape__Area Shape__Length
+28,Limite_Urbano,(todas: limite urbano),limite_urbano,Polygon,65,70,0,0,0,0,0,0,0,0.0,,,si,Resolución(7); Decreto(1),38(2); 08(1),08/05/2026(2); 11-04-1995(1),REG COM OBJECTID NOM N_DOC T_DOC INSTRUMENT ADMIN DO
+29,PRC_Angol_Area_de_riesgo,Angol,area_de_riesgo,Polygon,81,87,81,10,11,0,0,0,21,297.8,AR-2a AR-2b,,si,Resolución(81),40(81),14/10/2022(81),OBJECTID_1 OBJECTID Shape_Leng REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS Shape__Area Shape__Length
+30,PRC_Renaico,Renaico,zonificacion,Polygon,146,148,0,0,0,0,0,0,0,0.0,,,si,Resolución(146),90(146),18/02/2023(146),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS Shape__Area Shape__Length
+31,PRC_Renaico_Area_de_riesgo,Renaico,area_de_riesgo,Polygon,20,20,20,19,0,0,0,0,19,16.0,AR - 1,,si,Resolución(20),90(20),18/02/2023(20),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS Shape__Area Shape__Length
+32,PRC_Renaico_ZNE,Renaico,zonificacion,Polyline,9,0,0,0,0,0,0,0,0,0.0,,,si,Resolución(9),90(9),18/02/2023(9),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS Shape__Length
+33,PRC_Nueva_Imperial_AR,Nueva Imperial,area_de_riesgo,Polygon,10,64,10,4,5,0,0,0,9,178.4,AR-1 AR-2,,si,Resolución(10),111(10),26/07/2025(10),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS Shape__Area Shape__Length
+34,PRC_Tolten_Nueva_Tolten_Area_de_riesgo,Tolten,area_de_riesgo,Polygon,6,6,6,2,0,4,0,0,6,13.3,AR1 AR2 AR3 AR4,,si,Resolución(6),38(6),08/05/2026(6),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS
+35,PRC_Tolten_Nueva_Tolten,Tolten,zonificacion,Polygon,118,124,0,0,0,0,0,2,0,0.0,,CURSO DE AGUA,si,Resolución(118),38(118),08/05/2026(118),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS
+36,PRC_Tolten_Villa_Boldos,Tolten,zonificacion,Polygon,54,58,0,0,0,0,0,3,0,0.0,,CURSO AGUA,si,Resolución(54),38(54),08/05/2026(54),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS
+37,PRC_Tolten_Villa_Boldos_Area_de_riesgo,Tolten,area_de_riesgo,Polygon,11,11,11,9,0,2,0,0,11,8.6,AR1 AR2,,si,Resolución(11),38(11),08/05/2026(11),OBJECTID REG COM LOC ZONA NOM UPERM UPROH P_DO N_DOC T_DO OBS

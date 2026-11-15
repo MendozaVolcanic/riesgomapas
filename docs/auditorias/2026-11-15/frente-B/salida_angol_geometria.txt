@@ -1,0 +1,55 @@
+GeoIDE capa 29 por ZONA (features, ha): {'AR-1c': (38, 194.0), 'AR-2a': (10, 282.2), 'AR-1b': (18, 26.9), 'AR-1a': (4, 71.8), 'AR-2b': (11, 15.6)}
+Nuestros AR-2a: 54 poligonos; por lamina: Counter({'angol-prc-ar2a-lamina2': 28, 'angol-prc-ar2a-lamina1': 26}) u: [4.6, 8.3]
+
+== Global: nuestra union de AR-2a contra cada referencia de GeoIDE ==
+AR-2a          G= 282.21 ha N= 225.22 ha IoU=0.671 inter=203.84 ha | N dentro de G=0.905 G cubierto por N=0.722 | dist centroides=68.0 m | explicada u=4,6/8,3/16,6/24,9: 0.24/0.38/0.54/0.60
+AR-2b          G=  15.64 ha N= 225.22 ha IoU=0.007 inter=  1.58 ha | N dentro de G=0.007 G cubierto por N=0.101 | dist centroides=1712.5 m | explicada u=4,6/8,3/16,6/24,9: 0.00/0.01/0.01/0.02
+AR-2a+2b       G= 288.59 ha N= 225.22 ha IoU=0.659 inter=204.07 ha | N dentro de G=0.906 G cubierto por N=0.707 | dist centroides=111.6 m | explicada u=4,6/8,3/16,6/24,9: 0.23/0.36/0.51/0.57
+AR-1a+1b+1c    G= 291.40 ha N= 225.22 ha IoU=0.025 inter= 12.51 ha | N dentro de G=0.056 G cubierto por N=0.043 | dist centroides=1705.4 m | explicada u=4,6/8,3/16,6/24,9: 0.01/0.02/0.04/0.07
+todo AR (81)   G= 567.70 ha N= 225.22 ha IoU=0.363 inter=211.22 ha | N dentro de G=0.938 G cubierto por N=0.372 | dist centroides=916.5 m | explicada u=4,6/8,3/16,6/24,9: 0.07/0.11/0.17/0.21
+
+== Donde cae el area de nuestros AR-2a (fraccion de N) ==
+  dentro de AR-2a: 0.905
+  dentro de AR-2b: 0.007
+  dentro de AR-1a: 0.001
+  dentro de AR-1b: 0.045
+  dentro de AR-1c: 0.013
+  fuera de todo AR de GeoIDE: 0.062
+
+== Por lamina ==
+angol-prc-ar2a-lamina1: n=26 u=8.3 m N=110.52 ha G(en su caja)=147.36 ha IoU=0.634 | traslacion que maximiza IoU: (-9,3) m IoU=0.658 | explicada u,2u,3u: 0.28/0.40/0.45
+angol-prc-ar2a-lamina2: n=28 u=4.6 m N=117.04 ha G(en su caja)=153.59 ha IoU=0.645 | traslacion que maximiza IoU: (-1,-8) m IoU=0.661 | explicada u,2u,3u: 0.25/0.41/0.51
+
+Global: traslacion que maximiza el IoU: (-4,-3) m -> IoU 0.680 (sin trasladar: 0.671)
+
+== Por poligono nuestro (54) contra AR-2a de GeoIDE ==
+poligonos con 0 % dentro de AR-2a: 3 de 54
+poligonos con >=50 % dentro de AR-2a: 48
+poligonos con >=90 % dentro de AR-2a: 30
+mediana fraccion dentro: 0.913
+con solape (n=51): mediana IoU con su feature: 0.014 | mediana dist centroides: 1130.5 | mediana Hausdorff: 3503.1 | mediana p95 borde: 19.8
+sin ningun solape con AR-2a: 3 distancia mediana al AR-2a mas cercano: 164.4
+
+== Por feature de GeoIDE AR-2a (10) ==
+  OBJECTID 6:   0.15 ha, cubierto por N=0.000, nuestros que lo tocan=0, IoU local=0.000
+  OBJECTID 7:   0.24 ha, cubierto por N=0.000, nuestros que lo tocan=0, IoU local=0.000
+  OBJECTID 39:  35.18 ha, cubierto por N=0.933, nuestros que lo tocan=3, IoU local=0.898
+  OBJECTID 41:   4.69 ha, cubierto por N=0.871, nuestros que lo tocan=2, IoU local=0.806
+  OBJECTID 42:   9.43 ha, cubierto por N=0.661, nuestros que lo tocan=3, IoU local=0.597
+  OBJECTID 43:  48.86 ha, cubierto por N=0.772, nuestros que lo tocan=5, IoU local=0.724
+  OBJECTID 44:   7.28 ha, cubierto por N=0.776, nuestros que lo tocan=3, IoU local=0.649
+  OBJECTID 45:   2.69 ha, cubierto por N=0.823, nuestros que lo tocan=1, IoU local=0.737
+  OBJECTID 53:   2.27 ha, cubierto por N=0.181, nuestros que lo tocan=2, IoU local=0.171
+  OBJECTID 67: 171.42 ha, cubierto por N=0.669, nuestros que lo tocan=32, IoU local=0.633
+
+== Contraste con el estudio de peligro 2013 (clasificador independiente, las manchas Alto/Medio) ==
+estudio 2013: n=96 union=213.1 ha (Alto 195.0, Medio 18.1)
+  nuestros AR-2a   vs estudio2013 Alto      : IoU=0.172  A dentro de E=0.274  E cubierto por A=0.317
+  nuestros AR-2a   vs estudio2013 Medio     : IoU=0.051  A dentro de E=0.052  E cubierto por A=0.647
+  nuestros AR-2a   vs estudio2013 Alto+Medio: IoU=0.202  A dentro de E=0.326  E cubierto por A=0.345
+  GeoIDE AR-2a     vs estudio2013 Alto      : IoU=0.152  A dentro de E=0.223  E cubierto por A=0.322
+  GeoIDE AR-2a     vs estudio2013 Medio     : IoU=0.055  A dentro de E=0.056  E cubierto por A=0.867
+  GeoIDE AR-2a     vs estudio2013 Alto+Medio: IoU=0.189  A dentro de E=0.278  E cubierto por A=0.369
+  GeoIDE AR-2a+2b  vs estudio2013 Alto      : IoU=0.149  A dentro de E=0.218  E cubierto por A=0.322
+  GeoIDE AR-2a+2b  vs estudio2013 Medio     : IoU=0.054  A dentro de E=0.054  E cubierto por A=0.867
+  GeoIDE AR-2a+2b  vs estudio2013 Alto+Medio: IoU=0.186  A dentro de E=0.272  E cubierto por A=0.369
