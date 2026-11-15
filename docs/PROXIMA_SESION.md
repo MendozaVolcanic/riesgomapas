@@ -1,6 +1,80 @@
 # Continuar riesgomapas: prompt para la próxima sesión
 
-## Estado al 15-nov-2026: el proyecto despertó con tres novedades que reordenan el plan
+## Estado al 15-nov-2026, tarde: la auditoría de los tres frentes está hecha y verificada
+
+Los tres frentes que dejó planeados el traspaso de la mañana corrieron en paralelo, cada
+uno con su verificador de contexto limpio y del otro modelo. **50 hallazgos de los
+auditores, ninguno refutado, y 7 nuevos de los verificadores.** La síntesis por familias, con los IDs finales y la gravedad del verificador,
+está en `docs/auditorias/2026-11-15/SINTESIS.md`; empezar por ahí.
+
+Lo que cambia el plan:
+
+1. **Angol: la capa derivada es una copia degradada del vectorial oficial.** GeoIDE
+   publica el AR-2a de la Resolución 40/2022 y nuestras láminas cubren el 72 % (faltan
+   78,4 ha), sin el AR-2b. No es georreferencia ni otra versión del plan: el contorno
+   oficial calza con el achurado. Es el vectorizador, que no ve el achurado sobre fondo
+   oscuro, y bajar el umbral no lo arregla. El IoU de 0,20 de septiembre queda explicado
+   (plan contra estudio de 2013). Y el visor dice en cinco textos que ese vectorial no
+   existe (F-103).
+2. **La capa A está vieja o incompleta** en Nueva Imperial (Res. 111/2025), Renaico (falta
+   el pueblo) y Toltén (faltan Nueva Toltén y Villa Boldos). GeoIDE lo trae.
+3. **El censo cuenta dos veces a 17.887 personas**: las 33 aldeas son 505 manzanas de la
+   capa 0. La región suma 1.003.546, no 1.021.433, y el visor muestra habitantes inflados
+   en 19 comunas. El GPKG del INE es el mismo dato que el de Esri (17 campos, cero
+   diferencias) y trae `TIPO_MZ`, que es lo que revela el duplicado.
+4. **La población expuesta depende más del criterio que de la capa**: el AR-2a de Angol va
+   de 429 a 22.113 personas; el reparto por área da 4.943, -16/+17 % con el error de borde.
+   Publicar por manzana pesaría 0,7 a 6,1 MB con gzip; por comuna, 15 kB.
+5. **Veredicto**: elegir comuna responde «Sin registros» en 22 de 30 (F-101), la pestaña de
+   detalle contradice al titular de borde (F-100), el texto reenviado no nombra la capa que
+   decidió (F-102), la banda de borde rebaja alto a medio (F-105).
+
+Además, hecho hoy:
+
+- Sin guiones largos en `GUIA_PRACTICANTE.md`, `PRACTICA_PROFESIONAL.md` y el script 20
+  (`d7d46e5`). **Quedan unos 25** en los `.md` del paquete, que vienen de los textos de
+  `fuente` de los scripts 01, 02 y 18 (el rótulo de fuente del MINVU y de SENAPRED, por
+  ejemplo) y de `tools/auditoria/revisar_poligonos_provincia.py`. Corregirlos cambia
+  `web/data/`, así que va con la regeneración de capas. `web/app.js` tiene 53 y el resto
+  del repo unos 2.000.
+- Las descargas quedaron en `data/raw/geoide_minvu_araucania/`,
+  `data/raw/geoide_minvu_araucania_verif/` y `data/raw/censo_ine_2024_R09/` (111 MB).
+- Los recortes de lámina de la verificación B no se versionan (`.gitignore`); se regeneran
+  con `tools/auditoria/vB_angol_fondo_oscuro.py`.
+- Borrador del mensaje para pedirle los datos al practicante, entregado a Nicolás en el
+  chat. **Sigue pendiente pedirle** el GeoPackage con la tabla del Anexo 1, los `.points` y
+  el script del cruce.
+
+### Decisiones que son de Nicolás, no tareas
+
+1. **Angol**: ¿la capa oficial de GeoIDE reemplaza a la vectorizada como A normativo, y la
+   vectorizada queda como respaldo trazable o se retira? La evidencia apoya reemplazar.
+2. **Fuente del censo**: pasar al GPKG del INE (mismo dato, archivo fijo con sha256).
+3. **Publicar población al visor**: por comuna precalculada (15 kB) o por manzana recortada
+   (0,7 a 6,1 MB), y con qué criterio a la vista (se publica siempre el rango).
+4. **Tsunami**: GeoIDE tiene un servicio de inundación por tsunami para cuatro comunas
+   costeras (F-208, F-280). riesgomapas es fluvial; ¿entra como capa aparte o no?
+5. **Publicar la rama**: sigue sin merge a `main`.
+
+### Prompt para abrir la próxima sesión
+
+> Estoy en `C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas`. Lee
+> `CLAUDE.md`, `REGLAS.md`, la primera sección de `docs/PROXIMA_SESION.md` y
+> `docs/auditorias/2026-11-15/SINTESIS.md`. Verifica que la rama esté al día con `origin`.
+> Las decisiones que tomé sobre la lista «Decisiones que son de Nicolás» son: [completar].
+> Con eso, arma un plan por familia contra el código de hoy (GUIA_MAESTRA_AUDITORIAS.md
+> §6: un defecto raíz por plan, medición antes y después, test que falle primero) y
+> ejecútalo en paralelo donde las familias no toquen los mismos archivos. La familia 3
+> (veredicto) toca `web/app.js`; la 1 y la 2 tocan la capa A y `estado-comunas.json`; la 4
+> toca los scripts 16 y 19. Nada de guiones largos, y las capas no se fusionan.
+
+---
+
+Lo de abajo es el traspaso anterior. Se conserva entero.
+
+---
+
+## Histórico: estado al 15-nov-2026, mañana: el proyecto despertó con tres novedades que reordenan el plan
 
 El proyecto estuvo dormido dos meses (último commit, 8-sep). Al retomarlo: **64 tests
 verdes sin tocar nada** y árbol limpio, así que lo que el traspaso de septiembre afirma
