@@ -1,0 +1,6 @@
+GeoIDE ['AR-2a']: 282.21 ha; fuera de las láminas AR-2a del visor: 78.37 ha (27.8 %)
+GeoIDE ['AR-2b']: 15.64 ha; fuera de las láminas AR-2a del visor: 14.06 ha (89.9 %)
+GeoIDE ['AR-2a', 'AR-2b']: 288.59 ha; fuera de las láminas AR-2a del visor: 84.52 ha (29.3 %)
+CONTROL AR-2a contra sí misma: 0.0 % fuera (debe ser 0); contra vacío: 100.0 % (debe ser 100)
+AR-2a GeoIDE fuera de las láminas ENSANCHADAS 10 m (descuenta el error de borde ~8 m): 49.12 ha (17.4 %)
+visor AR-2a: 225.22 ha

@@ -1,0 +1,3 @@
+== F-100: ¿el detalle explica la banda?, ¿y qué más se imprime?
+  puntos con titular de borde: 407; detalle sin explicar banda: 407; resumen (panel que TAMBIEN se imprime) explica la banda: 407; detalle dice "no cae dentro": 407
+  CONTROL (dentro de lámina el detalle trae ±): OK

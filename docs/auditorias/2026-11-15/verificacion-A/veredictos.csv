@@ -1,0 +1,24 @@
+id,veredicto,gravedad_verificador,evidencia,comando
+F-100,CONFIRMADO EN PARTE,3,407/407 detalles sin explicar banda y con 'no cae dentro'; pero resumen (que style.css:633 tambien imprime) explica la banda en 407/407,PASO=4 node tools/auditoria/vA_sondas.js F100 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_F100.txt)
+F-101,CONFIRMADO,4,zoomComuna real: 22 de 30 comunas con registros dan 'Sin registros',node tools/auditoria/vA_sondas.js F101 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_b.txt)
+F-102,CONFIRMADO,3,"textoFicha en punto dentro de AR-2a y en borde no trae plano, ano, derivado ni borde",node tools/auditoria/vA_sondas.js F102 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_b.txt)
+F-103,CONFIRMADO,4,"GeoIDE capa 29: AR-2a 10 y AR-2b 11 poligonos, P_DO 14/10/2022; app.js:939-941 y 677-683 afirman no publicado; 17.4% del AR-2a (49.12 ha) fuera de laminas aun ensanchadas 10 m",python -I tools/auditoria/vA_geoide_ar2_vs_laminas.py GEOJSON (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_geoide_ar2_vs_laminas.txt)
+F-104,CONFIRMADO EN PARTE,2,"hecho cierto por lectura app.js:471-522, 790, 882; titular y etiqueta distinguen fuente; decision de diseno",lectura de codigo
+F-105,CONFIRMADO,3,"50 de 582 puntos de borde tendrian alto; mismo punto 0 m medio, 60 m alto",node tools/auditoria/vA_borde_no_monotono.js (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_borde_no_monotono.txt); vA_sondas.js F105
+F-106,CONFIRMADO,3,precisionPos antes=80 despues de consultar()=80; sin reset en app.js:1466 ni 2272,node tools/auditoria/vA_sondas.js F106 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_b.txt)
+F-107,CONFIRMADO,2,Curarrehue Susceptibilidad media sin efecto legal da alto; decision de diseno prudente,node tools/auditoria/vA_clases_laminas_a_nivel.js (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_clases_laminas_a_nivel.txt)
+F-108,CONFIRMADO,3,"1 de 15 campamentos (Wenehuen, 37 hogares) recibe titular Sin registros mientras el detalle lo declara en riesgo",node tools/auditoria/vA_campamentos_vs_titular.js (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_campamentos_vs_titular.txt)
+F-109,CONFIRMADO,3,32.3% de 20000 puntos dentro de la cobertura publicada en terreno no apto; control fuera 95.2%,python -I tools/auditoria/vA_cobertura_vs_terreno.py (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_cobertura_vs_terreno.txt)
+F-110,CONFIRMADO,3,"767 puntos nivel bajo con gore o mancha; porQue solo habla del registro (ej. GORE MAXIMA, 899 m)",PASO=1 node tools/auditoria/vA_sondas.js F110 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_F110.txt)
+F-111,CONFIRMADO EN PARTE,2,anio '2026' en 54 AR-2a es el de la ordenanza y la fuente lo dice al lado; GeoIDE P_DO 14/10/2022; ambiguedad de rotulado,lectura vectorizadas.geojson y app.js:862-865; consulta GeoIDE
+F-112,CONFIRMADO,2,0 de 1075 poligonos SAR declaran incertidumbre; BORDE_MINIMO_M=10 vs ~40x50 m en config,node tools/auditoria/vA_sondas.js F117 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_b.txt)
+F-113,CONFIRMADO,2,"app.js:1360 slice(0,3) sin total; fuente solo de cerca[0]",lectura de codigo
+F-114,CONFIRMADO,2,3 combinaciones de laminas superpuestas con incertidumbre y ano distintos; laminas[0] decide atribucion,node tools/auditoria/vA_sondas.js F114 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_b.txt)
+F-115,CONFIRMADO,2,app.js:1182-1191 no menciona cuencas pequenas; limitacion en INVENTARIO_FUENTES.md:491,lectura de codigo y grep de docs
+F-116,CONFIRMADO,1,app.js:459 busca borde solo fuera; error en lado prudente,lectura de codigo
+F-117,CONFIRMADO,1,"laminas max incertidumbre 8.3, >10: 0; latente",node tools/auditoria/vA_sondas.js F117
+F-118,CONFIRMADO,1,app.js:3-14 describe solo puntos,lectura de codigo
+F-119,CONFIRMADO,1,"gore clases MAXIMA/MEDIA; app.js:774-777 toLowerCase sin tilde, 1201 si traduce",lectura de codigo y Counter de clases
+F-120,CONFIRMADO,1,"index.html:148-153 campamentos bajo municipio; (-73.6,-38.5) dentro del bbox da sindato",node tools/auditoria/vA_sondas.js F120 (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_sondas_b.txt)
+F-180,CONFIRMADO (area); SOSPECHA (causa),4,AR-2a GeoIDE 17.4% fuera de laminas ensanchadas 10 m; AR-2b 89.9% fuera; posible duplicado con frente B,python -I tools/auditoria/vA_geoide_ar2_vs_laminas.py GEOJSON (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_geoide_ar2_vs_laminas.txt)
+F-181,CONFIRMADO,1,campamento Generacion 2 con hogares=0 se rotula con 0 hogares en area de riesgo,node tools/auditoria/vA_campamentos_vs_titular.js (docs/auditorias/2026-11-15/verificacion-A/salidas/vA_campamentos_vs_titular.txt)

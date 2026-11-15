@@ -1,0 +1,2 @@
+== F-110: gore calla en el resumen cuando hay un registro lejano
+  puntos nivel bajo con gore/mancha: 767; ejemplo con porQue que NO menciona modelo: {"lon":-73.123908,"lat":-38.70824819942508,"gore":"MAXIMA","enMancha":false,"porQue":"El registro más cercano de inundación está a 899 metros."}

@@ -1,0 +1,4 @@
+polígonos de cobertura: 115 | área bbox: [-73.671, -39.64, -70.906, -37.35]
+terreno.tif: EPSG:4326 (5112, 6223) bounds [-73.7, -39.65, -70.9, -37.35]
+puntos DENTRO de la cobertura publicada: 20000; terreno NO apto: 6457 (32.3 %)
+CONTROL puntos FUERA de la cobertura (mismo DEM): 20000; NO apto: 95.2 %

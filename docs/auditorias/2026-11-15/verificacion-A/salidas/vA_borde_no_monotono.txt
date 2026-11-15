@@ -1,0 +1,3 @@
+0 m medio | Estás justo en el borde de un área marcada como inundable | borde 3 graves300 1
+60 m alto | Tu sector tiene registro de inundaciones | borde null graves300 1
+120 m alto | Tu sector tiene registro de inundaciones | borde null graves300 2

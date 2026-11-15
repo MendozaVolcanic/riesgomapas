@@ -1,0 +1,5 @@
+4 ('Angol', 'AR-1a', 'Áreas de Riesgo de Deslizamientos')
+18 ('Angol', 'AR-1b', 'Áreas de Riesgo de Flujos')
+38 ('Angol', 'AR-1c', 'Áreas de Riesgo de Desprendimientos')
+10 ('Angol', 'AR-2a', 'Áreas de Riesgo Inundables o Potencialmente Inundables')
+11 ('Angol', 'AR-2b', 'Áreas de Riesgo por Anegamiento')

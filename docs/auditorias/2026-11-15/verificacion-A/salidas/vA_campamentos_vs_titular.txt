@@ -1,0 +1,16 @@
+La Ribera | Inundación | 33 | dentro: true | medio | Estás justo en el borde de un área marcada como inundable
+Antumapu | Inundación | 30 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Sueño De Todos | Inundación | 19 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Triangulo De Chivilcán | Inundación | 104 | dentro: true | medio | Estás justo en el borde de un área marcada como inundable
+Un Futuro Para Daina | Inundación | 37 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Cruz Del Sur | Inundación | 35 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Esperanza De Chivilcan | Inundación | 51 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Infinity | Inundación | 55 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Luz Y Esperanza | Inundación | 56 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Generación 2 | Inundación | 0 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+Costanera Queule | Inundación | 13 | dentro: true | alto | Estás en un área de riesgo por inundación litoral del plan r
+Paz Y Progreso | Inundación | 27 | dentro: true | alto | Estás en un área de riesgo por inundación del plan regulador
+Comunidad Indígena Urbana Wenehuen | Inundación | 37 | dentro: true | sindato | Sin registros en las fuentes consultadas
+A Paso Firme | Inundación | 13 | dentro: true | medio | Estás justo en el borde de un área marcada como inundable
+Antu Mapu | Inundación | 27 | dentro: true | alto | Estás en un área de riesgo por anegamiento del plan regulado
+campamentos 15 puntos dentro 15 con titular sindato 1

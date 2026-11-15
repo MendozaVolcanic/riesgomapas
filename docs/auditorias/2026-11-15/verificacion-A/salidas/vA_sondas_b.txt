@@ -1,0 +1,74 @@
+== F-101: elegir comuna con el zoomComuna REAL
+PUCÓN            puntos= 26 ❔ Sin registros en las fuentes consultadas
+NUEVA IMPERIAL   puntos= 34 ⚠️ Tu sector tiene registro de inundaciones
+SAAVEDRA         puntos= 23 ❔ Sin registros observados ni norma, pero un modelo sí marca este punto
+TEODORO SCHMIDT  puntos= 32 ❔ Sin registros en las fuentes consultadas
+RENAICO          puntos= 19 ❔ Sin registros en las fuentes consultadas
+PADRE LAS CASAS  puntos= 30 ℹ️ Registros de inundación a cierta distancia
+CURARREHUE       puntos= 18 ❔ Sin registros en las fuentes consultadas
+LAUTARO          puntos= 16 ❔ Sin registros en las fuentes consultadas
+GALVARINO        puntos= 14 ❔ Sin registros en las fuentes consultadas
+VILLARRICA       puntos= 18 ❔ Sin registros en las fuentes consultadas
+LOS SAUCES       puntos= 16 ❔ Sin registros en las fuentes consultadas
+FREIRE           puntos= 26 ❔ Sin registros en las fuentes consultadas
+TOLTÉN           puntos= 13 ❔ Sin registros observados ni norma, pero un modelo sí marca este punto
+ANGOL            puntos= 14 ℹ️ Registros de inundación a cierta distancia
+COLLIPULLI       puntos= 10 ❔ Sin registros en las fuentes consultadas
+TRAIGUÉN         puntos=  8 ❔ Sin registros en las fuentes consultadas
+LONCOCHE         puntos=  8 ℹ️ Registros de inundación a cierta distancia
+PITRUFQUÉN       puntos= 23 ❔ Sin registros observados ni norma, pero un modelo sí marca este punto
+PURÉN            puntos= 10 ⚠️ Tu sector tiene registro de inundaciones
+MELIPEUCO        puntos=  7 ❔ Sin registros en las fuentes consultadas
+LONQUIMAY        puntos= 11 ❔ Sin registros en las fuentes consultadas
+CUNCO            puntos= 14 ❔ Sin registros en las fuentes consultadas
+ERCILLA          puntos= 10 ❔ Sin registros observados ni norma, pero un modelo sí marca este punto
+CARAHUE          puntos=  9 ❔ Sin registros en las fuentes consultadas
+LUMACO           puntos=  4 ⚠️ El agua llegó hasta acá el 3 de agosto de 2026
+PERQUENCO        puntos=  4 ℹ️ Registros de inundación a cierta distancia
+CURACAUTÍN       puntos=  9 ❔ Sin registros en las fuentes consultadas
+GORBEA           puntos=  1 ⚠️ Tu sector tiene registro de inundaciones
+VILCÚN           puntos= 10 ❔ Sin registros en las fuentes consultadas
+CHOL CHOL        puntos=  3 ❔ Sin registros observados ni norma, pero un modelo sí marca este punto
+  comunas con registros: 30; titular "Sin registros" al elegirlas: 22
+  comunas totales en estado-comunas: 32
+== F-102: texto compartido en punto dentro de lámina derivada y en borde
+  [lamina] titular: Estás en un área de riesgo por inundación del plan regulador
+    | ESTÁS EN UN ÁREA DE RIESGO POR INUNDACIÓN DEL PLAN REGULADOR
+    | Ubicación: x
+    | 
+    | El satélite miró este punto el 3 de agosto de 2026 y no detectó agua.
+    |   Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+    |   y es la foto del instante de la pasada, no el máximo del evento.
+    | 
+    | Puntos críticos registrados cerca:
+    | • 499 m — Inundación por desborde de cauce (riesgo Alto)
+    |   Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)
+    | 
+    | Esto NO es información oficial ni un pronóstico.
+    | En emergencia: SENAPRED y tu municipio.
+  [borde] titular: Estás justo en el borde de un área marcada como inundable
+    | ESTÁS JUSTO EN EL BORDE DE UN ÁREA MARCADA COMO INUNDABLE
+    | Ubicación: x
+    | 
+    | El satélite miró este punto el 3 de agosto de 2026 y no detectó agua.
+    |   Ojo: el radar no ve agua bajo bosque cerrado ni en zona urbana densa,
+    |   y es la foto del instante de la pasada, no el máximo del evento.
+    | 
+    | Puntos críticos registrados cerca:
+    | • 839 m — Inundación por desborde de cauce (riesgo Alto)
+    |   Fuente: SENAPRED — Puntos Críticos, Programa Invierno (temporada 2026)
+    | 
+    | Esto NO es información oficial ni un pronóstico.
+    | En emergencia: SENAPRED y tu municipio.
+== F-106: precisionPos tras consultar() (camino de las sugerencias)
+  precisionPos antes=80 despues de consultar()=80
+== F-114: dos láminas superpuestas con distinta incertidumbre/año
+  combinaciones distintas con >=2 láminas: 3; con incertidumbre distinta: 3; con año distinto: 3; ejemplo: [["Alto","2013",7.7],["AR-2a","2026",8.3]]
+== F-117: incertidumbres declaradas > 10 m
+  laminas: declaran=174, max=8.3, >10: 0
+  areasRiesgo: declaran=0, max=n/a, >10: 0
+  sar: declaran=0, max=n/a, >10: 0
+  gore: declaran=0, max=n/a, >10: 0
+== F-120: veredicto en el mar dentro del bbox
+  (-73.6,-38.5) dentroDeRegion=true -> sindato: Sin registros en las fuentes consultadas
+  (-73.69,-37.4) dentroDeRegion=true -> sindato: Sin registros en las fuentes consultadas
