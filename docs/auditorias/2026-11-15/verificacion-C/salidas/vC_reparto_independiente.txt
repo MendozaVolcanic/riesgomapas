@@ -1,0 +1,14 @@
+AR-2a                    base     4943 -borde     4142 (-16%) +borde     5788 (+17%)  ha_disuelta 225.6  borde_m [np.float64(4.6), np.float64(8.3)]
+Alto                     base      726 -borde      480 (-34%) +borde      994 (+37%)  ha_disuelta 195.3  borde_m [np.float64(7.7)]
+Alto+Medio               base     1290 -borde      775 (-40%) +borde     1851 (+43%)  ha_disuelta 213.4  borde_m [np.float64(7.7)]
+Susc alta (Curarrehue)   base       69 -borde       53 (-23%) +borde       84 (+22%)  ha_disuelta 95.4  borde_m [np.float64(5.3)]
+Susc alta+media          base      579 -borde      494 (-15%) +borde      655 (+13%)  ha_disuelta 819.1  borde_m [np.float64(5.3)]
+tipos {'anegamiento': 3, 'fluvial': 59, 'litoral': 2, 'napa_freatica': 1} es_inundacion {True: 65}
+A normativo todas reparto 20179
+  anegamiento       16889  ha   1601.6
+  fluvial            2708  ha    513.8
+  litoral             701  ha     77.5
+  napa_freatica         0  ha      0.2
+  anegamiento Collipulli 32 5.0 n poligonos 2
+  anegamiento Temuco 16857 1596.6 n poligonos 1
+aldeas excluidas del calculo: 33

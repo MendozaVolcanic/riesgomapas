@@ -1,0 +1,10 @@
+INE manzanas+entidades 17074 aldeas 33 pob 1003546 17887
+Esri sin MANZENT: 33 {'aldea': 33}
+{'dup_esri': 0, 'dup_ine': 0, 'emparejados': 17074, 'solo_esri': 0, 'solo_ine': 0}
+dif por campo {'n_per': 0, 'n_hombres': 0, 'n_mujeres': 0, 'n_edad_0_5': 0, 'n_edad_60_mas': 0, 'n_discapacidad': 0, 'n_viv_hacinadas': 0, 'n_mat_paredes_precarios': 0, 'n_mat_techo_precarios': 0, 'n_tipo_viv_mediagua': 0, 'n_hog_allegados': 0, 'n_jefatura_mujer': 0, 'n_fuente_agua_publica': 0, 'n_fuente_agua_pozo': 0, 'n_fuente_agua_camion': 0, 'n_fuente_agua_rio': 0, 'n_distrib_agua_acarreo': 0}
+hausdorff m: max 0.729 p99 0.0 n 17074
+aldeas Esri con aldea INE que la contiene y misma n_per: 33 de 33
+invalidas Esri 7 INE 1 INE aldeas 0
+INE Manzanas por AREA_C {'count': {'RURAL': 505, 'URBANO': 12381}, 'sum': {'RURAL': 17887.0, 'URBANO': 673286.0}}
+INE Manzanas TIPO_MZ {'URBANO': 12381, 'ALDEA': 505}
+manzanas rurales INE n_per 17887 aldeas INE n_per 17887

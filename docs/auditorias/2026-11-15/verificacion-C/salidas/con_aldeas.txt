@@ -1,0 +1,28 @@
+evaluados 17107 puntos, 1.021.433 personas, 335.4 s
+
+PERSONAS POR NIVEL: {"bajo":230746,"medio":121027,"alto":74788,"sindato":594872}
+
+POR CAPA QUE DECIDE (personas / unidades):
+  nada (sin dato)           384.779 / 6335
+  D puntos (bajo)           230.746 / 4007
+  C modelo (sin dato)       210.093 / 3269
+  D puntos (medio)          115.430 / 2136
+  D puntos (alto)            47.767 / 895
+  A normativo MINVU          20.494 / 324
+  A derivado                  6.038 / 69
+  banda de borde              5.597 / 64
+  B observado                   489 / 8
+
+DEFECTOS (personas / unidades / personas con agua de río):
+  D1 borde rebaja alto->medio: 272 / 7 / 0  [Villarrica 96, Traiguén 84, Angol 55, Loncoche 37]
+     ejemplo: {"lon":-72.66807,"lat":-38.25632,"n":84,"comuna":"Traiguén","titulo":"Estás justo en el borde de un área marcada como inundable","nivel":"medio"}
+  D2 clase media -> nivel alto: 773 / 12 / 72  [Curarrehue 662, Angol 111]
+     ejemplo: {"lon":-71.69922,"lat":-39.35035,"n":138,"comuna":"Curarrehue","titulo":"Estás dentro de la zona que el estudio de riesgo de tu comuna marcó como inundable","nivel":"alto"}
+  D3 campamento en AR sin nivel alto: 341 / 4 / 0  [Temuco 320, Collipulli 21]
+     ejemplo: {"lon":-72.61061,"lat":-38.71712,"n":209,"comuna":"Temuco","titulo":"Estás justo en el borde de un área marcada como inundable","nivel":"medio"}
+  D3b campamento en AR con «sin registros»: 124 / 2 / 0  [Temuco 103, Collipulli 21]
+     ejemplo: {"lon":-72.61139,"lat":-38.7172,"n":103,"comuna":"Temuco","titulo":"Sin registros en las fuentes consultadas","nivel":"sindato"}
+  D4 GORE máxima callada en el resumen: 71.877 / 978 / 299  [Pitrufquén 10.053, Angol 9.872, Freire 6.173, Nueva Imperial 5.813]
+     ejemplo: {"lon":-72.69831,"lat":-37.78934,"n":1499,"comuna":"Angol","titulo":"Registros de inundación a cierta distancia","nivel":"bajo"}
+  D5 «sí miró» en terreno que el radar excluye: 131.520 / 1793 / 4.326  [Temuco 32.869, Padre Las Casas 11.490, Villarrica 10.838, Carahue 9.105]
+     ejemplo: {"lon":-73.1489,"lat":-38.71422,"n":1084,"comuna":"Carahue","titulo":"Sin registros observados ni norma, pero un modelo sí marca este punto","nivel":"sindato"}

@@ -1,0 +1,37 @@
+    MANZENT    n  suma_rp  n_rp           tipos  frac_cubierta_por_otras  area_ha  igual
+0       NaN  520      520    11  manzana_urbana                    0.915     17.3   True
+1       NaN  448      448     8  manzana_urbana                    0.951     36.2   True
+2       NaN  462      462    12  manzana_urbana                    0.921     26.2   True
+3       NaN  322      322     8  manzana_urbana                    0.894      6.7   True
+4       NaN  728      728    26  manzana_urbana                    0.942     52.0   True
+5       NaN  493      493    23  manzana_urbana                    0.929     72.1   True
+6       NaN  453      453    14  manzana_urbana                    0.919     38.2   True
+7       NaN  471      471     8  manzana_urbana                    0.938    112.2   True
+8       NaN  328      328     7  manzana_urbana                    0.882      7.7   True
+9       NaN  675      675    18  manzana_urbana                    0.892     11.0   True
+10      NaN  868      868    29  manzana_urbana                    0.930     75.9   True
+11      NaN  748      748    13  manzana_urbana                    0.921     45.1   True
+12      NaN  637      637    16  manzana_urbana                    0.891     32.6   True
+13      NaN  309      309     8  manzana_urbana                    0.950     30.4   True
+14      NaN  341      341    10  manzana_urbana                    0.962    192.2   True
+15      NaN  356      356    14  manzana_urbana                    0.915     17.9   True
+16      NaN  434      434    13  manzana_urbana                    0.947     29.0   True
+17      NaN  860      860    28  manzana_urbana                    0.916     54.3   True
+18      NaN  393      393     7  manzana_urbana                    0.905     12.8   True
+19      NaN  625      625    23  manzana_urbana                    0.918     58.7   True
+20      NaN  592      592     8  manzana_urbana                    0.930     44.5   True
+21      NaN  586      586    18  manzana_urbana                    0.849     18.6   True
+22      NaN  338      338     7  manzana_urbana                    0.816      3.4   True
+23      NaN  907      907    40  manzana_urbana                    0.925     53.9   True
+24      NaN  641      641    10  manzana_urbana                    0.917     27.3   True
+25      NaN  411      411     8  manzana_urbana                    0.945     31.6   True
+26      NaN  408      408     2  manzana_urbana                    0.825      4.4   True
+27      NaN  497      497    33  manzana_urbana                    0.903     85.0   True
+28      NaN  406      406     7  manzana_urbana                    0.934     26.6   True
+29      NaN  548      548    12  manzana_urbana                    0.929     49.9   True
+30      NaN  660      660    20  manzana_urbana                    0.912     50.1   True
+31      NaN  484      484    23  manzana_urbana                    0.905     44.5   True
+32      NaN  938      938    21  manzana_urbana                    0.923     60.1   True
+aldeas 33 con suma exacta 33 pob aldeas 17887 pob suma_rp 17887
+tipos de unidades dentro: {'manzana_urbana': 33}
+total con aldeas 1021433 sin aldeas 1003546 diferencia 17887
