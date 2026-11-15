@@ -1,0 +1,28 @@
+{'tipo': 'control', 'esri': 499, 'ine': 500, 'emparejadas': 499, 'solo_esri': 0, 'solo_ine': 1, 'manzent_dup_esri': 0, 'manzent_dup_ine': 0, 'difieren_n_per': 1, 'difieren_n_fuente_agua_rio': 0, 'difieren_n_viv_hacinadas': 0, 'difieren_n_edad_60_mas': 0, 'difieren_n_edad_0_5': 0, 'difieren_n_discapacidad': 0, 'difieren_n_mat_paredes_precarios': 0, 'difieren_n_tipo_viv_mediagua': 0, 'difieren_n_distrib_agua_acarreo': 0, 'hausdorff_m_p50': 0.0, 'hausdorff_m_p99': 0.0, 'hausdorff_m_max': 5.0, 'geom_hausdorff_mayor_1m': 1, 'geom_difsim_rel_max': 0.101501, 'geom_difsim_rel_mayor_1pct': 1, 'vertices_esri': 34604, 'vertices_ine': 34604}
+CONTROL: OK
+{'tipo': 'manzana_urbana', 'esri': 12886, 'ine': 12886, 'emparejadas': 12886, 'solo_esri': 0, 'solo_ine': 0, 'manzent_dup_esri': 0, 'manzent_dup_ine': 0, 'difieren_n_per': 0, 'difieren_n_fuente_agua_rio': 0, 'difieren_n_viv_hacinadas': 0, 'difieren_n_edad_60_mas': 0, 'difieren_n_edad_0_5': 0, 'difieren_n_discapacidad': 0, 'difieren_n_mat_paredes_precarios': 0, 'difieren_n_tipo_viv_mediagua': 0, 'difieren_n_distrib_agua_acarreo': 0, 'hausdorff_m_p50': 0.0001, 'hausdorff_m_p99': 0.0001, 'hausdorff_m_max': 0.7286, 'geom_hausdorff_mayor_1m': 0, 'geom_difsim_rel_max': 0.000217, 'geom_difsim_rel_mayor_1pct': 0, 'vertices_esri': 810236, 'vertices_ine': 810456, 'invalidas_esri': 1, 'invalidas_ine': 1}
+{'tipo': 'entidad_rural', 'esri': 4188, 'ine': 4188, 'emparejadas': 4188, 'solo_esri': 0, 'solo_ine': 0, 'manzent_dup_esri': 0, 'manzent_dup_ine': 0, 'difieren_n_per': 0, 'difieren_n_fuente_agua_rio': 0, 'difieren_n_viv_hacinadas': 0, 'difieren_n_edad_60_mas': 0, 'difieren_n_edad_0_5': 0, 'difieren_n_discapacidad': 0, 'difieren_n_mat_paredes_precarios': 0, 'difieren_n_tipo_viv_mediagua': 0, 'difieren_n_distrib_agua_acarreo': 0, 'hausdorff_m_p50': 0.0001, 'hausdorff_m_p99': 0.0008, 'hausdorff_m_max': 0.01, 'geom_hausdorff_mayor_1m': 0, 'geom_difsim_rel_max': 2e-06, 'geom_difsim_rel_mayor_1pct': 0, 'vertices_esri': 806569, 'vertices_ine': 807039, 'invalidas_esri': 6, 'invalidas_ine': 0}
+{'tipo': 'aldea', 'esri': 33, 'ine': 33, 'emparejadas': 33, 'difieren_n_per': 0, 'hausdorff_m_max': 0.0006, 'invalidas_esri': 0, 'invalidas_ine': 0}
+{'esri_sin_aldeas': 1003546.0, 'ine_manzanas_mas_entidades': 1003546.0, 'esri_con_aldeas_como_esta': 1021433.0, 'dif_sin_aldeas': 0.0, 'dif_como_esta': 17887.0}
+comunas con diferencia sin aldeas: 0 | con aldeas como está: 19
+               comuna  dif_como_esta
+CUT                                 
+9101           Temuco         1752.0
+9102          Carahue          728.0
+9103            Cunco          946.0
+9104       Curarrehue          471.0
+9105           Freire         1871.0
+9107           Gorbea          748.0
+9109         Loncoche          637.0
+9111   Nueva Imperial          309.0
+9115            Pucón          697.0
+9116         Saavedra          434.0
+9117  Teodoro Schmidt         1253.0
+9118           Toltén         1803.0
+9119           Vilcún         1245.0
+9120       Villarrica         1052.0
+9121         Cholchol          408.0
+9203       Curacautín          497.0
+9204          Ercilla          406.0
+9208            Purén          548.0
+9211         Victoria         2082.0

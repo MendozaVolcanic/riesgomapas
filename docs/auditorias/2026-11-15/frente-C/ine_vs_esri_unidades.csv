@@ -1,0 +1,4 @@
+tipo,esri,ine,emparejadas,solo_esri,solo_ine,manzent_dup_esri,manzent_dup_ine,difieren_n_per,difieren_n_fuente_agua_rio,difieren_n_viv_hacinadas,difieren_n_edad_60_mas,difieren_n_edad_0_5,difieren_n_discapacidad,difieren_n_mat_paredes_precarios,difieren_n_tipo_viv_mediagua,difieren_n_distrib_agua_acarreo,hausdorff_m_p50,hausdorff_m_p99,hausdorff_m_max,geom_hausdorff_mayor_1m,geom_difsim_rel_max,geom_difsim_rel_mayor_1pct,vertices_esri,vertices_ine,invalidas_esri,invalidas_ine
+manzana_urbana,12886,12886,12886,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0001,0.7286,0.0,0.000217,0.0,810236.0,810456.0,1,1
+entidad_rural,4188,4188,4188,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0008,0.01,0.0,2e-06,0.0,806569.0,807039.0,6,0
+aldea,33,33,33,,,,,0,,,,,,,,,,,0.0006,,,,,,0,0

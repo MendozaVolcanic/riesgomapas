@@ -1,0 +1,25 @@
+variante,elementos,bytes,bytes_gzip9,MB,MB_gzip
+V0 geojson del censo tal cual,17107,73162241,15706196,73.16,15.706
+"V1 todas las unidades, campos útiles, 5 decimales",17074,44961009,6109534,44.96,6.11
+   V3 pieza A_normativo/todas,528,1427304,149824,1.43,0.15
+   V3 pieza A_normativo/fluvial,186,385160,55232,0.39,0.055
+   V3 pieza A_normativo/anegamiento,317,989628,88991,0.99,0.089
+   V3 pieza A_normativo/litoral,35,81741,9924,0.08,0.01
+   V3 pieza A_normativo/napa_freatica,5,3953,664,0.0,0.001
+   V3 pieza A_derivado/angol_estudio_2013_alto_medio,56,198668,28695,0.2,0.029
+   V3 pieza A_derivado/angol_estudio_2013_alto,36,159958,24013,0.16,0.024
+   V3 pieza A_derivado/angol_prc_ar2a,187,370602,45365,0.37,0.045
+   V3 pieza A_derivado/curarrehue_2025,20,363747,56303,0.36,0.056
+   V3 pieza B_observado/sar_2026_08,257,724881,82711,0.72,0.083
+   V3 pieza C_modelado/gore_maxima,4604,11697803,1524773,11.7,1.525
+   V3 pieza C_modelado/gore_media_o_maxima,8435,20475461,2601119,20.48,2.601
+   V3 pieza C_modelado/jrc_rp10,508,940724,135960,0.94,0.136
+   V3 pieza C_modelado/jrc_rp20,520,980897,142304,0.98,0.142
+   V3 pieza C_modelado/jrc_rp50,521,985357,143168,0.99,0.143
+   V3 pieza C_modelado/jrc_rp100,524,996728,145264,1.0,0.145
+   V3 pieza C_modelado/jrc_rp200,528,1012594,147876,1.01,0.148
+   V3 pieza C_modelado/jrc_rp500,540,1040850,151990,1.04,0.152
+V2 unidades que tocan alguna mancha (todas las capas),8706,28258818,4015265,28.26,4.015
+V2b unidades que tocan alguna mancha sin GORE ni JRC,981,5108541,723630,5.11,0.724
+"V3 piezas recortadas, suma de todos los archivos por capa",17807,42836056,5534176,42.84,5.534
+V4 tablas precalculadas por capa y comuna (19 CSV),19,74576,14934,0.07,0.015

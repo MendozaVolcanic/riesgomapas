@@ -1,0 +1,23 @@
+censo: {'unidades_entrada': 17107, 'personas_entrada': 1021433, 'aldeas': 33, 'aldeas_que_cuadran': 33, 'personas_aldeas': 17887, 'personas_manzanas_dentro_de_aldeas': 17887, 'unidades_usadas': 17107, 'personas_usadas': 1021433}
+A_normativo  todas                            ha=   2172.1 dentro=   10232 punto=   20355 reparto=  21195.7 cualquier=   50363
+A_normativo  fluvial                          ha=    513.8 dentro=     378 punto=    2963 reparto=   2905.2 cualquier=   16485
+A_normativo  anegamiento                      ha=   1601.6 dentro=    9457 punto=   16244 reparto=  17206.9 cualquier=   32207
+A_normativo  litoral                          ha=     77.5 dentro=     397 punto=    1269 reparto=   1399.7 cualquier=    2986
+A_normativo  napa_freatica                    ha=      0.2 dentro=       0 punto=       0 reparto=      1.3 cualquier=     908
+A_derivado   angol_estudio_2013_alto_medio    ha=    213.4 dentro=       0 punto=    1209 reparto=   1290.3 cualquier=   10328
+A_derivado   angol_estudio_2013_alto          ha=    195.3 dentro=       0 punto=     219 reparto=    726.0 cualquier=    6970
+A_derivado   angol_prc_ar2a                   ha=    225.6 dentro=     429 punto=    4983 reparto=   4942.9 cualquier=   22113
+A_derivado   curarrehue_2025                  ha=    819.1 dentro=       0 punto=     644 reparto=    910.2 cualquier=    2714
+A_derivado   todas_disueltas                  ha=   1184.5 dentro=     429 punto=    5738 reparto=   6004.0 cualquier=   24904
+B_observado  sar_2026_08                      ha=   5083.8 dentro=       0 punto=     773 reparto=    873.4 cualquier=   24315
+C_modelado   gore_maxima                      ha= 313907.9 dentro=   96427 punto=  208897 reparto= 210215.4 cualquier=  362568
+C_modelado   gore_media_o_maxima              ha= 558741.9 dentro=  260542 punto=  409794 reparto= 410313.9 cualquier=  575782
+C_modelado   jrc_rp10                         ha=  60772.3 dentro=    5888 punto=   16804 reparto=  17152.5 cualquier=   38284
+C_modelado   jrc_rp20                         ha=  63463.2 dentro=    6437 punto=   17579 reparto=  18232.0 cualquier=   39354
+C_modelado   jrc_rp50                         ha=  65893.0 dentro=    6474 punto=   18127 reparto=  18385.8 cualquier=   39530
+C_modelado   jrc_rp100                        ha=  67636.6 dentro=    6612 punto=   18140 reparto=  18531.0 cualquier=   39864
+C_modelado   jrc_rp200                        ha=  69993.5 dentro=    6775 punto=   18140 reparto=  18725.4 cualquier=   39955
+C_modelado   jrc_rp500                        ha=  72751.3 dentro=    6775 punto=   18642 reparto=  19335.2 cualquier=   41018
+escrito: C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas\docs\auditorias\2026-11-15\frente-C\resumen_por_capa_con_aldeas.csv
+
+[exited with code 0]

@@ -1,0 +1,44 @@
+Control 1: manzanas sintéticas de 1.000 personas, mancha con traslapes
+  OK    U1 mitad dentro, reparto: obtenido 500.0000, esperado 500
+  OK    U1 mitad dentro, dentro: obtenido 0.0000, esperado 0
+  OK    U1 mitad dentro, cualquier: obtenido 1000.0000, esperado 1000
+  OK    U2 entera dentro (mancha duplicada encima), reparto: obtenido 1000.0000, esperado 1000
+  OK    U2 entera dentro, dentro: obtenido 1000.0000, esperado 1000
+  OK    U2 entera dentro, punto: obtenido 1000.0000, esperado 1000
+  OK    U3 fuera, cualquier: obtenido 0.0000, esperado 0
+  OK    U4 70 % dentro, reparto: obtenido 700.0000, esperado 700
+  OK    U4 70 % dentro, punto (centro adentro): obtenido 1000.0000, esperado 1000
+  OK    U4 70 % dentro, dentro: obtenido 0.0000, esperado 0
+  OK    campo vulnerabilidad U1 reparto (10 viviendas): obtenido 5.0000, esperado 5
+Control 2: sin disolver, el traslape tiene que inflar la cifra (si no, el control es ciego)
+  sin disolver (fracción cruda sin tope) = 3700.0; disuelta = 2200.0; esperado 2200
+  OK    disuelta total reparto: obtenido 2200.0000, esperado 2200
+  OK    sin disolver infla la cifra: el control sí ve el doble conteo
+Control 3: aldea que repite a sus dos manzanas (30 + 20 = 50)
+  OK    población tras quitar la aldea duplicada: obtenido 50.0000, esperado 50
+  OK    población si NO se quita (debe duplicar): obtenido 100.0000, esperado 100
+  OK    una aldea que no cuadra (60 != 50) detiene el instrumento
+Control 4: datos reales
+  censo: {'unidades_entrada': 17107, 'personas_entrada': 1021433, 'aldeas': 33, 'aldeas_que_cuadran': 33, 'personas_aldeas': 17887, 'personas_manzanas_dentro_de_aldeas': 17887, 'unidades_usadas': 17074, 'personas_usadas': 1003546}
+  OK    aldeas que cuadran con sus manzanas: obtenido 33.0000, esperado 33
+  OK    A_normativo/todas: dentro 10232 <= reparto 20179 <= cualquier 48376; punto 19408
+  OK    A_normativo/fluvial: dentro 378 <= reparto 2708 <= cualquier 15860; punto 2963
+  OK    A_normativo/anegamiento: dentro 9457 <= reparto 16889 <= cualquier 31437; punto 15922
+  OK    A_normativo/litoral: dentro 397 <= reparto 701 <= cualquier 1769; punto 644
+  OK    A_normativo/napa_freatica: dentro 0 <= reparto 0 <= cualquier 283; punto 0
+  OK    A_derivado/angol_estudio_2013_alto_medio: dentro 0 <= reparto 1290 <= cualquier 10328; punto 1209
+  OK    A_derivado/angol_estudio_2013_alto: dentro 0 <= reparto 726 <= cualquier 6970; punto 219
+  OK    A_derivado/angol_prc_ar2a: dentro 429 <= reparto 4943 <= cualquier 22113; punto 4983
+  OK    mancha AR-2a de Angol trasladada 100 km al mar: cualquier: obtenido 0.0000, esperado 0
+  OK    A_derivado/curarrehue_2025: dentro 0 <= reparto 579 <= cualquier 2243; punto 644
+  OK    A_derivado/todas_disueltas: dentro 429 <= reparto 5673 <= cualquier 24433; punto 5738
+  OK    B_observado/sar_2026_08: dentro 0 <= reparto 873 <= cualquier 24315; punto 773
+  OK    C_modelado/gore_maxima: dentro 95102 <= reparto 204888 <= cualquier 352178; punto 204571
+  OK    C_modelado/gore_media_o_maxima: dentro 254035 <= reparto 400312 <= cualquier 562079; punto 401131
+  OK    C_modelado/jrc_rp10: dentro 5888 <= reparto 16394 <= cualquier 36919; punto 15767
+  OK    C_modelado/jrc_rp20: dentro 6437 <= reparto 17474 <= cualquier 37989; punto 16542
+  OK    C_modelado/jrc_rp50: dentro 6474 <= reparto 17628 <= cualquier 38165; punto 17090
+  OK    C_modelado/jrc_rp100: dentro 6612 <= reparto 17773 <= cualquier 38499; punto 17103
+  OK    C_modelado/jrc_rp200: dentro 6775 <= reparto 17967 <= cualquier 38590; punto 17103
+  OK    C_modelado/jrc_rp500: dentro 6775 <= reparto 18577 <= cualquier 39653; punto 17605
+CONTROL: OK
