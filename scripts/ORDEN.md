@@ -27,6 +27,7 @@
 | 11 | `11_verificar_superposicion.py` | control visual de los planos | 10 |
 | 19 | `19_estado_comunas.py` | inventario del vacío + publica los derivados | 01,06,09,10,16,18 |
 | 20 | `20_paquete_practicante.py` | paquete por provincia para QGIS | 19; opcionales 01,02,06,13,14,15,17,18 |
+| 21 | `21_poblacion_expuesta.py` | gente dentro de cada capa A, por comuna, con su rango | 06,16,18,19 |
 | 04 | `04_georreferenciar.py` | planos a mano, con .points de QGIS | cuando 08 rechaza uno |
 
 > La columna «Requiere» se verificó contra el código el 7-sep-2026 y cinco filas
@@ -45,6 +46,7 @@ python scripts/01_senapred_puntos_criticos.py
 python scripts/06_areas_riesgo_prc.py
 python scripts/13_campamentos_riesgo.py
 python scripts/19_estado_comunas.py
+python scripts/21_poblacion_expuesta.py
 ```
 
 ## Lo que se rompe al clonar limpio

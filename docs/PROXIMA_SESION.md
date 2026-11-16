@@ -1,6 +1,43 @@
 # Continuar riesgomapas: prompt para la próxima sesión
 
-## Estado al 15-nov-2026, cierre: familias 1 y 2 hechas, capa A hídrica desde GeoIDE en toda la región
+## Estado al 15-nov-2026, más tarde: familia 5 hecha, población expuesta en el visor
+
+La rama se unió a `main` (fast-forward a 12b8b96, con el OK de Nicolás). Después, a
+pedido suyo («Población al visor»), la familia 5. Medición en
+`docs/auditorias/2026-11-15/arreglos/familia-5/README.md`.
+
+### Lo que se hizo
+
+- `scripts/21_poblacion_expuesta.py` publica `web/data/poblacion-expuesta.json`
+  (16,5 kB, offline): gente dentro de cada capa A por comuna, con los cuatro criterios,
+  fracción rural, vulnerabilidad y, en el A derivado, el reparto con el borde movido.
+  A normativo por fenómeno, nunca junto (F-302).
+- Panel de la comuna y texto que se comparte: cifra central redondeada y siempre el
+  rango; aviso si la mayor parte es rural; explicación de por qué es un rango.
+  `sw.js` a v25. `ORDEN.md` con la fila 21.
+- Angol fluvial: unas 6.600 personas (926 a 25.098). Temuco anegamiento: 16.780.
+- Pruebas: `pytest` 86 verdes (7 nuevas en `tests/test_poblacion_expuesta.py`, rojas
+  antes; una contrasta con `vC_reparto_independiente.py`).
+
+### Decisiones abiertas
+
+1. **Capas B y C**: no se publicó su población. El GORE pone entre 20 y 40 % de la
+   región dentro de su mancha y el radar es 99 % rural; publicarlas pide otro texto.
+2. **Criterio de canales** (Temuco ARC frente a Collipulli ZR-3), sigue abierto.
+3. **Los Sauces, Lumaco y Purén**: sin ningún mapa. Se pueden vectorizar si aparecen
+   láminas con zonas de riesgo en sus documentos (técnica de grilla UTM).
+
+### Prompt para abrir la próxima sesión
+
+> Estoy en `C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas`. Lee
+> `CLAUDE.md`, `REGLAS.md` y la primera sección de `docs/PROXIMA_SESION.md`. Verifica
+> la rama contra `origin` y que `pytest` dé 86 verdes. Pregúntame si publico la
+> población de las capas B y C, y el criterio de canales. Después, buscar láminas de
+> Los Sauces, Lumaco y Purén. Nada de guiones largos, y las capas no se fusionan.
+
+---
+
+## Histórico: estado al 15-nov-2026, cierre: familias 1 y 2 hechas, capa A hídrica desde GeoIDE en toda la región
 
 Nicolás pidió hacerlo regional («Sí, toda la región»), así que las familias 1 y 2 son
 un solo importador. Mediciones en `docs/auditorias/2026-11-15/arreglos/familias-1-2/README.md`.

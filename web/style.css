@@ -660,3 +660,5 @@ body.base-satelite .maplibregl-ctrl-attrib a { color: #eaf4ff; }
   background: color-mix(in srgb, #c98a1e 18%, var(--panel));
   border: 1px dotted color-mix(in srgb, #c98a1e 70%, transparent);
 }
+.expuesta { padding-left: 1.1rem; margin: .4rem 0; }
+.expuesta li { margin: .45rem 0; line-height: 1.4; }

@@ -118,6 +118,11 @@ async function cargarDatos() {
     estado.estadoComunas =
       (await cargarJSON('data/estado-comunas.json')).comunas || [];
   } catch { estado.estadoComunas = []; }
+  // Cuánta gente vive dentro de cada mapa, por comuna y capa por capa (script
+  // 21). Va aparte del inventario porque cada cifra pertenece a una capa de
+  // evidencia y no se suman entre capas.
+  try { estado.expuesta = await cargarJSON('data/poblacion-expuesta.json'); }
+  catch { estado.expuesta = null; }
   try {
     estado.campamentos = await cargarJSON('data/campamentos-inundacion.geojson');
   } catch { estado.campamentos = null; }
@@ -604,6 +609,82 @@ function estadoDeComuna(nombre) {
   return estado.estadoComunas.find((x) => k(x.comuna) === k(nombre)) || null;
 }
 
+/** Las cifras de gente expuesta de una comuna, una por capa, sin sumarlas.
+ *
+ *  Cada entrada trae los cuatro criterios de cruce (dentro, punto, reparto,
+ *  cualquier). Se muestra el reparto como cifra central y siempre el rango
+ *  entre «dentro» y «cualquier», porque el censo no ubica las casas dentro de
+ *  la manzana y ese rango ES la incertidumbre (F-303). Nunca se suman capas
+ *  distintas: un plan regulador y una lámina derivada no dicen lo mismo.
+ */
+function expuestaDeComuna(nombre) {
+  if (!estado.expuesta || !nombre) return [];
+  const k = (t) => String(t || '').normalize('NFD')
+    .replace(/[̀-ͯ]/g, '').replace(/[^a-z]/gi, '').toLowerCase();
+  const out = [];
+  for (const b of estado.expuesta.capas || []) {
+    const hit = Object.entries(b.comunas || {}).find(([c]) => k(c) === k(nombre));
+    if (hit && hit[1].personas.cualquier > 0) out.push({ capa: b, v: hit[1] });
+  }
+  return out;
+}
+
+/** Una cifra central sin precisión falsa: el reparto no sabe de unidades. */
+function redondeo(n) {
+  const r = n >= 1000 ? Math.round(n / 100) * 100 : n >= 100 ? Math.round(n / 10) * 10 : n;
+  return r.toLocaleString('es-CL');
+}
+function cifraCentral(n) {
+  return n < 10 ? 'menos de 10' : `unas ${redondeo(n)}`;
+}
+
+const ETIQUETA_CAPA = { A_normativo: 'NORMATIVO', A_derivado: 'DERIVADO' };
+
+function bloqueExpuesta(c) {
+  const filas = expuestaDeComuna(c.comuna);
+  if (!filas.length) return '';
+  const n = (x) => x.toLocaleString('es-CL');
+  const items = filas.map(({ capa, v }) => {
+    const p = v.personas;
+    const partes = [`<strong>${cifraCentral(p.reparto)}</strong> personas; entre
+      ${n(p.dentro)} y ${n(p.cualquier)} según cómo se cuente.`];
+    if (v.reparto_con_borde) {
+      const [lo, hi] = v.reparto_con_borde;
+      partes.push(`Si el borde que dibujamos se corre en su error
+        (±${String(capa.incertidumbre_borde_m).replace('.', ',')} m), la cifra
+        central va de ${n(lo)} a ${n(hi)}.`);
+    }
+    if (v.fraccion_rural >= 0.5) {
+      partes.push(`La mayor parte está en sectores rurales, donde las casas no
+        se reparten parejo: ahí la cifra central vale poco y manda el rango.`);
+    }
+    const vu = v.vulnerabilidad || {};
+    const pob = [];
+    if ((vu.n_edad_60_mas?.reparto || 0) >= 1) pob.push(`${redondeo(vu.n_edad_60_mas.reparto)} de 60 años o más`);
+    if ((vu.n_edad_0_5?.reparto || 0) >= 1) pob.push(`${redondeo(vu.n_edad_0_5.reparto)} niños de 0 a 5 años`);
+    if ((vu.n_discapacidad?.reparto || 0) >= 1) pob.push(`${redondeo(vu.n_discapacidad.reparto)} con discapacidad`);
+    if (pob.length) partes.push(`Entre ellas, cerca de ${pob.join(', ')}.`);
+    if ((vu.n_fuente_agua_rio?.reparto || 0) >= 1) {
+      partes.push(`Unas ${redondeo(vu.n_fuente_agua_rio.reparto)} viviendas sacan el
+        agua de un río o vertiente: en una crecida pierden también el agua.`);
+    }
+    return `<li><strong>${esc(capa.nombre)}</strong>
+      <span class="etiqueta">${ETIQUETA_CAPA[capa.capa_evidencia] || ''}</span>:
+      ${partes.join(' ')}</li>`;
+  });
+  return `<p><strong>Cuánta gente vive dentro de estos mapas</strong>
+      (Censo 2024):</p>
+    <ul class="expuesta">${items.join('')}</ul>
+    <details class="incert"><summary>Por qué es un rango</summary>
+      El censo cuenta personas por manzana, no por casa. Si el mapa corta una
+      manzana no se sabe cuántos de sus vecinos quedan dentro. La cifra más baja
+      cuenta sólo las manzanas que quedan enteras dentro; la más alta, todas las
+      que el mapa toca. La central reparte a la gente según la parte de la
+      manzana que cae dentro. Cada mapa se cuenta por separado y no se suman:
+      dicen cosas distintas y se traslapan.
+    </details>`;
+}
+
 /** Qué tiene y qué le falta a la comuna, en la pestaña de detalle.
  *
  *  Es deliberadamente la unidad que se comparte, y no la ficha de un punto.
@@ -645,6 +726,7 @@ function bloqueComuna(c) {
           reportó inundación, <strong>${n(c.puntos_cronicos)}</strong> de ellos
           repetidos en 3 o más temporadas</li>
     </ul>
+    ${bloqueExpuesta(c)}
     ${tiene.length
       ? `<p><strong>Qué hay:</strong></p><ul><li>${tiene.join('</li><li>')}</li></ul>`
       : '<p><strong>No encontramos nada consultable para esta comuna.</strong></p>'}
@@ -726,6 +808,15 @@ function textoComuna(c) {
   if (c.personas) l.push(`${c.personas.toLocaleString('es-CL')} habitantes (Censo 2024)`);
   l.push(`${c.puntos_inundacion} puntos con inundación reportada por el municipio`
          + (c.puntos_cronicos ? `, ${c.puntos_cronicos} de ellos crónicos` : ''));
+  const exp = expuestaDeComuna(c.comuna);
+  if (exp.length) {
+    l.push('', 'Gente que vive dentro de los mapas que existen (Censo 2024; rango según cómo se cuente):');
+    for (const { capa, v } of exp) {
+      const p = v.personas;
+      l.push(`• ${capa.nombre}: ${cifraCentral(p.reparto)} personas, `
+             + `entre ${p.dentro.toLocaleString('es-CL')} y ${p.cualquier.toLocaleString('es-CL')}`);
+    }
+  }
   l.push('');
   if (c.le_falta.length) {
     l.push('LO QUE FALTA:');
