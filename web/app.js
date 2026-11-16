@@ -123,6 +123,10 @@ async function cargarDatos() {
   // evidencia y no se suman entre capas.
   try { estado.expuesta = await cargarJSON('data/poblacion-expuesta.json'); }
   catch { estado.expuesta = null; }
+  // Qué tiene el visor y con qué peso legal (script 22). Si no está, la sección
+  // no se muestra: mejor callar que mostrar un inventario a medias.
+  try { estado.inventario = await cargarJSON('data/inventario.json'); }
+  catch { estado.inventario = null; }
   try {
     estado.campamentos = await cargarJSON('data/campamentos-inundacion.geojson');
   } catch { estado.campamentos = null; }
@@ -2448,7 +2452,7 @@ function renderCifras() {
       t: 'puntos críticos de inundación registrados por SENAPRED' },
     { n: cronicos, t: 'de ellos son crónicos: se repiten temporada tras temporada' },
     { n: estado.areasRiesgo?.features.length || 0,
-      t: `áreas de riesgo con efecto legal, en ${comunasConArea} comunas` },
+      t: `áreas de riesgo de planes reguladores publicadas por el MINVU, en ${comunasConArea} comunas` },
     { n: estado.planos?.length || 0,
       t: 'planos de plan regulador ubicados sobre el mapa' },
   ];
@@ -2471,6 +2475,82 @@ function renderCifras() {
       <span class="cifra-num">${d.n.toLocaleString('es-CL')}</span>
       <span class="cifra-txt">${esc(d.t)}</span>
     </div>`).join('');
+}
+
+/** Inventario de portada: qué tenemos, de cuántas comunas y con qué peso legal.
+ *  Todo sale de data/inventario.json (script 22). Cada capa va en su propia fila
+ *  y no se suman entre sí: una comuna puede estar en varias (REGLAS §1). El peso
+ *  legal se dice sólo si el dato lo declara; si no, se dice que no lo declara. */
+function renderInventario() {
+  const sec = $('#inventario');
+  const cuerpo = $('#inventario-cuerpo');
+  const inv = estado.inventario;
+  if (!sec || !cuerpo || !inv) return;
+  const n = (x) => Number(x || 0).toLocaleString('es-CL');
+  const lista = (xs) => listaEnEspanol(xs.map((x) => esc(x)));
+  const comunas = (k) => `${n(k)} ${k === 1 ? 'comuna' : 'comunas'}`;
+  const norm = inv.normativo;
+  const conRes = norm.con_resolucion.map((d) =>
+    `${esc(d.comuna)} (${esc(d.instrumento)})`);
+  const filas = [];
+  filas.push(`<li><strong>Área de riesgo de plan regulador, publicada por el MINVU:</strong>
+    ${n(norm.poligonos)} polígonos en ${n(norm.comunas)} comunas.
+    ${conRes.length ? `En ${conRes.length} el dato trae la resolución publicada en el
+    Diario Oficial: ${listaEnEspanol(conRes)}.` : ''}
+    ${norm.sin_resolucion_declarada.length ? `En las otras ${norm.sin_resolucion_declarada.length}
+    el dato no declara su resolución: ${lista(norm.sin_resolucion_declarada)}.` : ''}</li>`);
+  const der = inv.derivado;
+  if (der.poligonos) {
+    const docs = der.documentos.map((d) =>
+      `${esc(d.comuna)}, ${esc(d.anio || 'año no declarado')} (${n(d.poligonos)} polígonos, borde
+       ±${Number(d.incertidumbre_borde_m).toLocaleString('es-CL')} m)`);
+    filas.push(`<li><strong>Estudios de riesgo que trazamos nosotros desde sus láminas:</strong>
+      ${n(der.poligonos)} polígonos de ${n(der.documentos.length)} documentos:
+      ${listaEnEspanol(docs)}. No son planes reguladores vigentes y el borde es nuestro,
+      con su error en metros.</li>`);
+  }
+  const pl = inv.planos;
+  if (pl.planos) {
+    const est = Object.entries(pl.por_estado).map(([k, v]) => `${n(v)} ${esc(k.toLowerCase())}`);
+    const todosAnte = Object.keys(pl.por_estado).length === 1 && pl.por_estado.Anteproyecto;
+    filas.push(`<li><strong>Planos de plan regulador ubicados sobre el mapa:</strong>
+      ${n(pl.planos)} planos de ${n(pl.comunas)} comunas${todosAnte
+        ? '. Todos son anteproyectos: todavía no rigen sobre nadie.'
+        : `: ${listaEnEspanol(est)}.`}</li>`);
+  }
+  const dc = inv.documentos;
+  const porEstado = dc.por_estado.map((g) =>
+    `<li>${n(g.documentos)} ${esc(g.rotulo)}, en ${comunas(g.comunas)}</li>`).join('');
+  filas.push(`<li><strong>Documentos de planificación en el catálogo:</strong>
+    ${n(dc.documentos)} de ${n(dc.comunas)} comunas, con ${n(dc.laminas)} láminas de
+    inundación localizadas en ${n(dc.comunas_con_lamina)}. Por su estado:
+    <ul>${porEstado}</ul></li>`);
+  if (inv.sin_cartografia.length) {
+    filas.push(`<li><strong>Sin ninguna cartografía de inundación que hayamos encontrado:</strong>
+      ${n(inv.sin_cartografia.length)} comunas: ${lista(inv.sin_cartografia)}. Que no haya
+      mapa no quiere decir que no se inunde.</li>`);
+  }
+  const o = inv.otras_capas;
+  filas.push(`<li><strong>Lo que no es un plan:</strong>
+    ${n(o.puntos_criticos.puntos)} puntos críticos de SENAPRED en ${n(o.puntos_criticos.comunas)}
+    comunas; ${n(o.campamentos.campamentos)} campamentos con ${n(o.campamentos.hogares)} hogares en
+    área de riesgo; ${n(Math.round(o.sar.hectareas_con_agua))} hectáreas donde el satélite vio agua
+    sobre ${n(Math.round(o.sar.km2_observados))} km² mirados${o.sar.evento ? ` (${esc(o.sar.evento)})` : ''};
+    el modelo regional del GORE y el modelo global del JRC (${n(o.jrc.periodos_de_retorno)}
+    períodos de retorno, a cerca de 1 km).</li>`);
+  // La frase de arriba es el resumen que se lee de un vistazo; la lista, el detalle.
+  const resumen = [
+    `${comunas(norm.comunas)} con área de riesgo del MINVU (${n(conRes.length)} con su resolución en el dato)`,
+    der.poligonos ? `${comunas(der.comunas)} con un estudio que trazamos nosotros` : null,
+    pl.planos ? `${comunas(pl.comunas)} con anteproyectos ubicados en el mapa` : null,
+    inv.sin_cartografia.length ? `${comunas(inv.sin_cartografia.length)} sin ningún mapa` : null,
+  ].filter(Boolean);
+  cuerpo.innerHTML =
+    `<p class="inventario-resumen">${listaEnEspanol(resumen)}.</p>
+     <p class="nota">De las ${n(inv.total_comunas)} comunas de La Araucanía. Cada línea
+      es una fuente distinta y una comuna puede estar en varias: no se suman.</p>
+     <ul class="inventario-lista">${filas.join('')}</ul>`;
+  sec.classList.remove('oculto');
 }
 
 /** Nota del control de la capa B. El evento y las fechas salen del índice del
@@ -2640,6 +2720,7 @@ async function inicio() {
       'consulta por dirección y por ubicación funciona igual.</p>';
   }
   renderCifras();
+  renderInventario();
   renderComunas();
   notaSar();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {

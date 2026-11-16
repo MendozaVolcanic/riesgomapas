@@ -144,12 +144,23 @@ def main() -> None:
                        "10_exportar_superposiciones.py (que a su vez necesita 08)").get("planos", [])
     # El estado de tramitación importa: un anteproyecto no rige sobre nadie.
     planos_por_comuna: dict[str, Counter] = {}
+    sin_comuna = []
     for p in planos:
-        k = norm(p.get("titulo"))
+        # Los nombres de archivo vienen del expediente tal cual, con sus erratas:
+        # tres planos de Teodoro Schmidt dicen «Schimdt» y se perdían en silencio
+        # (la comuna figuraba con 1 plano de 4). Se corrigen las erratas conocidas
+        # y, si un plano igual no encuentra comuna, el script se cae.
+        k = norm(p.get("titulo")).replace("schimdt", "schmidt")
+        hallado = False
         for c in comunas:
             if norm(c) and norm(c) in k:
                 planos_por_comuna.setdefault(norm(c), Counter())[
                     p.get("estado_tramite") or "No declarado"] += 1
+                hallado = True
+        if not hallado:
+            sin_comuna.append(p.get("titulo"))
+    if sin_comuna:
+        raise SystemExit(f"planos sin comuna atribuible: {sin_comuna}")
 
     catalogo = requerido(WEB_DATA / "catalogo-documentos.json", "09_exportar_catalogo.py")
     docs = {}

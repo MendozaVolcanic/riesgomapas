@@ -1,5 +1,40 @@
 # Continuar riesgomapas: prompt para la próxima sesión
 
+## Estado al 16-nov-2026: el visor dice qué tiene y con qué peso legal
+
+A pedido de Nicolás («una sección que resumidamente diga qué tenemos en el visor,
+cuántos mapas o estudios oficiales de cuántas comunas, cuántos no aprobados»), la
+pestaña «Detalle y fuentes» tiene la sección **«Qué tenemos, y con qué peso»**, con una
+frase de resumen y una línea por fuente, sin sumarlas entre sí:
+
+- 13 comunas con área de riesgo del MINVU (GeoIDE), 136 polígonos. Sólo 4 traen en el
+  dato su resolución en el Diario Oficial (Angol, Nueva Imperial, Renaico, Toltén); las
+  otras 9 se dicen «el dato no declara su resolución», ni aprobadas ni no aprobadas.
+- 2 comunas con un estudio que trazamos nosotros (Angol 2013, Curarrehue 2025).
+- 20 planos de 6 comunas, todos anteproyectos: «todavía no rigen sobre nadie».
+- 354 documentos de 25 comunas, por estado en el registro EAE: 4 de un plan aprobado,
+  95 con la EAE terminada (el registro no dice si el plan rige), 99 en tramitación,
+  16 desistidos, 140 municipales.
+- 9 comunas sin ningún mapa: Cholchol, Curacautín, Ercilla, Lautaro, Los Sauces,
+  Melipeuco, Padre Las Casas, Perquenco y Victoria.
+
+Lo calcula `scripts/22_inventario_visor.py` a `web/data/inventario.json`, leyendo sólo
+lo que el visor ya publica; los estados EAE van por lista cerrada y uno desconocido cae
+en «sin estado declarado». Va con `tests/test_inventario.py` y 3 comprobaciones e2e por
+vista. La cifra de portada dejó de decir «con efecto legal», que el dato sólo sostiene
+en 4 de 13 comunas.
+
+De paso: el script 19 perdía tres planos de Teodoro Schmidt porque el archivo fuente
+dice «Schimdt» (figuraba con 1 de 4). Ahora corrige la errata y se cae si un plano
+queda sin comuna.
+
+Pruebas: `pytest` 92 verdes. El e2e dio 318 OK y 0 hallazgos en una corrida; en otras
+dos falló por carga lenta de la red (un `goto` a 30 s y «fuga de planos» sin planos
+cargados), no por el inventario. La línea base roja del inventario se hizo en el panel
+del navegador: sin el JSON, la sección no aparece y el resto de la página sigue.
+
+`main` no se tocó en esta tanda: lo nuevo está sólo en la rama.
+
 ## Estado al 15-nov-2026, más tarde: familia 5 hecha, población expuesta en el visor
 
 La rama se unió a `main` (fast-forward a 12b8b96, con el OK de Nicolás). Después, a

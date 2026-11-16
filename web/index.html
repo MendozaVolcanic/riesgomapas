@@ -200,6 +200,13 @@
        si el pipeline cambia, la portada no puede quedar mintiendo. -->
   <section class="cifras" id="cifras" aria-label="Qué contiene este visor"></section>
 
+  <!-- Inventario: qué tenemos, de cuántas comunas y con qué peso legal. Sale de
+       data/inventario.json (script 22), que cuenta cada capa por separado. -->
+  <section class="inventario oculto" id="inventario" aria-labelledby="inventario-titulo">
+    <h2 id="inventario-titulo">Qué tenemos, y con qué peso</h2>
+    <div id="inventario-cuerpo"></div>
+  </section>
+
   <a class="enlace-catalogo" href="documentos.html">
     <strong>¿Dónde está el mapa de riesgo de mi comuna? →</strong>
     <span>Índice de los documentos oficiales de planificación de La Araucanía, con

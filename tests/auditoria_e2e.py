@@ -354,6 +354,44 @@ def auditar(page, aud: Auditoria, base: str, movil: bool, oscuro: bool = False) 
                   "la pestaña oculta no se imprime: el papel saldría con el "
                   "veredicto y sin las fuentes")
 
+    # ------------------------------------ inventario: qué tenemos y con qué peso
+    #
+    # Pedido de Nicolás (16-nov-2026). Las cifras se contrastan contra el JSON
+    # leído del disco, no contra lo que el visor dice: si el visor dejara de
+    # cargarlo o mostrara otro número, esta comprobación lo ve. Y el peso legal no
+    # puede inflarse: los anteproyectos tienen que decir que no rigen.
+    inv = json.loads((WEB / "data" / "inventario.json").read_text(encoding="utf-8"))
+    page.evaluate("() => irAPestana('detalle', false)")
+    page.wait_for_timeout(250)
+    sec = page.locator("#inventario")
+    if not sec.count() or not sec.is_visible():
+        aud.falla(f"inventario [{etq}]", "la sección no se ve")
+    else:
+        txt = sec.inner_text()
+        n = inv["normativo"]
+        esperado = [
+            f"{n['poligonos']} polígonos en {n['comunas']} comunas",
+            f"{inv['planos']['planos']} planos de {inv['planos']['comunas']} comunas",
+            f"{len(inv['sin_cartografia'])} comunas sin ningún mapa",
+            *[d["comuna"] for d in n["con_resolucion"]],
+            *inv["sin_cartografia"],
+        ]
+        falta = [x for x in esperado if x not in txt]
+        if falta:
+            aud.falla(f"inventario [{etq}]", f"no dice: {falta}")
+        else:
+            aud.ok(f"el inventario cuadra con inventario.json [{etq}]",
+                   f"{n['comunas']} comunas con área, {len(inv['sin_cartografia'])} sin mapa")
+        if "anteproyectos: todavía no rigen" in txt and "no declara su resolución" in txt:
+            aud.ok(f"el inventario no infla el peso legal [{etq}]")
+        else:
+            aud.falla(f"peso legal en el inventario [{etq}]",
+                      "no advierte que los anteproyectos no rigen o que el dato no "
+                      "declara la resolución")
+        ancho = page.evaluate("() => document.documentElement.scrollWidth - innerWidth")
+        if ancho > 1:
+            aud.falla(f"inventario desborda [{etq}]", f"{ancho} px de scroll lateral")
+
     # ------------------------------------ quiénes lo hacen y para qué
     #
     # La autoría explícita y el «esperamos dejar de hacer falta» no son adorno:
