@@ -155,3 +155,17 @@ def test_inventario_de_angol_ya_no_dice_sin_vectorial():
     filas = est["comunas"] if isinstance(est, dict) else est
     angol = next(c for c in filas if c["comuna"] == "Angol")
     assert angol["poligonos_area_riesgo"] == 21
+
+
+def test_geoide_se_rotula_como_interpretacion_referencial():
+    """El MINVU declara su capa PRC_Araucania «Interpretación de los planos
+    oficiales de los PRC» con licencia «Información referencial» (medido el
+    16-nov-2026). El contenido es normativo, pero el trazado es la
+    digitalización del MINVU, no el plano con efecto legal. Publicarlo sin
+    decirlo deja creer que el borde dibujado es el legal."""
+    fs = [f for f in _publicado()["features"]
+          if str(f["properties"].get("origen_capa", "")).startswith("GeoIDE")]
+    assert fs
+    assert all("referencial" in f["properties"]["fuente"] for f in fs)
+    app = (RAIZ / "web" / "app.js").read_text(encoding="utf-8")
+    assert "información referencial" in app and "origen_capa" in app

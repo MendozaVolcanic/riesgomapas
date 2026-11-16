@@ -1099,7 +1099,18 @@ function render(res, etiqueta, lon, lat) {
       html += `</li>`;
     }
     html += `</ul><p>Esto <strong>sí tiene efecto legal</strong>: condiciona permisos
-             de edificación y usos de suelo en ese terreno.</p>
+             de edificación y usos de suelo en ese terreno.</p>`;
+    // La norma es del plan, pero el dibujo de GeoIDE es del MINVU: su ficha lo
+    // declara «Interpretación de los planos oficiales» con licencia
+    // «Información referencial» (16-nov-2026). Sin esto, «efecto legal» se lee
+    // como si el borde dibujado fuera el legal.
+    if (res.areas.some((a) => String(a.properties.origen_capa || '').startsWith('GeoIDE'))) {
+      html += `<p class="incert">El dibujo lo hizo el MINVU a partir de los planos
+               oficiales y lo publica como <strong>información referencial</strong>.
+               Lo que tiene efecto legal es el plano del plan regulador: cerca del
+               borde, consúltalo en la Dirección de Obras de tu municipalidad.</p>`;
+    }
+    html += `
              <p class="incert">Ojo con lo que esto significa: un área de riesgo
              <strong>no prohíbe construir, condiciona</strong>. La Ordenanza General
              (art. 2.1.17) permite autorizar proyectos si se acompaña un
@@ -2493,7 +2504,8 @@ function renderInventario() {
   const conRes = norm.con_resolucion.map((d) =>
     `${esc(d.comuna)} (${esc(d.instrumento)})`);
   const filas = [];
-  filas.push(`<li><strong>Área de riesgo de plan regulador, publicada por el MINVU:</strong>
+  filas.push(`<li><strong>Área de riesgo de plan regulador, publicada por el MINVU</strong>
+    (su dibujo de los planos oficiales, que el MINVU declara información referencial)<strong>:</strong>
     ${n(norm.poligonos)} polígonos en ${n(norm.comunas)} comunas.
     ${conRes.length ? `En ${conRes.length} el dato trae la resolución publicada en el
     Diario Oficial: ${listaEnEspanol(conRes)}.` : ''}

@@ -406,8 +406,13 @@ def seleccionar_geoide(capas: list[tuple[str, list[dict]]]) -> list[dict]:
                 "tipo_hidrico_segun": base,
                 "origen_capa": f"GeoIDE {capa}",
                 "instrumento": (f"{doc} del {p_do}" if doc and p_do else doc or None),
-                **sello("MINVU GeoIDE: áreas de riesgo del Plan Regulador Comunal "
-                        "(Art. 2.1.17 OGUC)", p_do[-4:] if len(p_do) >= 4 else None),
+                # El MINVU declara esta capa «Interpretación de los planos
+                # oficiales de los PRC», licencia «Información referencial»
+                # (medido el 16-nov-2026). La norma es del plan; el trazado es
+                # suyo. La fuente lo dice para que nadie lea el borde como legal.
+                **sello("MINVU GeoIDE: interpretación referencial de las áreas de "
+                        "riesgo del Plan Regulador Comunal (Art. 2.1.17 OGUC)",
+                        p_do[-4:] if len(p_do) >= 4 else None),
             }
             if p_do:
                 props["anio_fuente"] = "GeoIDE MINVU, fecha de publicación en el Diario Oficial (P_DO)"
@@ -610,7 +615,10 @@ def main() -> None:
                       "no una modelación hidráulica. Sólo existen dentro del límite "
                       "urbano de comunas con PRC que las haya definido: la ausencia de "
                       "polígono no significa ausencia de riesgo, significa que el plan "
-                      "regulador no lo zonificó.",
+                      "regulador no lo zonificó. Los polígonos de GeoIDE son la "
+                      "interpretación que hizo el MINVU de los planos oficiales y el "
+                      "MINVU los publica como información referencial: el plano con "
+                      "efecto legal es el del plan regulador.",
         escala_original="escala del plan regulador respectivo (típicamente 1:5.000 a 1:20.000)",
         fecha_dato="consulta al servicio de MINVU; el año de cada instrumento va "
                    "por polígono en el campo `anio`",
