@@ -1,6 +1,80 @@
 # Continuar riesgomapas: prompt para la próxima sesión
 
-## Estado al 16-nov-2026: el visor dice qué tiene y con qué peso legal
+## Estado al 17-nov-2026: GeoIDE rotulado como referencial y la solicitud corregida
+
+### a. Todo en una pantalla
+
+| Qué | Estado | Evidencia |
+|---|---|---|
+| GeoIDE rotulado como «interpretación referencial del MINVU» | hecho, en main | `55b6d0e`; la ficha del punto lo dice bajo «efecto legal»; misma geometría, 136 polígonos |
+| Punto 4 de la solicitud por Transparencia | hecho, **solo en la rama** | `4324c5f`; 7 comunas con plan en GeoIDE sin área hídrica ya no reciben «no disponible» |
+| Revisión de GeoIDE y visores parecidos | hecho | memoria `geoide-referencial-y-visores-similares.md` |
+| Pruebas | 94 verdes | `python -m pytest tests/ -q`, 17-nov |
+| Trabajo en curso | ninguno | sin tareas en segundo plano al cerrar |
+
+Rama `visor-simple-y-laminas-vectorizadas`. Main está en `55b6d0e`; la rama va adelante con
+`4324c5f` y el commit de este traspaso. **Unir a main pide el OK de Nicolás.**
+
+### b. Decisiones que espera Nicolás
+
+| # | Pregunta | Opciones | Recomendación |
+|---|---|---|---|
+| 1 | ¿Unir `4324c5f` a main? | sí / esperar | Sí: corrige una afirmación falsa en un texto que la gente firma y envía |
+| 2 | Población expuesta de las capas B y C | publicar / no | Esperar: el GORE deja 20 a 40 % de la región dentro y pide otro texto (F-305) |
+| 3 | Canales: Temuco ARC excluido, Collipulli ZR-3 incluido | igualar en un sentido | Excluir ambos como franja de restricción, salvo que la ordenanza los llame área de riesgo por inundación |
+| 4 | Los Sauces, Lumaco, Purén | vectorizar si aparecen láminas | Sí, cuando aparezcan |
+| 5 | Escribirles a Sarricolea (U. de Chile) y Hormazábal (Resiliencia Chile) | sí / no | Sí, antes de seguir construyendo; primero revisar a mano las capas de resilienciachile.cl/mapa-alertas |
+
+### c. Lo aprendido
+
+- **«No está publicado» y «está publicado sin eso» son afirmaciones distintas.** Siete comunas
+  (Curacautín, Freire, Lautaro, Lonquimay, Padre Las Casas, Pucón, Victoria) tienen su plan
+  en GeoIDE sin área de riesgo por inundación. Una solicitud que dice «no se encuentra
+  disponible» ahí es falsa y le resta crédito al que firma. Ahora el script 06 escribe
+  `data/processed/geoide_prc_por_comuna.json` y bota si GeoIDE trae una capa sin comuna
+  asignada; el 19 lo pasa al visor como `prc_en_geoide`. Va a la memoria del proyecto.
+- **GeoIDE no es el plano legal.** Su ficha dice «Interpretación de los planos oficiales» y
+  licencia «Información referencial». La norma rige; el borde dibujado es del MINVU.
+- Regla general del workspace (ya existía, se reafirma): un texto que el usuario envía con su
+  firma se verifica contra la fuente igual que un número publicado.
+
+### d. Problemas abiertos
+
+- CONFIRMADO: de las 9 comunas «sin ningún mapa» del inventario, 4 tienen plan en GeoIDE
+  (Curacautín, Lautaro, Padre Las Casas, Victoria). No es falso, porque el plan no trae mapa de
+  inundación, pero el inventario podría decirlo. No se tocó.
+- SOSPECHA: el agregado nacional (services3) también sería una digitalización referencial del
+  MINVU; no se verificó qué declara, por eso el aviso sale solo en polígonos de GeoIDE.
+- SOSPECHA: las capas del visor de Resiliencia Chile se cruzan con las nuestras; no se pudieron ver.
+- Pendientes viejos sin tocar: F-104, F-107, F-108, F-109; carrera `mostrarPlano`/`isStyleLoaded`;
+  instrumentos `fA_zoom_comuna.js` y `vC_aldeas_doble_conteo.py`; guiones largos antiguos;
+  pedirle al practicante sus polígonos, la tabla del Anexo 1, los .points y el script del cruce.
+
+### e. Cerrado, no rehacer
+
+- Familia 5 (población expuesta, capa A) en main; rótulo referencial de GeoIDE en main.
+- La solicitud por Transparencia ya distingue los dos casos (`prc_en_geoide`).
+- La pregunta «¿tiene sentido si existe GeoIDE?» está respondida: GeoIDE no tiene visor de
+  áreas de riesgo; el aporte es procedencia por capa, error declarado, gente expuesta con rango
+  e inventario de lo que falta.
+
+### f. Prompt para la próxima sesión
+
+```
+Retoma riesgomapas (C:\Users\nmend\OneDrive\Escritorio\claude\Volcanologia\riesgomapas).
+1. Verifica antes de creer: git status -sb; git ls-remote origin -h refs/heads/main
+   refs/heads/visor-simple-y-laminas-vectorizadas; python -m pytest tests/ -q (esperado 94).
+2. Lee docs/PROXIMA_SESION.md (bloque del 17-nov), REGLAS.md, README.md.
+3. Pregunta a Nicolás si une 4324c5f a main (no unir sin su OK).
+4. Luego, en orden: F-104/F-107/F-108/F-109; carrera mostrarPlano/isStyleLoaded;
+   instrumentos fA_zoom_comuna.js y vC_aldeas_doble_conteo.py con --control;
+   que el inventario diga cuáles de las comunas sin mapa tienen plan en GeoIDE.
+5. Reglas: capas de evidencia nunca se fusionan; ningún número sin error; auditar no es
+   arreglar; data/raw no se toca; sin guiones largos; español de Chile.
+6. Si no alcanza: /cierre al ~50 % de contexto.
+```
+
+## Histórico: estado al 16-nov-2026: el visor dice qué tiene y con qué peso legal
 
 A pedido de Nicolás («una sección que resumidamente diga qué tenemos en el visor,
 cuántos mapas o estudios oficiales de cuántas comunas, cuántos no aprobados»), la
@@ -35,7 +109,7 @@ del navegador: sin el JSON, la sección no aparece y el resto de la página sigu
 
 `main` no se tocó en esta tanda: lo nuevo está sólo en la rama.
 
-## Estado al 15-nov-2026, más tarde: familia 5 hecha, población expuesta en el visor
+## Histórico: estado al 15-nov-2026, más tarde: familia 5 hecha, población expuesta en el visor
 
 La rama se unió a `main` (fast-forward a 12b8b96, con el OK de Nicolás). Después, a
 pedido suyo («Población al visor»), la familia 5. Medición en
