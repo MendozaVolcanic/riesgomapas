@@ -785,11 +785,23 @@ function textoSolicitud(c) {
     `3. En caso negativo, indicar si existe algún estudio en curso o `
     + `programado, y qué organismo tiene la competencia para elaborarlo.`,
   ];
-  if (sinArea) {
+  // Dos casos distintos. Si el plan está en GeoIDE sin área de riesgo por
+  // inundación, decir que «no está disponible» es falso: está publicado y no la
+  // trae. Se pregunta si la define. Si no está, la pregunta no presupone que
+  // exista (verificado contra GeoIDE el 17-nov-2026: 7 comunas en el primer caso).
+  if (sinArea && c.prc_en_geoide) {
+    l.push(`4. El Plan Regulador Comunal de ${c.comuna} está publicado en el `
+           + `servicio de datos territoriales del MINVU (GeoIDE), pero esa `
+           + `publicación no contiene áreas de riesgo por inundación. Solicito `
+           + `indicar si el plan vigente define áreas de riesgo por inundación `
+           + `conforme al artículo 2.1.17 de la Ordenanza General de Urbanismo y `
+           + `Construcciones y, si las define, por qué no forman parte de esa `
+           + `publicación.`);
+  } else if (sinArea) {
     l.push(`4. Si el Plan Regulador Comunal vigente de ${c.comuna} define áreas `
            + `de riesgo por inundación conforme al artículo 2.1.17 de la `
-           + `Ordenanza General de Urbanismo y Construcciones, y por qué razón `
-           + `dicha cartografía no se encuentra disponible en el servicio `
+           + `Ordenanza General de Urbanismo y Construcciones y, si las define, `
+           + `por qué razón no se encuentran disponibles en el servicio `
            + `público de datos territoriales del MINVU.`);
   }
   l.push(``,

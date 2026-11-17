@@ -169,3 +169,18 @@ def test_geoide_se_rotula_como_interpretacion_referencial():
     assert all("referencial" in f["properties"]["fuente"] for f in fs)
     app = (RAIZ / "web" / "app.js").read_text(encoding="utf-8")
     assert "información referencial" in app and "origen_capa" in app
+
+
+def test_comunas_con_plan_en_geoide_sin_area_hidrica():
+    """Victoria y Freire tienen su plan en GeoIDE sin área de riesgo por
+    inundación (17-nov-2026). La solicitud no puede decir que «no está
+    disponible»: está publicado y no la trae."""
+    assert m06.comunas_con_prc_en_geoide(["PRC_Victoria", "Limite_Urbano"]) == ["Victoria"]
+    with pytest.raises(SystemExit):
+        m06.comunas_con_prc_en_geoide(["PRC_Cunco"])
+    est = {c["comuna"]: c for c in
+           json.loads((WEB / "estado-comunas.json").read_text(encoding="utf-8"))["comunas"]}
+    assert est["Victoria"]["prc_en_geoide"] and not est["Victoria"]["poligonos_area_riesgo"]
+    assert not est["Cunco"]["prc_en_geoide"]
+    app = (RAIZ / "web" / "app.js").read_text(encoding="utf-8")
+    assert "c.prc_en_geoide" in app

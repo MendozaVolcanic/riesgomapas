@@ -234,6 +234,12 @@ def main() -> None:
             f"→ web/data/laminas/vectorizadas.geojson")
 
 
+    # Comunas cuyo plan regulador está en GeoIDE aunque no traiga área de riesgo
+    # por inundación (lo escribe el script 06). Cambia la pregunta de la
+    # solicitud por Transparencia: el plan está publicado y no la trae.
+    geoide = requerido(DATA_PROC / "geoide_prc_por_comuna.json", "06_areas_riesgo_prc.py")
+    prc_en_geoide = {norm(c) for c in geoide["comunas_con_prc"]}
+
     # --- armar la ficha por comuna ------------------------------------------
     salida = []
     for c in sorted(comunas):
@@ -267,6 +273,7 @@ def main() -> None:
             "puntos_inundacion": pc.get("puntos_inundacion", 0),
             "puntos_cronicos": pc.get("cronicos", 0),
             "poligonos_area_riesgo": con_area.get(k, 0),
+            "prc_en_geoide": k in prc_en_geoide,
             "documentos": dc["documentos"],
             "laminas_localizadas": dc["laminas"],
             "planos_georreferenciados": sum(pl.values()),

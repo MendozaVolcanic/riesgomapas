@@ -50,6 +50,7 @@ import collections
 import json
 import sys
 import unicodedata
+from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -249,6 +250,36 @@ COMUNA_DE_CAPA = {
     "PRC_Villarrica": "Villarrica",
 }
 
+# Capas de GeoIDE sin zonas hídricas: sirven para saber qué comunas tienen su
+# plan regulador publicado en GeoIDE aunque no traiga área de riesgo por
+# inundación. La solicitud por Transparencia pregunta distinto en ese caso: no
+# «por qué no está publicada», sino «el plan publicado no la trae, ¿la define?».
+# Una capa que no esté aquí ni en COMUNA_DE_CAPA bota el script.
+COMUNA_DE_CAPA_SIN_HIDRICO = {
+    "PRC_Pucon": "Pucón", "PRC_Victoria": "Victoria",
+    "PRC_Tolten_Queule": "Toltén", "PRC_Tolten_Villa_OHiggins": "Toltén",
+    "PRC_Tolten_Nueva_Tolten": "Toltén", "PRC_Tolten_Villa_Boldos": "Toltén",
+    "PRC_Renaico_Tijeral": "Renaico", "PRC_Renaico": "Renaico", "PRC_Renaico_ZNE": "Renaico",
+    "PRC_Temuco": "Temuco", "PRC_Temuco_Cajon": "Temuco",
+    "PRC_Padre _Las_Casas": "Padre Las Casas", "PRC_Nueva_Imperial": "Nueva Imperial",
+    "PRC_Lonquimay_Villa_Portales": "Lonquimay", "PRC_Lautaro ": "Lautaro",
+    "PRC_Freire_Quepe": "Freire", "PRC_Curacautin": "Curacautín",
+    "PRC_Carahue_Area_de_riesgo": "Carahue", "PRC_Angol": "Angol",
+}
+CAPAS_GEOIDE_NO_PRC = {"Limite_Urbano"}
+
+
+def comunas_con_prc_en_geoide(nombres: list[str]) -> list[str]:
+    """Comunas con al menos una capa de plan regulador en GeoIDE."""
+    desconocidas = [n for n in nombres if n not in COMUNA_DE_CAPA
+                    and n not in COMUNA_DE_CAPA_SIN_HIDRICO and n not in CAPAS_GEOIDE_NO_PRC]
+    if desconocidas:
+        raise SystemExit(f"GeoIDE trae capas que no conocemos: {desconocidas}. "
+                         "Asígnales comuna en COMUNA_DE_CAPA_SIN_HIDRICO.")
+    return sorted({(COMUNA_DE_CAPA | COMUNA_DE_CAPA_SIN_HIDRICO)[n]
+                   for n in nombres if n not in CAPAS_GEOIDE_NO_PRC})
+
+
 # Qué zonas de GeoIDE son área de riesgo hídrica y de qué fenómeno.
 #
 # La llave es (capa, ZONA, NOM) normalizados, y el tipo NO se deduce del texto:
@@ -444,6 +475,11 @@ def desde_geoide() -> list[dict]:
     for capa in info.get("layers", []):
         feats = consultar_capa_arcgis(f"{GEOIDE}/{capa['id']}", campos="*")
         capas.append((capa["name"], feats))
+    con_prc = comunas_con_prc_en_geoide([n for n, _ in capas])
+    (DATA_PROC / "geoide_prc_por_comuna.json").write_text(json.dumps({
+        "fuente": GEOIDE, "consultado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "comunas_con_prc": con_prc}, ensure_ascii=False, indent=1), encoding="utf-8")
+    log(f"  {len(con_prc)} comunas con plan regulador en GeoIDE")
     out = seleccionar_geoide(capas)
     log(f"  {len(capas)} capas, {len(out)} polígonos hídricos")
     return out

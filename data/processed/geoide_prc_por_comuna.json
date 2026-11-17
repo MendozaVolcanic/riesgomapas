@@ -1,0 +1,26 @@
+{
+ "fuente": "https://geoide.minvu.cl/server/rest/services/IPT/PRC_Araucania/FeatureServer",
+ "consultado": "2026-11-17T23:29:54+00:00",
+ "comunas_con_prc": [
+  "Angol",
+  "Carahue",
+  "Collipulli",
+  "Curacautín",
+  "Freire",
+  "Gorbea",
+  "Lautaro",
+  "Loncoche",
+  "Lonquimay",
+  "Nueva Imperial",
+  "Padre Las Casas",
+  "Pitrufquén",
+  "Pucón",
+  "Renaico",
+  "Saavedra",
+  "Temuco",
+  "Toltén",
+  "Traiguén",
+  "Victoria",
+  "Villarrica"
+ ]
+}
